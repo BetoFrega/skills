@@ -1,0 +1,5 @@
+interface:
+  display_name: "Orchestrate"
+  short_description: "Develop a GitHub Spec through parallel Codex tasks"
+policy:
+  allow_implicit_invocation: false
