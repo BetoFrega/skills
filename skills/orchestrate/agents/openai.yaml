@@ -1,5 +1,5 @@
 interface:
   display_name: "Orchestrate"
-  short_description: "Develop a GitHub Spec through parallel Codex tasks"
+  short_description: "Develop explicit GitHub ticket worksets in parallel"
 policy:
   allow_implicit_invocation: false
