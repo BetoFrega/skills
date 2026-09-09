@@ -27,3 +27,19 @@ Execute Exponential Semantic Density Scaling (ESDS) on the supplied input text.
 
 Before output, verify that each retained relation is supported by the input and
 that rollup preserves the current state, decision scope, and blocker status.
+
+6. **Blind interpretation.** Give an independent subagent only the compacted
+   version and ask it to explain what it understands. Start with no inherited
+   conversation context; withhold the original, intended interpretation, and
+   compression rationale.
+7. **Independent loss review.** Give a second independent subagent the original
+   and compacted versions and ask it to list semantic losses. Start with no
+   inherited conversation context; withhold the first subagent's explanation and
+   your own conclusions.
+8. **Recover relevant losses.** Compare the blind interpretation and loss review
+   against the original. Treat a loss as relevant when it changes the meaning or
+   application of retained facts, including state, decisions, conditions, scope,
+   certainty, temporal order, or blockers. Restore relevant missing or distorted
+   meaning in the compacted output using the same compact format. Keep review
+   commentary outside the payload; verify restored relations against the original
+   before yielding the final output.
