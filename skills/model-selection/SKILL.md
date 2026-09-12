@@ -84,6 +84,11 @@ escalating.
 Before creating a subagent or a separate task, identify whether it will perform the
 complete implementation, the complete review, or a narrower supporting assignment.
 
+Before or alongside every subagent dispatch, tell the user the concrete model and
+reasoning effort assigned to it. Report the actual configuration, including any
+substitution made because the recommended configuration is unavailable; do not defer
+this disclosure to the final summary.
+
 - Give the complete implementation or review executor the corresponding model and
   effort recorded in the ticket for its provider. Set both explicitly when the
   dispatch interface supports them; otherwise include them in the assignment.
