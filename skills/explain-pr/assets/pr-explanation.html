@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explicação de PR — exemplo ilustrativo</title>
+<style>
+:root{color-scheme:light;--paper:#faf8f3;--ink:#23332f;--muted:#52635c;--line:#cbd3ca;--accent:#17634f;--wash:#e9efe7;--code:#edf0ea}
+*{box-sizing:border-box}html{scroll-padding-top:2rem}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.7 system-ui,sans-serif}::selection{background:#cce3bc;color:#183328}a{color:var(--accent);text-underline-offset:.2em}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid var(--accent);outline-offset:5px}code,pre{font-family:ui-monospace,monospace;font-size:.88em}code{overflow-wrap:anywhere}pre{padding:1.25rem;background:var(--code);overflow:auto;line-height:1.6}pre code{overflow-wrap:normal}.layout{max-width:1280px;margin:auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:4rem;padding:3rem 2rem 6rem}.skip{position:absolute;left:1rem;top:-100px}.skip:focus{top:1rem;background:var(--paper);padding:.5rem}aside{position:sticky;top:2rem;align-self:start;font-size:.88rem}nav a{display:block;padding:.45rem 0}nav{border-top:1px solid var(--line);margin-top:1rem;padding-top:.7rem}main{min-width:0}header{padding-bottom:2rem;border-bottom:1px solid var(--line)}h1,h2,h3{line-height:1.16;text-wrap:balance}h1{font:500 clamp(2.5rem,5vw,4.5rem)/1.06 Georgia,serif;letter-spacing:-.025em;margin:0 0 1.5rem;max-width:19ch}h2{font:500 2rem/1.2 Georgia,serif;margin:0 0 1.25rem}h3{font-size:1.12rem;margin:2rem 0 .6rem}p,li{max-width:70ch}p{margin:.7rem 0 1.1rem}.lead{font-size:1.2rem}.meta,.caption{color:var(--muted);font-size:.88rem}.meta{font-variant-numeric:tabular-nums;overflow-wrap:anywhere}section{padding:2.8rem 0;border-bottom:1px solid var(--line)}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:2rem}.comparison h3{margin-top:0}.tag{display:inline-block;font-size:.75rem;font-weight:650;padding:.12rem .55rem;background:var(--wash);border:1px solid var(--line);border-radius:4px;vertical-align:middle}.journey{padding-left:1.5rem}.journey li{padding:0 0 1.25rem .5rem}.journey h3{margin:.2rem 0}.journey p{margin:.5rem 0}figure{margin:1.75rem 0;padding:1.25rem;background:white;border:1px solid var(--line)}.diagram{overflow:auto}.diagram svg{display:block;max-width:none!important;margin:auto}.diagram-status{color:var(--muted);font-size:.85rem}details{margin:1rem 0}summary{cursor:pointer;font-weight:600;min-height:44px;padding:.45rem 0}summary:hover{color:var(--accent)}footer{margin-top:2rem;color:var(--muted);font-size:.85rem}
+@media(max-width:800px){.layout{grid-template-columns:1fr;gap:2rem;padding:1.5rem 1.2rem 3rem}aside{position:static}nav{display:flex;flex-wrap:wrap;gap:.25rem 1rem}h1{max-width:24ch}.comparison{grid-template-columns:1fr;gap:1rem}figure{margin-inline:0;padding:.75rem}}
+@media print{body{background:white;font-size:11pt}.layout{display:block;padding:0;max-width:none}aside,.skip,.diagram-status{display:none}section{padding:1.2rem 0}h1{font-size:30pt}h2{font-size:21pt}h2,h3,summary{break-after:avoid}figure,li{break-inside:avoid}a{color:inherit}pre{white-space:pre-wrap;overflow-wrap:anywhere}details::details-content{display:block!important;content-visibility:visible!important}.diagram{overflow:visible}.diagram svg{max-width:100%!important;height:auto}footer{font-size:9pt}}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Ir para a explicação</a>
+<div class="layout">
+<aside aria-label="Navegação da explicação">
+<strong>Guia do PR</strong>
+<p class="meta">Exemplo ilustrativo<br>Substituir pelo PR e commits analisados.</p>
+<nav aria-label="Nesta página">
+<a href="#mudanca">O que muda</a>
+<a href="#jornada">Da ação ao resultado</a>
+<a href="#evidencias">Evidências e leitura</a>
+</nav>
+</aside>
+<main id="conteudo">
+<header>
+<h1>Retomar a publicação após completar o perfil</h1>
+<p class="lead">Exemplo ilustrativo: uma pessoa quer publicar seu anúncio sem perder o trabalho ao completar os dados do perfil.</p>
+<p class="meta">Leitor: engenheiro que conhece o produto, mas ainda não leu este PR.<br>Comparação: registrar repositório, PR, base e head completos.</p>
+</header>
+<section id="mudanca">
+<h2>O anúncio acompanha a pessoa</h2>
+<div class="comparison">
+<div><h3>Antes</h3><p>Neste exemplo fictício, a pessoa completa o perfil e precisa reiniciar a publicação.</p></div>
+<div><h3>Depois <span class="tag">Alterado</span></h3><p>A intenção de publicar é preservada. A pessoa volta ao anúncio e continua de onde parou.</p></div>
+</div>
+<p class="caption">Na explicação final, vincular a necessidade à issue e o comportamento às fontes verificadas.</p>
+</section>
+<section id="jornada">
+<h2>Da ação ao resultado</h2>
+<p>Ana tenta publicar um anúncio com o perfil incompleto. O exemplo acompanha essa tentativa até a retomada.</p>
+<figure aria-labelledby="diagrama-descricao">
+<div class="diagram" role="img" aria-label="Fluxo ilustrativo de publicação" hidden></div>
+<p class="diagram-status" role="status">O diagrama requer conexão. A descrição e seu código estão disponíveis abaixo.</p>
+<figcaption id="diagrama-descricao">A publicação verifica o perfil. Se estiver incompleto, preserva a intenção e abre o cadastro; depois, retoma a publicação.</figcaption>
+<details><summary>Consultar código do diagrama</summary><pre class="diagram-source">flowchart TD
+  A["Publicar · existente"] --> B{"Perfil completo? · existente"}
+  B -->|Sim| C["Publicar anúncio · existente"]
+  B -->|Não| D["Preservar intenção · novo"]
+  D --> E["Completar perfil · existente"]
+  E --> F["Retomar publicação · novo"]
+  F --> B
+  classDef changed fill:#e1efd9,stroke:#376345,color:#20372b
+  class D,F changed</pre></details>
+</figure>
+<ol class="journey">
+<li><h3>A tela recebe a tentativa <span class="tag">Existente</span></h3><p>O comando de publicar inicia a verificação do perfil.</p><p class="caption">Adicionar referência verificada ao entrypoint.</p></li>
+<li><h3>A aplicação preserva a intenção <span class="tag">Novo</span></h3><p>Com o perfil incompleto, registra qual anúncio deve ser retomado e encaminha Ana ao cadastro.</p><p class="caption">Adicionar referência à decisão e à persistência.</p></li>
+<li><h3>A conclusão do cadastro retoma o fluxo <span class="tag">Novo</span></h3><p>A aplicação recupera a intenção e verifica novamente as condições para publicar.</p><p class="caption">Adicionar referência ao consumidor da intenção.</p></li>
+</ol>
+<details><summary>Condições que podem mudar o resultado</summary><p>Substituir por falhas, permissões e caminhos alternativos verificados neste PR, explicando o resultado visível.</p></details>
+</section>
+<section id="evidencias">
+<h2>O que sustenta esta explicação</h2>
+<p>Este template é uma demonstração fictícia. Nenhum comportamento ou teste de um PR real foi verificado.</p>
+<details><summary>Testes e cobertura</summary><p>Registrar cenários cobertos, testes apenas inspecionados, resultados de CI consultados e comandos efetivamente executados. Identificar o que permanece desconhecido.</p></details>
+<h3>Por onde começar a leitura do código</h3>
+<p>Substituir por uma lista curta de links para as decisões centrais, em ordem de leitura. Agrupar alterações mecânicas em uma nota de cobertura.</p>
+</section>
+<footer>Exemplo ilustrativo · A explicação final deve identificar a revisão analisada e suas limitações.</footer>
+</main>
+</div>
+<script type="module">
+// Renderer: https://mermaid.js.org/config/usage.html . Narrative and source remain usable offline.
+const figures = [...document.querySelectorAll('figure:has(.diagram-source)')];
+try {
+  const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.esm.min.mjs');
+  mermaid.initialize({startOnLoad:false,securityLevel:'strict',theme:'neutral',fontFamily:'system-ui, sans-serif',flowchart:{htmlLabels:false}});
+  for (const [index, figure] of figures.entries()) {
+    const target = figure.querySelector('.diagram');
+    const status = figure.querySelector('.diagram-status');
+    try {
+      const { svg } = await mermaid.render(`journey-${index}`, figure.querySelector('.diagram-source').textContent);
+      target.innerHTML = svg;
+      target.hidden = false;
+      status.hidden = true;
+    } catch {
+      status.textContent = 'Não foi possível desenhar este diagrama. Consulte a descrição e o código abaixo.';
+    }
+  }
+} catch {
+  for (const figure of figures) figure.querySelector('.diagram-status').textContent = 'Renderer indisponível. A descrição e o código do diagrama continuam disponíveis.';
+}
+</script>
+<script>
+const expandedBeforePrint = new Set();
+addEventListener('beforeprint', () => {
+  document.querySelectorAll('details').forEach(detail => {
+    if (detail.open) expandedBeforePrint.add(detail);
+    detail.open = true;
+  });
+});
+addEventListener('afterprint', () => {
+  document.querySelectorAll('details').forEach(detail => { detail.open = expandedBeforePrint.has(detail); });
+  expandedBeforePrint.clear();
+});
+</script>
+</body>
+</html>
