@@ -28,15 +28,14 @@ validate=source_support(each_relation)+preserved(current_state,decision_scope,bl
 output=semantic_payload_only; introduction|commentary|markdown_fences|closing=exclude
 retained_facts=empty -> output={}
 
-before_final_output -> blind_interpretation+independent_loss_review+recovery
-reviewers={A,B}; A != B; inherited_context(A,B)=none
-A.input=compacted_only; A.task=explain_understanding
-A.withhold={original,intended_interpretation,compression_rationale}
-B.input={original,compacted}; B.task=list_semantic_losses
-B.withhold={A.explanation,compressor_conclusions}
-recovery=compare(A.explanation,B.losses,original)
+before_final_output -> compare(compacted,entire_original)+recovery
 loss=missing_or_distorted(any_distinct_original_meaning)|altered(protected_literal)
 each_loss -> restore(compacted_output); format=same_compact_format
 final_gate=source_support+complete_semantic_coverage+verbatim_literal_preservation
 unresolved_loss -> block_completion; ambiguous_compression -> retain_source_detail
 review_commentary=outside_payload
+
+review_needed=risk|volume|ambiguity|explicit_request
+review_needed -> one_independent_loss_review(input={original,compacted})
+review_focus={omissions,distortions,unsupported_relations,altered_protected_literals}
+high_assurance_requested|exceptional_risk -> blind_interpretation+independent_loss_review

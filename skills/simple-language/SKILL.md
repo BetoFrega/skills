@@ -1,6 +1,6 @@
 ---
 name: simple-language
-description: Use when you need to make text relevant, findable, understandable, and actionable.
+description: Rewrite or audit reader-facing prose when the user asks for plain language, clarity, readability, or actionability.
 ---
 
 Each technique serves one of the four principles in ISO 24495.

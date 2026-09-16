@@ -1,0 +1,5 @@
+interface:
+  display_name: "ESDS Compress Compressed"
+  short_description: "Run the self-compressed ESDS contract"
+policy:
+  allow_implicit_invocation: false

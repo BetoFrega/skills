@@ -74,34 +74,7 @@ statements such as “crosses layers”, “touches authorization”, “require
 preserve behavior” do not justify escalation. When either element is absent, use the
 lower configuration.
 
-Recalculate every child ticket independently. A parent recommendation applies to a
-child only when the same unresolved decision remains in that child. Execution may
-escalate after discovering evidence absent from the ticket; record that evidence when
-escalating.
-
 ## Propagate the recommendation to execution
 
-Before creating a subagent or a separate task, identify whether it will perform the
-complete implementation, the complete review, or a narrower supporting assignment.
-
-Before or alongside every subagent dispatch, tell the user the concrete model and
-reasoning effort assigned to it. Report the actual configuration, including any
-substitution made because the recommended configuration is unavailable; do not defer
-this disclosure to the final summary.
-
-- Give the complete implementation or review executor the corresponding model and
-  effort recorded in the ticket for its provider. Set both explicitly when the
-  dispatch interface supports them; otherwise include them in the assignment.
-- Recalibrate a narrower assignment with this skill. The parent recommendation is
-  context, not an automatic minimum, so mechanical exploration or editing can use a
-  cheaper configuration.
-- Include the applicable ticket recommendation and this delegation rule in the
-  assignment. A receiving agent that delegates again carries the same obligation.
-- When the recommended model is unavailable, use the closest available capability
-  tier and record the substitution.
-- Deviate upward only because of concrete evidence discovered after the ticket was
-  written, and record that evidence in the assignment or execution record.
-
-Delegation is complete when every delegated assignment is traceable either to the
-ticket recommendation for complete implementation or review, or to a recalibration
-recorded under this skill for supporting work.
+Before creating a subagent or separate task, read
+[delegation.md](references/delegation.md) and apply its dispatch and disclosure rules.
