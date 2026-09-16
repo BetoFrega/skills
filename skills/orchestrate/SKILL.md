@@ -1,7 +1,6 @@
 ---
 name: orchestrate
 description: Orchestrate an explicit GitHub ticket workset through parallel Codex tasks.
-disable-model-invocation: true
 ---
 
 # Orchestrate

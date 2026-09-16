@@ -1,0 +1,5 @@
+interface:
+  display_name: "Last Responsible Moment Compressed"
+  short_description: "Apply the compressed LRM decision contract"
+policy:
+  allow_implicit_invocation: false
