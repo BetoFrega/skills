@@ -1,0 +1,3 @@
+interface:
+  display_name: "Four-axis Code Review"
+  short_description: "Review standards, spec, observability, and accessibility"
