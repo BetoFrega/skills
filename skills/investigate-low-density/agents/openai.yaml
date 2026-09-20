@@ -1,0 +1,3 @@
+interface:
+  display_name: "Investigate Low Density"
+  short_description: "Find causes and safe reductions for low-density content"

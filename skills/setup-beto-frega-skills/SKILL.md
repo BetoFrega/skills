@@ -1,6 +1,6 @@
 ---
 name: setup-beto-frega-skills
-description: "Configure a repository for Beto Frega's engineering skills, including issue tracking, domain documentation, observability, and accessibility baselines. Run explicitly before first use or to fill a missing configuration document."
+description: "Configure a repository for Beto Frega's engineering skills, including issue tracking, domain documentation, information-density rules, observability, and accessibility baselines. Run explicitly before first use or to fill a missing configuration document."
 ---
 
 # Setup Beto Frega skills
@@ -8,8 +8,9 @@ description: "Configure a repository for Beto Frega's engineering skills, includ
 Scaffold the per-repository configuration consumed by the engineering skills:
 
 - issue-tracker workflow;
-- triage-label vocabulary when a triage skill is installed;
+- tracker-label vocabulary when triage or low-density reporting is installed;
 - domain-document layout;
+- information-density reporting rules in the repository's agent instructions;
 - the repository's own observability baseline;
 - the repository's own accessibility baseline.
 
@@ -23,8 +24,10 @@ Inspect facts the user should not have to supply:
 
 - remotes and `.git/config` for tracker clues;
 - root `AGENTS.md` and `CLAUDE.md`, including existing skill pointers;
+- any existing rule for flagging low-information-density content;
 - `docs/agents/`, `.scratch/`, `CONTEXT.md`, `CONTEXT-MAP.md`, and ADR directories;
-- whether a triage skill is installed;
+- whether triage and low-density reporting skills are installed;
+- configured tracker labels and their live existence when the tracker is external;
 - monorepo signals and context boundaries;
 - `OBSERVABILITY.md` and `ACCESSIBILITY.md`, plus any alternate paths explicitly
   declared by repository instructions;
@@ -52,11 +55,26 @@ tracker. Use the matching reference as a starting point:
 Confirm the choice before drafting. Adapt commands and conventions to the repository;
 do not claim integrations that were not verified.
 
-### B. Triage labels
+When `$report-low-density` is installed, the workflow must support searching open
+issues by a deterministic fingerprint, creating an issue with labels, and reading back
+the result. Treat any missing operation in an existing document as a configuration gap
+and ask before filling it.
 
-Run only when a triage skill is installed and `docs/agents/triage-labels.md` is absent.
-Recommend the canonical labels in [the template](references/triage-labels.md). Ask one
-question: whether to keep them. Collect overrides only when the answer is no.
+When `$investigate-low-density` is installed, the workflow must support reading an
+issue with discussion, commenting, and reading back the comment. Treat missing
+operations as configuration gaps too.
+
+### B. Tracker labels
+
+Run when a triage skill, `$report-low-density`, or `$investigate-low-density` is
+installed. If `docs/agents/triage-labels.md` is absent, recommend the applicable
+canonical labels in [the template](references/triage-labels.md). Ask one question:
+whether to keep them. Collect overrides only when the answer is no.
+
+When either low-density skill is installed, require mappings for `low information
+density` and `needs triage`. After the mapping is confirmed, inspect the external
+tracker and include any missing-label creation in the proposed mutations. For a local
+Markdown tracker, confirm its equivalent category and status representation.
 
 ### C. Domain docs
 
@@ -65,7 +83,16 @@ Offer multi-context layout only when exploration found real monorepo boundaries.
 [the domain consumer rules](references/domain.md) as the draft basis. Domain files
 themselves remain lazy: do not create an empty `CONTEXT.md` or ADR directory.
 
-### D. Observability baseline
+### D. Information density
+
+If the canonical agent-instruction file has no equivalent rule, add an inline rule that
+follows [the information-density rule](references/information-density.md). Use the
+reporter clause or its unavailable fallback, and include the investigator clause only
+when that skill is confirmed available. Treat an existing rule with the same behavior
+as settled even when its heading or wording differs. Preserve it rather than adding a
+duplicate.
+
+### E. Observability baseline
 
 If the authoritative observability document is absent, run the grilling protocol below
 with [the observability defaults](references/observability-default.md). Treat defaults
@@ -76,7 +103,7 @@ Base recommendations on inspected architecture and tooling. The interview must s
 scope, critical behavior, signals, correlation, failure reporting, privacy, volume and
 cardinality, alert ownership, operational response, verification, and exceptions.
 
-### E. Accessibility baseline
+### F. Accessibility baseline
 
 If the authoritative accessibility document is absent, run a separate grilling tree
 using [the accessibility defaults](references/accessibility-default.md). Resolve every
@@ -99,30 +126,36 @@ understanding.
 
 Show the complete proposed contents of every file that would change:
 
-- the `## Agent skills` block for the chosen agent-instruction file;
-- `docs/agents/issue-tracker.md` when missing;
-- `docs/agents/triage-labels.md` when applicable and missing;
+- the `## Agent skills` block for the chosen agent-instruction file, including the
+  information-density rule when missing;
+- `docs/agents/issue-tracker.md` when missing or incomplete;
+- `docs/agents/triage-labels.md` when applicable and missing or incomplete;
 - `docs/agents/domain.md` when missing;
 - the resolved observability and accessibility paths when missing (defaulting to
-  `OBSERVABILITY.md` and `ACCESSIBILITY.md`).
+  `OBSERVABILITY.md` and `ACCESSIBILITY.md`);
+- every tracker label that would be created or changed.
 
 If both `AGENTS.md` and `CLAUDE.md` exist, ask which is canonical. If one exists, use
 it. If neither exists, ask which one to create. Update an existing `## Agent skills`
 section in place and preserve surrounding user content.
 
-The block contains only applicable pointers, each with a one-line repository-specific
-summary. Point directly to the resolved observability and accessibility paths; do not
-duplicate their policies in agent instructions. The example below uses the defaults.
+The block contains the information-density rule and only applicable pointers, each with
+a one-line repository-specific summary. Point directly to the resolved observability
+and accessibility paths; do not duplicate their policies in agent instructions. The
+example below uses the defaults.
 
 Use this shape, omitting only sections that genuinely do not apply:
 
 ```markdown
 ## Agent skills
 
+### Information density
+<the rule from `references/information-density.md`>
+
 ### Issue tracker
 <repository-specific summary>. See `docs/agents/issue-tracker.md`.
 
-### Triage labels
+### Tracker labels
 <repository-specific summary>. See `docs/agents/triage-labels.md`.
 
 ### Domain docs
@@ -139,9 +172,10 @@ Wait for confirmation or edits to the drafts.
 
 ## 4. Write and verify
 
-Create only confirmed files and directories. Existing configuration is preserved
-unless the user explicitly approved its edit. Check that every pointer resolves, every
-generated document describes the actual repository, and no placeholder remains.
+Create only confirmed files, directories, and tracker labels. Existing configuration
+is preserved unless the user explicitly approved its edit. Read back every external
+label mutation. Check that every pointer resolves, every generated document describes
+the actual repository, and no placeholder remains.
 
 Finish by listing created or changed files and the skills that consume them. Tell the
 user that the documents can be edited directly later and that setup should be rerun
