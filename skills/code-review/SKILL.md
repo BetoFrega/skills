@@ -1,15 +1,17 @@
 ---
 name: code-review
-description: "Review changes since a fixed point along four independent axes: repository standards, originating spec, observability, and accessibility. Use for branches, pull requests, work in progress, or requests to review since a commit, branch, tag, or merge-base."
+description: "Review changes since a fixed point along five independent axes: repository standards, originating spec, performance, observability, and accessibility. Use for branches, pull requests, work in progress, or requests to review since a commit, branch, tag, or merge-base."
 ---
 
-# Four-axis code review
+# Five-axis code review
 
 Review `HEAD` against one fixed point. Keep the axes independent so strength in one
 cannot hide failure in another:
 
 - **Standards**: repository rules plus the heuristic smell baseline below.
 - **Spec**: fidelity to the originating requirement.
+- **Performance**: concrete regression risks, measured regressions, and consciously
+  accepted performance trade-offs.
 - **Observability**: fidelity to the repository's operational baseline.
 - **Accessibility**: fidelity to the repository's accessibility baseline.
 
@@ -48,6 +50,11 @@ setup skill autonomously and do not substitute an implicit baseline.
 
 Read `docs/agents/domain.md` when present, then follow its pointers to relevant context
 and ADR files. Existing repository rules override generic review heuristics.
+
+`PERFORMANCE.md` is optional. Read it, or an explicit normative pointer that replaces
+it, when present. It may add critical paths, representative workloads, budgets,
+benchmarks, or acceptance rules; its absence never blocks the Performance review. The
+universal performance baseline still applies.
 
 ## 3. Resolve the spec
 
@@ -106,6 +113,21 @@ Provide the spec path and contents. Report missing or partial requirements, unre
 scope, and implementation that appears to satisfy a requirement incorrectly. Quote or
 precisely cite the controlling spec passage for each finding.
 
+### Performance reviewer
+
+Provide the spec, [the universal performance baseline](references/performance-baseline.md)
+in full, any repository performance source, and every available author-authored
+acknowledgement from the current chat, pull request, issue, or spec. First determine
+whether the diff changes runtime, build, tests, distribution, or a development
+feedback loop. Return `N/A` when it changes none of them; return `No findings` only
+after reviewing an applicable change.
+
+Apply every relevant baseline and repository rule. Cite the changed hunk and controlling
+rule, preserve the baseline's evidence and acknowledgement labels, and give the user
+the complete causal explanation rather than leaving the mechanism for them to infer.
+Use `Author acknowledgement: Not found` only after checking the supplied evidence and
+other acknowledgement sources accessible in the reviewer context.
+
 ### Observability reviewer
 
 Provide the complete authoritative observability document. First determine whether the
@@ -126,9 +148,10 @@ human or assistive-technology verification.
 
 ## 6. Aggregate without masking
 
-Present reports under `## Standards`, `## Spec`, `## Observability`, and
-`## Accessibility`. Preserve each reviewer's ordering and meaning; lightly clean
-wording only. Do not move, deduplicate, or rank findings across axes.
+Present reports under `## Standards`, `## Spec`, `## Performance`,
+`## Observability`, and `## Accessibility`. Preserve each reviewer's ordering and
+meaning; lightly clean wording only. Do not move, deduplicate, or rank findings across
+axes.
 
 End with one line giving the finding count and highest-impact finding within each axis.
 Do not select an overall winner.
