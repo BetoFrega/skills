@@ -8,6 +8,8 @@ enforces.
   or holds. Rename it; if no honest name emerges, revisit the design.
 - **Duplicated Code**: the same logic shape appears in multiple changed hunks or files.
   Extract the shared shape and call it from both places.
+- **Redundant Tests**: tests exercise the same behavior and one adds no distinct
+  failure signal, boundary, or regression contract. Remove or merge it.
 - **Feature Envy**: a method reaches into another object's data more than its own. Move
   the behavior toward the data it uses.
 - **Data Clumps**: the same fields or parameters repeatedly travel together. Give the
