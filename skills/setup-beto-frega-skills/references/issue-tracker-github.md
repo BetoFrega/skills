@@ -10,5 +10,6 @@ request or triage surface; default to no.
 
 When a skill says “fetch the relevant ticket,” read the issue and its comments. When it
 says “publish,” create an issue only within the authorization of the active task.
-A confirmed repository rule may provide standing authorization for one named publishing
-workflow; keep every mutation within that workflow's explicit contract.
+Repository instructions may require preparing a publishing workflow, but they do not
+authorize a persistent GitHub mutation. If the active task lacks the user's explicit
+request or approval for the exact write, return the complete proposal and wait.
