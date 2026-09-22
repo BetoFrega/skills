@@ -20,7 +20,13 @@ merging or globally reranking findings.
 
 ## 1. Pin the comparison
 
-Use the fixed point supplied by the user. If none was supplied, ask for it and stop.
+Use the fixed point supplied by the user. Otherwise infer it from repository
+evidence: prefer the pull request's base branch, then a documented target
+branch, then the repository's default branch.
+Use their merge-base with `HEAD` as the fixed point. If no target branch can be
+identified, use `HEAD^`; for a root commit, use the empty tree. State the
+inferred point and the evidence for choosing it in the review. Do not ask the
+user to choose the comparison point.
 
 Resolve it with `git rev-parse <fixed-point>`, then capture these exact views once:
 
