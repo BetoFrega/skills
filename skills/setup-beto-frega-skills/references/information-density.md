@@ -27,9 +27,12 @@ Include only when `$report-low-density` is available:
 ```markdown
 For a flag in pre-existing or out-of-scope content, delegate `$report-low-density` to a
 subagent with the exact flag, source, minimal reproduction command or steps, and the
-relevant revision and environment. This rule authorizes only the reporter's minimal
-issue creation. If no subagent is available or publication cannot be confirmed,
-preserve the flag and reproduction pointers, distinguish confirmed absence from an
+relevant revision and environment. Delegation authorizes preparation and duplicate
+detection, not a tracker mutation. If the active task does not contain the user's
+explicit request or approval to publish the exact report, the reporter returns the
+complete proposed issue and the parent asks before delegating publication. If no
+subagent is available or publication cannot be confirmed, preserve the flag and
+reproduction pointers, distinguish approval required or confirmed absence from an
 unresolved write, state the remediation path, and stop.
 ```
 
@@ -38,9 +41,9 @@ unresolved write, state the remediation path, and stop.
 Include only when `$investigate-low-density` is available:
 
 ```markdown
-For focused investigation, use `$investigate-low-density`. When the active task
-explicitly assigns a low-density tracker issue, this rule authorizes one append-only
-findings comment on that issue, not remediation or state changes.
+For focused investigation, use `$investigate-low-density`. When the user explicitly
+requests investigation of an assigned low-density tracker issue, one append-only
+findings comment is within that task's scope; remediation and state changes are not.
 ```
 
 ## Reporter-unavailable fallback

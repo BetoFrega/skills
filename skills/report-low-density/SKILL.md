@@ -1,16 +1,18 @@
 ---
 name: report-low-density
-description: Publish one existing low-information-density flag as a minimal, reproducible tracker issue when a parent agent explicitly delegates reporting under the repository's information-density rule. Do not use for investigation or remediation.
+description: Prepare one delegated low-information-density flag as a minimal, reproducible tracker issue and publish it only after the user explicitly requests or approves that write. Do not use for investigation or remediation.
 ---
 
 # Report low density
 
 Run only as a subagent explicitly delegated by a parent agent under the repository's
 information-density rule. Otherwise create nothing and state that reporting requires
-that delegation. Publish one observed flag. Do not inspect beyond what is needed to
-verify stable reproduction pointers. The parent agent must supply the exact flag plus
-every grouped source pointer, revision or environment when relevant, and minimal
-reproduction steps. Without those inputs, return the missing fields and create nothing.
+that delegation. Delegation establishes the reporting scope; it does not authorize a
+tracker mutation. Publish one observed flag only after the active task contains the
+user's explicit request or approval to create that report. The parent agent must supply
+the exact flag plus every grouped source pointer, revision or environment when relevant,
+and minimal reproduction steps. Without those inputs, return the missing fields and
+create nothing.
 
 ## Resolve the tracker contract
 
@@ -51,10 +53,32 @@ Build the fingerprint input with LF separators from the tracker project identifi
 repo-relative source pointers sorted lexicographically, and reproduction steps with
 trailing whitespace removed. Hash those exact UTF-8 bytes with SHA-256.
 
+## Resolve publication authority
+
+Search for a duplicate before requesting or exercising publication authority. When no
+match exists, accept either of these as authority for the create:
+
+- the user explicitly requested publication of this report in the active task; or
+- after seeing the tracker destination, title, labels, and complete body, the user
+  explicitly approved that create and the parent included that approval in the
+  delegation.
+
+A repository instruction, standing rule, prior approval for another report, or the
+parent agent's decision is not user authorization for a persistent tracker write. When
+authority is absent, create nothing. Return `approval-required` with the destination,
+title, labels, complete body, and this question in the user's language:
+
+`May I publish this low-density issue to <tracker>?`
+
+The parent asks the user and, if approved, delegates again with the approval and the
+unchanged prepared issue. This approval pause is a successful preparation outcome, not
+an access failure or uncertain write.
+
 ## Detect duplicates and publish
 
-Immediately before creation, search open issues carrying the configured
-low-information-density label and fingerprint.
+Search open issues carrying the configured low-information-density label and
+fingerprint during preparation, then repeat the same search immediately before an
+authorized creation.
 
 - If no match exists, create one issue with the configured category and workflow
   values.
