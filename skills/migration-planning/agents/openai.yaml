@@ -1,0 +1,4 @@
+interface:
+  display_name: "Migration planning"
+  short_description: "Migrate systems through coexistence and controlled rollout"
+  default_prompt: "Use $migration-planning to design and execute a migration through an alternative path, canary validation, controlled traffic transfer, and legacy retirement without visible user interruption."
