@@ -25,6 +25,8 @@ Discovery is sufficient to choose the first slice when its boundary, intended re
 
 Use **Strangler Fig** as the preferred approach: preserve the active path while building an alternative behind a replaceable boundary, then migrate bounded capabilities. Use feature flags and canaries for controlled activation. Choose gradual cohorts or a controlled switch according to the capability.
 
+Prefer **vertical slices whenever feasible**: migrate one complete user journey, business capability, or representative traffic path through the necessary interface, behavior, data, and operations. Make each slice independently exposable, observable, and recoverable so it can deliver value and test migration assumptions before the next slice. If coupling prevents this, identify the smallest enabling work and explain how it leads to the first vertical slice.
+
 Always consider routing affinity by user or organization, versioned contracts, backward-compatible evolution, staged read/write migration, and synchronization or replication. Select or combine them for the actual boundary, explaining material limitations or inapplicability. Affinity preserves destination choice; compatible contracts preserve interoperability; replication preserves specified data availability and consistency. Each addresses a different part of continuity.
 
 For application decomposition or replacement behind a new boundary, read [boundaries and transitional architecture](references/boundaries-and-transition.md). Justify what separates and what stays together, including remaining execution, data, and deployment coupling. Define temporary transition mechanisms, their cost and ownership, and conditions for removal.
