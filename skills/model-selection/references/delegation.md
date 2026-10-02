@@ -24,6 +24,6 @@ summary.
   [selection and escalation rules](../SKILL.md). Record the revised recommendation
   and the evidence for it in the assignment or execution record.
 
-Delegation is complete when every assignment is traceable to either the ticket
-recommendation for complete implementation or review, or a recalibration recorded
-under this skill for supporting work.
+Delegation is complete when every assignment is traceable to its individual
+recommendation, with recalibration recorded under this skill for narrower supporting
+work.

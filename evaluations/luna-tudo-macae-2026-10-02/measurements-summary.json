@@ -1,0 +1,30 @@
+{
+  "assignments_started": 23,
+  "assignments_completed": 22,
+  "assignments_timed_out": 1,
+  "models": [
+    "gpt-6-luna"
+  ],
+  "unique_thread_ids": 23,
+  "role_counts": {
+    "initial_a": 3,
+    "initial_b": 3,
+    "verifier": 11,
+    "additional": 3,
+    "judge": 3
+  },
+  "peak_overlapping_assignment_lifetimes": 4,
+  "duration_first_dispatch_to_final_completion_seconds": 2245.6,
+  "cli_reported_tokens": {
+    "input_tokens": 1675012,
+    "cached_input_tokens": 959232,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 82561,
+    "reasoning_output_tokens": 22415
+  },
+  "usage_limit": "Usage is unavailable for the timed-out broad audit. Counts sum emitted completion usage and include cached input; they are not a monetary cost.",
+  "initial_source_excerpts": 50,
+  "initial_literal_excerpt_matches": 45,
+  "initial_whitespace_normalized_excerpt_matches": 46,
+  "judge_research_commands": 0
+}

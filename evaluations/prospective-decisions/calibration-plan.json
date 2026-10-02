@@ -1,0 +1,55 @@
+{
+  "status": "prospective_design_not_validated_model_recommendations",
+  "policy": "Calibrate each class and material subtype independently. A pooled score cannot authorize a cheaper configuration for an untested class.",
+  "holdout_policy": "Freeze configurations, rubrics, budgets, and references before exposing fresh local instances to tested models. Reserve an untouched confirmation set after pilot changes.",
+  "tracks": [
+    {
+      "decision_class": "product",
+      "subtypes": ["journey tradeoffs", "prioritization", "scope and user value"],
+      "fresh_cases": "New private briefs with new constraints, segment evidence, competing proposals, and explicit user priorities.",
+      "reference": "Before model runs, a domain owner marks acceptable choices, binding violations, and unresolved value choices under a frozen rubric.",
+      "objective_checks": ["budget and scope", "binding user priorities", "claims grounded in the supplied evidence"],
+      "human_checks": ["user benefit", "tradeoff quality", "whether a value choice needs the user"],
+      "status": "requires fresh briefs and human reference labels"
+    },
+    {
+      "decision_class": "architecture",
+      "subtypes": ["invariants and failure recovery", "system boundaries", "operational tradeoffs"],
+      "fresh_cases": "New private combinations of dependencies, load, provider capabilities, failure traces, and recovery alternatives.",
+      "reference": "Executable invariants or model checking for the controlled fragment; independent engineering review for open-ended architecture.",
+      "objective_checks": ["state invariants", "ordering and concurrency", "failure and retry behavior"],
+      "human_checks": ["system boundaries", "operational burden", "appropriateness of modeled assumptions"],
+      "status": "finite scheduling diagnostic implemented; open-ended track requires independent reference"
+    },
+    {
+      "decision_class": "code_design",
+      "subtypes": ["behavior preservation", "module boundaries", "API and abstraction choices"],
+      "fresh_cases": "New private specifications and candidate implementations, with generated counterexamples and unseen input combinations.",
+      "reference": "Hidden behavioral tests plus an engineering rubric fixed before the tested models see candidates.",
+      "objective_checks": ["observable behavior", "specified contracts", "regression counterexamples"],
+      "human_checks": ["clarity", "cohesion", "fit to repository conventions"],
+      "status": "requires fresh candidate code, hidden tests, and design reference labels"
+    },
+    {
+      "decision_class": "tone_manner",
+      "subtypes": ["reader-facing copy", "response manner", "brand voice"],
+      "fresh_cases": "New private situations and response alternatives written after the rubric and configurations are frozen.",
+      "reference": "Blind human judgments against the user's approved voice examples and fixed rating anchors; allow several acceptable responses.",
+      "objective_checks": ["explicit language constraints", "required information", "unsupported factual claims"],
+      "human_checks": ["clarity", "respect", "appropriate tone", "fit to approved voice"],
+      "status": "requires voice rubric approval and blind human reference judgments"
+    },
+    {
+      "decision_class": "factual_truth",
+      "subtypes": ["source extraction", "cross-source conflicts", "uncertainty and freshness"],
+      "fresh_cases": "New private event records or new observed events with frozen authoritative source snapshots, conflicting revisions, and explicit unknowns.",
+      "reference": "Programmatic answers for generated records; authoritative source records for real events. Ground each determinant claim and abstention.",
+      "objective_checks": ["source identity", "version and time", "literal support", "true versus unsupported claims"],
+      "human_checks": ["whether real-world sources settle the question"],
+      "status": "requires a separate fact-record generator or newly captured authoritative records"
+    }
+  ],
+  "shared_metrics": ["wrong accepted decisions", "unsupported determinant factual claims", "correct escalations", "unnecessary escalations", "eligible completion coverage", "total known cost and unmeasured cost", "elapsed time"],
+  "human_rating_controls": ["reference labels sealed before tested model runs", "anonymized arm identities and randomized answer order", "rubric-specific acceptance anchors", "documented disagreements and allowable alternatives", "an evaluation model cannot be the sole truth reference for the models being tested"],
+  "comparison_policy": "Compare cost among configurations meeting the same class-specific quality target and coverage floor. Repetitions of the same case are not new independent evidence. Unvalidated classes retain provisional selections."
+}

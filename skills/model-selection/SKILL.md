@@ -13,6 +13,13 @@ Resolve current model names, capability descriptions, and supported effort value
 from the live execution environment. An explicit model or effort requested by the
 user remains authoritative.
 
+Select each assignment independently, including every decider, judge, and verifier
+in a decision protocol. Agent count or agreement alone does not justify a lower
+capability tier or effort.
+
+For an explicit ensemble cost/reliability comparison, or adoption of a configuration
+supported by relevant confirmation data, read [ensemble.md](references/ensemble.md).
+
 ## Classify the assigned work
 
 Classify the work by unresolved reasoning, not by file, layer, or test count:
@@ -51,6 +58,10 @@ For review:
   invariants.
 - Require the highest-capability tier only when the review must resolve or challenge a
   frontier decision, rather than verify an already-decided implementation.
+
+For decision protocols, apply implementation criteria to deciders and review criteria
+to judges and verifiers. Classify the reasoning within each role; a coordinator's
+recommendation is not an automatic minimum for every assignment.
 
 ## Choose reasoning effort
 
