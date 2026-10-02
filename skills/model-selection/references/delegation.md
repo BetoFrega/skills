@@ -17,11 +17,12 @@ summary.
 - Recalibrate narrower supporting work with the selection criteria in `SKILL.md`. The
   parent recommendation is context, not an automatic minimum.
 - Include the applicable ticket recommendation and this delegation rule in the
-  assignment. A receiving agent that delegates again carries the same obligation.
-- When the recommended model is unavailable, use the closest available capability
-  tier and record the substitution.
-- Deviate upward only for concrete evidence discovered after the ticket was written,
-  and record that evidence in the assignment or execution record.
+  assignment. When using a compatible pricing snapshot, include its `checked_at`
+  value and billing surface; otherwise carry the recommendation's pricing uncertainty.
+  A receiving agent that delegates again carries the same obligation.
+- When availability, the cached pricing snapshot, or task evidence changes, reapply the
+  [selection and escalation rules](../SKILL.md). Record the revised recommendation
+  and the evidence for it in the assignment or execution record.
 
 Delegation is complete when every assignment is traceable to either the ticket
 recommendation for complete implementation or review, or a recalibration recorded
