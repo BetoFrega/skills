@@ -1,6 +1,6 @@
 ---
 name: model-selection
-description: Select models and reasoning effort for implementation, review, recommendations, or delegated agent work using required capability, current costs, and unresolved reasoning.
+description: Select models and reasoning effort for implementation, review, recommendations, or delegated agent work using required capability, cached costs, and unresolved reasoning.
 ---
 
 # Model Selection
@@ -68,16 +68,19 @@ Several files, layers, or test tiers do not independently justify high effort.
 ## Choose configuration by expected cost
 
 Compare available configurations that meet the capability floor and the task's
-latency, tooling, and context requirements. Verify current prices for the applicable
-billing surface and speed mode in official provider documentation or account-specific
-rates.
+latency, tooling, and context requirements. Read `~/.agents/model-pricing.json` once
+per session, matching the billing surface, speed mode, and units. Routine selection
+uses this local snapshot exclusively; cache age is provenance, not a refresh trigger.
 
 Estimate task cost from expected input, cache use, billable output (including
 reasoning), and likely retries. Prefer greater capability when expected cost is equal
 or lower and the configuration meets the same requirements. When evidence is
-incomplete, state the uncertainty and use a suitable default.
+incomplete, including missing or incompatible cached rates, state the uncertainty
+and use a suitable default.
 
 Name the selected model and effort and the cost basis for the recommendation.
+For an explicitly requested cache setup, repair, or refresh, read
+[pricing-cache.md](references/pricing-cache.md).
 
 ## Justify escalation
 
