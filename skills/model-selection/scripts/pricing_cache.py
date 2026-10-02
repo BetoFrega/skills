@@ -88,7 +88,10 @@ def parse_rates(markdown):
 
 
 def load_cache(path):
-    data = json.loads(path.read_text())
+    return validate_cache(json.loads(path.read_text()))
+
+
+def validate_cache(data):
     if not isinstance(data, dict) or data.get("schema_version") != 1 or not isinstance(data.get("rate_cards"), list):
         raise ValueError("Unsupported pricing cache structure")
     seen = set()
@@ -102,6 +105,8 @@ def load_cache(path):
         if timestamp.tzinfo is None:
             raise ValueError("checked_at must include its timezone")
         key = key_for(card)
+        if key == CARD_KEY and card["unit"] != "credits_per_million_tokens":
+            raise ValueError("Codex credit-rate units are incompatible")
         if key in seen:
             raise ValueError("Duplicate rate card")
         seen.add(key)
@@ -121,6 +126,32 @@ def key_for(card):
     return tuple(card.get(key) for key in ("provider", "billing_surface", "speed_mode"))
 
 
+def prepare_refresh(path):
+    empty = {"schema_version": 1, "rate_cards": []}
+    if not path.exists():
+        return empty, None
+    raw = path.read_bytes()
+    parsed = None
+    try:
+        parsed = json.loads(raw)
+        return validate_cache(parsed), None
+    except (ValueError, TypeError, KeyError, OverflowError):
+        recovered = empty
+        if isinstance(parsed, dict) and parsed.get("schema_version") == 1 and isinstance(parsed.get("rate_cards"), list):
+            recovered = dict(parsed, rate_cards=[])
+            seen = set()
+            for item in parsed["rate_cards"]:
+                try:
+                    validate_cache({"schema_version": 1, "rate_cards": [item]})
+                except (ValueError, TypeError, KeyError, OverflowError):
+                    continue
+                key = key_for(item)
+                if key != CARD_KEY and key not in seen:
+                    recovered["rate_cards"].append(item)
+                    seen.add(key)
+        return recovered, raw
+
+
 def refresh(path):
     request = Request(SOURCE_URL, headers={"User-Agent": "model-selection-cache/1.0"})
     with urlopen(request, timeout=30) as response:
@@ -128,20 +159,30 @@ def refresh(path):
     card = dict(zip(("provider", "billing_surface", "speed_mode"), CARD_KEY))
     card.update(unit="credits_per_million_tokens", source_url=SOURCE_URL,
                 checked_at=datetime.now(timezone.utc).isoformat(), models=models)
-    data = load_cache(path) if path.exists() else {"schema_version": 1, "rate_cards": []}
+    data, invalid_bytes = prepare_refresh(path)
     data["rate_cards"] = [item for item in data["rate_cards"] if key_for(item) != CARD_KEY] + [card]
+    validate_cache(data)
     content = json.dumps(data, indent=2, allow_nan=False) + "\n"
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = None
+    backup = None
     try:
         with tempfile.NamedTemporaryFile(mode="w", dir=path.parent, encoding="utf-8", delete=False) as handle:
             temporary = Path(handle.name)
             handle.write(content)
+        if invalid_bytes is not None:
+            with tempfile.NamedTemporaryFile(mode="wb", dir=path.parent, prefix=path.name + ".invalid-",
+                                             suffix=".bak", delete=False) as handle:
+                backup = Path(handle.name)
+                handle.write(invalid_bytes)
         os.replace(temporary, path)
     finally:
         if temporary is not None and temporary.exists():
             temporary.unlink()
-    return {"cache": str(path), "checked_at": card["checked_at"], "model_count": len(models)}
+    result = {"cache": str(path), "checked_at": card["checked_at"], "model_count": len(models)}
+    if backup is not None:
+        result["backup"] = str(backup)
+    return result
 
 
 def show(path, model_names):
@@ -150,8 +191,6 @@ def show(path, model_names):
     if len(cards) != 1:
         raise ValueError("Expected one Codex Standard credit-rate card")
     card = dict(cards[0])
-    if card["unit"] != "credits_per_million_tokens":
-        raise ValueError("Codex credit-rate units are incompatible")
     rates = card["models"]
     selected = model_names or list(rates)
     card["models"] = {model: rates[model] for model in selected if model in rates}

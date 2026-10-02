@@ -98,6 +98,41 @@ class PricingCacheTest(unittest.TestCase):
         self.assertEqual(self.path.read_bytes(), original_bytes)
         self.assertEqual(list(self.path.parent.iterdir()), [self.path])
 
+    def test_refresh_repairs_malformed_or_incompatible_cache_with_a_backup(self):
+        incompatible = card()
+        incompatible["unit"] = "usd_per_million_tokens"
+        raw_card = json.dumps({"schema_version": 1, "rate_cards": [incompatible]}).encode()
+        for raw in (b"{broken json", b'{"schema_version":2,"rate_cards":[]}', raw_card):
+            with self.subTest(raw=raw):
+                self.path.write_bytes(raw)
+                with patch.object(cache, "urlopen", return_value=self.response()):
+                    result = cache.refresh(self.path)
+                self.assertEqual(cache.show(self.path, ["gpt-6.1-sol"])["missing_models"], [])
+                self.assertEqual(Path(result["backup"]).read_bytes(), raw)
+
+    def test_refresh_repairs_target_card_and_preserves_other_valid_cards(self):
+        other = card(provider="another-provider", surface="api_usd")
+        broken = card()
+        broken["models"]["gpt-6.1-sol"]["input"] = -1
+        self.path.write_text(json.dumps({"schema_version": 1, "rate_cards": [broken, other]}))
+        original_bytes = self.path.read_bytes()
+        with patch.object(cache, "urlopen", return_value=self.response()):
+            result = cache.refresh(self.path)
+        self.assertEqual(cache.load_cache(self.path)["rate_cards"][0], other)
+        self.assertEqual(Path(result["backup"]).read_bytes(), original_bytes)
+        self.assertEqual(cache.show(self.path, ["gpt-6.1-sol"])["rate_card"]["models"]["gpt-6.1-sol"]["input"], 50)
+
+    def test_failed_download_preserves_corrupt_cache_without_creating_a_backup(self):
+        self.path.write_bytes(b"{broken json")
+        for failure in (OSError("Offline"), None):
+            with self.subTest(failure=failure):
+                response = self.response(SOURCE.replace("Standard speed", "Fast speed"))
+                with patch.object(cache, "urlopen", side_effect=failure, return_value=response):
+                    with self.assertRaises((OSError, ValueError)):
+                        cache.refresh(self.path)
+                self.assertEqual(self.path.read_bytes(), b"{broken json")
+                self.assertEqual(list(self.path.parent.iterdir()), [self.path])
+
     def test_incompatible_or_corrupt_cache_is_rejected(self):
         for value in (-1, True, float("nan"), "50"):
             with self.subTest(value=value):

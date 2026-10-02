@@ -68,8 +68,9 @@ Several files, layers, or test tiers do not independently justify high effort.
 ## Choose configuration by expected cost
 
 Compare available configurations that meet the capability floor and the task's
-latency, tooling, and context requirements. Read `~/.agents/model-pricing.json` once
-per session, matching the billing surface, speed mode, and units. Routine selection
+latency, tooling, and context requirements. Read `~/.agents/model-pricing.json` and
+reuse it within the session; reload after a successful explicit refresh or a detected
+snapshot change. Match the billing surface, speed mode, and units. Routine selection
 uses this local snapshot exclusively; cache age is provenance, not a refresh trigger.
 
 Estimate task cost from expected input, cache use, billable output (including

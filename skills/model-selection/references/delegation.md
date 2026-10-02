@@ -17,7 +17,8 @@ summary.
 - Recalibrate narrower supporting work with the selection criteria in `SKILL.md`. The
   parent recommendation is context, not an automatic minimum.
 - Include the applicable ticket recommendation and this delegation rule in the
-  assignment, including the pricing snapshot's `checked_at` value and billing surface.
+  assignment. When using a compatible pricing snapshot, include its `checked_at`
+  value and billing surface; otherwise carry the recommendation's pricing uncertainty.
   A receiving agent that delegates again carries the same obligation.
 - When availability, the cached pricing snapshot, or task evidence changes, reapply the
   [selection and escalation rules](../SKILL.md). Record the revised recommendation

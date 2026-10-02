@@ -31,6 +31,10 @@ extracts the Standard credit table without a model call, and atomically replaces
 rate card. It preserves other rate cards and retains the existing cache on download
 or parsing failure. The command reports a compact result rather than the source page.
 
+For a corrupt or incompatible cache, a successful refresh saves the original bytes
+in a `.bak` file beside the cache and rebuilds the target card. It retains other valid
+rate cards when the version 1 container can be read, and reports the backup path.
+
 The source is documentation, not a dedicated pricing API. A changed heading, table,
 or unit requires repairing the parser against the official source before retrying.
 Use an agent for that repair when interpretation is needed; routine extraction runs
