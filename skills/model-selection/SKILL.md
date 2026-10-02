@@ -1,18 +1,17 @@
 ---
 name: model-selection
-description: Select models and reasoning effort for implementation, review, recommendations, or delegated agent work based on unresolved reasoning and concrete escalation risk.
+description: Select models and reasoning effort for implementation, review, recommendations, or delegated agent work using required capability, current costs, and unresolved reasoning.
 ---
 
 # Model Selection
 
-Choose the least expensive configuration expected to complete the assigned work
+Choose the lowest expected cost configuration that can complete the assigned work
 reliably. Treat a recommendation as a starting point, not insurance against every
 possible complication.
 
 Resolve current model names, capability descriptions, and supported effort values
-from the live execution environment. This skill defines capability tiers, not a cache
-of provider catalogs. An explicit model or effort requested by the user remains
-authoritative.
+from the live execution environment. An explicit model or effort requested by the
+user remains authoritative.
 
 ## Classify the assigned work
 
@@ -31,27 +30,27 @@ Authorization, persistence, caching, public behavior, multiple layers, and multi
 test tiers affect verification and the consequence of mistakes. They do not by
 themselves make the work judgment-heavy.
 
-## Choose model capability
+## Determine minimum capability
+
+Treat these tiers as capability floors. Select the actual configuration after
+choosing the required effort.
 
 For implementation:
 
-- Mechanical work uses the fastest suitable model.
-- Contained work uses a balanced model by default.
-- Judgment-heavy work uses a strong workhorse model.
-- Frontier work uses the highest-capability model only when a consequential decision
+- Mechanical work needs enough capability to apply the known edit.
+- Contained work needs balanced capability.
+- Judgment-heavy work needs strong workhorse capability.
+- Frontier work needs the highest-capability tier only when a consequential decision
   remains unresolved **and** a wrong decision would be silent, expensive, or propagate
   into later work.
 
 For review:
 
-- Use a balanced model by default.
-- Use a strong workhorse when correctness depends on correlating subtle invariants.
-- Use the highest-capability model only when the review must resolve or challenge a
+- Require balanced capability by default.
+- Require strong workhorse capability when correctness depends on correlating subtle
+  invariants.
+- Require the highest-capability tier only when the review must resolve or challenge a
   frontier decision, rather than verify an already-decided implementation.
-
-When the assigned work specifies its seam, behavior, precedent, and a contained
-acceptance checklist, cap implementation at the balanced tier unless a remaining
-decision defeats that cap.
 
 ## Choose reasoning effort
 
@@ -66,13 +65,28 @@ Choose effort from the unresolved reasoning:
 
 Several files, layers, or test tiers do not independently justify high effort.
 
+## Choose configuration by expected cost
+
+Compare available configurations that meet the capability floor and the task's
+latency, tooling, and context requirements. Verify current prices for the applicable
+billing surface and speed mode in official provider documentation or account-specific
+rates.
+
+Estimate task cost from expected input, cache use, billable output (including
+reasoning), and likely retries. Prefer greater capability when expected cost is equal
+or lower and the configuration meets the same requirements. When evidence is
+incomplete, state the uncertainty and use a suitable default.
+
+Name the selected model and effort and the cost basis for the recommendation.
+
 ## Justify escalation
 
-Any recommendation above a balanced model or middle effort names both the concrete
-unresolved question and the concrete consequence of deciding it incorrectly. Generic
-statements such as “crosses layers”, “touches authorization”, “requires care”, or “must
-preserve behavior” do not justify escalation. When either element is absent, use the
-lower configuration.
+Any recommendation that pays more for greater capability or uses effort above middle
+names both the concrete unresolved question and the concrete consequence of deciding
+it incorrectly. Generic statements such as “crosses layers”, “touches authorization”,
+“requires care”, or “must preserve behavior” do not justify escalation. When either
+element is absent, choose the least expensive suitable configuration with at most
+middle effort.
 
 ## Propagate the recommendation to execution
 
