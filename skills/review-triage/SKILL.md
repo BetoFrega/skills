@@ -26,8 +26,10 @@ maintainability concern without a regression belongs in Tech Debt or Improvement
 For each actionable finding record classification, location, evidence, impact, and
 smallest credible correction. Preserve the originating review axis when supplied.
 Unsupported concerns remain unconfirmed and cannot be presented as established
-blockers; explain the missing evidence. Record findings disproved by inspection as
-dismissed with the reason.
+blockers; explain the missing evidence. A potentially actionable concern grounded
+in changed code keeps readiness pending until confirmed or dismissed. Record
+disproved or purely speculative concerns as dismissed with the evidence or scope
+reason, rather than imposing speculative approval gates.
 
 For **Feature Blocker**, verify the flag's actual default, rollout/activation state,
 evaluation path, and isolation of the affected behavior. A conditional in the diff
@@ -75,20 +77,32 @@ Tech Debt.
 
 ## 3. Determine approval readiness
 
+Establish the intended review scope from the request and repository requirements:
+comparison base, change set, and required review axes. Record evidence that the
+source review covered that scope; a matching SHA establishes freshness, not
+completeness. Missing hunks or required axes keep readiness pending. For an
+explicitly limited review, qualify the recommendation to the reviewed scope and
+identify remaining coverage before whole-PR approval.
+
 Record the revision covered by the source review and compare it with the current
-PR head. If they differ, review the entire intervening delta, including unrelated
-new hunks, and recheck affected findings and release evidence. Keep approval pending
-until review coverage reaches the current revision. Reapply classification and
-disposition to any new findings.
+PR head, or the current branch tip (`HEAD`) for a non-PR review. For uncommitted
+work, also capture the reviewed patch; a changed patch changes the review target
+even when `HEAD` is unchanged. If the target changed, review the entire intervening
+delta, including unrelated new hunks, and recheck affected findings and release
+evidence. Keep readiness pending until coverage reaches the current target.
+Reapply classification and disposition to new findings.
 
 - **Changes required**: at least one unresolved PR Blocker. Tickets cannot waive it.
 - **Approval pending follow-up**: no unresolved PR Blocker, but review coverage is
-  incomplete, a Feature Blocker or Tech Debt finding lacks a verified resolution
+  incomplete, a potentially actionable unconfirmed concern remains unsettled,
+  a Feature Blocker or Tech Debt finding lacks a verified resolution
   or explicit deferral with verified ticket coverage, or required feature isolation
   verification or other accepted follow-up remains incomplete. State the precise
   outstanding action; this is a process gate, not a new defect class.
-- **Ready for approval**: review coverage reaches the current revision; PR Blockers
-  are resolved and verified; every Feature Blocker and Tech Debt finding is either
+- **Ready for approval**: review coverage includes the full intended scope at the
+  current target; potentially actionable unconfirmed concerns are confirmed and
+  dispositioned or dismissed; PR Blockers are resolved and verified; every
+  Feature Blocker and Tech Debt finding is either
   resolved and verified or explicitly deferred with verified ticket coverage;
   every Improvement accepted for later work has verified ticket coverage; deferred
   Feature Blockers have verified isolation and recorded activation gates.
@@ -97,6 +111,8 @@ Ready for approval means this review process permits approval. Feature Blockers
 still prevent activation until fixed and verified. Apply any other repository
 checks or approval requirements as well. A review recommendation does not itself
 approve or merge a PR, activate a flag, or authorize those writes.
+For non-PR reviews, report the equivalent readiness for the branch or working
+changes within the stated scope; do not imply that a PR exists or was approved.
 
 ## 4. Report the disposition
 
