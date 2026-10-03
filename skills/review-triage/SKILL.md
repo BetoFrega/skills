@@ -85,12 +85,16 @@ explicitly limited review, qualify the recommendation to the reviewed scope and
 identify remaining coverage before whole-PR approval.
 
 Record the revision covered by the source review and compare it with the current
-PR head, or the current branch tip (`HEAD`) for a non-PR review. For uncommitted
-work, also capture the reviewed patch; a changed patch changes the review target
-even when `HEAD` is unchanged. If the target changed, review the entire intervening
-delta, including unrelated new hunks, and recheck affected findings and release
-evidence. Keep readiness pending until coverage reaches the current target.
-Reapply classification and disposition to new findings.
+PR head, or the current branch tip (`HEAD`) for a non-PR review. Also record and
+compare the actual target-base tip and diff base or merge-base used by the source
+review. For uncommitted work, capture the reviewed patch too. A changed base or
+patch changes the review target even when the head is unchanged. If any part of
+the target changed, review the entire affected delta, including unrelated new
+hunks and the updated integration against the target base. Recheck affected
+findings, release evidence, and integration behavior with appropriate repository
+checks; a clean merge alone does not establish compatibility. Keep readiness
+pending until coverage reaches the current target. Reapply classification and
+disposition to new findings.
 
 - **Changes required**: at least one unresolved PR Blocker. Tickets cannot waive it.
 - **Approval pending follow-up**: no unresolved PR Blocker, but review coverage is
