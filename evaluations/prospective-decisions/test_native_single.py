@@ -52,10 +52,16 @@ class NativeSingleTests(unittest.TestCase):
     def test_missing_usage_is_not_a_complete_monetary_total(self):
         for i in (1, 2):
             choice = benchmark.get(self.suite / "private/answers" / f"{i:05d}.json")["acceptable"][0]
+            packet = benchmark.get(self.suite / "packets" / f"{i:05d}.json")
+            report = {"decision_id": packet["decision_id"], "decision": choice, "scope": "as_specified",
+                "conditions": [], "rationale": "Fixture", "claims": [], "options": [
+                    {"id": e["id"], "advantages": "Fixture", "disadvantages": "Fixture"}
+                    for e in packet["evidence"] if e["id"].startswith("plan-")]}
             job = {"job_id": f"native-{i}", "provider": "native_collaboration"}
             benchmark.put(self.output / job["job_id"] / "stdout.log", {"usage": None})
             benchmark.put(self.output / "outcomes" / f"{i:05d}.json", {"case_index": i,
-                "status": "escalated" if choice == "ESCALATE" else "accepted", "decision": choice, "jobs": [job]})
+                "status": "escalated" if choice == "ESCALATE" else "accepted", "decision": choice,
+                "reports": [report], "jobs": [job]})
         with contextlib.redirect_stdout(io.StringIO()):
             native_single.score(self.output)
         scored = benchmark.get(self.output / "scores.json")

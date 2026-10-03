@@ -2,6 +2,7 @@
 """Recover native-agent usage and audit assigned-input reads after a bounded replay."""
 
 import argparse
+import ast
 from collections import Counter
 import hashlib
 import json
@@ -18,22 +19,73 @@ def put(path, value):
     path.write_text(json.dumps(value, indent=2) + "\n")
 
 
+def command_paths(command):
+    """Admit literal file reads and the input-slicing used by native judges."""
+    if "$" in command or "`" in command:
+        raise ValueError("Shell expansion is not an audited input read")
+    arguments = shlex.split(command)
+    if len(arguments) >= 2 and arguments[0] == "cat":
+        return arguments[1:]
+    if len(arguments) == 4 and arguments[:2] == ["sed", "-n"] and \
+            re.fullmatch(r"\d+(?:,\d+)?p", arguments[2]):
+        return [arguments[3]]
+    if len(arguments) >= 3 and arguments[0] == "dd" and arguments[1].startswith("if=") and all(
+            re.fullmatch(r"(?:bs|skip|count)=\d+|2>/dev/null", argument) for argument in arguments[2:]):
+        return [arguments[1].removeprefix("if=")]
+    if len(arguments) != 3 or arguments[:2] not in (["python3", "-c"], ["python", "-c"]):
+        raise ValueError("Unrecognized input-loading command")
+    tree = ast.parse(arguments[2])
+    permitted = (ast.Module, ast.ImportFrom, ast.alias, ast.Assign, ast.Name, ast.Load,
+                 ast.Store, ast.Expr, ast.Call, ast.Attribute, ast.Constant, ast.Subscript, ast.Slice)
+    paths = []
+    for node in ast.walk(tree):
+        if not isinstance(node, permitted):
+            raise ValueError("Unrecognized Python input loader")
+        if isinstance(node, ast.ImportFrom) and (node.module != "pathlib" or
+                [(alias.name, alias.asname) for alias in node.names] != [("Path", None)] or node.level):
+            raise ValueError("Unexpected Python import")
+        if not isinstance(node, ast.Call):
+            continue
+        function = node.func
+        if isinstance(function, ast.Name) and function.id == "Path":
+            if len(node.args) != 1 or node.keywords or not isinstance(node.args[0], ast.Constant) or \
+                    not isinstance(node.args[0].value, str):
+                raise ValueError("A literal input path is required")
+            paths.append(node.args[0].value)
+        elif isinstance(function, ast.Name) and function.id == "print" and not node.keywords:
+            continue
+        elif (isinstance(function, ast.Attribute) and function.attr == "read_text" and
+              isinstance(function.value, ast.Call) and isinstance(function.value.func, ast.Name) and
+              function.value.func.id == "Path" and not node.args and not node.keywords):
+            continue
+        else:
+            raise ValueError("Unexpected Python call")
+    if not paths:
+        raise ValueError("No literal input paths")
+    return paths
+
+
 def scope_issue(call, allowed, workspace):
     code = call["code"]
-    paths_read = set(re.findall(r"/Users/betofrega/[A-Za-z0-9_./-]+", code))
-    methods = set(re.findall(r"tools\.([a-zA-Z0-9_]+)\s*\(", code))
-    suspicious = any(s in code for s in (
-        ".write_text(", ".write_bytes(", ".unlink(", ".mkdir(", "curl ", "wget "))
-    # A workdir is transport metadata. Admit it only for this exact two-file
-    # relative cat command, rather than granting reads throughout the directory.
-    cwd = re.search(r'\bworkdir\s*:\s*("(?:\\.|[^"\\])*")', code)
-    cmd = re.search(r'\bcmd\s*:\s*("(?:\\.|[^"\\])*")', code)
-    if cwd and cmd and json.loads(cwd.group(1)) == str(workspace):
-        arguments = shlex.split(json.loads(cmd.group(1)))
-        relative = {str(Path(p).relative_to(workspace)) for p in allowed}
-        if len(arguments) == 3 and arguments[0] == "cat" and set(arguments[1:]) == relative:
-            paths_read.discard(str(workspace))
-    return call["name"] != "exec" or methods != {"exec_command"} or bool(paths_read - allowed) or suspicious
+    methods = re.findall(r"tools\.([a-zA-Z0-9_]+)\s*\(", code)
+    commands = re.findall(r"tools\.exec_command\s*\(\s*\{([^{}]*)\}\s*\)", code, re.DOTALL)
+    if call["name"] != "exec" or set(methods) != {"exec_command"} or len(commands) != len(methods):
+        return True
+    allowed = {Path(path).resolve() for path in allowed}
+    workspace = Path(workspace).resolve()
+    try:
+        for body in commands:
+            cmd = re.search(r'(?:(?:"cmd")|\bcmd)\s*:\s*("(?:\\.|[^"\\])*")', body)
+            cwd = re.search(r'(?:(?:"workdir")|\bworkdir)\s*:\s*("(?:\\.|[^"\\])*")', body)
+            if cmd is None or (re.search(r'(?:(?:"workdir")|\bworkdir)\s*:', body) and cwd is None):
+                return True
+            workdir = workspace if cwd is None else (workspace / json.loads(cwd.group(1))).resolve()
+            paths = {(workdir / path).resolve() for path in command_paths(json.loads(cmd.group(1)))}
+            if paths - allowed:
+                return True
+    except (ValueError, TypeError, SyntaxError):
+        return True
+    return False
 
 
 def audit(output, session_dir):

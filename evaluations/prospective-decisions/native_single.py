@@ -11,6 +11,8 @@ import re
 import shutil
 import time
 
+from report_validation import validate_schema
+
 
 def get(path):
     return json.loads(path.read_text())
@@ -42,6 +44,7 @@ def prepare(suite, original, output):
     (output / "frozen").mkdir()
     shutil.copyfile(Path(__file__), output / "frozen/native_single.py")
     shutil.copyfile(suite / "frozen/benchmark.py", output / "frozen/benchmark.py")
+    shutil.copyfile(Path(__file__).with_name("report_validation.py"), output / "frozen/report_validation.py")
     put(output / "decider-schema.json", bench.schema())
     cases = []
     for index in range(source["case_count"]):
@@ -65,7 +68,7 @@ def prepare(suite, original, output):
             path.write_text(prompt)
         cases.append({"case_index": index, "packet": packet, "model_assignment_required": prompt is not None})
     put(output / "inputs.json", cases)
-    plan = {"version": "posthoc-native-single-v1", "evaluation_kind": "One standalone Sol round on reused cases",
+    plan = {"version": "posthoc-native-single-v2", "evaluation_kind": "One standalone Sol round on reused cases",
         "source_suite": str(suite), "source_run": str(original), "source_manifest_sha256": sha(suite / "manifest.json"),
         "case_count": len(cases), "repetitions": 1, "max_live_native_agents": 3,
         "model": "gpt-6.1-sol", "effort": "high", "provider": "native_collaboration",
@@ -133,6 +136,7 @@ def collect(output, root_rollout):
         if not receipt["agent_thread_id"]:
             raise ValueError("Missing native thread identity")
         report = receipt["report"]
+        validate_schema(report, get(output / "decider-schema.json"))
         bench.validate_report(case["packet"], report)
         job_id = f"c{index:05d}-r0-sol-single"
         job_dir = output / job_id
@@ -165,6 +169,7 @@ def score(output):
     if len(records) != plan["case_count"] or {r["case_index"] for r in records} != set(range(plan["case_count"])):
         raise ValueError("Missing or duplicated outcomes")
     keys = {i: get(suite / "private/answers" / f"{i:05d}.json")["acceptable"] for i in range(plan["case_count"])}
+    validate_outcomes(output, records)
     accepted = [r for r in records if r["status"] == "accepted"]
     wrong = sum(r["decision"] not in keys[r["case_index"]] for r in accepted)
     eligible = sum(v != ["ESCALATE"] for v in keys.values())
@@ -193,6 +198,15 @@ def score(output):
         "limits": plan["limits"] + ["USD is conditional API-equivalent cost, not an account bill; preparation and coordinator are excluded."]}
     put(output / "scores.json", result)
     print(json.dumps(result, indent=2))
+
+
+def validate_outcomes(output, records):
+    response_schema = get(output / "decider-schema.json")
+    for record in records:
+        if record["status"] != "failed" and record["jobs"]:
+            if len(record.get("reports", [])) != 1:
+                raise ValueError("Expected one native decision report")
+            validate_schema(record["reports"][0], response_schema)
 
 
 if __name__ == "__main__":

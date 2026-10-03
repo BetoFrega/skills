@@ -82,6 +82,13 @@ restricts tools by instruction and subsequent audit, rather than disabling them
 as the CLI does. System context and loading turns also differ from the Luna CLI
 baseline. Neither aliases nor one-round outputs identify immutable model behavior.
 
+A subsequent offline check against the complete frozen decider schema confirmed
+the same 20 valid reports and one already recorded invalid response. The portable
+scope checker admitted all 21 recorded input reads. No model call or frozen artifact
+was changed. The all-Luna and hybrid comparators reused additional-decider inputs
+with visible peer reports; their cost and reliability describe an anchored variant,
+not the skill's blind reconsideration protocol.
+
 The first command-text audit falsely flagged case 21's working-directory metadata
 when its `cat` command used the two assigned relative paths. The checker now admits
 that exact two-file command without granting reads elsewhere in the directory.

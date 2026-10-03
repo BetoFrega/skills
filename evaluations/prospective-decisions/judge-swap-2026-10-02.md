@@ -11,6 +11,14 @@ configuration was chosen after observing the pilot, the Luna reports were reused
 and execution moved from CLI to native subagents. It does not qualify reliability
 on untouched data or demonstrate the cheapest way to attain equal confidence.
 
+The reused additional-decider inputs contained peer reports, exposing votes and
+reasoning. The hybrid's reliability and protocol-equivalent cost therefore describe
+that anchored variant, not the skill's blind reconsideration configuration. Current
+v3 removes that exposure from future reconsiderations; the frozen replay is unchanged.
+An offline check with the complete frozen judge schema found all 21 native judgments
+structurally valid. The portable command audit admitted all 132 recorded input reads.
+These checks do not supply new evidence for the corrected decision protocol.
+
 ## Observed comparison
 
 All configurations use high effort. Three explicit human gates are mechanical

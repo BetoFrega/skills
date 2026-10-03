@@ -2,6 +2,7 @@
 
 import asyncio
 import contextlib
+import copy
 import io
 import json
 import math
@@ -12,6 +13,49 @@ import unittest
 from unittest.mock import patch
 
 import benchmark as b
+
+
+def complete_report(packet):
+    return {"decision_id": packet["decision_id"], "decision": "ESCALATE", "scope": "as_specified",
+            "conditions": [], "rationale": "Fixture", "claims": [], "options": [
+                {"id": entry["id"], "advantages": "Fixture", "disadvantages": "Fixture"}
+                for entry in packet["evidence"] if entry["id"].startswith("plan-")]}
+
+
+class ReportSchemaTests(unittest.TestCase):
+    def test_complete_decider_schema_is_required(self):
+        packet = b.generate_case("schema-fixture", 1)
+        report = complete_report(packet)
+        b.validate_report(packet, report)
+        mutations = [
+            lambda r: r.pop("rationale"), lambda r: r.pop("claims"),
+            lambda r: r.update(extra="forbidden"), lambda r: r.update(rationale=123),
+            lambda r: r.update(claims=None), lambda r: r.update(options="not an array"),
+            lambda r: r.update(conditions=["extra condition"]),
+            lambda r: r["options"][0].pop("advantages"),
+            lambda r: r["options"][0].update(disadvantages=[]),
+            lambda r: r["options"][0].update(extra="forbidden"),
+            lambda r: r.update(claims=[{"fact_id": "capacity"}]),
+            lambda r: r.update(claims=[{"fact_id": "capacity", "value_json": 2}]),
+            lambda r: r.update(claims=[{"fact_id": "capacity", "value_json": "2", "extra": True}])]
+        for index, mutate in enumerate(mutations):
+            with self.subTest(index=index):
+                invalid = copy.deepcopy(report)
+                mutate(invalid)
+                with self.assertRaises(ValueError):
+                    b.validate_report(packet, invalid)
+
+    def test_judge_schema_and_unsupported_schema_keywords_fail_closed(self):
+        report = {"outcome": "accept", "candidate": "ESCALATE", "preferred_choice": "ESCALATE",
+                  "rationale": "Fixture", "remaining_gap": ""}
+        b.validate_schema(report, b.schema(True))
+        report.pop("rationale")
+        with self.assertRaises(ValueError):
+            b.validate_schema(report, b.schema(True))
+        response_schema = b.schema()
+        response_schema["unevaluatedProperties"] = False
+        with self.assertRaisesRegex(ValueError, "Unsupported"):
+            b.validate_schema(complete_report(b.generate_case("schema-fixture", 1)), response_schema)
 
 
 class ReferenceTests(unittest.TestCase):
@@ -154,6 +198,70 @@ class StudyTests(unittest.TestCase):
             self.assertTrue(all(j["tool_mode"] == "none" and not j["read_dirs"] for j in record["jobs"]))
             if record["arm"] == "luna-ensemble" and record["jobs"]:
                 self.assertEqual(sum(j["role"] == "additional" for j in record["jobs"]), 1)
+
+    def test_additional_packets_exclude_peer_reports_votes_and_judge_gap(self):
+        output = self.run_fake(repeated_reconsider=True)
+        additional = [job for job in self.started_jobs if job["role"] == "additional"]
+        self.assertTrue(additional)
+        for job in additional:
+            text = Path(job["prompt_file"]).read_text()
+            payload = json.loads(text[text.index("\n{\n") + 1:])
+            self.assertNotIn("reports", payload)
+            self.assertNotIn("source_checks", payload)
+            self.assertNotIn("gap", payload)
+            self.assertNotIn("One bounded reassessment.", text)
+            self.assertEqual(payload["verified_facts"], [{"fact_id": "capacity", "value":
+                b.facts(payload["packet"])["capacity"]}])
+            self.assertTrue(payload["points_in_dispute"])
+        packet = b.get(self.suite / "packets/00001.json")
+        report = complete_report(packet)
+        report.update(rationale="PRIVATE_PEER_VOTE", claims=[
+            {"fact_id": "PRIVATE_PEER_VOTE", "value_json": "true"},
+            {"fact_id": "capacity", "value_json": "null"}])
+        text = json.dumps(b.reconsideration_payload(packet, [report]))
+        self.assertNotIn("PRIVATE_PEER_VOTE", text)
+        self.assertEqual(json.loads(text)["unresolved_fact_ids"], ["capacity"])
+
+    def test_scoring_rejects_reports_that_bypass_generation_validation(self):
+        output = self.run_fake()
+        for path in (output / "outcomes").glob("*.json"):
+            record = b.get(path)
+            if record["status"] == "accepted":
+                record["reports"][-1].pop("rationale")
+                b.put(path, record)
+                break
+        with self.assertRaisesRegex(ValueError, "Missing required"):
+            b.score_suite(self.suite, output)
+
+    def test_empty_partial_or_invalid_rate_cards_remain_unknown(self):
+        output = self.run_fake()
+        arm = self.plan["arms"][0]
+        model = arm["roles"]["decider"]["model"]
+        cards = [{}, {"input": 1}, {"input": 1, "cached_input": 0, "output": "1"},
+                 {"input": -1, "cached_input": 0, "output": 1},
+                 {"input": float("nan"), "cached_input": 0, "output": 1}, None]
+        for card in cards:
+            with self.subTest(card=card):
+                plan = copy.deepcopy(self.plan)
+                plan["arms"][0]["api_equivalent_rates_per_million"][model] = card
+                with patch.object(b, "check_suite", return_value=plan), contextlib.redirect_stdout(io.StringIO()):
+                    b.score_suite(self.suite, output)
+                scored = next(s for s in b.get(output / "scores.json")["summaries"] if s["arm"] == arm["id"])
+                self.assertGreater(scored["job_count"], 0)
+                self.assertEqual(scored["jobs_without_usage_or_rates"], scored["job_count"])
+                self.assertEqual(scored["known_api_standard_short_context_equivalent_usd"], 0)
+
+    def test_complete_zero_rates_are_known(self):
+        output = self.run_fake()
+        plan = copy.deepcopy(self.plan)
+        arm = plan["arms"][0]
+        arm["api_equivalent_rates_per_million"][arm["roles"]["decider"]["model"]] = {
+            "input": 0, "cached_input": 0, "output": 0}
+        with patch.object(b, "check_suite", return_value=plan), contextlib.redirect_stdout(io.StringIO()):
+            b.score_suite(self.suite, output)
+        scored = next(s for s in b.get(output / "scores.json")["summaries"] if s["arm"] == arm["id"])
+        self.assertEqual(scored["jobs_without_usage_or_rates"], 0)
+        self.assertEqual(scored["known_api_standard_short_context_equivalent_usd"], 0)
 
     def test_repeated_reconsideration_escalates_without_new_budget(self):
         output = self.run_fake(repeated_reconsider=True)

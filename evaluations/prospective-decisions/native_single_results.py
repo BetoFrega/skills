@@ -13,6 +13,8 @@ import time
 
 import native_single as original
 
+from report_validation import validate_schema
+
 
 def collect(output, root_rollout):
     frozen = original.module(output / "frozen/native_single.py")
@@ -40,6 +42,7 @@ def collect(output, root_rollout):
             report, failure = None, None
             try:
                 report = json.loads(raw)
+                validate_schema(report, original.get(output / "decider-schema.json"))
                 bench.validate_report(cases[index]["packet"], report)
             except json.JSONDecodeError as error:
                 failure = {"kind": "invalid_json", "detail": str(error)}
@@ -82,13 +85,15 @@ def collect(output, root_rollout):
         not c["model_assignment_required"] for c in cases.values()), "model_responses": len(receipts),
         "failed": sum(r["failure"] is not None for r in receipts.values()),
         "offline_collector": {"path": str(Path(__file__).resolve()), "sha256": original.sha(Path(__file__)),
-            "reason": "The original strict collector stopped on malformed JSON. Preserve that output as a failure without repair or new inference."}}
+            "schema_validator_sha256": original.sha(Path(__file__).with_name("report_validation.py")),
+            "reason": "Validate the frozen schema and preserve malformed native output as a failure without repair or new inference."}}
     original.put(output / "run-summary.json", summary)
     print(json.dumps(summary))
 
 
 def score(output):
     frozen = original.module(output / "frozen/native_single.py")
+    original.validate_outcomes(output, [original.get(p) for p in (output / "outcomes").glob("*.json")])
     frozen.score(output)
     result = original.get(output / "scores.json")
     failures = [original.get(p) for p in sorted((output / "outcomes").glob("*.json"))

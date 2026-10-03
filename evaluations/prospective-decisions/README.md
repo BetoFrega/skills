@@ -20,8 +20,12 @@ This diagnostic does not establish skill in open-ended architecture or product d
 
 The [2026-10-02 live pilot report](pilot-2026-10-02.md) records 24 paired cases and
 98 completed Luna/high calls, including observed errors, costs, and a source-checking
-defect. Its frozen v1 results remain unchanged. Current v2 fixes the checker and
-initial scheduling order; it has regression coverage but no fresh live confirmation.
+defect. Its frozen v1 results remain unchanged. Those ensembles exposed peer reports
+to the additional decider, so their reliability and cost describe an anchored variant,
+not the skill's blind reconsideration protocol. Current v3 retains v2's checker and
+scheduling fixes, removes peer reports and judge preferences from reconsideration,
+validates complete response schemas, and repairs portable scope and accounting
+checks. It has regression coverage but no fresh live confirmation.
 
 The other tracks and their required references are specified in
 [calibration-plan.json](calibration-plan.json). Product, architecture, code design,
@@ -110,7 +114,10 @@ python3 audit_execution.py \
 ```
 
 Each provider job has fresh context and tools disabled. Its prompt contains only
-admitted packets or prior reports and literal source checks. The runner never reads
+its role's admitted inputs. Deciders receive the original packet; an additional
+decider receives verified literal facts and neutral checks covering all objections
+allowed by this finite rulebook, with no peer reports, votes, or judge preferences.
+Judges receive prior reports and literal source checks. The runner never reads
 private keys or the private seed. The offline verifier and scorer do read them.
 Tool restrictions are the exposure boundary; Unix directory modes alone do not
 isolate processes running as the same user. The oracle source is not secret, while
@@ -122,12 +129,25 @@ single additional decider. A judge receives reports with their admitted context 
 literal source checks, and uses no research tools. Reconsideration may consume the
 one additional decider; a continuing gap or majority challenge escalates. At most
 three decider calls and two judge calls complete per decision. Failures remain
-failures, with no automatic retries. A shared semaphore caps all live jobs across
+failures, with no automatic retries. Complete schemas are checked before acceptance
+and scoring, including required fields, nested types, and forbidden properties.
+The standard-library validator covers the frozen formats' schema keywords and
+rejects unsupported keywords. Its source is frozen alongside new runners.
+A shared semaphore caps all live jobs across
 arms, repetitions, and decision stages. No proposal is executed.
 
 The source checker compares literal input facts only. It does not calculate
 feasibility, optimize schedules, or disclose the private answer. Determinant derived
 reasoning remains the agents' responsibility and is evaluated by the private scorer.
+
+The native scope audit resolves literal paths against the supplied workspace and
+recorded working directory. It recognizes bounded `cat`, `sed`, `dd`, and Python
+input-slicing reads; unfamiliar or dynamic commands require review. Working-directory
+metadata grants no access to neighboring files. This remains a command-text check,
+not an operating-system boundary. A gate-only CLI run has zero job wall duration.
+Missing, incomplete, or invalid token-category rate maps count as unknown pricing;
+zero-valued complete rate maps are valid. Known cost is a subtotal when any job is
+unpriced.
 This controlled variant needs no external factual research and therefore no research
 verifier agent. It is not a test of discovering unknown facts with tools.
 

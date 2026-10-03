@@ -12,8 +12,10 @@ import shutil
 import subprocess
 import time
 
+from report_validation import validate_schema
+from benchmark import schema
 
-VERSION = "posthoc-judge-swap-v2"
+VERSION = "posthoc-judge-swap-v3"
 
 
 def load_module(name, path):
@@ -83,8 +85,9 @@ def prepare(suite, original, output, judge_provider="codex"):
     frozen = output / "frozen"
     frozen.mkdir()
     shutil.copyfile(Path(__file__), frozen / "judge_swap.py")
-    for filename in ("benchmark.py", "dispatch.py"):
-        shutil.copyfile(suite / "frozen" / filename, frozen / filename)
+    shutil.copyfile(suite / "frozen/dispatch.py", frozen / "dispatch.py")
+    for filename in ("benchmark.py", "report_validation.py"):
+        shutil.copyfile(Path(__file__).with_name(filename), frozen / filename)
     plan = {"version": VERSION, "evaluation_kind": "post-hoc judge substitution; no new confirmation set",
         "judge_provider": judge_provider,
         "source_suite": str(suite), "source_run": str(original),
@@ -129,6 +132,7 @@ def verify(replay):
 
 
 def validate_judgment(packet, reports, judgment):
+    validate_schema(judgment, schema(True))
     candidate = reports[-1]["decision"]
     allowed = {e["id"] for e in packet["evidence"] if e["id"].startswith("plan-")} | {"ESCALATE"}
     if (judgment["outcome"] not in {"accept", "reconsider", "challenge_majority", "user_decision"}
@@ -183,9 +187,8 @@ async def run(replay, output):
                     "source_checks": bench.source_checks(packet, reports),
                     "candidate": reports[-1]["decision"], "additional_decider_used": True}).decode()
             else:
-                prompt = bench.DECIDER + "\n" + bench.ADDITIONAL + "\n" + bench.encoded({
-                    "packet": packet, "reports": reports,
-                    "source_checks": bench.source_checks(packet, reports), "gap": gap}).decode()
+                prompt = bench.DECIDER + "\n" + bench.ADDITIONAL + "\n" + bench.encoded(
+                    bench.reconsideration_payload(packet, reports)).decode()
             path = output / "prompts" / (job_id + ".txt")
             path.parent.mkdir(exist_ok=True)
             path.write_text(prompt)
@@ -198,6 +201,7 @@ async def run(replay, output):
             if status["state"] != "completed":
                 raise ValueError("Assignment ended: " + status["state"])
             report = get(output / job_id / "report.json")
+            validate_schema(report, get(Path(job["schema_file"])))
             if role == "additional":
                 bench.validate_report(packet, report)
             return report
@@ -224,6 +228,12 @@ def score(replay, output):
     records = [get(p) for p in sorted((output / "outcomes").glob("*.json"))]
     if len(records) != len(cases) or {r["case_index"] for r in records} != set(cases):
         raise ValueError("Missing or duplicated outcomes")
+    for record in records:
+        if record["status"] != "failed" and record["jobs"]:
+            packet = cases[record["case_index"]]["packet"]
+            for report in record["reports"]:
+                bench.validate_report(packet, report)
+            validate_judgment(packet, record["reports"], record["judgment"])
     keys = {i: get(Path(plan["source_suite"]) / "private/answers" / f"{i:05d}.json")["acceptable"] for i in cases}
     accepted = [r for r in records if r["status"] == "accepted"]
     wrong = sum(r["decision"] not in keys[r["case_index"]] for r in accepted)

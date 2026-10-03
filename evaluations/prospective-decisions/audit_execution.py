@@ -117,7 +117,7 @@ def audit(suite, output):
               "prompt_hash_mismatches": prompt_mismatches,
               "independent_tick_reference_checked_cases": plan["case_count"],
               "independent_reference_mismatches": reference_mismatches,
-              "wall_seconds_first_job_to_last_job": max(t for t, _ in events) - min(t for t, _ in events),
+              "wall_seconds_first_job_to_last_job": (max(t for t, _ in events) - min(t for t, _ in events)) if events else 0,
               "assignment_time_by_arm": per_arm,
               "limits": (["The frozen v1 scheduler queued individual assignments ahead of initial ensemble pairs; elapsed decision time includes this queue effect."]
                          if version == "prospective-decisions-v1" else []) + [
