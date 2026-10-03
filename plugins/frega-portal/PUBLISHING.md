@@ -1,4 +1,4 @@
-# Automatic private publication from main
+# Validated main packages and private publication
 
 ## Trigger and responsibilities
 
@@ -7,10 +7,10 @@ validate the same package and release-preparation rules, without creating a
 publishable artifact. A successful main run stores `frega-portal-<commit>` with
 `frega-portal.zip` and `build.json` for 30 days.
 
-An authenticated Codex heartbeat in the originating chat checks every ten minutes
-and uses Plugin Creator to update the existing personal, private plugin. The
-heartbeat is a local Codex automation and needs the app running and its account
-session available. GitHub builds remain independent of the desktop app.
+The ten-minute publication heartbeat is paused at the owner's request.
+GitHub continues to validate and build packages on main; it does not publish the
+account plugin. Publication requires an explicit request and an authenticated
+Plugin Creator session to update the existing personal, private plugin.
 
 The integration uses the supported account-plugin update tool. It requires no
 ChatGPT session token or OpenAI API key in GitHub Actions. Workspace GitHub
@@ -27,7 +27,7 @@ are the publication state of record.
 1. Read the full current `main` SHA with `gh api repos/BetoFrega/skills/commits/main`.
    Select a completed, successful run of `frega-portal.yml` on `main` with that
    exact `headSha`, from a `push` or `workflow_dispatch` event. A pending run is
-   revisited at the next heartbeat. A failed or missing workflow needs attention.
+   awaited before proceeding. A failed or missing workflow needs attention.
 2. Read the target plugin through `get_plugin_files`, including `plugin.json`,
    `.codex-plugin/plugin.json`, `mcp.json`, `.mcp.json`, and `skills-inventory.json`.
    Follow `next_offset` to collect its complete file list, requiring the same
@@ -56,7 +56,7 @@ are the publication state of record.
    Use fresh temporary paths per run. `unchanged` ends silently. `ready` provides
    the archive path, next version, content digest, and observed release ID.
 5. Re-read `main` before publishing. If its SHA changed, discard this candidate
-   and select the new main build on the next heartbeat. For `ready`, call
+   and select the new main build. For `ready`, call
    `update_plugin` with the exact existing plugin ID, prepared local archive,
    and `expected_release_id` from preparation. A release conflict requires fresh
    source and preparation. An uncertain mutation requires read-back before retry.
@@ -75,21 +75,34 @@ commits, and file deletion. The account update operation overlays files and cann
 remove old ones; a removed skill therefore needs separate supported handling.
 
 Versions increment the currently published patch number, with the source version
-as a minimum. A content digest excludes release numbers and Git provenance, so
+as a minimum. Content digest schema 2 includes archived file modes and excludes
+release numbers and Git provenance, so
 unrelated main commits, reruns, and unknown-outcome retries cannot create duplicate
-versions once the matching inventory is read back.
+versions once the matching inventory is read back. The first explicitly requested
+update from a release with the old byte-only digest publishes the new inventory
+once, even if the file bytes are unchanged. Subsequent identical packages are
+unchanged. Inventory hashes and modes are checked against the archive before
+preparing any release.
+
+The builder parses complete skill frontmatter with PyYAML's safe loader and
+requires non-empty string names and descriptions. It accepts quoted and block
+strings and rejects malformed YAML and Python object tags. The pinned dependency
+is needed for builds and tests only; the release preparer remains stdlib-only.
 
 ## Checks and recovery
 
 ```sh
-python3 -m unittest discover -s scripts -p 'test_frega_portal_release.py' -v
-python3 scripts/package_frega_portal.py --output /tmp/frega-portal.zip
+python3 -m venv /tmp/frega-portal-builder
+/tmp/frega-portal-builder/bin/python -m pip install -r scripts/frega_portal_requirements.txt
+/tmp/frega-portal-builder/bin/python -m unittest discover -s scripts -p 'test_frega_portal_release.py' -v
+/tmp/frega-portal-builder/bin/python scripts/package_frega_portal.py --output /tmp/frega-portal.zip
 ```
 
 For an expired artifact, dispatch `frega-portal.yml` on `main` and await that exact
 SHA's successful run. For a lost session, reconnect through the client's normal
-authentication flow. Pause the publication heartbeat through Codex Automations to
-stop private updates; main validation and artifact generation can continue.
+authentication flow. Keep the publication automation paused unless the owner
+explicitly requests that it be re-enabled. Main validation and artifact generation
+can continue while publication is disabled.
 
 Official packaging and distribution reference:
 https://developers.openai.com/plugins/build/plugins

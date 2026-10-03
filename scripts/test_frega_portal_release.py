@@ -8,7 +8,7 @@ import tempfile
 import unittest
 import zipfile
 
-from package_frega_portal import collect_files, content_digest, write_archive
+from package_frega_portal import collect_files, collect_modes, content_digest, validate, write_archive
 from prepare_frega_portal_release import prepare, read_artifact
 
 
@@ -40,16 +40,19 @@ class PrivateReleaseTests(unittest.TestCase):
         self.output = self.root / 'release.zip'
         self.write_candidate(self.candidate)
 
-    def inventory(self, files):
+    def inventory(self, files, modes=None):
+        modes = collect_modes(files) if modes is None else modes
         return {'plugin': 'frega-portal', 'version': '0.2.0', 'source_commit': COMMIT,
-                'skills_worktree_modified': False, 'content_digest': content_digest(files),
+                'skills_worktree_modified': False, 'content_digest_schema': 2,
+                'content_digest': content_digest(files, modes), 'file_modes': modes,
                 'skill_count': len(self.skills), 'skills': self.skills,
                 'files': {path: hashlib.sha256(data).hexdigest() for path, data in files.items()}}
 
-    def write_candidate(self, files):
+    def write_candidate(self, files, modes=None):
+        modes = collect_modes(files) if modes is None else modes
         complete = dict(files)
-        complete['skills-inventory.json'] = json.dumps(self.inventory(files)).encode()
-        write_archive(complete, self.artifact)
+        complete['skills-inventory.json'] = json.dumps(self.inventory(files, modes)).encode()
+        write_archive(complete, self.artifact, modes)
 
     def prepare(self, current=None):
         return prepare(self.artifact, current or self.current, COMMIT, self.output, 123)
@@ -76,7 +79,8 @@ class PrivateReleaseTests(unittest.TestCase):
             value = json.loads(files[path])
             value['version'] = '7.8.9'
             files[path] = json.dumps(value).encode()
-        self.assertEqual(content_digest(files), content_digest(self.source))
+        modes = collect_modes(self.source)
+        self.assertEqual(content_digest(files, modes), content_digest(self.source, modes))
 
     def test_privacy_identity_and_scope_are_required(self):
         for field, value in [('discoverability', 'LISTED'), ('scope', 'WORKSPACE'),
@@ -152,6 +156,73 @@ class PrivateReleaseTests(unittest.TestCase):
         initial = self.artifact.read_bytes()
         self.write_candidate(self.candidate)
         self.assertEqual(initial, self.artifact.read_bytes())
+
+    def test_skill_frontmatter_rejects_invalid_yaml_and_metadata_types(self):
+        for frontmatter in [
+            'name: proceed\ndescription: [unterminated',
+            'name: proceed\ndescription: Valid\nmetadata: [unterminated',
+            'name: proceed\ndescription: [a, list]',
+            'name: proceed\ndescription: true',
+            'name: proceed\ndescription: "   "',
+            'name: [proceed]\ndescription: Valid',
+            '- proceed\n- description',
+            'name: proceed\ndescription: !!python/object:builtins.object {}',
+        ]:
+            with self.subTest(frontmatter=frontmatter):
+                files = dict(self.source)
+                files['skills/proceed/SKILL.md'] = ('---\n' + frontmatter + '\n---\nBody.\n').encode()
+                with self.assertRaisesRegex(ValueError, 'frontmatter|name or description'):
+                    validate(files)
+
+    def test_skill_frontmatter_accepts_yaml_quoted_and_block_strings(self):
+        for description in ['"Text with: punctuation --- inside"', '|\n  First line.\n  Second line.', '>\n  Folded description.']:
+            with self.subTest(description=description):
+                files = dict(self.source)
+                files['skills/proceed/SKILL.md'] = ('---\nname: "proceed"\ndescription: ' + description + '\n---\nBody.\n').encode()
+                _, skills = validate(files)
+                self.assertIn({'name': 'proceed', 'path': 'skills/proceed/SKILL.md'}, skills)
+
+    def test_mode_only_change_prepares_release_and_preserves_permissions(self):
+        target = next(path for path in self.source if path.startswith('skills/') and path.endswith('.py'))
+        for before, after in [(0o100644, 0o100755), (0o100755, 0o100644)]:
+            with self.subTest(before=oct(before), after=oct(after)):
+                old_modes = collect_modes(self.source)
+                old_modes[target] = before
+                current = copy.deepcopy(self.current)
+                current['contents']['skills-inventory.json'] = json.dumps(self.inventory(self.source, old_modes))
+                new_modes = dict(old_modes)
+                new_modes[target] = after
+                self.write_candidate(self.source, new_modes)
+                result = self.prepare(current)
+                self.assertEqual(result['status'], 'ready')
+                _, modes, inventory = read_artifact(self.output, COMMIT)
+                self.assertEqual(modes[target], after)
+                self.assertEqual(inventory['file_modes'][target], after)
+                self.assertNotEqual(result['content_digest'], self.inventory(self.source, old_modes)['content_digest'])
+
+    def test_archive_mode_tampering_is_rejected(self):
+        with zipfile.ZipFile(self.artifact) as archive:
+            entries = [(info, archive.read(info)) for info in archive.infolist()]
+        with zipfile.ZipFile(self.artifact, 'w') as archive:
+            for info, data in entries:
+                if info.filename.endswith('/skills/proceed/SKILL.md'):
+                    info.external_attr = 0o100755 << 16
+                archive.writestr(info, data)
+        with self.assertRaisesRegex(ValueError, 'mode inventory mismatch'):
+            self.prepare()
+
+    def test_legacy_published_digest_migrates_once(self):
+        current = copy.deepcopy(self.current)
+        previous = json.loads(current['contents']['skills-inventory.json'])
+        previous.pop('content_digest_schema')
+        previous.pop('file_modes')
+        previous['content_digest'] = 'legacy-byte-only-digest'
+        current['contents']['skills-inventory.json'] = json.dumps(previous)
+        self.write_candidate(self.source)
+        self.assertEqual(self.prepare(current)['status'], 'ready')
+        _, _, inventory = read_artifact(self.output, COMMIT)
+        current['contents']['skills-inventory.json'] = json.dumps(inventory)
+        self.assertEqual(self.prepare(current)['status'], 'unchanged')
 
 
 if __name__ == '__main__':

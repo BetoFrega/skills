@@ -28,6 +28,12 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Install package validation dependency
+        run: |
+          python3 -m venv "$RUNNER_TEMP/frega-portal-venv"
+          "$RUNNER_TEMP/frega-portal-venv/bin/python" -m pip install -r scripts/frega_portal_requirements.txt
+          echo "$RUNNER_TEMP/frega-portal-venv/bin" >> "$GITHUB_PATH"
+
       - name: Test private release preparation
         run: python3 -m unittest discover -s scripts -p 'test_frega_portal_release.py' -v
 
@@ -60,5 +66,5 @@ jobs:
           print('')
           print('Skills: ' + str(result['skill_count']) + '. Content digest: `' + result['content_digest'] + '`.')
           print('')
-          print('The authenticated Codex heartbeat publishes changed content to the existing private Frega Portal plugin and verifies the saved release. This artifact alone is not a published plugin.')
+          print('Scheduled publication is disabled. This validated artifact can be published through an explicitly requested, guarded private-plugin update; it is not a published plugin.')
           PY
