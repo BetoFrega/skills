@@ -52,16 +52,18 @@ accepted as deferred work:
 2. Search for an existing open ticket covering the finding. Reuse it when its
    scope and acceptance criteria cover the work; otherwise prepare a new ticket.
    Related findings can share a ticket only when each remains explicitly covered.
-3. Include the review/PR reference and reviewed revision, affected locations,
-   evidence and impact, classification, correction scope, acceptance criteria, and
-   the repository's ownership or triage disposition. For a Feature Blocker, name
-   the feature and flag, and record that release and activation depend on verified
-   resolution. Use the tracker's blocking relationship when available; otherwise
-   put an explicit activation gate in the ticket and link it from the existing
-   feature spec or release checklist when available.
-4. Create or update tickets within the active task's authorization and repository
-   rules. If a required write is unauthorized or unavailable, prepare its complete
-   content and report approval pending ticket creation or update.
+3. Prepare ticket content with the review/PR reference and reviewed revision,
+   affected locations, evidence and impact, classification, correction scope,
+   acceptance criteria, and the repository's ownership or triage disposition.
+   For a Feature Blocker, name the feature and flag, and record that release and
+   activation depend on verified resolution. Prepare the tracker's blocking
+   relationship when available; otherwise include an explicit activation gate in
+   the ticket and prepare a backlink from the existing feature spec or release
+   checklist when available.
+4. Perform ticket, dependency, feature-spec, and release-checklist writes only
+   within the active task's authorization and repository rules. If a required
+   write is unauthorized or unavailable, return the complete proposed content or
+   edit and report approval pending that write.
 5. Read back each ticket and any dependency or release-document entry used.
    Confirm the ID/link, open status, coverage, and activation gate. Record the
    verified link beside every deferred finding.
@@ -73,16 +75,23 @@ Tech Debt.
 
 ## 3. Determine approval readiness
 
-Use the current reviewed revision. If it changed, recheck affected findings and
-release evidence before deciding.
+Record the revision covered by the source review and compare it with the current
+PR head. If they differ, review the entire intervening delta, including unrelated
+new hunks, and recheck affected findings and release evidence. Keep approval pending
+until review coverage reaches the current revision. Reapply classification and
+disposition to any new findings.
 
 - **Changes required**: at least one unresolved PR Blocker. Tickets cannot waive it.
-- **Approval pending follow-up**: no unresolved PR Blocker, but required ticket
-  creation/readback or feature isolation verification remains incomplete. State
-  the precise outstanding action; this is a process gate, not a new defect class.
-- **Ready for approval**: PR Blockers are resolved and verified; every deferred
-  finding requiring a ticket has verified coverage; deferred Feature Blockers
-  have verified isolation and recorded activation gates.
+- **Approval pending follow-up**: no unresolved PR Blocker, but review coverage is
+  incomplete, a Feature Blocker or Tech Debt finding lacks a verified resolution
+  or explicit deferral with verified ticket coverage, or required feature isolation
+  verification or other accepted follow-up remains incomplete. State the precise
+  outstanding action; this is a process gate, not a new defect class.
+- **Ready for approval**: review coverage reaches the current revision; PR Blockers
+  are resolved and verified; every Feature Blocker and Tech Debt finding is either
+  resolved and verified or explicitly deferred with verified ticket coverage;
+  every Improvement accepted for later work has verified ticket coverage; deferred
+  Feature Blockers have verified isolation and recorded activation gates.
 
 Ready for approval means this review process permits approval. Feature Blockers
 still prevent activation until fixed and verified. Apply any other repository
