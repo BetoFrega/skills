@@ -1,0 +1,34 @@
+{
+  "purpose": "Pilot; compare a single Luna with the bounded Luna decision protocol",
+  "decision_class": "architecture",
+  "evaluated_scope": "Synthetic scheduling, dependency, retry, and capacity constraints; excludes open-ended architectural quality",
+  "case_count": 24,
+  "repetitions": 1,
+  "max_concurrency": 4,
+  "timeout_seconds": 300,
+  "max_wrong_accepted_rate": 0.01,
+  "minimum_eligible_coverage": 0.9,
+  "confidence_level": 0.95,
+  "arms": [
+    {
+      "id": "luna-single",
+      "protocol": "single",
+      "provider": "codex",
+      "roles": {"decider": {"model": "gpt-6-luna", "effort": "high"}},
+      "selection_rationale": "Individual baseline; constraint reasoning and competing schedules require high effort.",
+      "api_equivalent_rates_per_million": {"gpt-6-luna": {"input": 0.1, "cached_input": 0.01, "output": 0.5}}
+    },
+    {
+      "id": "luna-ensemble",
+      "protocol": "ensemble",
+      "provider": "codex",
+      "roles": {
+        "decider": {"model": "gpt-6-luna", "effort": "high"},
+        "additional": {"model": "gpt-6-luna", "effort": "high"},
+        "judge": {"model": "gpt-6-luna", "effort": "high"}
+      },
+      "selection_rationale": "Provisional economical ensemble; independent decisions, literal source checks, bounded reconsideration, and a tool-free judge. No claim of equal reliability yet.",
+      "api_equivalent_rates_per_million": {"gpt-6-luna": {"input": 0.1, "cached_input": 0.01, "output": 0.5}}
+    }
+  ]
+}

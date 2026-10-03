@@ -1,0 +1,6 @@
+# Retain experiment source snapshots, inputs, and raw execution records locally.
+/*
+!/.gitignore
+!/README.md
+!/assessment-rubric.json
+!/measurements-summary.json

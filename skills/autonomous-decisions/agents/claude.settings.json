@@ -1,0 +1,5 @@
+{
+  "skillOverrides": {
+    "autonomous-decisions": "user-invocable-only"
+  }
+}

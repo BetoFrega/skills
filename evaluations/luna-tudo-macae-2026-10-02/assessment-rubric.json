@@ -1,0 +1,38 @@
+{
+  "assessment_scope": "Exploratory case study, not a statistical reliability estimate. The coordinator checks transport/schema/provenance mechanically; semantic assessment is a separate Luna-only audit.",
+  "criteria": [
+    "Literal source excerpts support factual claims",
+    "Proposals obey supplied binding contracts and authorization",
+    "Race and failure outcomes are explicit rather than replaced by generic advice",
+    "Current behavior, inferred guarantees, and proposed safeguards are distinguished",
+    "Refuted or unresolved material premises are not accepted as facts",
+    "No judge research or majority bypass; one additional decider maximum",
+    "Actual execution/model/effort, time, tokens, and unresolved outcomes are reported"
+  ],
+  "case_checks": {
+    "publication-recovery": [
+      "publicationState is distinct from visibility status",
+      "publishing means domain publication committed but completion still pending",
+      "a deliberate pause must not be silently reactivated by retry",
+      "profile authorization is checked inside domain transactions",
+      "failed photo upload must not be equated with failed ad publication",
+      "in-memory tests do not prove Firestore transaction atomicity"
+    ],
+    "upload-finalization": [
+      "same operation key can repeat external sanitization/storage while still yielding idempotent domain results",
+      "different operation keys conflict for one reservation",
+      "owner check precedes returning a stored result",
+      "same digest and differing metadata produce conflict rather than two canonical media",
+      "cleanupAt is checked at the commit stage",
+      "a late failure may leave external storage effects even though no result commits"
+    ],
+    "image-revocation-recovery": [
+      "receipt publication rechecks authenticated source absence",
+      "transform flag does not disable revocation duties",
+      "Worker-tag and resizing-URL purge are separate effects",
+      "pre-deletion intent survives receipt/purge/failure-detail failure",
+      "successful purge with failed recovery cleanup is distinct from failed purge",
+      "code, probe definitions, and source tests are not proof of deployment/provider success"
+    ]
+  }
+}
