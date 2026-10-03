@@ -42,6 +42,23 @@ def collect_files():
     return files
 
 
+def markdown_prose(text):
+    """Exclude fenced examples from package reference validation."""
+    lines = []
+    fence = None
+    for line in text.splitlines():
+        if fence is not None:
+            if re.fullmatch(r" {0,3}" + re.escape(fence[0]) + "{" + str(fence[1]) + r",}\s*", line):
+                fence = None
+            continue
+        opener = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+        if opener and (opener[1][0] != "`" or "`" not in opener[2]):
+            fence = (opener[1][0], len(opener[1]))
+            continue
+        lines.append(line)
+    return "\n".join(lines)
+
+
 def validate(files):
     # Only the builder needs PyYAML; release preparation remains stdlib-only.
     import yaml
@@ -91,7 +108,7 @@ def validate(files):
                 raise ValueError(f"Invalid skill name or description: {name}")
             skills.append({"name": path.parent.name, "path": name})
         if path.suffix == ".md" and path.parts[0] == "skills":
-            for link in re.findall(r"\[[^\]\n]*\]\(([^)\n]+)\)", content.decode()):
+            for link in re.findall(r"\[[^\]\n]*\]\(([^)\n]+)\)", markdown_prose(content.decode())):
                 link = link.strip().split("#", 1)[0]
                 if not link or ":" in link:
                     continue
@@ -175,7 +192,7 @@ def main():
         "file_modes": modes,
         "skill_count": len(skills),
         "skills": skills,
-        "external_skill_requirements": {"orchestrate": ["implement"]},
+        "external_skill_requirements": {},
         "files": {name: hashlib.sha256(data).hexdigest() for name, data in sorted(files.items())},
     }
     files["skills-inventory.json"] = (json.dumps(inventory, indent=2) + "\n").encode()

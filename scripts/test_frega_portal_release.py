@@ -157,6 +157,19 @@ class PrivateReleaseTests(unittest.TestCase):
         self.write_candidate(self.candidate)
         self.assertEqual(initial, self.artifact.read_bytes())
 
+    def test_example_links_are_ignored_but_real_references_are_required(self):
+        source = 'skills/proceed/SKILL.md'
+        for fence in ['```markdown', '~~~~markdown']:
+            with self.subTest(fence=fence):
+                files = dict(self.source)
+                closing = fence.split('markdown')[0]
+                files[source] += (f'\n{fence}\n[Example](./absent.md)\n{closing}\n').encode()
+                validate(files)
+        files = dict(self.source)
+        files[source] += b'\n[Required reference](./absent.md)\n'
+        with self.assertRaisesRegex(ValueError, 'Reference missing from package'):
+            validate(files)
+
     def test_skill_frontmatter_rejects_invalid_yaml_and_metadata_types(self):
         for frontmatter in [
             'name: proceed\ndescription: [unterminated',

@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "ownership": "Repository-owned editable copies; the upstream metadata records provenance only.",
+  "imported_on": "2026-10-03",
+  "skills": {
+    "implement": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/implement/SKILL.md",
+      "installed_folder_hash": "f07d230f645fc9ac390cf13a450bbff12ad791a3",
+      "snapshot_updated_at": "2026-09-26T14:46:50.646Z",
+      "local_adaptations": []
+    },
+    "grill-me": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/productivity/grill-me/SKILL.md",
+      "installed_folder_hash": "3df14e2d3a89459bf300614be9247e3ce74798f8",
+      "snapshot_updated_at": "2026-09-26T14:46:50.645Z",
+      "local_adaptations": []
+    },
+    "grill-with-docs": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/grill-with-docs/SKILL.md",
+      "installed_folder_hash": "eedaf2562c83155115e9c649fa3ecaac2e10e81d",
+      "snapshot_updated_at": "2026-09-26T14:46:50.645Z",
+      "local_adaptations": []
+    },
+    "grilling": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/productivity/grilling/SKILL.md",
+      "installed_folder_hash": "f0732035b8b1b60ae39454e4191caef32fa91903",
+      "snapshot_updated_at": "2026-09-26T14:46:50.646Z",
+      "local_adaptations": []
+    },
+    "domain-modeling": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/domain-modeling/SKILL.md",
+      "installed_folder_hash": "388c9822641805ca2dcd5038e68a1d5282437ee5",
+      "snapshot_updated_at": "2026-09-26T14:46:50.644Z",
+      "local_adaptations": []
+    },
+    "to-spec": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/to-spec/SKILL.md",
+      "installed_folder_hash": "136b9651747cfccbfbb7c50a6b0dfb757e7547d2",
+      "snapshot_updated_at": "2026-09-26T14:46:50.649Z",
+      "local_adaptations": [
+        "Use the existing repository setup skill."
+      ]
+    },
+    "to-tickets": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/to-tickets/SKILL.md",
+      "installed_folder_hash": "b32c94e5a51c24ee9c41fcb7fe9ea9fff9af6369",
+      "snapshot_updated_at": "2026-09-26T14:46:50.649Z",
+      "local_adaptations": [
+        "Use the existing repository setup skill."
+      ]
+    },
+    "tdd": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/tdd/SKILL.md",
+      "installed_folder_hash": "79288be15c67b849f22b6572056601090fd20913",
+      "snapshot_updated_at": "2026-09-26T14:46:50.648Z",
+      "local_adaptations": []
+    },
+    "diagnosing-bugs": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/diagnosing-bugs/SKILL.md",
+      "installed_folder_hash": "99bd56983e42bc752c52da67f1112e4121781cd1",
+      "snapshot_updated_at": "2026-09-26T14:46:50.644Z",
+      "local_adaptations": []
+    },
+    "triage": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/triage/SKILL.md",
+      "installed_folder_hash": "95fa21bf236993cd9af25bd3670476c17fdb95a4",
+      "snapshot_updated_at": "2026-09-26T14:46:50.649Z",
+      "local_adaptations": [
+        "Use the existing repository setup skill."
+      ]
+    },
+    "wizard": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/wizard/SKILL.md",
+      "installed_folder_hash": "0a163daf092c6f361158ca9627e81f2cb5230574",
+      "snapshot_updated_at": "2026-09-26T14:46:50.653Z",
+      "local_adaptations": []
+    },
+    "implement-spec": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/in-progress/implement-spec/SKILL.md",
+      "installed_folder_hash": "1ec4cd3fbcc62d57cd32cf1d907c4c4761355e2b",
+      "snapshot_updated_at": "2026-09-26T14:46:50.654Z",
+      "local_adaptations": []
+    },
+    "codebase-design": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/codebase-design/SKILL.md",
+      "installed_folder_hash": "344e3efc88ee60663b2e989555c2efdb548fbd42",
+      "snapshot_updated_at": "2026-09-26T14:46:50.644Z",
+      "local_adaptations": []
+    },
+    "pr": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/in-progress/pr/SKILL.md",
+      "installed_folder_hash": "80d46d68aa3fea9ff45e191b7ec107d65d37e416",
+      "snapshot_updated_at": "2026-09-26T14:46:50.655Z",
+      "local_adaptations": []
+    },
+    "research": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/research/SKILL.md",
+      "installed_folder_hash": "0a6796c5667e95ed2301ba7381c123b4acb2ae1a",
+      "snapshot_updated_at": "2026-09-26T14:46:50.647Z",
+      "local_adaptations": []
+    },
+    "resolving-merge-conflicts": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/resolving-merge-conflicts/SKILL.md",
+      "installed_folder_hash": "77f0d7de3143abbf03e55a63522d30bff31ae908",
+      "snapshot_updated_at": "2026-09-26T14:46:50.647Z",
+      "local_adaptations": []
+    },
+    "prototype": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/prototype/SKILL.md",
+      "installed_folder_hash": "e41d92e171f074a2b6887d8f6faca4a15c83d1ca",
+      "snapshot_updated_at": "2026-09-26T14:46:50.646Z",
+      "local_adaptations": []
+    },
+    "writing-for-agents": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/productivity/writing-for-agents/SKILL.md",
+      "installed_folder_hash": "ad2925850efb8973a72d2e666f7a975f9a2d4a9b",
+      "snapshot_updated_at": "2026-09-26T14:46:50.653Z",
+      "local_adaptations": [
+        "Move the existing repository copy to skills/; expose it through a relative .agents/skills symlink."
+      ]
+    }
+  }
+}

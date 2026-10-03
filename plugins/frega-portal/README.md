@@ -24,8 +24,7 @@ configuration. The MCP connection supplies the portal's upstream tools; it does
 not supply a shell, a repository checkout, or native Codex task management.
 
 - `orchestrate` requires Codex task tools, an accessible GitHub project, and the
-  project's separately installed `implement` skill. The release retains its
-  explicit prerequisite checks.
+  included `implement` skill. The release retains its explicit prerequisite checks.
 - `advisory`, `autonomous-decisions`, and `code-review` require supported agent
   delegation. The autonomous decision CLI adapter also requires Python 3 and
   the selected provider's CLI.
