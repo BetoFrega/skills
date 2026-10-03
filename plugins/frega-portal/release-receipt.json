@@ -1,0 +1,27 @@
+{
+  "plugin_id": "plugins_6abd6d03d40081919659c0ee5d6979c9",
+  "plugin_url": "https://chatgpt.com/plugins/plugins_6abd6d03d40081919659c0ee5d6979c9",
+  "version": "0.2.0",
+  "release_id": "pluginrel_6ac0633acce881918cbb3a7c081e1094",
+  "scope": "USER",
+  "discoverability": "PRIVATE",
+  "archive_sha256": "6411a11edad0444f8b4684a091f3f7d775215bd7fb5db7ef604ee73d68cda2e0",
+  "verification": {
+    "skill_count": 28,
+    "file_count": 89,
+    "skill_sources_unchanged": true,
+    "private_visibility_read_back": true,
+    "mcp_configuration_unchanged": true,
+    "installed_version": "0.2.0",
+    "codex_plugin_catalog_skill_count": 28,
+    "codex_plugin_skill_read": "proceed",
+    "reference_verified": "skills/autonomous-decisions/references/batch.md",
+    "server_normalization": {
+      "file": ".codex-plugin/plugin.json",
+      "field": "skills",
+      "submitted": "./skills/",
+      "saved": "./skills"
+    },
+    "workflow_execution": "Not executed; discovery, skill loading, references, and package contents verified."
+  }
+}
