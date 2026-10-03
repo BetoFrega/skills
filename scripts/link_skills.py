@@ -6,8 +6,21 @@ import json
 import os
 from pathlib import Path
 import shutil
+import subprocess
 import tempfile
 from datetime import datetime, timezone
+
+
+def canonical_repo(checkout=None):
+    checkout = Path(checkout or Path(__file__).resolve().parents[1]).resolve()
+    try:
+        listing = subprocess.check_output(
+            ["git", "-C", str(checkout), "worktree", "list", "--porcelain", "-z"],
+            stderr=subprocess.DEVNULL,
+        ).decode()
+    except (OSError, subprocess.CalledProcessError):
+        return checkout
+    return Path(listing.split("\0", 1)[0].removeprefix("worktree "))
 
 
 def atomic_write(path, content):
@@ -32,6 +45,7 @@ def link_skills(repo, target, apply=False):
     # A directory symlink would redirect all mutations somewhere else.
     if target.is_symlink():
         raise ValueError(f"The installation directory must be a real directory: {target}")
+    target = target.resolve()
     names = [source.parent.name for source in sources]
     lock_path = target.parent / ".skill-lock.json"
     lock_bytes = lock_path.read_bytes() if lock_path.exists() else None
@@ -44,7 +58,8 @@ def link_skills(repo, target, apply=False):
     changes, unchanged = [], []
     for source in sources:
         destination = target / source.parent.name
-        if destination.is_symlink() and destination.resolve() == source.parent.resolve():
+        relative = os.path.relpath(source.parent, target)
+        if destination.is_symlink() and destination.readlink() == Path(relative):
             unchanged.append(source.parent.name)
         else:
             changes.append((source.parent, destination))
@@ -72,7 +87,7 @@ def link_skills(repo, target, apply=False):
             if existed:
                 destination.rename(saved)
             completed.append((destination, saved, existed))
-            destination.symlink_to(source, target_is_directory=True)
+            destination.symlink_to(os.path.relpath(source, target), target_is_directory=True)
         # Repository links are maintained locally, outside skills CLI update tracking.
         if registry_names:
             for name in registry_names:
@@ -100,8 +115,8 @@ def link_skills(repo, target, apply=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--repo", type=Path, required=True,
-                        help="Stable canonical checkout, rather than a temporary worktree")
+    parser.add_argument("--repo", type=Path, default=canonical_repo(),
+                        help="Override the primary checkout discovered from this script's repository")
     parser.add_argument("--target", type=Path, default=Path.home() / ".agents" / "skills")
     parser.add_argument("--apply", action="store_true", help="Apply the previewed links")
     args = parser.parse_args()

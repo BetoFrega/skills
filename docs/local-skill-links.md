@@ -4,19 +4,22 @@
 that source within the repository. Imported provenance lives in
 `skill-origins.json`; it does not enable automatic upstream replacement.
 
-Point global installations at a stable canonical checkout so edits appear
-immediately. Preview, then apply:
+The script discovers the repository's primary checkout through Git, including
+when run from a linked worktree. It uses the script's repository directory when
+Git metadata is absent. Preview, then apply from the repository:
 
 ```sh
-python3 scripts/link_skills.py --repo /Users/betofrega/Code/skills
-python3 scripts/link_skills.py --repo /Users/betofrega/Code/skills --apply
+python3 scripts/link_skills.py
+python3 scripts/link_skills.py --apply
 ```
 
-The script links every repository skill into `~/.agents/skills`, saves replaced
+The script links every repository skill into `~/.agents/skills` using relative
+paths calculated from the installation directory. It saves replaced
 copies and the previous installer registry in `~/.agents/skill-link-backups`,
 and removes those skills from the skills CLI update registry. Other installed
 skills remain as they are. Repeated runs keep links that already resolve to the
-canonical source. If the canonical checkout moves, rerun with its new path.
+canonical source. If the canonical checkout moves, rerun the script from its new
+location. Use `--repo` only to choose a different checkout explicitly.
 
 Update the canonical checkout to receive repository changes. Pull upstream
 skill changes deliberately into `skills/` when useful; local edits belong to

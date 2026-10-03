@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import subprocess
 from pathlib import Path
 import tempfile
 import unittest
@@ -41,6 +42,7 @@ class LinkSkillsTests(unittest.TestCase):
         self.assertFalse(preview["applied"])
         self.assertFalse((self.target / "alpha").is_symlink())
         result = module.link_skills(self.repo, self.target, apply=True)
+        self.assertFalse((self.target / "alpha").readlink().is_absolute())
         source = self.repo / "skills" / "alpha" / "SKILL.md"
         source.write_text("edited in canonical checkout")
         self.assertEqual((self.target / "alpha" / "SKILL.md").read_text(), source.read_text())
@@ -76,6 +78,29 @@ class LinkSkillsTests(unittest.TestCase):
             module.link_skills(self.repo, self.target, apply=True)
         self.assertFalse((self.target / "alpha").is_symlink())
         self.assertFalse((self.target.parent / "skill-link-backups").exists())
+
+    def test_primary_checkout_is_discovered_from_a_linked_worktree(self):
+        def git(*args):
+            return subprocess.check_output(["git", "-C", str(self.repo),
+                                            "-c", "commit.gpgsign=false",
+                                            "-c", "core.hooksPath=/dev/null", *args],
+                                           stderr=subprocess.STDOUT)
+
+        git("init", "--quiet")
+        git("-c", "user.name=Test", "-c", "user.email=test@example.com",
+            "commit", "--quiet", "--allow-empty", "-m", "Initialize test checkout")
+        linked = self.root / "arbitrary folder" / "linked"
+        git("worktree", "add", "--quiet", "--detach", str(linked))
+        self.assertEqual(module.canonical_repo(linked).resolve(), self.repo.resolve())
+
+    def test_relative_links_survive_moving_the_parent_directory(self):
+        module.link_skills(self.repo, self.target, apply=True)
+        moved = self.root.with_name(self.root.name + "-moved")
+        self.root.rename(moved)
+        try:
+            self.assertEqual((moved / ".agents/skills/alpha/SKILL.md").read_text(), "canonical alpha")
+        finally:
+            moved.rename(self.root)
 
 
 if __name__ == "__main__":
