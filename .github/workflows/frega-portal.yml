@@ -1,0 +1,64 @@
+name: Frega Portal package
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - 'skills/**'
+      - 'plugins/frega-portal/**'
+      - 'scripts/*frega_portal*'
+      - '.github/workflows/frega-portal.yml'
+      - 'LICENSE'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frega-portal-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+
+      - name: Test private release preparation
+        run: python3 -m unittest discover -s scripts -p 'test_frega_portal_release.py' -v
+
+      - name: Build and validate all skills
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/frega-portal"
+          python3 scripts/package_frega_portal.py \
+            --output "$RUNNER_TEMP/frega-portal/frega-portal.zip" \
+            > "$RUNNER_TEMP/frega-portal/build.json"
+          cat "$RUNNER_TEMP/frega-portal/build.json"
+
+      - name: Store approved main package
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: frega-portal-${{ github.sha }}
+          path: ${{ runner.temp }}/frega-portal/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Explain publication status
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, os
+          from pathlib import Path
+          result = json.loads((Path(os.environ['RUNNER_TEMP']) / 'frega-portal/build.json').read_text())
+          print('Validated private-plugin candidate for main commit `' + result['source_commit'] + '`.')
+          print('')
+          print('Skills: ' + str(result['skill_count']) + '. Content digest: `' + result['content_digest'] + '`.')
+          print('')
+          print('The authenticated Codex heartbeat publishes changed content to the existing private Frega Portal plugin and verifies the saved release. This artifact alone is not a published plugin.')
+          PY

@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "frega-portal": {
+      "type": "streamable-http",
+      "url": "https://mcp.frega.dev/mcp",
+      "headers": {}
+    }
+  }
+}

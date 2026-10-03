@@ -1,0 +1,10 @@
+{
+  "repository": "BetoFrega/skills",
+  "branch": "main",
+  "workflow": "frega-portal.yml",
+  "artifact_prefix": "frega-portal-",
+  "plugin_id": "plugins_6abd6d03d40081919659c0ee5d6979c9",
+  "plugin_name": "frega-portal",
+  "scope": "USER",
+  "discoverability": "PRIVATE"
+}
