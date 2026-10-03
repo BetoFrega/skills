@@ -43,6 +43,9 @@ def collect_files():
 
 
 def validate(files):
+    # Only the builder needs PyYAML; release preparation remains stdlib-only.
+    import yaml
+
     manifest = json.loads(files["plugin.json"])
     overlay = json.loads(files[".codex-plugin/plugin.json"])
     if manifest["name"] != PACKAGE_NAME or overlay["name"] != PACKAGE_NAME:
@@ -74,10 +77,17 @@ def validate(files):
             text = content.decode()
             if not text.startswith("---\n") or "\n---\n" not in text[4:]:
                 raise ValueError(f"Missing skill frontmatter: {name}")
-            frontmatter = text.split("---", 2)[1]
-            skill_name = re.search(r"^name:\s*([^\n]+)$", frontmatter, re.M)
-            description = re.search(r"^description:\s*([^\n]+)$", frontmatter, re.M)
-            if not skill_name or skill_name[1].strip() != path.parent.name or not description:
+            frontmatter = text[4:].split("\n---\n", 1)[0]
+            try:
+                metadata = yaml.safe_load(frontmatter)
+            except yaml.YAMLError as error:
+                raise ValueError(f"Invalid skill frontmatter: {name}") from error
+            if not isinstance(metadata, dict):
+                raise ValueError(f"Invalid skill frontmatter mapping: {name}")
+            skill_name, description = metadata.get("name"), metadata.get("description")
+            if (not isinstance(skill_name, str) or not skill_name.strip()
+                    or skill_name != path.parent.name
+                    or not isinstance(description, str) or not description.strip()):
                 raise ValueError(f"Invalid skill name or description: {name}")
             skills.append({"name": path.parent.name, "path": name})
         if path.suffix == ".md" and path.parts[0] == "skills":
@@ -99,7 +109,16 @@ def validate(files):
     return manifest, skills
 
 
-def content_digest(files):
+def collect_modes(files):
+    """Capture the exact regular-file permissions used by the archive writer."""
+    modes = {}
+    for name in files:
+        source = ROOT / name if name.startswith("skills/") else SOURCE / name
+        modes[name] = 0o100755 if source.exists() and source.stat().st_mode & 0o111 else 0o100644
+    return modes
+
+
+def content_digest(files, modes):
     """Identify package content independently of release numbers and Git commits."""
     hashes = {}
     for name, data in sorted(files.items()):
@@ -111,19 +130,19 @@ def content_digest(files):
             if isinstance(manifest.get("skills"), str):
                 manifest["skills"] = manifest["skills"].rstrip("/")
             data = json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode()
-        hashes[name] = hashlib.sha256(data).hexdigest()
+        hashes[name] = {"sha256": hashlib.sha256(data).hexdigest(), "mode": modes[name]}
     return hashlib.sha256(json.dumps(hashes, sort_keys=True).encode()).hexdigest()
 
 
 def write_archive(files, output, modes=None):
+    if modes is None:
+        modes = collect_modes(files)
     output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for name, data in sorted(files.items()):
             info = zipfile.ZipInfo(f"{PACKAGE_NAME}/{name}", (1980, 1, 1, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
-            source = ROOT / name if name.startswith("skills/") else SOURCE / name
-            mode = 0o100755 if source.exists() and source.stat().st_mode & 0o111 else 0o100644
-            info.external_attr = (modes or {}).get(name, mode) << 16
+            info.external_attr = modes.get(name, 0o100644) << 16
             archive.writestr(info, data)
     with zipfile.ZipFile(output) as archive:
         if archive.testzip() is not None or len(archive.namelist()) != len(files):
@@ -131,6 +150,8 @@ def write_archive(files, output, modes=None):
         for name, data in files.items():
             if archive.read(f"{PACKAGE_NAME}/{name}") != data:
                 raise ValueError(f"Archive mismatch: {name}")
+            if archive.getinfo(f"{PACKAGE_NAME}/{name}").external_attr >> 16 != modes.get(name, 0o100644):
+                raise ValueError(f"Archive mode mismatch: {name}")
 
 
 def main():
@@ -142,20 +163,23 @@ def main():
         parser.error("Write a .zip archive outside plugins/frega-portal")
     files = collect_files()
     manifest, skills = validate(files)
+    modes = collect_modes(files)
     inventory = {
         "plugin": PACKAGE_NAME,
         "version": manifest["version"],
         "source_repository": "https://github.com/BetoFrega/skills",
         "source_commit": git("rev-parse", "HEAD").decode().strip(),
         "skills_worktree_modified": bool(git("status", "--porcelain", "--", "skills")),
-        "content_digest": content_digest(files),
+        "content_digest_schema": 2,
+        "content_digest": content_digest(files, modes),
+        "file_modes": modes,
         "skill_count": len(skills),
         "skills": skills,
         "external_skill_requirements": {"orchestrate": ["implement"]},
         "files": {name: hashlib.sha256(data).hexdigest() for name, data in sorted(files.items())},
     }
     files["skills-inventory.json"] = (json.dumps(inventory, indent=2) + "\n").encode()
-    write_archive(files, output)
+    write_archive(files, output, modes)
     print(json.dumps({"archive": str(output), "version": manifest["version"],
                       "skill_count": len(skills), "file_count": len(files),
                       "source_commit": inventory["source_commit"],

@@ -39,7 +39,11 @@ def read_artifact(path, expected_commit):
     for name in source_files:
         if hashlib.sha256(files[name]).hexdigest() != inventory['files'][name]:
             raise ValueError(f"Artifact hash mismatch: {name}")
-    digest = content_digest(files)
+    if inventory.get('content_digest_schema') != 2:
+        raise ValueError("Artifact requires a content digest with file modes")
+    if inventory.get('file_modes') != {name: modes[name] for name in source_files}:
+        raise ValueError("Artifact mode inventory mismatch")
+    digest = content_digest(files, modes)
     if digest != inventory['content_digest']:
         raise ValueError("Artifact content digest mismatch")
     paths = {name for name in files if name.startswith('skills/') and name.endswith('/SKILL.md')}

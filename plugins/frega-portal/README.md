@@ -8,7 +8,8 @@ endpoint https://mcp.frega.dev/mcp.
 The release includes every skill under this repository's `skills/` directory,
 with its references, executable scripts, agent metadata, and assets. Skill content
 is copied unchanged. `skills-inventory.json` records the included names and each
-source file's SHA-256 digest. The repository's MIT license is included.
+source file's SHA-256 digest and archived permissions. The repository's MIT license
+is included.
 
 The client discovers `skills/<name>/SKILL.md`. Select a skill from the client's
 skill catalog or invoke its client-supported command. Metadata discovery and
@@ -53,7 +54,9 @@ hosted execution remains dependent on that client's supported integrations.
 From the skills repository, run:
 
 ```sh
-python3 scripts/package_frega_portal.py --output /tmp/frega-portal-0.2.0.zip
+python3 -m venv /tmp/frega-portal-builder
+/tmp/frega-portal-builder/bin/python -m pip install -r scripts/frega_portal_requirements.txt
+/tmp/frega-portal-builder/bin/python scripts/package_frega_portal.py --output /tmp/frega-portal.zip
 ```
 
 The command validates manifests, skill frontmatter, relative Markdown references,
@@ -61,12 +64,11 @@ and the final archive. It uses tracked files under `skills/`, excluding tests an
 Git ignore rules, and writes a reproducible ZIP containing one `frega-portal/`
 directory. Build output belongs outside this source directory.
 
-Every push to `main` validates and builds a CI artifact. An authenticated Codex
-heartbeat checks every ten minutes and publishes changed content to the same
-private plugin, preserving its MCP connection and audience. Release versions
-increment automatically from the current published version. Unchanged content
-creates no release. The desktop app and its account session must be available
-for the publication step.
+Every push to `main` validates and builds a CI artifact. Scheduled publication
+is disabled. An explicitly requested update can publish changed content to the
+same private plugin, preserving its MCP connection and audience. The release
+preparer increments the current published version and treats executable permission
+changes as new content. Unchanged content creates no release.
 
 The repository's `plugins/frega-portal/PUBLISHING.md` describes the CI artifact,
 publication protocol, verification, and recovery. Publication uses the observed
