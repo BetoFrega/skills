@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Triage"
+  short_description: "Classify findings and gate approval on tracked follow-ups"
+  default_prompt: "Use $review-triage to classify this review's findings, verify required follow-up tickets, and determine PR approval and feature activation readiness."

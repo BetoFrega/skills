@@ -15,8 +15,8 @@ cannot hide failure in another:
 - **Observability**: fidelity to the repository's operational baseline.
 - **Accessibility**: fidelity to the repository's accessibility baseline.
 
-Each applicable axis gets an isolated reviewer. Aggregate their reports without
-merging or globally reranking findings.
+Each applicable axis gets an isolated reviewer. Preserve the axes when grouping
+their findings by classification.
 
 ## 1. Pin the comparison
 
@@ -83,6 +83,9 @@ baseline, and tooling-enforced rules do not need manual findings.
 
 ## 5. Dispatch isolated reviewers
 
+Read [review-triage](../review-triage/SKILL.md), the authoritative classification,
+follow-up ticket, and approval policy shared with other review workflows.
+
 Use `model-selection` for each review assignment. Before or alongside dispatch, tell
 the user the concrete model and reasoning effort for every reviewer, including any
 substitution. Start as many reviewers concurrently as capacity permits and queue the
@@ -94,13 +97,10 @@ Give every reviewer:
 - the changed-file list and applicable repository instructions;
 - its authoritative source documents or contents;
 - this finding format: classification, location, evidence, impact, and smallest credible correction;
-- the classification must be exactly one of:
-  - **PR Blocker**: Causes a defect or regression if merged. Alters production behavior contrary to spec. Must be fixed before approval.
-  - **Feature Blocker**: Prevents the feature from working as specified, but is behind a feature flag (no prod regression). Can be fixed in the PR, or must generate a ticket blocking the feature and its flag activation. Infer feature flags from diff patterns (e.g., `if (isFeatureEnabled(...))`) or PR/Spec metadata.
-  - **Tech Debt**: No functional/non-functional regression, but significantly reduces maintainability.
-  - **Improvement**: Optional maintainability improvement.
-- a limit of 400 words, findings ordered by classification severity;
-- the constraint to report only actionable defects introduced or materially exposed
+- the classification rules and feature-isolation evidence requirements from
+  review-triage; paste them in full into each isolated reviewer context;
+- a limit of 400 words, findings ordered by review-triage's classification order;
+- the constraint to report only actionable findings introduced or materially exposed
   by the diff, without praise, pass lists, or speculative hardening.
 
 Each reviewer returns one of:
@@ -157,15 +157,11 @@ whole affected journey, including states and errors. Cite the specific baseline 
 for every finding; do not treat automated checks as proof of requirements that need
 human or assistive-technology verification.
 
-## 6. Aggregate by classification
+## 6. Triage findings and determine approval readiness
 
-Present reports grouped by classification severity rather than by axis. Use the following headers in order:
-
-- `## PR Blockers`
-- `## Feature Blockers`
-- `## Tech Debt`
-- `## Improvements`
-
-Under each header, list the findings from all reviewers that match that classification. For each finding, preserve the reviewer's meaning and note which axis (Standards, Spec, Performance, Observability, Accessibility) it originated from. Do not deduplicate findings if they cover different aspects of the same issue. Lightly clean wording only.
-
-End with a brief summary of the finding counts per classification.
+Apply review-triage to the collected reports: validate classifications, verify
+resolutions and required follow-up tickets within the active task's authorization,
+and report findings grouped by classification with their originating axes.
+Preserve each reviewer's meaning and distinct aspects of the same issue; lightly
+clean wording only. Include finding counts, approval readiness, outstanding
+actions, and any feature activation gates as specified by review-triage.
