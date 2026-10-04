@@ -1,7 +1,7 @@
 # Local skill links
 
-`skills/` owns the editable copies. `.agents/skills/writing-for-agents` links to
-that source within the repository. Imported provenance lives in
+`skills/` owns the editable copies. Relative links under `.agents/skills/` expose
+selected skills for repository-local discovery. Imported provenance lives in
 `skill-origins.json`; it does not enable automatic upstream replacement.
 
 The script discovers the repository's primary checkout through Git, including
