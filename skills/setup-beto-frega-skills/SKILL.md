@@ -20,6 +20,11 @@ This is an incremental, prompt-driven setup. Preserve existing decisions. Explor
 interview, show complete drafts, obtain confirmation, then write. Invocation authorizes
 only this configuration work.
 
+For every unresolved setup decision, read and use
+[grilling](../grilling/SKILL.md). It owns the interview protocol, including question
+selection, grouping, recommendations, and shared-understanding confirmation. Scope
+each design tree to the configuration gaps identified here; retain settled choices.
+
 ## 1. Explore without writing
 
 Inspect facts the user should not have to supply:
@@ -127,7 +132,7 @@ duplicate.
 
 ### E. Observability baseline
 
-If the authoritative observability document is absent, run the grilling protocol below
+If the authoritative observability document is absent, use `grilling`
 with [the observability defaults](references/observability-default.md). Treat defaults
 as recommendations, not repository policy. Resolve every applicable branch before
 drafting the resolved observability path.
@@ -138,7 +143,7 @@ cardinality, alert ownership, operational response, verification, and exceptions
 
 ### F. Accessibility baseline
 
-If the authoritative accessibility document is absent, run a separate grilling tree
+If the authoritative accessibility document is absent, use `grilling` in a separate tree
 using [the accessibility defaults](references/accessibility-default.md). Resolve every
 applicable branch before drafting the resolved accessibility path.
 
@@ -147,12 +152,9 @@ settle scope, conformance target, supported interaction and assistive technology
 semantics, visual and motion behavior, content and errors, verification, ownership,
 and exceptions.
 
-Do not combine the two trees. For each tree, map every decision and its dependencies.
-In each round, ask the complete frontier: all decisions whose prerequisites are already
-settled. Number the questions, recommend an answer for each, then wait. Recompute the
-frontier from the user's answers. Find repository facts yourself; ask the user only for
-decisions. Write nothing until the frontier is empty and the user confirms shared
-understanding.
+Keep the observability and accessibility trees separate. Complete each tree under
+`grilling` before drafting its document; confirm the complete drafts in step 3 before
+writing.
 
 ### G. Product documentation
 
