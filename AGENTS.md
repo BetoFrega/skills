@@ -20,6 +20,13 @@
 
 Write all skill content in English, including frontmatter descriptions, headings, instructions, and examples. Apply this rule when creating or editing skills in this repository. Respond to the user in their preferred language.
 
+## Skill installation
+
+Every repository skill must have a relative symlink under `~/.agents/skills`.
+When creating or importing skills, or after synchronizing delivered changes into
+the primary checkout, follow [the link workflow](docs/local-skill-links.md) and
+verify every installed skill before declaring the task complete.
+
 ## Portable paths
 
 Use repository-relative paths in maintained instructions and examples. Scripts must
