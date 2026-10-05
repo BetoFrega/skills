@@ -14,3 +14,5 @@ Carry delivery through to completion: diagnose and fix validation or CI failures
 Pause only when progress requires unavailable access, an external dependency, a substantive user decision, or changes beyond the authorized task. First exhaust safe remedies within scope; if attempts cease making progress, report the specific blocker, attempted remedies, and the smallest action needed to resume. Honor repository protections and required checks throughout.
 
 Confirm the remote main revision and report the delivered commit and validation. This invocation does not authorize deployment, publication beyond the Git delivery, bypassing protections, or archival.
+
+For ticket work, finish the report using [next steps](../next-steps/SKILL.md) to identify any remaining delivery requirements or recommend a successor after full delivery.

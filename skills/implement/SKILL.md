@@ -13,3 +13,5 @@ Run typechecking regularly, single test files regularly, and the full test suite
 Once done, use /code-review to review the work.
 
 Commit your work to the current branch.
+
+When reporting completed implementation or full ticket delivery, use [next steps](../next-steps/SKILL.md) to explain remaining delivery work or recommend the next ticket.

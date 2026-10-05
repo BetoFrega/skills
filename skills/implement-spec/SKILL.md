@@ -33,3 +33,5 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 8. Mark the PR as ready for review.
 
 9. Clean up all **implementer subagent** worktrees.
+
+10. Report the implementation and delivery state using [next steps](../next-steps/SKILL.md).
