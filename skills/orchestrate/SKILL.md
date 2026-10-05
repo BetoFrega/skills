@@ -40,8 +40,10 @@ Selectors:
    to the current project. An issue URL or repository-qualified filter must match the
    project's canonical remote; stop on no match, ambiguity, or cross-repository filter
    results.
-2. Read that project's instructions, `docs/agents/issue-tracker.md`, the selector source,
-   and every currently selected ticket. Require `$implement` in the project. Stop before
+2. Read that project's instructions and resolve its tracker workflow through
+   [project configuration locations](../setup-beto-frega-skills/references/project-configuration.md),
+   including project-scoped external files. Read the selector source and every
+   currently selected ticket. Require `$implement` in the project. Stop before
    writes when the project, tracker rules, selector, or implementation skill is
    unavailable.
 3. Evaluate the selector according to its mode. Before the first write, show the mode,
@@ -70,6 +72,8 @@ For every frontier issue, create a task in a project worktree:
 - Use the recommended OpenAI `/implement` model and effort exactly.
 - Use the deterministic title above.
 - Record the canonical mode and selector identity in the prompt.
+- Include the project configuration entry reference and applicable external document
+  locations in the prompt so the new task can resolve the same conventions.
 - Explicitly invoke `$implement` in the prompt. Require the implementer to re-fetch and
   revalidate the issue, claim it as its first write, follow the target repository's
   instructions, push its committed branch, open a pull request to `main` whose body

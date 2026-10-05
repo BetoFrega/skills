@@ -1,6 +1,8 @@
 # Issue tracker: local Markdown
 
-Issues and specs live under `.scratch/<feature>/` in the repository.
+Choose the issue and spec storage root during setup. The repository default is
+`.scratch/<feature>/`; use an external storage root when selected. Configuration
+placement and work-record placement are separate choices.
 
 Recommended layout:
 
@@ -10,5 +12,5 @@ Recommended layout:
 ```
 
 Use one file per issue. Record status and categories near the top and append discussion
-under a `## Comments` heading. The generated repository document must define its actual
+under a `## Comments` heading. The generated configuration must define its actual
 naming, metadata, linking, blocking, and publish/fetch conventions.

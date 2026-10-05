@@ -40,22 +40,22 @@ empty diff.
 
 ## 2. Require repository configuration
 
-Read repository instructions first. Require all three sources:
+Read repository instructions first. Use
+[project configuration locations](../setup-beto-frega-skills/references/project-configuration.md)
+to resolve applicable configuration, including project-scoped external files.
+Require all three sources, using these defaults when no replacement is configured:
 
 - `docs/agents/issue-tracker.md`
 - `OBSERVABILITY.md`
 - `ACCESSIBILITY.md`
 
-An explicit pointer in `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, or equivalent
-repository documentation may replace any canonical path. The pointed-to document is
-authoritative.
-
 If any source is absent, stop before review dispatch, list the missing sources, and
 suggest that the user explicitly invoke `$setup-beto-frega-skills`. Do not invoke the
 setup skill autonomously and do not substitute an implicit baseline.
 
-Read `docs/agents/domain.md` when present, then follow its pointers to relevant context
-and ADR files. Existing repository rules override generic review heuristics.
+Read the resolved domain-layout document when present, then follow its pointers to
+relevant context and ADR files. Existing repository rules override generic review
+heuristics.
 
 `PERFORMANCE.md` is optional. Read it, or an explicit normative pointer that replaces
 it, when present. It may add critical paths, representative workloads, budgets,
@@ -64,7 +64,7 @@ universal performance baseline still applies.
 
 ## 3. Resolve the spec
 
-Follow `docs/agents/issue-tracker.md`. Look in this order:
+Follow the resolved issue-tracker workflow. Look in this order:
 
 1. Issue or merge-request references in `git log <fixed-point>..HEAD --oneline`.
 2. A spec path or issue supplied by the user.
@@ -73,6 +73,11 @@ Follow `docs/agents/issue-tracker.md`. Look in this order:
 
 Ask for the source only after exhausting repository evidence. If the user confirms
 there is no spec, mark the Spec axis `N/A — no spec available`.
+
+For product behavior, read the referenced canonical functionality, shared rules, and
+accepted decisions through [product-documentation](../product-documentation/SKILL.md).
+Check the spec's intended change against the contract and its approval evidence. A
+ticket or spec does not by itself establish release or policy authority.
 
 ## 4. Resolve standards
 

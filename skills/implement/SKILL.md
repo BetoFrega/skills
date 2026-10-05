@@ -6,11 +6,22 @@ disable-model-invocation: true
 
 Implement the work described by the user in the spec or tickets.
 
+For product behavior, read the affected canonical contracts through
+[product-documentation](../product-documentation/SKILL.md), including project-scoped
+external configuration. Preserve links from the work to functionalities, shared rules,
+decisions, and scenarios. Surface conflicts or unresolved policy rather than treating
+ticket readiness as product approval.
+
 Use /tdd where possible, at pre-agreed seams.
 
 Run typechecking regularly, single test files regularly, and the full test suite once at the end.
 
 Once done, use /code-review to review the work.
+
+Reconcile affected product records through `product-documentation` after relevant
+implementation, deployment, or release actions. Record supported observations and
+verification gaps for each dimension; preserve release and operational flag authority.
+Carry the configuration entry and affected record references into delegated work.
 
 Commit your work to the current branch.
 

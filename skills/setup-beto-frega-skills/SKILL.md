@@ -1,18 +1,18 @@
 ---
 name: setup-beto-frega-skills
-description: "Configure a repository for Beto Frega's engineering skills, including issue tracking, domain documentation, information-density rules, observability, and accessibility baselines. Run explicitly before first use or to fill a missing configuration document."
+description: "Configure project conventions for Beto Frega's skills, using files inside or outside the repository. Run explicitly before first use or to fill configuration gaps."
 ---
 
 # Setup Beto Frega skills
 
-Scaffold the per-repository configuration consumed by the engineering skills:
+Configure the project documents consumed by the skills:
 
 - issue-tracker workflow;
 - tracker-label vocabulary when triage or low-density reporting is installed;
 - domain-document layout;
-- information-density reporting rules in the repository's agent instructions;
-- the repository's own observability baseline;
-- the repository's own accessibility baseline.
+- information-density reporting rules in the chosen agent-instruction entry;
+- the project's observability and accessibility baselines;
+- product-documentation destinations, native formats, and maintenance conventions.
 
 This is an incremental, prompt-driven setup. Preserve existing decisions. Explore,
 interview, show complete drafts, obtain confirmation, then write. Invocation authorizes
@@ -24,6 +24,8 @@ Inspect facts the user should not have to supply:
 
 - remotes and `.git/config` for tracker clues;
 - root `AGENTS.md` and `CLAUDE.md`, including existing skill pointers;
+- external configuration references supplied by the user or personal instructions,
+  and whether their project binding matches this repository;
 - any existing rule for flagging low-information-density content;
 - `docs/agents/`, `.scratch/`, `CONTEXT.md`, `CONTEXT-MAP.md`, and ADR directories;
 - whether triage and low-density reporting skills are installed;
@@ -31,11 +33,26 @@ Inspect facts the user should not have to supply:
 - monorepo signals and context boundaries;
 - `OBSERVABILITY.md` and `ACCESSIBILITY.md`, plus any alternate paths explicitly
   declared by repository instructions;
+- existing product records, documentation destinations, and maintenance conventions;
 - runtime architecture, deployed services, telemetry libraries, user-facing surfaces,
   UI platforms, and relevant test tooling.
 
 Report what exists, what is missing, and any contradictory pointers. Existing files
 are authoritative; ask before changing them.
+
+### Resolve locations and discovery
+
+Before drafting missing documents, use
+[project configuration locations](references/project-configuration.md) to settle
+placement, project binding, and discovery. Support repository files, external files,
+and mixed configurations. Confirm external placement when the user requests working
+without changes to a third-party repository. Continue to honor its applicable
+instructions.
+
+Resolve each section's configuration path and any document destinations it describes.
+The defaults below apply only where the user has not selected another location.
+Complete when each applicable section has a location and agents have an agreed way
+to receive the configuration entry.
 
 ## 2. Configure only the gaps
 
@@ -44,8 +61,8 @@ asks to revisit them.
 
 ### A. Issue tracker
 
-If `docs/agents/issue-tracker.md` is absent, recommend the tracker indicated by the
-remote: GitHub, then GitLab, otherwise local Markdown. Also support a user-described
+If the resolved issue-tracker document is absent, recommend the tracker indicated by
+the remote: GitHub, then GitLab, otherwise local Markdown. Also support a user-described
 tracker. Use the matching reference as a starting point:
 
 - [GitHub](references/issue-tracker-github.md)
@@ -67,7 +84,7 @@ operations as configuration gaps too.
 ### B. Tracker labels
 
 Run when a triage skill, `$report-low-density`, or `$investigate-low-density` is
-installed. If `docs/agents/triage-labels.md` is absent, recommend the applicable
+installed. If the resolved tracker-label document is absent, recommend the applicable
 canonical labels in [the template](references/triage-labels.md). Ask one question:
 whether to keep them. Collect overrides only when the answer is no.
 
@@ -78,14 +95,17 @@ Markdown tracker, confirm its equivalent category and status representation.
 
 ### C. Domain docs
 
-If `docs/agents/domain.md` is absent, default to one root `CONTEXT.md` and `docs/adr/`.
-Offer multi-context layout only when exploration found real monorepo boundaries. Use
+If the resolved domain-layout document is absent, recommend one `CONTEXT.md` and an
+ADR directory at the configured documentation destination. Repository defaults are
+root `CONTEXT.md` and `docs/adr/`; an external layout keeps those files outside the
+checkout when selected. Offer multi-context layout only when exploration found real
+monorepo boundaries. Use
 [the domain consumer rules](references/domain.md) as the draft basis. Domain files
 themselves remain lazy: do not create an empty `CONTEXT.md` or ADR directory.
 
 ### D. Information density
 
-If the canonical agent-instruction file has no equivalent rule, add an inline rule that
+If the selected agent-instruction entry has no equivalent rule, add an inline rule that
 follows [the information-density rule](references/information-density.md). Use the
 reporter clause or its unavailable fallback, and include the investigator clause only
 when that skill is confirmed available. Treat an existing rule with the same behavior
@@ -97,7 +117,7 @@ duplicate.
 If the authoritative observability document is absent, run the grilling protocol below
 with [the observability defaults](references/observability-default.md). Treat defaults
 as recommendations, not repository policy. Resolve every applicable branch before
-drafting the resolved observability path, defaulting to `OBSERVABILITY.md`.
+drafting the resolved observability path.
 
 Base recommendations on inspected architecture and tooling. The interview must settle
 scope, critical behavior, signals, correlation, failure reporting, privacy, volume and
@@ -107,8 +127,7 @@ cardinality, alert ownership, operational response, verification, and exceptions
 
 If the authoritative accessibility document is absent, run a separate grilling tree
 using [the accessibility defaults](references/accessibility-default.md). Resolve every
-applicable branch before drafting the resolved accessibility path, defaulting to
-`ACCESSIBILITY.md`.
+applicable branch before drafting the resolved accessibility path.
 
 Base recommendations on inspected product surfaces and platforms. The interview must
 settle scope, conformance target, supported interaction and assistive technology,
@@ -122,27 +141,36 @@ frontier from the user's answers. Find repository facts yourself; ask the user o
 decisions. Write nothing until the frontier is empty and the user confirms shared
 understanding.
 
+### G. Product documentation
+
+If product-documentation conventions are absent or incomplete, use
+[product-documentation setup](references/product-documentation.md) to resolve the
+applicable destinations, native representations, product conventions, and maintenance.
+Draft the resolved product configuration. This standard setup owns configuration;
+product-documentation operations consume it to register and maintain records.
+
 ## 3. Confirm complete drafts
 
 Show the complete proposed contents of every file that would change:
 
-- the `## Agent skills` block for the chosen agent-instruction file, including the
+- the `## Agent skills` block for the chosen agent-instruction entry, including the
   information-density rule when missing;
-- `docs/agents/issue-tracker.md` when missing or incomplete;
-- `docs/agents/triage-labels.md` when applicable and missing or incomplete;
-- `docs/agents/domain.md` when missing;
-- the resolved observability and accessibility paths when missing (defaulting to
-  `OBSERVABILITY.md` and `ACCESSIBILITY.md`);
+- the resolved tracker, label, domain, and product configuration paths when applicable
+  and missing or incomplete;
+- the resolved observability and accessibility paths when missing;
+- any discovery pointer that would change, with its project scope;
 - every tracker label that would be created or changed.
 
-If both `AGENTS.md` and `CLAUDE.md` exist, ask which is canonical. If one exists, use
-it. If neither exists, ask which one to create. Update an existing `## Agent skills`
-section in place and preserve surrounding user content.
+For a repository entry, if both `AGENTS.md` and `CLAUDE.md` exist, ask which is canonical.
+If one exists, use it. If neither exists, ask which one to create. For an external
+entry, draft the confirmed external file instead. Update an existing `## Agent skills`
+section in place and preserve surrounding user content. Include the project binding
+in the external entry. Include repository edits only when selected in the draft.
 
 The block contains the information-density rule and only applicable pointers, each with
-a one-line repository-specific summary. Point directly to the resolved observability
+a one-line project-specific summary. Point directly to the resolved observability
 and accessibility paths; do not duplicate their policies in agent instructions. The
-example below uses the defaults.
+example below uses repository defaults; external entries use their resolved paths.
 
 Use this shape, omitting only sections that genuinely do not apply:
 
@@ -161,6 +189,9 @@ Use this shape, omitting only sections that genuinely do not apply:
 ### Domain docs
 <single-context or multi-context summary>. See `docs/agents/domain.md`.
 
+### Product documentation
+<canonical destinations and representation summary>. See `docs/agents/product.md`.
+
 ### Observability
 <repository-specific scope summary>. See `OBSERVABILITY.md`.
 
@@ -175,7 +206,9 @@ Wait for confirmation or edits to the drafts.
 Create only confirmed files, directories, and tracker labels. Existing configuration
 is preserved unless the user explicitly approved its edit. Read back every external
 label mutation. Check that every pointer resolves, every generated document describes
-the actual repository, and no placeholder remains.
+the actual project, and no placeholder remains. Verify the chosen configuration
+discovery mechanism as described in the locations reference. For an external-only
+setup, verify that the target repository was not changed by setup.
 
 Finish by listing created or changed files and the skills that consume them. Tell the
 user that the documents can be edited directly later and that setup should be rerun

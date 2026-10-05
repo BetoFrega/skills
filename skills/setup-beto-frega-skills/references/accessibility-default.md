@@ -1,7 +1,7 @@
 # Accessibility baseline defaults
 
-Use this only to recommend answers while creating a repository-owned
-`ACCESSIBILITY.md`. It is not policy after that document exists.
+Use this only to recommend answers while creating the project-scoped accessibility
+baseline at its resolved location. Consult that document once it exists.
 
 ## Recommended decisions
 

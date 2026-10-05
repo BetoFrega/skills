@@ -6,17 +6,29 @@ disable-model-invocation: true
 
 This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user; just synthesize what you already know.
 
-The issue tracker and triage label vocabulary should have been provided to you. If not, tell the user to run `/setup-beto-frega-skills`.
+Resolve the issue tracker, triage labels, and domain-document pointers using
+[project configuration locations](../setup-beto-frega-skills/references/project-configuration.md),
+including project-scoped external files. If required configuration is missing, tell
+the user to run `/setup-beto-frega-skills`.
 
 ## Process
 
 1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching.
 
+   For product behavior, use [product-documentation](../product-documentation/SKILL.md)
+   to locate the governing functionality, shared rules, and accepted choices. Reference
+   them in the spec and identify the proposed change from the current contract. Reflect
+   accepted changes through that skill; keep unresolved behavior clearly proposed.
+   A spec defines work and does not silently establish product or release authority.
+
 2. Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
 
 Check with the user that these seams match their expectations.
 
-3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
+3. Write the spec using the template below, then publish it to the project issue
+tracker. Apply the mapped `ready-for-agent` disposition when the scope is executable
+without an unresolved product choice. Otherwise state the blocking choice and use
+the configured non-ready disposition; the spec can still record the proposed work.
 
 <spec-template>
 
@@ -27,6 +39,12 @@ The problem that the user is facing, from the user's perspective.
 ## Solution
 
 The solution to the problem, from the user's perspective.
+
+## Product references
+
+Links to applicable canonical functionalities, shared rules, and accepted decisions.
+State the intended change from the current contract and any unresolved product choice.
+Omit this section only when the work has no product contract to reference.
 
 ## User Stories
 

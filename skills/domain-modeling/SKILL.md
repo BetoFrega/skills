@@ -9,6 +9,12 @@ Actively build and sharpen the project's domain model as you design. This is the
 
 ## File structure
 
+Resolve the domain-document layout through
+[project configuration locations](../setup-beto-frega-skills/references/project-configuration.md),
+including project-scoped external files. Follow configured glossary, context-map,
+and ADR destinations. The layouts below are defaults for unconfigured repository
+documentation; external configuration can select an external documentation root.
+
 Most repos have a single context:
 
 ```
@@ -21,7 +27,8 @@ Most repos have a single context:
 └── src/
 ```
 
-If a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. The map points to where each one lives:
+If a context map exists at the configured location, the project has multiple contexts.
+The default repository map points to where each one lives:
 
 ```
 /
@@ -37,7 +44,8 @@ If a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. The ma
 │       └── docs/adr/
 ```
 
-Create files lazily: only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
+Create files lazily at the resolved destinations: the glossary when the first term
+is resolved, and the ADR directory when the first record is needed.
 
 ## During the session
 
@@ -68,3 +76,11 @@ When a term is resolved, update `CONTEXT.md` right there. Don't batch these up: 
 When modeling resolves an architectural choice, use
 [`write-adr`](../write-adr/SKILL.md) to determine whether it warrants an ADR and to
 write or update the record. That skill owns ADR authoring rules and the format.
+
+### Product behavior and policy
+
+When modeling depends on product behavior, read the affected canonical contracts
+through [product-documentation](../product-documentation/SKILL.md). When an approved
+choice changes a product rule, actor permission, state, or exception, use its decision
+and catalogue routes to record the choice and affected contracts. Preserve vocabulary
+definitions in the glossary and link behavior to its product authority.

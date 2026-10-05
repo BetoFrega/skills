@@ -9,7 +9,7 @@
 | workflow | will not fix | `wontfix` | Intentionally not planned |
 | category | low information density | `low-info-density` | Content reported for low information density |
 
-The generated `docs/agents/triage-labels.md` maps each applicable canonical purpose to
+The generated document at the resolved tracker-label path maps each canonical purpose to
 the label actually used by the repository. Include `low information density` and
 `needs triage` when either low-density skill is installed. Preserve existing tracker
 vocabulary rather than creating synonyms, and record whether each mapped value is a

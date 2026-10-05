@@ -18,14 +18,22 @@ explicit request to document a particular architectural decision.
 
 ## Find the governing records
 
-Read repository instructions, any domain-document configuration, and existing ADRs
-that govern the affected area. Use the glossary for domain terms. Follow the
+Resolve domain-document configuration through
+[project configuration locations](../setup-beto-frega-skills/references/project-configuration.md),
+including project-scoped external files. Read repository instructions and existing
+ADRs that govern the affected area. Use the glossary for domain terms. Follow the
 project's existing location, format, numbering, and approval conventions. Reuse an
 existing record for the same proposal rather than create a duplicate.
 
-If conventions are absent, use `docs/adr/NNNN-short-decision-title.md`, starting at
-`0001`. Increment the highest number in the selected directory, including retired
-records; preserve existing filenames and never reuse numbers. Create the directory
+For a choice that also changes product behavior or business policy, use
+[product-documentation](../product-documentation/SKILL.md) to resolve the product
+authority and affected contracts. Cross-link product and architectural consequences;
+ADR acceptance alone does not establish unrelated product or release authority.
+
+If naming conventions are absent, use `NNNN-short-decision-title.md` in the selected
+ADR directory, defaulting to repository `docs/adr/` only when no destination is
+configured. Start at `0001`. Increment the highest number in the directory, including
+retired records; preserve existing filenames and never reuse numbers. Create the directory
 only when saving the first record. Follow an existing context map when it defines
 context-specific ADR locations.
 

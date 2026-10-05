@@ -46,8 +46,9 @@ promise or a changed line alone does not establish resolution.
 For every deferred Feature Blocker or Tech Debt finding, and every Improvement
 accepted as deferred work:
 
-1. Read the repository's issue-tracker instructions, normally
-   `docs/agents/issue-tracker.md` or its explicit replacement pointer. Follow its
+1. Resolve the project's issue-tracker instructions through
+   [project configuration locations](../setup-beto-frega-skills/references/project-configuration.md),
+   including project-scoped external files. Follow its
    tracker, labels, ownership, and dependency conventions. Classification and
    explanation can proceed without tracker configuration; ticket writes require a
    known destination and applicable conventions.

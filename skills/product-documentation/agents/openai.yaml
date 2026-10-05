@@ -1,0 +1,5 @@
+interface:
+  display_name: "Product Documentation"
+  short_description: "Maintain product knowledge, decisions, and release evidence"
+policy:
+  allow_implicit_invocation: true

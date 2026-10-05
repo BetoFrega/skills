@@ -16,9 +16,10 @@ create nothing.
 
 ## Resolve the tracker contract
 
-Read the repository's canonical agent instructions, `docs/agents/issue-tracker.md`, and
-`docs/agents/triage-labels.md`, following any normative alternate paths. Resolve these
-two configured labels:
+Use [project configuration locations](../setup-beto-frega-skills/references/project-configuration.md)
+to resolve the issue-tracker workflow and label vocabulary, including project-scoped
+external files. Read the applicable repository instructions and resolved documents.
+Resolve these two configured labels:
 
 - category `low information density`, defaulting to `low-info-density` only when the
   project document explicitly keeps that default;
