@@ -1,5 +1,5 @@
 interface:
   display_name: "Setup Beto Frega Skills"
-  short_description: "Configure project skills with local or external files"
+  short_description: "Configure global communication and project skill conventions"
 policy:
   allow_implicit_invocation: false

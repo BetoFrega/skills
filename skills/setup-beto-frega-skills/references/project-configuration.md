@@ -7,6 +7,11 @@ sections.
 
 ## Resolve configuration
 
+Global personal communication is configured separately through
+[global communication](global-communication.md). Its language and emoji policy applies
+across projects; global instruction entries require no repository identity binding.
+Keep project-specific rules and pointers scoped using the binding rules below.
+
 Read the project's applicable repository instructions. Follow configuration pointers
 provided by the user, personal agent instructions, or those repository instructions,
 including pointers to files outside the checkout. A supplied configuration entry may

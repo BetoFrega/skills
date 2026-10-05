@@ -1,12 +1,14 @@
 ---
 name: setup-beto-frega-skills
-description: "Configure project conventions for Beto Frega's skills, using files inside or outside the repository. Run explicitly before first use or to fill configuration gaps."
+description: "Configure Beto Frega's global communication rules and project skill conventions, using files inside or outside the repository. Run explicitly before first use or to fill configuration gaps."
 ---
 
 # Setup Beto Frega skills
 
-Configure the project documents consumed by the skills:
+Configure personal communication in the installed agents' global instruction files,
+then the project documents consumed by the skills:
 
+- global conversation language and semantic emoji markers;
 - issue-tracker workflow;
 - tracker-label vocabulary when triage or low-density reporting is installed;
 - domain-document layout;
@@ -24,6 +26,8 @@ Inspect facts the user should not have to supply:
 
 - remotes and `.git/config` for tracker clues;
 - root `AGENTS.md` and `CLAUDE.md`, including existing skill pointers;
+- installed agents' global instruction sources, their actual loading conventions,
+  existing communication rules, and symlink targets;
 - external configuration references supplied by the user or personal instructions,
   and whether their project binding matches this repository;
 - any existing rule for flagging low-information-density content;
@@ -58,6 +62,15 @@ to receive the configuration entry.
 
 Take the applicable sections in order. Skip settled sections unless the user explicitly
 asks to revisit them.
+
+### Personal communication (global)
+
+Use [global communication](references/global-communication.md) to install the settled
+personal policy in every configured agent's global instruction entry. Keep this scope
+separate from project configuration and project binding. Use one canonical global
+`AGENTS.md`; expose Claude's global `CLAUDE.md` through a relative symlink to it.
+Reuse the approved language and emoji choices rather than interviewing again. Inspect
+and fill installation gaps; retain entries that already provide the same behavior.
 
 ### A. Issue tracker
 
@@ -153,6 +166,8 @@ product-documentation operations consume it to register and maintain records.
 
 Show the complete proposed contents of every file that would change:
 
+- the global communication block, any reconciliation with existing global content,
+  and each global entry or relative symlink to be created or changed;
 - the `## Agent skills` block for the chosen agent-instruction entry, including the
   information-density rule when missing;
 - the resolved tracker, label, domain, and product configuration paths when applicable
@@ -203,12 +218,15 @@ Wait for confirmation or edits to the drafts.
 
 ## 4. Write and verify
 
-Create only confirmed files, directories, and tracker labels. Existing configuration
-is preserved unless the user explicitly approved its edit. Read back every external
+Create only confirmed files, directories, symlinks, and tracker labels. Existing
+configuration is preserved unless the user explicitly approved its edit. Read back every external
 label mutation. Check that every pointer resolves, every generated document describes
 the actual project, and no placeholder remains. Verify the chosen configuration
 discovery mechanism as described in the locations reference. For an external-only
 setup, verify that the target repository was not changed by setup.
+
+For global communication, read the policy through every configured agent's entry,
+verify relative symlink targets, and check that rerunning setup would make no changes.
 
 Finish by listing created or changed files and the skills that consume them. Tell the
 user that the documents can be edited directly later and that setup should be rerun
