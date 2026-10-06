@@ -15,14 +15,26 @@ Work the tree in **rounds**. The **frontier** is every decision whose prerequisi
 
 Ask **one question per round by default**, prioritizing the decision that most shapes the remaining tree. Group questions only when **every** recommendation in the group is supported by known facts and settled user preferences, is clearly preferable to the alternatives, and is likely to need only a simple "OK" from the user for the entire group. Independence makes questions ready; it does not make their answers obvious. Confidence in your recommendation alone is insufficient: judge how much thought the user needs to give it.
 
-Keep any question that needs comparison, reflection, missing context, or a meaningful tradeoff in its own round, even when other ready questions qualify for grouping. Leave unasked frontier questions pending. Number each question, give your recommended answer, and wait for the user's response before the next round. An expected "OK" is not approval; only the user's actual answer settles decisions.
+Keep any question that needs comparison, reflection, missing context, or a meaningful tradeoff in its own round, even when other ready questions qualify for grouping. Leave unasked frontier questions pending. Number each question, give your recommended answer when supported, and wait for the user's response before the next round. An expected "OK" is not approval; only the user's actual answer settles decisions.
+
+Use [recommend](../recommend/SKILL.md) to prepare each question's alternatives,
+pros and cons, comparison, and recommendation. Apply its decisive-gap checks within
+this skill's frontier and round rules: ask about an unresolved prerequisite before
+recommending choices that depend on it. Include the recommendation block below only
+when supported by the available evidence and settled preferences.
+
+For every question, try to offer **at least three distinct, viable alternatives**. Briefly explain each option's main tradeoff and identify your recommendation. Ground the options in known facts and settled prerequisites. When fewer than three viable alternatives exist, present those available and briefly explain the limitation. Let the user propose a different answer.
 
 Format each question like so; repeat the block only for a qualifying group:
 
 ```
-❓ **Q1** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
+❓ **Q1** - **<question title>**: <question body>
 
-💡 <your recommended answer>
+A. <alternative and main tradeoff>
+B. <alternative and main tradeoff>
+C. <alternative and main tradeoff>
+
+💡 <recommended alternative and reason>
 ```
 
 Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
