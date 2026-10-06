@@ -18,14 +18,18 @@ documents; configure navigation and relationships without requiring a separate
 artifact for every function or change.
 
 Choose destinations with the user instead of prescribing a provider. Map identifiers,
-content, metadata, relationships, status, and decision history to concrete native
-properties, sections, or files. Record how consumers find an affected record and the
-format they must use to create or update it.
+content, metadata, relationships, and status to concrete native properties, sections,
+or files. Use the destination's native versions or audit history for document revisions.
+Record how consumers find an affected record and the format they must use to update it.
 
 For functionality content, read
 [catalogue meanings](../../product-documentation/references/catalogue.md#required-meanings).
-For decision history, read
+For decision records, read
 [decision content](../../product-documentation/references/decisions.md#decision-content).
+For living records, read
+[record format](../../product-documentation/references/record-format.md), including
+its functionality template and example. Map them to the chosen native representation;
+historical narration is not a field or section in living records.
 Use those requirements to map the chosen destination without duplicating templates
 in the generated configuration. Record concrete native field/section mappings or
 links to authoritative project templates so writers can apply them.

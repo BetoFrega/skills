@@ -1,6 +1,8 @@
 # Catalogue
 
 Read this to find or maintain product capabilities and functionality records.
+Use [record format](record-format.md) for the living document's representation,
+template, example, and consolidation checks.
 
 ## Organize outcomes
 

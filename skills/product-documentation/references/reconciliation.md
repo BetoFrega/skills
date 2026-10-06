@@ -45,7 +45,7 @@ before drawing audience availability conclusions.
    unexplained drift for the appropriate authority. A lifecycle label that mixes
    dimensions needs supporting fields or an explicit representation gap. Complete when
    each affected record, dimension, and audience has a supported update or named gap.
-4. **Read back.** Verify saved observations, history, and links in the canonical
+4. **Read back.** Verify consolidated observations and links in the canonical
    destination. Complete with a verified change set; report partial, draft-only, or
    unverifiable effects separately, including the records and sources still unresolved.
 

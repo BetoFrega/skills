@@ -1,6 +1,6 @@
 # Product documentation model
 
-Agreed design from the product-owner interview, updated on 2026-10-04.
+Agreed design from the product-owner interview, updated on 2026-10-06.
 The executable workflow is [product-documentation](../../skills/product-documentation/SKILL.md); this document preserves the agreed design. Consult it for the model's rationale and implementation scope. Standard setup owns configuration; the skill's references own the operational authoring and maintenance rules.
 For source rationale or comparisons with other methods, consult the [research note](../research/product-business-decision-practices.md).
 
@@ -33,7 +33,7 @@ A functionality represents a recognizable outcome an actor can achieve, with rel
 
 Distinguish **roles**, which express responsibilities and permissions, from **segments**, which express different needs and contexts. A functionality may serve multiple roles, segments, and jobs without duplicating its canonical record.
 
-Each functionality record is the canonical source for its specific behavior and rules; shared rules have their own authoritative records. Keep proposals distinguishable from the current contract, and preserve historical rationale through decision links and available record history.
+Each functionality record is the canonical source for its specific behavior and rules; shared rules have their own authoritative records. Keep proposals distinguishable from the consolidated contract. Document revisions remain in native version history; genuine decision records capture substantive choices and rationale. The executable [record format](../../skills/product-documentation/references/record-format.md) owns consolidation, changelog limits, the template, and the worked example.
 
 ## Functionality record content
 

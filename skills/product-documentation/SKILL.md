@@ -6,7 +6,7 @@ description: Maintain product catalogues, shared rules, direction and evidence, 
 # Product documentation
 
 Maintain explicit product knowledge that product owners and agents can use across
-sessions. Preserve intent, behavior, authority, evidence, and history. Adapt formats,
+sessions. Maintain consolidated intent, behavior, authority, and evidence. Adapt formats,
 workflow, hierarchy, and depth to the product while covering the relevant contract.
 
 ## Resolve authority and intent
@@ -42,6 +42,10 @@ Specs and tickets describe work derived from these records and retain links to t
 
 ## Write the affected knowledge
 
+Before creating or updating a living record, read
+[record format](references/record-format.md) for consolidation, native version history,
+bounded changelogs, and the functionality template and worked example.
+
 Distinguish approved intent, proposals, observed implementation, and assumptions.
 Use conversation and project evidence for approval; code or flag configuration alone
 does not establish a product decision. State material unknowns and discrepancies.
@@ -65,7 +69,8 @@ Read the reconciliation route before any authorized operational flag change.
 
 Read back saved records and relationships in the configured destination. Check
 identity, representation, applicable content, authority and effective timing,
-source coverage, and links to decisions, shared rules, work, and verification.
+source coverage, and links to decisions, shared rules, work, and verification. Apply
+the record-format completion checks to the resulting document as a whole.
 Account for every affected record with a verified result or a named remaining gap.
 
 For a lookup or review, answer with the relevant canonical references and concrete

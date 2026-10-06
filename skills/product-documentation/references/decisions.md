@@ -29,32 +29,33 @@ Map applicable content to the configured native representation:
 - related decisions, shared rules, functionalities, proposals, and derived work;
 - reconsideration triggers and supersession relationships when relevant.
 
-Keep the explanation proportional to the deliberation. A brief decision may live in
-the same object as the current contract if native history preserves the choice and
-its rationale. Significant cross-functional or costly-to-reverse choices warrant
-more explicit history. Cover the affected product contract regardless of whether
-the project requires a standalone decision object. Preserve unknowns rather than
-invent alternatives, numeric value, or evidence.
+Keep the explanation proportional to the deliberation. Routine acceptance can be
+represented by compact authority metadata and the consolidated rule. Significant
+cross-functional or costly-to-reverse choices may warrant a linked decision record
+explaining the choice and rationale. Cover the affected product contract regardless
+of whether the project requires a standalone decision object. Preserve unknowns
+rather than invent alternatives, numeric value, or evidence.
 
 For architecture decisions, use [write-adr](../../write-adr/SKILL.md). A mixed choice
 can link product/business rationale and architectural consequences; keep each meaning
 at its configured authority without copying the same decision into competing logs.
 
-## Apply and preserve history
+## Apply the accepted choice
 
 For an accepted choice, update the affected [catalogue](catalogue.md),
 [shared rules or direction](context.md), and release plan where relevant. Preserve
 future-effective changes separately from the currently effective contract. Link
 derived specs and tickets; those work records do not silently replace product policy.
 
-Edit proposals and factual or editorial corrections in place. For a substantive
-change to an accepted choice, preserve the earlier rationale through native versions,
-an explicit change history, or a successor record according to project conventions.
-Link predecessor and successor. A proposed replacement leaves the accepted choice
-in force. Record deprecation reasons and effective timing when retiring a decision.
+Edit proposals and factual or editorial corrections in place. Consolidate accepted
+changes in the affected records using [record format](record-format.md); it owns
+native history and the optional bounded changelog. A proposed replacement leaves the
+accepted choice in force. Use status, relationships, reasons, and effective timing
+when retiring a decision, without adding a narrative of document revisions.
 
 Complete when the decision's saved status matches its authority, rationale and history
-are recoverable, and every affected contract has a verified update or a named gap.
+are recoverable through the configured decision authority and native versions, and
+every affected contract has a verified consolidated update or a named gap.
 Report unresolved acceptance or partial contract updates explicitly. Acceptance does
 not establish implementation, deployment, or actual exposure; use
 [reconciliation](reconciliation.md) for those claims.
