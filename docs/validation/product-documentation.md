@@ -5,6 +5,7 @@ whose canonical authoring responsibility now lives in consolidate. This exercise
 does not validate the subsequent workflow changes. See the agreed
 [product-documentation model](../design/product-documentation-model.md) and
 [skill entry](../../skills/consolidate/SKILL.md).
+The [workflow validation](product-workflow.md) covers the newer entrypoints and boundaries.
 
 ## Scope
 
