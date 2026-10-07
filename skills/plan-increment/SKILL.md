@@ -9,6 +9,9 @@ Turn the scope the user wants now into usable delivery increments and executable
 work. A feature's complete documentation does not define the current workset.
 One product increment can require several execution tickets.
 
+Apply [artifact links](../consolidate/references/artifact-links.md) to cited documents
+and tickets in plans, work records, recommendations, and handoffs.
+
 ## Resolve context and selection
 
 Resolve the tracker, readiness mapping, domain references, and product destinations

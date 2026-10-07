@@ -9,6 +9,9 @@ Maintain explicit product knowledge that product owners and agents can use acros
 sessions. Maintain consolidated intent, behavior, authority, and evidence. Adapt formats,
 workflow, hierarchy, and depth to the product while covering the relevant contract.
 
+Apply [artifact links](references/artifact-links.md) whenever citing documents or
+tickets in records, responses, or handoffs.
+
 ## Resolve authority and intent
 
 Use [project configuration locations](../setup-beto-frega-skills/references/project-configuration.md#resolve-configuration)

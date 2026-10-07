@@ -17,8 +17,9 @@
 
 ## Canonical and technical references
 
-<Selected increment and feature, applicable rules/scenarios, glossary, ADR, or scoped
-technical spec. Include the portion of aggregate increment acceptance this item covers.>
+<Links to the selected increment and feature, applicable rules/scenarios, glossary,
+ADR, or scoped technical spec. Include the portion of aggregate increment acceptance
+this item covers.>
 
 ## Prerequisites and relationships
 

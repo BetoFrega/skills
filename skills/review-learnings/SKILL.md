@@ -9,6 +9,9 @@ Review what work taught us and how it changes product knowledge or upcoming work
 Own evidence gathering, synthesis, and unresolved decisions; use
 [consolidate](../consolidate/SKILL.md) as the canonical writer.
 
+Apply [artifact links](../consolidate/references/artifact-links.md) to cited source
+documents, affected records, and tickets in the review and its handoff.
+
 ## Scope and gather
 
 Identify the selected work, product question, or review period from the request.

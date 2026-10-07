@@ -2,8 +2,8 @@
 
 ## Scope and authority
 
-Selected increment references, intended technical result, and canonical product,
-glossary, and ADR references. Identify acceptance evidence and unresolved proposals.
+Linked selected increments, intended technical result, and links to canonical product
+records, glossary, and ADRs. Identify acceptance evidence and unresolved proposals.
 
 ## Technical approach and constraints
 

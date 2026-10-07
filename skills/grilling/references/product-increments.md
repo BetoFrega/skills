@@ -8,6 +8,9 @@ the slice sufficiency check only when defining delivery increments.
 
 ## Read the affected context
 
+Apply [artifact links](../../consolidate/references/artifact-links.md) to documents and
+tickets cited in questions, closure proposals, and handoffs.
+
 Use [consolidate](../../consolidate/SKILL.md) to resolve configured
 authority and the affected functionality, shared rules, decisions, proposals, and
 evidence. Read the applicable domain glossary and existing ADRs or technical constraints

@@ -8,6 +8,8 @@ description: Explain remaining completion or delivery requirements, identify mea
 Use the latest goal, agreed plan, completed work, and user corrections. Read relevant
 work records, canonical references, and configured completion and delivery rules.
 Verify current artifact state before selecting the applicable guidance below.
+Apply [artifact links](../consolidate/references/artifact-links.md) to every cited
+document or ticket in remaining requirements and recommendations.
 
 ## Current work incomplete
 
@@ -36,8 +38,9 @@ point. Distinguish required knowledge maintenance from a subsequent learning rev
 For successor work, inspect explicit follow-ups, selected increment and spec references,
 parent/dependency relationships, remaining work, readiness, and documented priority.
 Recommend one open item whose actual prerequisites are satisfied; explain its value
-toward the agreed goal and give its link or identifier. If a consequential finding
-invalidates its scope or readiness, recommend resolving that finding before execution.
+toward the agreed goal and give its link, labeled with its title or identifier.
+If a consequential finding invalidates its scope or readiness, recommend resolving
+that finding before execution.
 Canonical future ideas alone do not establish selected work or readiness.
 
 When no source establishes a ready successor, omit that suggestion. For work without

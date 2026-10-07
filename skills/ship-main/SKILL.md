@@ -27,3 +27,5 @@ meaningful learning or a configured review point warrants it, explicitly recomme
 [review-learnings](../review-learnings/SKILL.md), naming the evidence and bounded scope
 to review. Continue authorized delivery before reporting; subsequent recommendations
 retain their own scope.
+Apply [artifact links](../consolidate/references/artifact-links.md) to documents and
+tickets cited in the delivery report or review recommendation.

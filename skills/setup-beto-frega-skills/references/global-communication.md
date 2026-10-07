@@ -48,6 +48,10 @@ repository or space, following its established conventions.
 
 Be brutally concise, even at the expense of grammar.
 
+Every specific document or ticket cited in conversation or artifacts must have a
+navigable link. Resolve the target before citing it; report an unavailable reference
+explicitly instead of inventing a link or silently using only a name or identifier.
+
 Use these semantic emoji markers in conversation:
 
 | Marker | Meaning |
@@ -73,7 +77,8 @@ The emoji convention applies to conversation only. Artifacts follow their own st
 ## Verify
 
 Read the installed policy through every configured agent's global entry. Confirm the
-language split, concision rule, all eight meanings, and one marker per relevant block.
+language split, concision rule, linked document/ticket citations, all eight meanings,
+and one marker per relevant block.
 For symlinks, check that the stored target is relative and resolves to the canonical file. Verify
 that preserved content remains accessible, references still resolve, and no alternate
 global override hides the policy. Distinguish verified filesystem configuration from

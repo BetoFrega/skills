@@ -53,7 +53,7 @@ Publish within requested authority and preserve partial results for safe resumpt
 
 - **Local tracker:** one file per ticket at its configured work-record location. Use
   `.scratch/<feature-slug>/issues/<NN>-<slug>.md` only when no replacement is configured.
-  Number in dependency order; reference blockers by stable number, title, or file.
+  Number in dependency order; link each blocking file using its stable number or title.
 - **Remote tracker:** create records in dependency order so relationships can use real
   identifiers. Use verified native blocking or sub-issue operations; otherwise retain
   explicit dependency links in the record. Apply configured readiness and relationships.
