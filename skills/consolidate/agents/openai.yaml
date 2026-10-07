@@ -1,0 +1,5 @@
+interface:
+  display_name: "Consolidate"
+  short_description: "Consolidate product knowledge, decisions, and evidence"
+policy:
+  allow_implicit_invocation: true

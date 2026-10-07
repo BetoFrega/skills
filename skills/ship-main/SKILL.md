@@ -16,9 +16,11 @@ Pause only when progress requires unavailable access, an external dependency, a 
 Confirm the remote main revision and report the delivered commit and validation. This invocation does not authorize deployment, publication beyond the Git delivery, bypassing protections, or archival.
 
 When this task changes product behavior, reconcile affected product records through
-[product-documentation](../product-documentation/SKILL.md) within the task's existing
+[consolidate](../consolidate/SKILL.md) within the task's existing
 documentation authority. Use the verified revision and supported observations;
 Git delivery alone does not establish deployment or audience exposure. Account for
 remaining documentation gaps in the delivery report.
 
-For ticket work, finish the report using [next steps](../next-steps/SKILL.md) to identify any remaining delivery requirements or recommend a successor after full delivery.
+Finish the report using [next steps](../next-steps/SKILL.md) to identify remaining
+requirements, relevant learning review, or ready successor work. Continue authorized
+delivery before reporting; subsequent recommendations retain their own scope.

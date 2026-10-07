@@ -1,15 +1,16 @@
 ---
 name: grilling
-description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
+description: Clarify and stress-test a selected plan, decision, idea, or product increment through scoped interview rounds. Use when the user asks for grilling or wants consequential uncertainty resolved.
 ---
 
-Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
+Clarify the user's selected goal until there is enough shared knowledge for its next
+deliverable. Establish that deliverable and the current scope from the conversation;
+ask only when they are missing. Map the scoped decisions as a **design tree**.
 
-For product discussions, read relevant canonical contracts, decisions, and evidence
-through [product-documentation](../product-documentation/SKILL.md). Retain settled
-choices and identify changes from current behavior. After the user confirms a product
-choice, use that skill to preserve the decision and affected contracts within the
-authorized documentation scope. Unresolved options remain proposals.
+For product discussions, read [product increments](references/product-increments.md)
+before the first product question. It owns canonical context, the slice-sufficiency
+check, and the discovery handoff. Retain settled choices; ask about the consequential
+uncertainty for the selected scope rather than every possible future branch.
 
 Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet.
 
@@ -41,4 +42,9 @@ Each round the user answers reshapes the tree: settled decisions push the fronti
 
 Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, etc.), dispatch a sub-agent to find it; don't ask the user for anything you could look up yourself. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report; select the next round from the remaining frontier using the grouping rule above. The _decisions_ are the user's: put each to them and wait.
 
-The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.
+Propose closure when the selected deliverable's knowledge requirements are met.
+Explain the supported result and consequential gaps. The user can accept, refine the
+current scope, or explicitly extend it. Keep later branches explicitly deferred;
+their existence does not prevent closure. Reuse an existing confirmation of this
+scope. On accepted closure, pass the settled choices, references, and remaining gaps
+to the next workflow within the existing authorization.

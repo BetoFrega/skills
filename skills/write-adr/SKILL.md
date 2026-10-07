@@ -26,7 +26,7 @@ project's existing location, format, numbering, and approval conventions. Reuse 
 existing record for the same proposal rather than create a duplicate.
 
 For a choice that also changes product behavior or business policy, use
-[product-documentation](../product-documentation/SKILL.md) to resolve the product
+[consolidate](../consolidate/SKILL.md) to resolve the product
 authority and affected contracts. Cross-link product and architectural consequences;
 ADR acceptance alone does not establish unrelated product or release authority.
 

@@ -75,7 +75,7 @@ Ask for the source only after exhausting repository evidence. If the user confir
 there is no spec, mark the Spec axis `N/A — no spec available`.
 
 For product behavior, read the referenced canonical functionality, shared rules, and
-accepted decisions through [product-documentation](../product-documentation/SKILL.md).
+accepted decisions through [consolidate](../consolidate/SKILL.md).
 Check the spec's intended change against the contract and its approval evidence. A
 ticket or spec does not by itself establish release or policy authority.
 

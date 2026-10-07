@@ -1,25 +1,56 @@
 ---
 name: next-steps
-description: Explain remaining ticket delivery steps after implementation, suggest the next ticket after full delivery, or list next actions when asked.
+description: Explain remaining completion or delivery requirements, identify meaningful learning to review, and recommend ready successor work for implementation, discovery, experiments, or documentation.
 ---
 
 # Next Steps
 
-Use the latest goal, agreed plan, completed work, and user corrections. For ticket work, read the ticket and the repository's tracker and delivery rules, then verify the current state of relevant artifacts before choosing the applicable branch below.
+Use the latest goal, agreed plan, completed work, and user corrections. Read relevant
+work records, canonical references, and configured completion and delivery rules.
+Verify current artifact state before selecting the applicable guidance below.
 
-## Implementation complete, delivery pending
+## Current work incomplete
 
-Explain what remains to fully deliver the current ticket. Return a short numbered list in execution order, with the immediate next action first and any blocker or required decision beside the affected action. Derive the remaining work from the ticket's acceptance criteria and repository workflow: checks, review, integration, deployment, operational verification, and tracker closure apply only where required.
+List remaining requirements in execution order, with the immediate next action first
+and blockers or required decisions beside the affected action. Derive them from the
+goal, acceptance, and project workflow: evidence gathering, canonical updates, checks,
+review, integration, deployment, operational verification, or tracker closure apply
+where required. Discovery completes against its expected evidence and output; it
+need not deliver a feature. Documentation completes against verified saved records.
 
-Call delivery complete only when every required acceptance and delivery condition has verified evidence. A completed implementation, merged PR, or closed ticket alone may leave required work outstanding. Missing evidence remains an explicit delivery gap.
+Call work complete only when its required conditions have verified evidence. A code
+change, merged PR, closed ticket, or prepared draft alone may leave requirements
+outstanding. Keep missing evidence explicit. For product observations, use
+[consolidate](../consolidate/SKILL.md) to interpret independent implementation,
+deployment, authorized release, exposure, and flag dimensions.
 
-## Ticket fully delivered
+## Current work complete
 
-1. Read the ticket's parent relationships and specification references. If it belongs to a spec, read that spec and its remaining tickets, including current status and blocking relationships. Recommend the next open ticket whose prerequisites are complete, using dependency order and documented priority. When several tickets are ready, choose one and explain its value toward the spec's goal. Include the ticket link or identifier and the reason it comes next. If no ticket is ready or the spec is complete, omit a next-ticket suggestion.
-2. If the ticket has no spec, inspect its explicit follow-up links, dependency relationships, and directly related open tickets. Suggest a ticket only when those sources establish a clear successor that is ready to start. Include its link or identifier and the relationship that makes it next. Otherwise, omit a suggestion.
+Consider continuation from supported evidence and the product's configured review
+points. Recommend [review-learnings](../review-learnings/SKILL.md) when results materially
+contradict a hypothesis, change scope or direction, redefine rules, or affect related
+features or pending work. Do not require a full review after every item; already
+incorporated learning does not need another review without new evidence or a review
+point. Distinguish required knowledge maintenance from a subsequent learning review.
 
-If tracker or spec evidence is unavailable, report the lookup gap and base recommendations only on verified relationships. A suggestion does not itself authorize starting another ticket; honor any existing authorization for the workset.
+For successor work, inspect explicit follow-ups, selected increment and spec references,
+parent/dependency relationships, remaining work, readiness, and documented priority.
+Recommend one open item whose actual prerequisites are satisfied; explain its value
+toward the agreed goal and give its link or identifier. If a consequential finding
+invalidates its scope or readiness, recommend resolving that finding before execution.
+Canonical future ideas alone do not establish selected work or readiness.
+
+When no source establishes a ready successor, omit that suggestion. For work without
+tickets, recommend only continuations supported by the agreed goal and verified
+relationships. Report unavailable sources and avoid inferring readiness from absence
+of blockers. Present outstanding current requirements separately from subsequent work.
 
 ## Invocation boundary
 
-An explicit request for next steps is informational: return the applicable result and end the turn. When reached automatically after implementation or delivery, apply this guidance to the final report once the authorized work is complete or blocked; continue any remaining authorized delivery work before reporting. For work without a ticket, list the remaining task actions, or say the task is complete. If no goal can be identified, ask which task the user means.
+An explicit next-steps request is informational: return the applicable result and end
+the turn. When reached automatically during execution, complete remaining authorized
+work before the final report or identify its blocker precisely. Use concrete execution
+skills for actions and consolidate for canonical persistence. A recommendation does
+not authorize new work, decisions, publications, release operations, or schedules;
+existing authorization remains usable within its scope. If no goal can be identified,
+ask which task the user means.

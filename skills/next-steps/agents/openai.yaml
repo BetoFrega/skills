@@ -1,2 +1,5 @@
+interface:
+  display_name: "Next Steps"
+  short_description: "Identify remaining requirements and useful successor work"
 policy:
   allow_implicit_invocation: true

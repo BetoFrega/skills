@@ -80,7 +80,7 @@ write or update the record. That skill owns ADR authoring rules and the format.
 ### Product behavior and policy
 
 When modeling depends on product behavior, read the affected canonical contracts
-through [product-documentation](../product-documentation/SKILL.md). When an approved
+through [consolidate](../consolidate/SKILL.md). When an approved
 choice changes a product rule, actor permission, state, or exception, use its decision
 and catalogue routes to record the choice and affected contracts. Preserve vocabulary
 definitions in the glossary and link behavior to its product authority.

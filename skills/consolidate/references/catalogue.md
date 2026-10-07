@@ -12,8 +12,9 @@ jobs, implementation, and exposure are views over the same records, not reasons 
 duplicate a functionality.
 
 A functionality is a recognizable outcome an actor can achieve under relevant
-conditions and rules. Split records when outcomes, contracts, or independently
-deliverable behavior differ materially. Preserve identity through ordinary evolution.
+conditions and rules. Split functionality records when actor outcomes or behavioral
+contracts differ materially. Use [delivery slices](delivery-slices.md) to represent
+usable increments of the same functionality. Preserve identity through ordinary evolution.
 When splitting, merging, or retiring records, preserve redirects or relationships
 and the reason so historical work can still be traced.
 

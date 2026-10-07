@@ -1,0 +1,5 @@
+interface:
+  display_name: "Review Learnings"
+  short_description: "Review learning and update canonical product knowledge"
+policy:
+  allow_implicit_invocation: true

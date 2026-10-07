@@ -1,8 +1,10 @@
 # Product documentation validation
 
-Validated on 2026-10-04 against the agreed
+Historical validation on 2026-10-04 of the original product-documentation skill,
+whose canonical authoring responsibility now lives in consolidate. This exercise
+does not validate the subsequent workflow changes. See the agreed
 [product-documentation model](../design/product-documentation-model.md) and
-[skill entry](../../skills/product-documentation/SKILL.md).
+[skill entry](../../skills/consolidate/SKILL.md).
 
 ## Scope
 

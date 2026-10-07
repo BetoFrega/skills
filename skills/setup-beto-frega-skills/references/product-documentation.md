@@ -2,7 +2,7 @@
 
 Read this when the standard setup configures product documentation or revisits its
 destinations, representation, or maintenance. Configure the project conventions here;
-the product-documentation skill consumes them when writing and reconciling records.
+consolidate consumes them when writing and reconciling records.
 
 Read existing product records and retain settled choices. Ask for the unresolved
 decisions needed by this product. Keep scope and depth proportional to the product's
@@ -23,11 +23,17 @@ or files. Use the destination's native versions or audit history for document re
 Record how consumers find an affected record and the format they must use to update it.
 
 For functionality content, read
-[catalogue meanings](../../product-documentation/references/catalogue.md#required-meanings).
+[catalogue meanings](../../consolidate/references/catalogue.md#required-meanings).
+For delivery slices, read
+[slice meanings](../../consolidate/references/delivery-slices.md). Map their
+stable references, feature relationships, acceptance, dependencies, controls, and
+delivery observations to identifiable sections by default or related records when
+useful. Configure how agents find and update an individual slice and preserve its
+identity if the representation changes.
 For decision records, read
-[decision content](../../product-documentation/references/decisions.md#decision-content).
+[decision content](../../consolidate/references/decisions.md#decision-content).
 For living records, read
-[record format](../../product-documentation/references/record-format.md), including
+[record format](../../consolidate/references/record-format.md), including
 its functionality template and example. Map them to the chosen native representation;
 historical narration is not a field or section in living records.
 Use those requirements to map the chosen destination without duplicating templates
@@ -39,9 +45,22 @@ links to authoritative project templates so writers can apply them.
 Resolve the hierarchy and functionality boundaries, profiles and roles, jobs and user
 stories, behavior and shared rules, decision authority, and effective timing. Preserve
 the catalogue meanings and
-[reconciliation dimensions](../../product-documentation/references/reconciliation.md#independent-dimensions)
+[reconciliation dimensions](../../consolidate/references/reconciliation.md#independent-dimensions)
 when defining field and status representations. Adapt the workflow and depth to the
 product; these meanings need not become a universal sequence of statuses.
+
+## Work and learning conventions
+
+Resolve the configured tracker representation for selected increments, executable
+delivery work, bounded discovery, experiments, and maintenance. Preserve canonical
+product references in work and keep optional technical specs scoped to technical
+approach, constraints, and validation. Read [work-item requirements](../../plan-increment/references/work-items.md)
+when defining readiness, dependencies, and publication conventions.
+
+Configure useful learning-review points and sources for this product. Review-learnings
+gathers and resolves learning; consolidate persists supported knowledge. Routine
+factual maintenance continues during work, without a mandatory review after each
+item. A configured review cadence does not itself create a scheduled job.
 
 ## Maintenance and capabilities
 

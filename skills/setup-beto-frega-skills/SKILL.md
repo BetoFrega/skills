@@ -162,7 +162,7 @@ If product-documentation conventions are absent or incomplete, use
 [product-documentation setup](references/product-documentation.md) to resolve the
 applicable destinations, native representations, product conventions, and maintenance.
 Draft the resolved product configuration. This standard setup owns configuration;
-product-documentation operations consume it to register and maintain records.
+consolidate consumes it to register and maintain records.
 
 ## 3. Confirm complete drafts
 

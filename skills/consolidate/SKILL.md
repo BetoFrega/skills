@@ -1,9 +1,9 @@
 ---
-name: product-documentation
-description: Maintain product catalogues, shared rules, direction and evidence, product/business decisions, and proposals; reconcile implementation, deployment, release, audience exposure, and feature flags against canonical product records.
+name: consolidate
+description: Read and consolidate canonical product knowledge, ideas, behavior, decisions, delivery increments, and evidence; route technical decisions to ADRs or scoped specs and reconcile delivery, exposure, and flags.
 ---
 
-# Product documentation
+# Consolidate
 
 Maintain explicit product knowledge that product owners and agents can use across
 sessions. Maintain consolidated intent, behavior, authority, and evidence. Adapt formats,
@@ -29,9 +29,11 @@ several documentation functions; the table is a router, not a mandatory sequence
 | Route | Read when |
 | --- | --- |
 | [Catalogue](references/catalogue.md) | Finding capabilities or defining and updating functionalities, audiences, jobs, behavior, value, and cost. |
+| [Delivery slices](references/delivery-slices.md) | Recording selected increments, acceptance, dependencies, exposure strategy, coverage, and delivery observations. |
 | [Context](references/context.md) | Maintaining product direction, business context, shared rules, vocabulary links, or research and experiment evidence. |
 | [Decisions](references/decisions.md) | Recording product or business choices and rationale, preserving history, or applying an accepted change to affected contracts. |
 | [Proposals](references/proposals.md) | Shaping a product proposal or pitch for an investment decision. |
+| [Technical work](references/technical-work.md) | Consolidating technical choices after discussion or preparing a scoped technical spec in the configured tracker. |
 | [Reconciliation](references/reconciliation.md) | Maintaining implementation, deployment, release, exposure, and flag observations, or investigating documentation drift. |
 
 For an architectural choice, use [write-adr](../write-adr/SKILL.md). For vocabulary
@@ -39,6 +41,10 @@ definitions, follow [the glossary format](../domain-modeling/CONTEXT-FORMAT.md) 
 configured domain conventions. Keep product-specific behavior in the catalogue and
 cross-functional rules in their shared authority.
 Specs and tickets describe work derived from these records and retain links to them.
+For an interview handoff, retain the selected increments, confirmed choices, relevant
+technical decisions, and deferred questions. Consolidate what is already known; use
+grilling only for consequential unresolved choices that prevent the requested update.
+Feature knowledge and future ideas can exceed the scope selected for delivery.
 
 ## Write the affected knowledge
 

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Plan Increment"
+  short_description: "Plan selected increments and executable tracker work"
+policy:
+  allow_implicit_invocation: false

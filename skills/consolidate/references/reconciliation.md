@@ -4,6 +4,10 @@ Read this during related implementation, deployment, and release work, for perio
 maintenance, or when records disagree with observed behavior. Setup supplies sources,
 representation, update triggers, cadence, responsibility, and permitted operations.
 
+For a functionality delivered in increments, read [delivery slices](delivery-slices.md)
+and reconcile the affected slices as well as the functionality. Preserve audience and
+scenario coverage when deriving the feature's state from partial delivery.
+
 ## Independent dimensions
 
 | Dimension | Evidence it records |
@@ -31,8 +35,8 @@ before drawing audience availability conclusions.
 
 1. **Locate authority and coverage.** Read affected records, governing product decisions,
    release plans, and configured sources. For a shared control or rule, identify all
-   affected functionalities. Complete when the relevant records, dimensions, audiences,
-   sources, and existing authorization are identified; keep unresolved scope explicit.
+   affected functionalities and slices. Complete when the relevant records, dimensions,
+   audiences, sources, and existing authorization are identified; keep unresolved scope explicit.
 2. **Observe.** Inspect code and meaningful verification evidence, deployed revisions,
    release authority, flag configuration/evaluation, and actual audience behavior as
    relevant. Capture source, observation time, environment, identity/audience context,

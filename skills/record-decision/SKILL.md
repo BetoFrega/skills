@@ -11,7 +11,7 @@ before writing. Preserve relevant history and supersession. Record what was appr
 without treating it as approval of later execution.
 
 For a product or business choice, use
-[`product-documentation`](../product-documentation/SKILL.md) to find the configured
+[`consolidate`](../consolidate/SKILL.md) to find the configured
 authority, preserve decision history, and update affected product contracts. A spec
 or ticket remains a linked work record rather than the implicit authority for product
 policy. If a choice also affects architecture, link the architectural record.

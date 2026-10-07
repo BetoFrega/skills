@@ -7,6 +7,11 @@ description: Build a throwaway prototype to answer a design question. Use when t
 
 A prototype is **throwaway code that answers a question**. The question decides the shape.
 
+For product questions, read applicable canonical contracts and evidence through
+[consolidate](../consolidate/SKILL.md), including external configuration. Preserve the
+selected question, scope, and completion criterion. A demonstrated interaction or
+technical possibility does not itself approve a product rule or release.
+
 ## Pick a branch
 
 Identify which question is being answered, using the user's prompt, the surrounding code, or by asking if the user is around:
@@ -24,3 +29,9 @@ The two branches produce very different artifacts, so getting this wrong wastes 
 4. **Skip the polish.** No tests, no error handling beyond what makes the prototype _runnable_, no abstractions. The point is to learn something fast.
 5. **Surface the state.** After every action (logic) or on every variant switch (UI), print or render the full relevant state so the user can see what changed.
 6. **Capture it when done.** Fold any validated decision into the real code, then capture the prototype itself as a **primary source**: commit it to a throwaway branch, out of main, and leave a context pointer to that branch on the implementation issue. Capture the answer too (the verdict and the question it settled) in the issue or a commit. The main branch keeps only the validated decision.
+
+Return supported product learning and accepted choices through consolidate within
+existing documentation authority, preserving unresolved proposals and evidence limits.
+Finish with [next steps](../next-steps/SKILL.md) for completion requirements, meaningful
+learning review, or a ready continuation. Prototype success does not establish feature
+delivery; concrete follow-up work remains separately scoped.

@@ -25,7 +25,9 @@
       "source_path": "skills/engineering/grill-with-docs/SKILL.md",
       "installed_folder_hash": "eedaf2562c83155115e9c649fa3ecaac2e10e81d",
       "snapshot_updated_at": "2026-09-26T14:46:50.645Z",
-      "local_adaptations": []
+      "local_adaptations": [
+        "Read canonical product and domain context before interviewing; hand off selected increments and retained decisions."
+      ]
     },
     "grilling": {
       "source": "mattpocock/skills",
@@ -33,7 +35,9 @@
       "source_path": "skills/productivity/grilling/SKILL.md",
       "installed_folder_hash": "f0732035b8b1b60ae39454e4191caef32fa91903",
       "snapshot_updated_at": "2026-09-26T14:46:50.646Z",
-      "local_adaptations": []
+      "local_adaptations": [
+        "Scope product grilling to sufficient knowledge for selected increments, with canonical context and a bounded discovery exit."
+      ]
     },
     "domain-modeling": {
       "source": "mattpocock/skills",
@@ -43,26 +47,6 @@
       "snapshot_updated_at": "2026-09-26T14:46:50.644Z",
       "local_adaptations": [
         "Route ADR authoring to the repository-owned write-adr skill; retain the former format path as a pointer."
-      ]
-    },
-    "to-spec": {
-      "source": "mattpocock/skills",
-      "source_url": "https://github.com/mattpocock/skills.git",
-      "source_path": "skills/engineering/to-spec/SKILL.md",
-      "installed_folder_hash": "136b9651747cfccbfbb7c50a6b0dfb757e7547d2",
-      "snapshot_updated_at": "2026-09-26T14:46:50.649Z",
-      "local_adaptations": [
-        "Use the existing repository setup skill."
-      ]
-    },
-    "to-tickets": {
-      "source": "mattpocock/skills",
-      "source_url": "https://github.com/mattpocock/skills.git",
-      "source_path": "skills/engineering/to-tickets/SKILL.md",
-      "installed_folder_hash": "b32c94e5a51c24ee9c41fcb7fe9ea9fff9af6369",
-      "snapshot_updated_at": "2026-09-26T14:46:50.649Z",
-      "local_adaptations": [
-        "Use the existing repository setup skill."
       ]
     },
     "tdd": {
@@ -155,6 +139,28 @@
       "snapshot_updated_at": "2026-09-26T14:46:50.653Z",
       "local_adaptations": [
         "Move the existing repository copy to skills/; expose it through a relative .agents/skills symlink."
+      ]
+    },
+    "consolidate": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/to-spec/SKILL.md",
+      "installed_folder_hash": "136b9651747cfccbfbb7c50a6b0dfb757e7547d2",
+      "snapshot_updated_at": "2026-09-26T14:46:50.649Z",
+      "local_adaptations": [
+        "Use the existing repository setup skill.",
+        "Absorb canonical product documentation; route architecture choices and optional scoped technical work through configured authority."
+      ]
+    },
+    "plan-increment": {
+      "source": "mattpocock/skills",
+      "source_url": "https://github.com/mattpocock/skills.git",
+      "source_path": "skills/engineering/to-tickets/SKILL.md",
+      "installed_folder_hash": "b32c94e5a51c24ee9c41fcb7fe9ea9fff9af6369",
+      "snapshot_updated_at": "2026-09-26T14:46:50.649Z",
+      "local_adaptations": [
+        "Use the existing repository setup skill.",
+        "Plan only selected product increments; distinguish aggregate slices from execution tickets and include bounded discovery work."
       ]
     }
   }
