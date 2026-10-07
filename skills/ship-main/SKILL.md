@@ -21,6 +21,9 @@ documentation authority. Use the verified revision and supported observations;
 Git delivery alone does not establish deployment or audience exposure. Account for
 remaining documentation gaps in the delivery report.
 
-Finish the report using [next steps](../next-steps/SKILL.md) to identify remaining
-requirements, relevant learning review, or ready successor work. Continue authorized
-delivery before reporting; subsequent recommendations retain their own scope.
+At the final delivery checkpoint, use [next steps](../next-steps/SKILL.md) to identify
+remaining requirements, learning-review triggers, and ready successor work. When
+meaningful learning or a configured review point warrants it, explicitly recommend
+[review-learnings](../review-learnings/SKILL.md), naming the evidence and bounded scope
+to review. Continue authorized delivery before reporting; subsequent recommendations
+retain their own scope.
