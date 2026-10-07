@@ -8,7 +8,7 @@ description: "Configure Beto Frega's global communication rules and project skil
 Configure personal communication in the installed agents' global instruction files,
 then the project documents consumed by the skills:
 
-- global conversation language and semantic emoji markers;
+- global conversation language, concision, and semantic emoji markers;
 - issue-tracker workflow;
 - tracker-label vocabulary when triage or low-density reporting is installed;
 - domain-document layout;
@@ -74,7 +74,7 @@ Use [global communication](references/global-communication.md) to install the se
 personal policy in every configured agent's global instruction entry. Keep this scope
 separate from project configuration and project binding. Use one canonical global
 `AGENTS.md`; expose Claude's global `CLAUDE.md` through a relative symlink to it.
-Reuse the approved language and emoji choices rather than interviewing again. Inspect
+Reuse the approved language, concision, and emoji choices rather than interviewing again. Inspect
 and fill installation gaps; retain entries that already provide the same behavior.
 
 ### A. Issue tracker

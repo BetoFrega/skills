@@ -46,6 +46,8 @@ questions, recommendations, progress updates, and final replies. Write documenta
 code, comments, tickets, PRs, and other artifacts in the canonical language of their
 repository or space, following its established conventions.
 
+Be brutally concise, even at the expense of grammar.
+
 Use these semantic emoji markers in conversation:
 
 | Marker | Meaning |
@@ -71,8 +73,8 @@ The emoji convention applies to conversation only. Artifacts follow their own st
 ## Verify
 
 Read the installed policy through every configured agent's global entry. Confirm the
-language split, all eight meanings, and one marker per relevant block. For symlinks,
-check that the stored target is relative and resolves to the canonical file. Verify
+language split, concision rule, all eight meanings, and one marker per relevant block.
+For symlinks, check that the stored target is relative and resolves to the canonical file. Verify
 that preserved content remains accessible, references still resolve, and no alternate
 global override hides the policy. Distinguish verified filesystem configuration from
 whether an already running conversation has reloaded its instructions.
