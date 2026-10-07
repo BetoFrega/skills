@@ -53,11 +53,16 @@ an accurate draft; use existing session authorization for documentation edits.
 
 ## Revise or replace
 
-Edit proposals and factual or editorial corrections in place. When changing an
-accepted decision's substance, create a new ADR and link it to the earlier one,
-preserving the earlier rationale. A proposed replacement leaves the earlier
-decision's status intact. Once the replacement is accepted under the project's
-approval convention, mark the earlier ADR as superseded and link both directions.
+Edit proposals and factual or editorial corrections in place. During initial
+architecture consolidation, revise an accepted ADR in place when the decision has
+no implementation or established downstream commitments. Record the revision's
+date, reason, and approval; keep it accepted when the revised decision is approved.
+
+Outside that case, when changing an accepted decision's substance, create a new
+ADR and link it to the earlier one, preserving the earlier rationale. A proposed
+replacement leaves the earlier decision's status intact. Once the replacement is
+accepted under the project's approval convention, mark the earlier ADR as
+superseded and link both directions.
 When retiring a decision without a replacement, record the reason for deprecation.
 
 ## Verify and report
