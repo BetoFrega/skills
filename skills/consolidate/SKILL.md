@@ -76,6 +76,9 @@ Read the reconciliation route before any authorized operational flag change.
 
 ## Verify completion
 
+For local document changes, apply
+[local document delivery](references/local-document-delivery.md) before reporting.
+
 Read back saved records and relationships in the configured destination. Check
 identity, representation, applicable content, authority and effective timing,
 source coverage, and links to decisions, shared rules, work, and verification. Apply

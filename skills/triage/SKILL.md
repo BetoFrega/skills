@@ -12,6 +12,10 @@ Resolve the tracker workflow and label vocabulary using
 [project configuration locations](../setup-beto-frega-skills/references/project-configuration.md),
 including project-scoped external files.
 
+For local Markdown tracker or `.out-of-scope/` changes, apply
+[local document delivery](../consolidate/references/local-document-delivery.md)
+when reporting the outcome.
+
 If this repo treats external pull requests as a request surface (see the issue-tracker config), triage covers them too: **a PR is an issue with attached code**, using the same roles, same states, and same machine, with a few deltas marked "for a PR" below. Resolve a bare `#42` to an issue or PR per the tracker config.
 
 Every comment or issue posted to the issue tracker during triage **must** start with this disclaimer:

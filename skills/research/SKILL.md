@@ -17,6 +17,9 @@ Its job:
 3. Save it at the configured research/work-record location. Otherwise match the
    repository's existing convention, or choose a sensible location and report it.
 
+For locally saved findings, the researcher and final report apply
+[local document delivery](../consolidate/references/local-document-delivery.md).
+
 For product work, preserve supported findings through consolidate within existing
 documentation authority. Keep observations, interpretations, and proposed policy
 distinct; unresolved choices can return to contextual grilling. Use

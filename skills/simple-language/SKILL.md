@@ -64,6 +64,10 @@ treat them as tripwires for a second look, not as hard caps.
 
 ## Self-Check (run before returning)
 
+When the rewrite changes local files, apply
+[local document delivery](../consolidate/references/local-document-delivery.md)
+in the completion report.
+
 1. Can the named reader say, after one reading, what this text wants them
    to know or do?
 2. Is the main point in the first two lines?

@@ -39,6 +39,10 @@ Finish when a reader can state the new behavior, follow its cause, and find the 
 
 ## 4. Build and verify the bundle
 
+When reporting the locally saved explanation bundle, apply
+[local document delivery](../consolidate/references/local-document-delivery.md)
+for its actual destination.
+
 Read and copy [assets/pr-explanation.html](assets/pr-explanation.html) into the bundle root as `index.html`. It is the presentation source of truth. Replace its illustrative content, adapt section count to actual journeys, update the document language/title, and synchronize navigation with section IDs. Keep CSS and narrative inline; keep the pinned CDN renderer, textual fallback, and accessible Mermaid source. Place source citations beside their claims.
 
 Create one portable directory at the user's chosen output location, otherwise in a writable artifact directory outside the reviewed repository. Name it for the PR and keep `index.html` at its root. Store every included PR-description screenshot under `assets/screenshots/` with stable, descriptive filenames and reference it from the HTML with a relative path. Preserve the source image bytes and useful file extension when possible. The bundle must not depend on remote image URLs or absolute filesystem paths; external source links in captions may still point to the PR. Keep required narrative visible; use expandable details for supporting code and evidence. Preserve responsive navigation, keyboard focus, diagram overflow handling, and print styles.

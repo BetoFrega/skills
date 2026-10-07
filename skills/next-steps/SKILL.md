@@ -18,7 +18,9 @@ and blockers or required decisions beside the affected action. Derive them from 
 goal, acceptance, and project workflow: evidence gathering, canonical updates, checks,
 review, integration, deployment, operational verification, or tracker closure apply
 where required. Discovery completes against its expected evidence and output; it
-need not deliver a feature. Documentation completes against verified saved records.
+need not deliver a feature. For local documentation, apply
+[local document delivery](../consolidate/references/local-document-delivery.md)
+to distinguish verified saved files from pending integration into `origin/main`.
 
 Call work complete only when its required conditions have verified evidence. A code
 change, merged PR, closed ticket, or prepared draft alone may leave requirements

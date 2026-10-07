@@ -71,6 +71,10 @@ accepted as deferred work:
    Confirm the ID/link, open status, coverage, and activation gate. Record the
    verified link beside every deferred finding.
 
+For local ticket, feature-spec, or release-document changes, apply
+[local document delivery](../consolidate/references/local-document-delivery.md)
+when reporting disposition and remaining work.
+
 A ticket draft, proposed title, unverified create response, closed unrelated ticket,
 or “will follow up” promise does not satisfy the ticket requirement. Tracking debt
 permits deferral without hiding it; it does not turn a production regression into

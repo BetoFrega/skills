@@ -26,3 +26,7 @@ keep any workspace note clearly marked as a draft. If the decision or destinatio
 ambiguous, ask before editing. Verify the saved result and report its path and the
 decision recorded. Keep this invocation to documentation; external posting, memory
 updates, commits, and pushes require their own authorization.
+
+When the decision is saved in a local document, apply
+[local document delivery](../consolidate/references/local-document-delivery.md)
+in the report.

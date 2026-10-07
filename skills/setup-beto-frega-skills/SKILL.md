@@ -220,6 +220,9 @@ Wait for confirmation or edits to the drafts.
 
 ## 4. Write and verify
 
+When reporting local configuration or document changes, apply
+[local document delivery](../consolidate/references/local-document-delivery.md).
+
 Create only confirmed files, directories, symlinks, and tracker labels. Existing
 configuration is preserved unless the user explicitly approved its edit. Read back every external
 label mutation. Check that every pointer resolves, every generated document describes

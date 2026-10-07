@@ -96,3 +96,7 @@ search the fingerprint once: accept one matching issue as success; otherwise kee
 outcome unresolved. Never retry an uncertain create. On missing access, authentication
 failure, or an unresolved write, state that no issue was confirmed and that creation
 may be unresolved, preserve the exact flag and reproduction pointers, and stop.
+
+For a local Markdown issue, apply
+[local document delivery](../consolidate/references/local-document-delivery.md)
+in the handoff so the parent can report its Git state and remaining route.

@@ -62,6 +62,9 @@ When retiring a decision without a replacement, record the reason for deprecatio
 
 ## Verify and report
 
+For local ADR changes, apply
+[local document delivery](../consolidate/references/local-document-delivery.md).
+
 Read back the saved files. Check that the required content is present, material
 claims have evidence or explicit assumptions, status matches approval evidence,
 numbering is unique, and local references and replacement links resolve. For a

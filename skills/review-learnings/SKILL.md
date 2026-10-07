@@ -59,6 +59,9 @@ operating flags. Exercise existing authorization within its actual scope.
 
 ## Verify completion
 
+For local document changes, apply
+[local document delivery](../consolidate/references/local-document-delivery.md).
+
 Read back saved canonical changes and any authorized work changes. Account for each
 material finding with a supported update, a reason it needs no change, or a named
 unresolved choice or source gap. Clearly identify drafts, partial writes, and missing

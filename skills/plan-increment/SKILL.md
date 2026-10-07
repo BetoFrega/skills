@@ -46,6 +46,9 @@ sufficient. Publication and execution stay within the user's applicable authorit
 
 ## Verify completion
 
+For local increment records or Markdown tickets, apply
+[local document delivery](../consolidate/references/local-document-delivery.md).
+
 Read back saved increment records, tickets, references, blocking relationships, and
 configured readiness. Account for the selected scope and its aggregate acceptance;
 identify deferred work, unresolved choices, and any partial publication. A missing

@@ -15,6 +15,10 @@ Translate the reason into an observable outcome and baseline: deployment autonom
 
 Read the repository's domain, architecture, testing, deployment, feature-flag, and issue-tracking guidance. Follow its conventions for recording work, readiness, relationships, and decisions. Missing recording guidance is a publication gap; continue independent design and implementation work that is authorized.
 
+When migration planning or execution changes local documents, apply
+[local document delivery](../consolidate/references/local-document-delivery.md)
+in progress and completion reports.
+
 Inspect code, configuration, architectural decisions, existing migration work, and operational evidence. Establish behavior, interfaces, data ownership, deployment paths, and failure modes. Distinguish current production evidence from local tests, historical notes, and assumptions.
 
 Inventory consumers for each capability: application flows, background jobs, queues, scheduled work, integrations, and older clients. Use available corporate search, service catalogs, relevant repositories, documentation, and responsible teams to discover dependencies beyond the local codebase. Corroborate discovery with runtime evidence where available. Track each consumer's disposition and ownership or usage gaps through transition and retirement. Absence of search results is not proof of disuse.

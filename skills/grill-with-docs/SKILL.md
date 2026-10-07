@@ -14,6 +14,10 @@ Consume existing glossary definitions as context. Use
 domain terms, relationships, or architectural choices. Preserve confirmed knowledge
 through its configured authority within the session's documentation scope.
 
+When that preservation changes local documents, apply
+[local document delivery](../consolidate/references/local-document-delivery.md)
+to progress reports and the final handoff.
+
 After accepted closure, carry selected increments, canonical references, confirmed
 product and technical choices, consequential gaps, and deferred questions into
 consolidation and delivery planning. A broad functionality record is context; plan
