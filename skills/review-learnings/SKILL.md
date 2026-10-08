@@ -51,6 +51,14 @@ references, ADRs, and delivery observations through their authoritative routes. 
 its living-record and history rules; this review is not a narrative of document edits.
 Reuse settled approvals and maintain provenance for supported claims.
 
+Route reusable learning about agent procedure to the canonical skill or instruction
+that governs that procedure, through [writing-for-agents](../writing-for-agents/SKILL.md).
+Keep case-specific evidence in the work record and place the actionable rule where
+future work will load it. Verify its discovery trigger and read back the changed
+guidance; a diagnostic comment alone does not complete this procedural feedback.
+Apply existing write authority, or name the exact target and pending change when
+that authority is missing.
+
 Identify implications for pending work: scope, acceptance, dependencies, readiness,
 or need for further investigation. Use [selected work planning](../plan-increment/references/selected-work.md)
 and its work-item route to prepare concrete changes when requested. Reviewing learning
