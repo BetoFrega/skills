@@ -16,8 +16,11 @@ baseline at its resolved location. Consult that document once it exists.
   it answers a named operational question.
 - **Context and correlation**: use stable event names and include service, environment,
   release, outcome, and the available request, trace, job, or operation identifier.
-  Propagate context across asynchronous and service boundaries where the repository's
-  architecture needs it.
+  When a call involves more than one system, recommend carrying a correlation ID
+  through its entire flow, including downstream calls and asynchronous handoffs,
+  and recording it in each system's relevant telemetry. Reuse an existing request,
+  trace, or operation identifier when it provides end-to-end correlation. Define
+  how each boundary propagates the ID and verify that the full flow can be followed.
 - **Failures**: record a failure once at the boundary that owns the response, preserving
   causal context and distinguishing expected domain outcomes from operational faults.
 - **Privacy and security**: exclude secrets and credentials. Minimize personal and
@@ -39,7 +42,8 @@ baseline at its resolved location. Consult that document once it exists.
 1. Which deployed components and critical journeys are in scope?
 2. Which failures or degradations must be detectable, and by whom?
 3. Which operational questions require logs, metrics, traces, or another signal?
-4. Which context must correlate work across each real boundary?
+4. Which context must correlate work across each real boundary? For calls involving
+   multiple systems, how is the correlation ID carried through the entire flow?
 5. Which data is prohibited, redacted, hashed, sampled, or retention-limited?
 6. Which dimensions can grow, and what bounds their cardinality and volume?
 7. Which conditions page, notify, or remain dashboard-only; who responds?
