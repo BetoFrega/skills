@@ -5,105 +5,54 @@ description: Select models and reasoning effort for implementation, review, reco
 
 # Model Selection
 
-Choose the lowest expected cost configuration that can complete the assigned work
-reliably. Treat a recommendation as a starting point, not insurance against every
-possible complication.
+Choose the lowest expected cost configuration that can reliably complete the assignment. Recommendations are starting points, not insurance against every complication.
 
-Resolve current model names, capability descriptions, and supported effort values
-from the live execution environment. An explicit model or effort requested by the
-user remains authoritative.
+Resolve model names, capabilities, and supported efforts from the live environment. Explicit user choices govern.
 
-Select each assignment independently, including every decider, judge, and verifier
-in a decision protocol. Agent count or agreement alone does not justify a lower
-capability tier or effort.
+Select every assignment independently, including deciders, judges, and verifiers. Agent count or agreement alone justifies no capability or effort discount.
 
-For an explicit ensemble cost/reliability comparison, or adoption of a configuration
-supported by relevant confirmation data, read [ensemble.md](references/ensemble.md).
+For explicit ensemble cost/reliability comparisons or adoption supported by relevant confirmation data, read [ensemble](references/ensemble.md).
 
-## Classify the assigned work
+## Classify the work
 
-Classify the work by unresolved reasoning, not by file, layer, or test count:
+Classify unresolved reasoning:
 
-- **Mechanical:** the exact edit and precedent are known; there is no meaningful
-  design choice.
-- **Contained:** work may span files or layers, but the behavior, seam, prior art, and
-  acceptance criteria determine the shape of the solution.
-- **Judgment-heavy:** investigation or comparison between plausible solutions remains
-  necessary.
-- **Frontier:** an unresolved architectural or product decision could silently or
-  expensively affect later work.
+- **Mechanical:** exact edit and precedent known; no meaningful design choice.
+- **Contained:** behavior, seam, prior art, and acceptance criteria determine the solution, even across files or layers.
+- **Judgment-heavy:** investigation or comparison between plausible solutions remains.
+- **Frontier:** an unresolved architecture or product decision could silently or expensively affect later work.
 
-Authorization, persistence, caching, public behavior, multiple layers, and multiple
-test tiers affect verification and the consequence of mistakes. They do not by
-themselves make the work judgment-heavy.
+Authorization, persistence, caching, public behavior, and file/layer/test counts affect verification and consequences; alone they justify neither judgment-heavy classification nor high effort.
 
-## Determine minimum capability
+## Set the capability floor
 
-Treat these tiers as capability floors. Select the actual configuration after
-choosing the required effort.
+For implementation, mechanical work needs enough capability for the known edit; contained work needs balanced capability; judgment-heavy work needs strong workhorse capability. Highest capability requires an unresolved consequential decision whose errors would be silent, expensive, or propagate.
 
-For implementation:
+For review, default to balanced capability. Use strong workhorse capability for subtle invariants; highest only when resolving or challenging a frontier decision, rather than verifying settled implementation.
 
-- Mechanical work needs enough capability to apply the known edit.
-- Contained work needs balanced capability.
-- Judgment-heavy work needs strong workhorse capability.
-- Frontier work needs the highest-capability tier only when a consequential decision
-  remains unresolved **and** a wrong decision would be silent, expensive, or propagate
-  into later work.
+Deciders use implementation criteria; judges and verifiers use review criteria. Classify each role's reasoning independently; a coordinator's recommendation sets no universal minimum.
 
-For review:
+## Choose effort
 
-- Require balanced capability by default.
-- Require strong workhorse capability when correctness depends on correlating subtle
-  invariants.
-- Require the highest-capability tier only when the review must resolve or challenge a
-  frontier decision, rather than verify an already-decided implementation.
+Set effort from unresolved reasoning, independently of capability:
 
-For decision protocols, apply implementation criteria to deciders and review criteria
-to judges and verifiers. Classify the reasoning within each role; a coordinator's
-recommendation is not an automatic minimum for every assignment.
+- Lowest suitable: obvious edit or direct application of prior art.
+- Middle: contained implementation or review with settled decisions.
+- High: investigation, competing approaches, or subtle judgment.
+- Exceptional top: a frontier decision governing broader work.
 
-## Choose reasoning effort
+## Compare expected cost
 
-Choose effort from the unresolved reasoning:
+After setting capability and effort, compare configurations meeting latency, tooling, and context requirements.
 
-- Use the lowest suitable effort for one obvious edit or direct application of prior
-  art.
-- Use a middle effort for contained implementation or review with settled decisions.
-- Use high effort when investigation, competing approaches, or subtle judgment remain.
-- Use the environment's exceptional top effort only when a frontier decision will
-  govern a broader slice of work.
+Read `~/.agents/model-pricing.json` and reuse it within the session. Reload after successful explicit refresh or detected snapshot change. Routine selection uses this local snapshot exclusively; age is provenance, not a refresh trigger. Match billing surface, speed mode, and units.
 
-Several files, layers, or test tiers do not independently justify high effort.
+Estimate input, cache use, billable output including reasoning, and retries. Prefer greater capability at equal or lower expected cost when other requirements are met. Missing or incompatible rates or incomplete evidence require stated uncertainty and a suitable default.
 
-## Choose configuration by expected cost
-
-Compare available configurations that meet the capability floor and the task's
-latency, tooling, and context requirements. Read `~/.agents/model-pricing.json` and
-reuse it within the session; reload after a successful explicit refresh or a detected
-snapshot change. Match the billing surface, speed mode, and units. Routine selection
-uses this local snapshot exclusively; cache age is provenance, not a refresh trigger.
-
-Estimate task cost from expected input, cache use, billable output (including
-reasoning), and likely retries. Prefer greater capability when expected cost is equal
-or lower and the configuration meets the same requirements. When evidence is
-incomplete, including missing or incompatible cached rates, state the uncertainty
-and use a suitable default.
-
-Name the selected model and effort and the cost basis for the recommendation.
-For an explicitly requested cache setup, repair, or refresh, read
-[pricing-cache.md](references/pricing-cache.md).
+Name model, effort, and cost basis. For explicit cache setup, repair, or refresh, read [pricing cache](references/pricing-cache.md).
 
 ## Justify escalation
 
-Any recommendation that pays more for greater capability or uses effort above middle
-names both the concrete unresolved question and the concrete consequence of deciding
-it incorrectly. Generic statements such as “crosses layers”, “touches authorization”,
-“requires care”, or “must preserve behavior” do not justify escalation. When either
-element is absent, choose the least expensive suitable configuration with at most
-middle effort.
+Paying more for capability or exceeding middle effort requires both a concrete unresolved question and concrete consequence of error. Generic risk claims are insufficient. If either is absent, choose the least expensive suitable configuration with at most middle effort.
 
-## Propagate the recommendation to execution
-
-Before creating a subagent or separate task, read
-[delegation.md](references/delegation.md) and apply its dispatch and disclosure rules.
+Before creating subagents or separate tasks, apply [delegation](references/delegation.md) dispatch and disclosure rules.
