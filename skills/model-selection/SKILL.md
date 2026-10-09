@@ -1,58 +1,51 @@
 ---
 name: model-selection
-description: Select models and reasoning effort for implementation, review, recommendations, or delegated agent work using required capability, cached costs, and unresolved reasoning.
+description: Select models and effort for implementation, review, recommendations, or delegation using capability, cached costs, and unresolved reasoning.
 ---
 
 # Model Selection
 
-Choose the lowest expected cost configuration that can reliably complete the assignment. Recommendations are starting points, not insurance against every complication.
+Choose the cheapest reliable configuration meeting latency, tooling, and context needs, subject to explicit user or role preferences. Resolve IDs, capabilities, and supported efforts live.
 
-Resolve model names, capabilities, and supported efforts from the live environment. Explicit user choices govern.
+Assess every assignment independently: deciders follow implementation criteria; judges/verifiers follow review criteria. Coordination or agreement sets no universal floor or discount.
 
-Select every assignment independently, including deciders, judges, and verifiers. Agent count or agreement alone justifies no capability or effort discount.
-
-For explicit ensemble cost/reliability comparisons or adoption supported by relevant confirmation data, read [ensemble](references/ensemble.md).
+Read [ensemble](references/ensemble.md) for explicit ensemble cost/reliability comparisons or adoption backed by relevant confirmation data.
 
 ## Classify the work
 
-Classify unresolved reasoning:
+- **Mechanical:** known edit and precedent, no design choice.
+- **Contained:** behavior, seam, precedent, and acceptance determine the solution.
+- **Judgment-heavy:** investigation or competing solutions remain.
+- **Frontier:** unresolved architecture/product choices risk silent, expensive downstream effects.
 
-- **Mechanical:** exact edit and precedent known; no meaningful design choice.
-- **Contained:** behavior, seam, prior art, and acceptance criteria determine the solution, even across files or layers.
-- **Judgment-heavy:** investigation or comparison between plausible solutions remains.
-- **Frontier:** an unresolved architecture or product decision could silently or expensively affect later work.
-
-Authorization, persistence, caching, public behavior, and file/layer/test counts affect verification and consequences; alone they justify neither judgment-heavy classification nor high effort.
+Authorization, persistence, caching, public behavior, and file/layer/test counts alone justify neither judgment-heavy classification nor high effort.
 
 ## Set the capability floor
 
-For implementation, mechanical work needs enough capability for the known edit; contained work needs balanced capability; judgment-heavy work needs strong workhorse capability. Highest capability requires an unresolved consequential decision whose errors would be silent, expensive, or propagate.
+Implementation: sufficient for mechanical edits; balanced for contained work; strong workhorse for judgment-heavy work; highest for consequential decisions risking silent, expensive, or propagating errors.
 
-For review, default to balanced capability. Use strong workhorse capability for subtle invariants; highest only when resolving or challenging a frontier decision, rather than verifying settled implementation.
+Review: balanced; strong workhorse for subtle invariants; highest for frontier decisions.
 
-Deciders use implementation criteria; judges and verifiers use review criteria. Classify each role's reasoning independently; a coordinator's recommendation sets no universal minimum.
+Opus 5.5: highest/frontier capability, with cheaper standard API rates than Opus 5, a strong workhorse. Capability sets neither effort nor cost.
 
 ## Choose effort
 
-Set effort from unresolved reasoning, independently of capability:
-
-- Lowest suitable: obvious edit or direct application of prior art.
-- Middle: contained implementation or review with settled decisions.
-- High: investigation, competing approaches, or subtle judgment.
-- Exceptional top: a frontier decision governing broader work.
+Independently: lowest for obvious edits/precedent; middle for settled, contained work; high for investigation, competing approaches, or subtle judgment; exceptional top for broader frontier decisions.
 
 ## Compare expected cost
 
-After setting capability and effort, compare configurations meeting latency, tooling, and context requirements.
+Reuse `~/.agents/model-pricing.json` exclusively for routine pricing; reload after explicit refresh or snapshot change. Age is provenance, not a refresh trigger. Match billing surface, speed, and units; API rates imply neither subscription costs nor dispatch availability.
 
-Read `~/.agents/model-pricing.json` and reuse it within the session. Reload after successful explicit refresh or detected snapshot change. Routine selection uses this local snapshot exclusively; age is provenance, not a refresh trigger. Match billing surface, speed mode, and units.
+Estimate input, cache, billable output/reasoning, and retries. Prefer higher capability at equal/lower cost. Disclose missing/incompatible rates or incomplete evidence; choose a suitable default. Name model, effort, and cost basis.
 
-Estimate input, cache use, billable output including reasoning, and retries. Prefer greater capability at equal or lower expected cost when other requirements are met. Missing or incompatible rates or incomplete evidence require stated uncertainty and a suitable default.
+Read [pricing cache](references/pricing-cache.md) for explicit setup, repair, or refresh.
 
-Name model, effort, and cost basis. For explicit cache setup, repair, or refresh, read [pricing cache](references/pricing-cache.md).
+## Recommend advisory
+
+For stalls, repeated errors, complex algorithms, or unresolved cross-layer interactions, use [advisory](../advisory/SKILL.md), which owns consultation triggers and model preference.
 
 ## Justify escalation
 
-Paying more for capability or exceeding middle effort requires both a concrete unresolved question and concrete consequence of error. Generic risk claims are insufficient. If either is absent, choose the least expensive suitable configuration with at most middle effort.
+Above-middle effort always requires an unresolved question and concrete error consequence; paying more requires both unless an explicit model preference applies. Otherwise use at most middle effort.
 
-Before creating subagents or separate tasks, apply [delegation](references/delegation.md) dispatch and disclosure rules.
+Before dispatch, apply [delegation](references/delegation.md).

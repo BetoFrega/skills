@@ -15,6 +15,8 @@ python3 scripts/pricing_cache.py show gpt-6.1-sol gpt-5.6-terra
 
 `show` performs no network requests and emits only matching cached rates, their
 provenance, and missing model names. Reuse the snapshot for child assignments.
+This command selects the Codex Standard card only. Read the JSON snapshot directly
+for other providers' cards.
 
 The initial source covers Codex Standard paid-credit rates. API charges, included
 subscription limits, other speed modes, and negotiated rates have separate billing
@@ -53,3 +55,12 @@ The built-in refresher writes `openai` / `codex_paid_credits` / `standard` /
 `credits_per_million_tokens`. Other cards can be maintained explicitly from their
 own authoritative sources. Availability, capability, and supported effort remain
 facts of the execution environment.
+
+The Anthropic `claude_api` / `standard` card uses `usd_per_million_tokens` and model
+IDs such as `claude-opus-5-5` and `claude-opus-5`. Maintain it explicitly from
+[Claude API pricing](https://platform.claude.com/docs/en/about-claude/pricing), with
+its own `checked_at`. `cached_input` is the cache-read price; optional
+`cache_write_5m` and `cache_write_1h` fields capture the distinct write rates.
+These are standard global API rates, not Claude subscription costs or Codex
+credits. Account for cache writes when estimating API costs. The built-in refresh
+preserves this card but does not update it.

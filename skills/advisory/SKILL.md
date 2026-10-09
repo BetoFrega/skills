@@ -1,24 +1,14 @@
 ---
 name: advisory
-description: Request a bounded second opinion from a subagent when independent judgment could materially improve a consequential decision, diagnosis, plan, or review. Select the advisory model and reasoning effort with model-selection.
+description: Consult for stalls, repeated errors, complex algorithms, unresolved cross-layer interactions, or consequential decisions, diagnoses, plans, and reviews.
 ---
 
 # Advisory
 
-You are authorized and encouraged to request one independent advisory subagent when
-its perspective could materially reduce uncertainty or expose a missed risk.
+Strongly recommend one independent advisor when another perspective can reduce uncertainty or reveal risk, especially for the description's triggers. Consultation is discretionary; layer count alone is insufficient. No per-call user approval is needed.
 
-Before dispatch, apply `model-selection` to the advisory assignment itself. Choose
-the least expensive reliable model and reasoning effort, and set both explicitly
-when the dispatch interface supports them.
+Apply [model-selection](../model-selection/SKILL.md). Prefer Opus 5.5 when available and compatible with tools/context, overriding lowest-cost selection. User choices govern; disclose fallback limitations. Select effort independently; set model/effort explicitly where supported.
 
-Give the advisor the unresolved question, relevant evidence, constraints, and the
-desired decision criteria. Keep the assignment consultative: the advisor investigates
-and recommends, while the primary agent retains ownership of the decision and all
-execution. Do not seed the advisor with the primary agent's preferred conclusion when
-an independent assessment is the point.
+Provide the unresolved question, evidence, constraints, and decision criteria without seeding a preferred conclusion when independence matters. The advisor investigates/recommends; the primary agent decides/executes.
 
-Evaluate the advice against the available evidence. Incorporate useful findings and
-surface material disagreement or decision-changing risk to the user. Advisory does
-not expand the task's scope or authorize mutations, external actions, or further
-delegation.
+Evaluate advice against evidence, incorporate useful findings, and surface material disagreement or decision-changing risk. Consultation authorizes no scope expansion, mutations, external actions, or further delegation.
