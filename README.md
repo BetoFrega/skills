@@ -94,6 +94,7 @@ permission.
 | --- | --- |
 | Confirmed knowledge is scattered across conversations and records | [consolidate](skills/consolidate/SKILL.md): maintain canonical behavior, rules, decisions, increments, and evidence. |
 | The selected outcome needs delivery cuts and tickets | [plan-increment](skills/plan-increment/SKILL.md): usable vertical slices, acceptance, dependencies, and executable work. |
+| A plan has speculative abstractions or unnecessary phases | [simplify-plan](skills/simplify-plan/SKILL.md): a smaller executable plan using YAGNI, Last Responsible Moment, and proportional SOLID. |
 | The change is a migration | [migration-planning](skills/migration-planning/SKILL.md): plan the transition and its operational constraints. |
 | An incoming issue or external PR needs classification and readiness | [triage](skills/triage/SKILL.md): verify the report and develop an agent-ready brief through the configured workflow. |
 
