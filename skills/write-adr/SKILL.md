@@ -38,7 +38,8 @@ Inspect code/sources affecting reasoning. Distinguish facts, assumptions, intent
 unknowns; code proves implementation, not approval. Invent no evidence, alternatives,
 or results.
 
-Read [ADR-FORMAT.md](ADR-FORMAT.md) for drafting/review; adapt to project format.
+Apply [writing-for-agents](../writing-for-agents/SKILL.md) when drafting and reviewing
+the record. Read [ADR-FORMAT.md](ADR-FORMAT.md); adapt to project format.
 Unresolved acceptance yields a reviewable proposal. Ask for a missing choice only if
 an accurate draft requires it; reuse session authorization for documentation edits.
 
@@ -55,6 +56,11 @@ once accepted under project conventions, mark the earlier record superseded and 
 both ways. Deprecation without replacement records its reason.
 
 ## Verify and report
+
+Before delivery, check that each passage adds necessary context, the choice,
+rationale, or consequences. Remove repetition and generic explanations; link to
+code, specs, or tickets for details they already govern. Preserve the reasoning
+needed to understand the decision without reconstructing it from those sources.
 
 Apply [local document delivery](../consolidate/references/local-document-delivery.md)
 for local changes. Read back required content, evidence/assumptions, approval/status,
