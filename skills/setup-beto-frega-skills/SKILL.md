@@ -36,6 +36,8 @@ Obtain approval before writing, including edits to existing configuration.
 
 ## 4. Write and verify
 
-Apply approved changes only. Read back labels; verify references, discovery, project accuracy, relative global symlinks, policy loading through every configured agent, and idempotence. For external-only setup, verify the repository stayed untouched.
+Apply approved changes only. Reconcile the communication policy in existing globals,
+including replacement of superseded concision guidance; preserve unrelated rules.
+Read back labels; verify references, discovery, project accuracy, relative global symlinks, policy loading through every configured agent, and idempotence. For external-only setup, verify the repository stayed untouched.
 
 Report changed files, consumers, and [delivery state](../consolidate/references/local-document-delivery.md). Rerun setup only for gaps or intentional revisions.

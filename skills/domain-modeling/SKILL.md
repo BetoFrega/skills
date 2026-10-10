@@ -31,6 +31,11 @@ Propose precise canonical terms for vague or overloaded words.
 ### Discuss concrete scenarios
 
 Stress-test relationships and concept boundaries with specific edge-case scenarios.
+Explain how proposed terms and relationships change responsibilities, rules, and
+behavior. For consequential domain/product choices, compare viable alternatives
+through [recommend](../recommend/SKILL.md) and obtain the user's decision before
+adopting them; prior approval remains valid within scope. Glossary edits capture
+settled meaning rather than silently settling policy.
 
 ### Cross-reference with code
 

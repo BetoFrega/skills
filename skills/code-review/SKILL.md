@@ -134,3 +134,9 @@ Apply review-triage to validate dispositions and verify resolutions/required tic
 within active authorization. Group by classification, retaining axes and distinct
 aspects of shared issues. Preserve reviewer meaning; clean wording lightly.
 Report counts, approval readiness, outstanding actions, and activation gates.
+Explain consequential findings in conversation: affected behavior/responsibility,
+causal mechanism, impact, and evidence limits, even when all review was delegated.
+Separate observed implementation from documented intent or inferred rationale.
+Bring resolutions requiring new consequential domain/product/design choices through
+[recommend](../recommend/SKILL.md) before adoption; review readiness is not user approval
+of those choices. Keep routine corrections within existing authorization.

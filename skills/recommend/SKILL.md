@@ -37,4 +37,8 @@ choice whose advantages outweigh its disadvantages for this user.
 Lead with the supported recommendation and a compact table or equivalent comparison.
 Explain why it beats the strongest alternative and which changed assumptions or
 conditions would reverse it. Use qualitative judgment unless evidence supports
-quantification. Finish when no decisive gap remains; user acceptance is separate.
+quantification. Make consequential domain, product, architecture, and code-design
+choices assessable in conversation: explain affected behavior/responsibilities and
+implications without assuming the user read linked artifacts. Describe actual options
+and rationale; do not invent retrospective alternatives. Finish when no decisive gap
+remains; adoption awaits the user's decision unless already explicitly approved.

@@ -5,8 +5,13 @@ disable-model-invocation: true
 ---
 
 Deliver the whole spec on one PR branch. Tickets form a dependency graph; dispatch
-its ready frontier with maximum background concurrency. Communicate sparsely through
-pointers to specs, tickets, research, and commits instead of duplicating them.
+its ready frontier with maximum background concurrency.
+
+Keep the user oriented through substantive conversational explanations of consequential
+choices, responsibility/behavior changes, and verification limits. Links supplement
+that context; do not assume the user read the spec or delegated reviews. Bring
+unresolved consequential choices and deviations through [recommend](../recommend/SKILL.md)
+before adoption; reuse approved choices and keep routine execution autonomous.
 
 ## Steps
 

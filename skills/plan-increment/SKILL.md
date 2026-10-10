@@ -40,7 +40,9 @@ Consolidate accepted increment definitions through the canonical writer, then li
 to those records. Routine implementation choices can remain for execution.
 
 Present the proposed cuts and work graph concisely: usable result or expected output,
-acceptance, blocking edges, and relevant exposure controls. Obtain unresolved scope or
+acceptance, blocking edges, and relevant exposure controls. Explain consequential
+product/domain choices, actual cut criteria, and consequences in conversation;
+links do not replace decision-essential context. Obtain unresolved scope or
 breakdown decisions before publication; existing approval of the same workset is
 sufficient. Publication and execution stay within the user's applicable authority.
 

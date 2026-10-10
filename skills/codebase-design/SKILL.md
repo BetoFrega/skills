@@ -7,6 +7,12 @@ description: Shared vocabulary for designing deep modules. Use when the user wan
 
 Design deep modules: substantial behaviour behind a small interface, with leverage for callers, locality for maintainers, and testability.
 
+Explain proposed responsibility placement, caller behavior, and consequences in
+conversation; assume technical fluency, not familiarity with this code. Compare
+consequential interface/seam choices through [recommend](../recommend/SKILL.md) before
+adoption, using actual criteria and tradeoffs. Reuse approved choices; routine
+implementation details stay autonomous. Do not invent retrospective alternatives.
+
 ## Vocabulary
 
 Use these terms exactly; avoid unit/component/service, API/signature, and boundary:

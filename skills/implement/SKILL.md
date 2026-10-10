@@ -10,6 +10,13 @@ functionality, shared-rule, decision, and scenario links; surface conflicts or
 unresolved policy. Ticket readiness does not establish product approval. Carry the
 configuration entry and affected record references into delegated work.
 
+Explain the intended behavior and responsibility changes in conversation without
+assuming the user read the spec. Bring unresolved consequential domain, product, or
+code-design choices and discovered deviations through [recommend](../recommend/SKILL.md)
+before implementing them; reuse approvals and continue routine work within them.
+At delivery, explain resulting behavior, actual rationale, consequences, and what
+verification establishes or leaves uncertain. Keep detail proportional to significance.
+
 Use [tdd](../tdd/SKILL.md) where possible, at pre-agreed seams. Run typechecking and
 single test files regularly, then the full suite once at the end. Finish with
 [code-review](../code-review/SKILL.md).
