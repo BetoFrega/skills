@@ -86,6 +86,12 @@ classification and feature-isolation evidence requirements in full. Require:
   pass lists, or speculative hardening;
 - findings, `No findings`, or `N/A — <evidence-backed reason>`.
 
+For runner, gate, or diagnostic changes, give Spec and Observability reviewers the
+canonical repository command, its effective configuration, and observed output.
+Verify required behavior through that command; probes with overridden configuration
+qualify only the fixture. If canonical evidence is missing, report that gap rather
+than infer compliance from passing probes.
+
 ### Standards reviewer
 
 Provide all standards and paste the smell baseline in full. Cite file and controlling
