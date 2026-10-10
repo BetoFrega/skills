@@ -1,28 +1,21 @@
 ---
 name: implement
-description: "Implement a piece of work based on a spec or set of tickets."
+description: Implement selected work from a spec or tickets.
 disable-model-invocation: true
 ---
 
-Implement the work described by the user in the spec or tickets.
+For product work, read affected canonical contracts through
+[consolidate](../consolidate/SKILL.md), including external configuration. Preserve
+functionality, shared-rule, decision, and scenario links; surface conflicts or
+unresolved policy. Ticket readiness does not establish product approval. Carry the
+configuration entry and affected record references into delegated work.
 
-For product behavior, read the affected canonical contracts through
-[consolidate](../consolidate/SKILL.md), including project-scoped
-external configuration. Preserve links from the work to functionalities, shared rules,
-decisions, and scenarios. Surface conflicts or unresolved policy rather than treating
-ticket readiness as product approval.
+Use [tdd](../tdd/SKILL.md) where possible, at pre-agreed seams. Run typechecking and
+single test files regularly, then the full suite once at the end. Finish with
+[code-review](../code-review/SKILL.md).
 
-Use /tdd where possible, at pre-agreed seams.
-
-Run typechecking regularly, single test files regularly, and the full test suite once at the end.
-
-Once done, use /code-review to review the work.
-
-Reconcile affected product records through `consolidate` after relevant
-implementation, deployment, or release actions. Record supported observations and
-verification gaps for each dimension; preserve release and operational flag authority.
-Carry the configuration entry and affected record references into delegated work.
-
-Commit your work to the current branch.
-
-When reporting completed implementation or full ticket delivery, use [next steps](../next-steps/SKILL.md) to explain remaining delivery work or recommend the next ticket.
+After relevant implementation, deployment, or release actions, reconcile affected
+product records through consolidate: supported observations and verification gaps
+for each dimension, preserving release/operational flag authority. Commit the work to the current branch.
+Report remaining delivery work or the next ticket through
+[next steps](../next-steps/SKILL.md).

@@ -1,93 +1,71 @@
 # Reconcile delivery, exposure, and flags
 
-Read this during related implementation, deployment, and release work, for periodic
-maintenance, or when records disagree with observed behavior. Setup supplies sources,
-representation, update triggers, cadence, responsibility, and permitted operations.
-
-For a functionality delivered in increments, read [delivery slices](delivery-slices.md)
-and reconcile the affected slices as well as the functionality. Preserve audience and
-scenario coverage when deriving the feature's state from partial delivery.
+Read for implementation/deployment/release maintenance, periodic reconciliation, or
+drift. Setup owns sources, representation, triggers, cadence, responsibility, and
+permitted operations. For incremental delivery, read [delivery slices](delivery-slices.md)
+and reconcile slices plus feature while retaining audience/scenario coverage.
 
 ## Independent dimensions
 
-| Dimension | Evidence it records |
+| Dimension | Evidence |
 | --- | --- |
-| Implementation | Constructed behavior, validated scenarios, relevant revision, and coverage gaps. |
-| Deployment | Presence of that change in a named environment, from provider or equivalent evidence. |
-| Authorized release | Approved audiences, conditions, rollout bounds, and advancement or reversal criteria. |
-| Observed exposure | Availability and relevant behavior for particular audiences and conditions, with actual verification coverage. |
-| Flag observations | Control identity, environment, evaluated targeting/configuration, source, observation time, and related functionalities. |
+| Implementation | Constructed behavior, validated scenarios, revision, and coverage gaps. |
+| Deployment | Presence in a named environment, with provider/equivalent evidence. |
+| Authorized release | Approved audiences, conditions, rollout bounds, advancement/reversal criteria. |
+| Observed exposure | Verified audience availability/behavior and actual coverage. |
+| Flag observations | Control identity, environment, evaluated targeting/configuration, source/time, feature relationships. |
 
-Adapt status vocabulary while keeping these dimensions independently accessible.
-A green test does not prove deployment; deployment does not establish release
-authority. A release plan describes intended exposure. Flag targeting describes
-control configuration; verification of an audience's behavior supports actual
-availability and correctness. Provider terminology does not collapse these meanings.
+Keep dimensions independent regardless of provider vocabulary. Tests do not prove
+deployment; deployment does not authorize release. Release plans describe intent;
+targeting describes configuration; audience behavior verifies availability/correctness.
 
-Map control relationships from actual implementation and evaluation paths. Several
-flags may gate one functionality, and one flag may affect several functionalities.
-Include material prerequisites, conditions, environments, and identity/cohort rules.
-A configured percentage is a targeting parameter, not a measured share of users who
-experienced the functionality. Verify actual flag evaluation and relevant behavior
-before drawing audience availability conclusions.
+Map actual implementation/evaluation paths: multiple controls may gate one feature,
+one control may affect several. Retain prerequisites, conditions, environments, and
+identity/cohort rules. Target percentages are configuration, not measured user exposure.
+Verify evaluation and behavior before claiming audience availability.
 
 ## Reconciliation workflow
 
-1. **Locate authority and coverage.** Read affected records, governing product decisions,
-   release plans, and configured sources. For a shared control or rule, identify all
-   affected functionalities and slices. Complete when the relevant records, dimensions,
-   audiences, sources, and existing authorization are identified; keep unresolved scope explicit.
-2. **Observe.** Inspect code and meaningful verification evidence, deployed revisions,
-   release authority, flag configuration/evaluation, and actual audience behavior as
-   relevant. Capture source, observation time, environment, identity/audience context,
-   revision where available, and coverage. Complete when each relevant source has a
-   dated observation or an identified access gap. Preserve the time of earlier evidence
-   when a source cannot be refreshed; identify its current staleness or uncertainty.
-3. **Reconcile.** Update each supported dimension in the configured representation.
-   Retain approved behavior and record implementation discrepancies. Distinguish an
-   external flag change from an approved release change; record unauthorized or
-   unexplained drift for the appropriate authority. A lifecycle label that mixes
-   dimensions needs supporting fields or an explicit representation gap. Complete when
-   each affected record, dimension, and audience has a supported update or named gap.
-4. **Read back.** Verify consolidated observations and links in the canonical
-   destination. Complete with a verified change set; report partial, draft-only, or
-   unverifiable effects separately, including the records and sources still unresolved.
+1. **Locate authority/coverage.** Read records, decisions, release plans, and sources.
+   Identify all functionalities/slices affected by shared controls/rules, relevant
+   dimensions/audiences, scope, and existing authority; name unresolved scope.
+2. **Observe.** Inspect relevant code/verification, deployed revisions, release authority,
+   flag configuration/evaluation, and audience behavior. Each source needs a dated
+   observation or access gap, with environment, identity/audience, available revision,
+   and coverage. Preserve earlier dates when refresh fails; mark staleness/uncertainty.
+3. **Reconcile.** Each affected record/dimension/audience gets a supported update or gap.
+   Retain approved contracts and report implementation discrepancies. Separate external
+   flag changes from release approval; record unexplained/unauthorized drift. Mixed
+   lifecycle statuses need supporting fields or a representation gap.
+4. **Read back.** Verify consolidated canonical observations/links. Report partial,
+   draft-only, or unverifiable effects with affected records and unresolved sources.
 
-Do not interpret missing access or an empty result with incomplete query coverage as
-absence of deployment, exposure, or a flag. Preserve contradictory observations with
-their time and scope rather than select a convenient source silently.
+Missing access/incomplete empty queries prove no absence of deployment, exposure, or
+controls. Preserve conflicting observations with time/scope rather than silently
+choosing a source.
 
 ## Operational flag changes
 
-When the task requests flag operations, read the authorized release plan and existing
-session authorization. Resolve the target control, environment, audiences, bounds,
-advancement/reversal conditions, current state, and related functionalities. Verify
-that the requested operation is within that authority and that the actual provider
-operation is available. Ask for authority only for unresolved scope or changes beyond
-it; preserve prior authorization for the same scope.
+For requested operations, resolve release plan/session authority, actual control,
+environment/audiences, bounds, advancement/reversal criteria, current state, and related
+features. Verify provider capability and scope; ask only for unresolved or additional
+authority, preserving prior approval.
 
-Perform the authorized change using the configured provider workflow. Read back its
-actual configuration and evaluate the relevant audience behavior according to the
-plan's verification criteria. Record intended scope, observed state, coverage, and any
-remaining gap. A failed or uncertain operation needs readback before another mutation;
-follow provider recovery rules and report unresolved effects without assuming success.
-Use an authorized reversal only when its agreed conditions apply.
+Perform authorized operations through provider workflow. Read back configuration and
+evaluate audience behavior against plan criteria; record intended scope, observed state,
+coverage, and gaps. Failed/uncertain writes require readback before another mutation
+and provider recovery rules. Reverse only within agreed authority and conditions.
 
-Reconciliation alone authorizes documentation within its scope, not a new operational
-flag change. A drift observation can require a release decision rather than an
-automatic attempt to make the provider match an old record.
+Reconciliation alone authorizes documentation within scope, not flag operations.
+Drift can require a release decision rather than automatic restoration to old records.
 
 ## Ongoing maintenance
 
-Related implementation, deployment, and release tasks invoke reconciliation for their
-affected records and carry its configuration references to delegated agents. Periodic
-reconciliation follows the cadence and sources configured for the product, covering
-external changes and missed events. Its completion criteria are the same as event
-maintenance, with query and audience coverage recorded.
+Invoke reconciliation from related delivery work and carry configuration references
+into delegation. Periodic work follows configured cadence/sources, including external
+changes and missed events, with the same completion/query/audience coverage criteria.
 
-Use an actual scheduler only when recurring operation is requested or already
-authorized and a verified mechanism exists. Include project binding, configuration
-entry, sources, scope, and permitted writes in its task. Keep observation and
-documentation maintenance distinct from authority for operational flags. Report a
-configured cadence as a plan until the recurring mechanism is created and verified;
-ordinary skill installation does not activate maintenance.
+Create an actual scheduler only for requested/already-authorized recurrence with a
+verified mechanism. Carry project binding, configuration entry, sources, scope, and
+permitted writes. Maintenance grants no flag authority. Cadence stays planned until
+mechanism creation/readback; skill installation activates no recurring work.

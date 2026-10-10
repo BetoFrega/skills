@@ -1,39 +1,64 @@
 ---
 name: ship-main
-description: Fix validation failures, complete automatic review cycles, triage findings, and deliver the current task's changes to main.
+description: Deliver current-task changes to main with validation, automatic reviews, and finding triage.
 ---
 
 # Ship Main
 
-Treat this explicit invocation as authorization to commit and integrate the current task's changes into the repository's main branch and push it. Identify the repository and intended changes from context; clarify only if either is ambiguous.
+Explicit invocation authorizes committing, integrating, and pushing the current task
+through the repository's permitted main delivery route, including a required PR/merge.
+Resolve repository/scope from context; clarify only ambiguity. Preserve unrelated
+work, inspect live remote/local state, validate the intended diff, commit only task
+changes, and integrate against current remote main without rewriting shared history.
 
-Inspect current remote state and local changes, preserve unrelated work, and run checks appropriate to the intended diff. Commit only the task's changes, integrate against current remote main without rewriting shared history, and push through the repository's permitted delivery route, creating or updating a pull request and merging it when required.
+Complete in-scope validation/CI fixes, actionable feedback, and routine conflicts;
+rerun affected checks. Failed checks or requested revisions are work to resolve.
 
-Carry delivery through to completion: diagnose and fix validation or CI failures within scope, address actionable review feedback, resolve routine integration conflicts, and rerun affected checks after changes. Treat a failed check or requested revision as work to complete, not an automatic stopping condition.
+## Automatic reviews and merge gate
 
-When delivery uses a pull request, move it out of draft when ready for review. Inspect repository review configuration and live PR evidence to determine which automatic reviews opening, marking ready, or updating it triggered or should trigger. Check review requests, check runs/statuses, submitted reviews, and reviewer comments; consult the review provider when its state is not exposed on the PR. Establish whether each expected review started and completed for the current review target. Passing CI, no comments, or no pending review request does not prove automatic reviews are complete. A missing expected result or failed/cancelled review keeps readiness pending; investigate and retry within scope.
+For PR delivery, mark ready when reviewable. Inspect repository configuration and live
+PR/provider evidence for reviews expected or triggered by opening, marking ready,
+and updates: requests, checks/statuses, submitted reviews, comments, and provider state
+when the PR lacks it. Establish startup and completion for the current review target.
+Passing CI, silence, and no pending request do not prove completed reviews. Missing,
+failed, or cancelled expected reviews keep readiness pending; investigate/retry.
 
-Review startup can lag the triggering event. Cover at least the first 30 seconds after each potential trigger, refreshing review activity roughly every 10 seconds and once at the end; extend this window for known provider delays. An empty initial response is not evidence that no review was triggered. This window discovers new reviews; it is not a completion timeout and cannot clear an expected review with a missing result. Only after this discovery window, if no automatic reviews are configured or observed, follow the repository's normal review requirements.
+After each potential trigger, cover at least 30 seconds, refreshing roughly every
+10 seconds and at the end; extend for known provider delays. This discovers reviews,
+not a completion timeout. Initial emptiness clears nothing. Only after this window,
+if no reviews are configured or observed, follow normal repository review requirements.
 
-Read PR-level comments, submitted review bodies, and inline review threads, including bot feedback outside required checks. Wait for queued or running reviews to finish, then apply [review-triage](../review-triage/SKILL.md) to every finding. Verify fixes, evidence-backed dismissals, and any permitted deferral with its required verified tickets and activation gates. Merge remains pending until triage reports **Ready for approval** for the full intended scope at the current head and target base, and the repository's other merge requirements are satisfied.
+Read PR comments, review bodies, and inline threads, including bot feedback outside
+required checks. Wait for queued/running reviews, then apply
+[review-triage](../review-triage/SKILL.md) to every finding: verified fixes,
+evidence-backed dismissals, or permitted verified-ticket deferrals and activation gates.
+Merge stays pending until **Ready for approval** covers the full scope, current head,
+and target base, with other repository requirements satisfied.
 
-After every correction push, rebase, or target-base change, rediscover automatic review activity and repeat the wait, read, triage, fix, and validation cycle. Corrections can trigger new reviews; earlier completion does not clear new runs or findings, and earlier findings still need verified disposition. If automation does not rerun, obtain the review coverage needed for the changed target under that triage process. Immediately before merging, re-read the current review target, checks, review activity, and comments. Merge only the verified head with no outstanding expected review or unaddressed finding under triage; if the target changes, repeat the gate. Do not enable auto-merge before this gate is satisfied.
+After correction pushes, rebases, or base changes, repeat discovery, wait, read,
+triage, fix, and validation. Earlier findings retain verified dispositions; earlier
+review completion does not clear new runs/findings. If automation does not rerun,
+obtain changed-target coverage under triage. Immediately before merge, reread target,
+checks, reviews, and comments. Merge only the verified head, with no outstanding
+expected review or unaddressed finding; target changes reopen the gate. Enable
+auto-merge only after this gate passes.
 
-Pause only when progress requires unavailable access, an external dependency, a substantive user decision, or changes beyond the authorized task. First exhaust safe remedies within scope; if attempts cease making progress, report the specific blocker, attempted remedies, and the smallest action needed to resume. Honor repository protections and required checks throughout.
+## Complete delivery
 
-Confirm the remote main revision and report the delivered commit and validation. This invocation does not authorize deployment, publication beyond the Git delivery, bypassing protections, or archival.
+Pause only for unavailable access, external dependencies, substantive user decisions,
+or out-of-scope changes. Exhaust safe in-scope remedies first; when progress stops,
+report blocker, attempts, and smallest resume action. Honor protections/required checks.
 
-When this task changes product behavior, reconcile affected product records through
-[consolidate](../consolidate/SKILL.md) within the task's existing
-documentation authority. Use the verified revision and supported observations;
-Git delivery alone does not establish deployment or audience exposure. Account for
-remaining documentation gaps in the delivery report.
+Confirm remote main revision; report commit and validation. Deployment, publication
+beyond Git delivery, protection bypass, and archival require separate authority.
 
-At the final delivery checkpoint, use [next steps](../next-steps/SKILL.md) to identify
-remaining requirements, learning-review triggers, and ready successor work. When
-meaningful learning or a configured review point warrants it, explicitly recommend
-[review-learnings](../review-learnings/SKILL.md), naming the evidence and bounded scope
-to review. Continue authorized delivery before reporting; subsequent recommendations
-retain their own scope.
-Apply [artifact links](../consolidate/references/artifact-links.md) to documents and
-tickets cited in the delivery report or review recommendation.
+For product changes, reconcile records through [consolidate](../consolidate/SKILL.md)
+within existing documentation authority. Record supported revision/observations and
+remaining gaps; Git delivery proves neither deployment nor audience exposure.
+
+At final checkpoint, use [next steps](../next-steps/SKILL.md) for remaining requirements,
+learning-review triggers, and ready successors. When meaningful learning or a configured
+review point warrants it, explicitly recommend [review-learnings](../review-learnings/SKILL.md)
+with evidence and bounded scope. Complete authorized delivery before reporting;
+recommendations retain their own scope. Apply
+[artifact links](../consolidate/references/artifact-links.md) to cited documents/tickets.

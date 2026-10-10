@@ -1,32 +1,28 @@
 ---
 name: grilling
-description: Clarify and stress-test a selected plan, decision, idea, or product increment through scoped interview rounds. Use when the user asks for grilling or wants consequential uncertainty resolved.
+description: Clarify and stress-test a selected plan, decision, idea, or product increment through scoped interview rounds. Use for grilling or consequential uncertainty.
 ---
 
-Clarify the user's selected goal until there is enough shared knowledge for its next
-deliverable. Establish that deliverable and the current scope from the conversation;
-ask only when they are missing. Map the scoped decisions as a **design tree**.
+Establish the selected goal, scope, and next deliverable from conversation; ask only
+if missing. Map its decisions as a **design tree**. For product questions, first read
+[product increments](references/product-increments.md): canonical context, slice
+sufficiency, and discovery handoff. Retain settled choices; leave future branches deferred.
 
-For product discussions, read [product increments](references/product-increments.md)
-before the first product question. It owns canonical context, the slice-sufficiency
-check, and the discovery handoff. Retain settled choices; ask about the consequential
-uncertainty for the selected scope rather than every possible future branch.
+Work in **rounds**. The **frontier** contains questions whose prerequisites are settled.
+Ask **one question per round by default**, prioritizing the decision that shapes the
+tree most. Group only when every recommendation is supported by known facts and settled
+preferences, clearly preferable, and likely to require just one simple “OK.” Independence
+alone does not make answers obvious; confidence alone does not remove user effort.
+Questions requiring comparison, reflection, missing context, or meaningful tradeoffs
+stay in separate rounds. Leave unasked frontier questions pending.
 
-Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet.
+Number questions; use [recommend](../recommend/SKILL.md) for alternatives, pros/cons,
+comparison, and supported recommendations. Resolve decisive prerequisites before
+recommending dependent choices. Try for **at least three distinct viable alternatives**
+with their main tradeoffs; explain when fewer exist and allow another answer. Include
+the recommendation only when evidence and settled preferences support it.
 
-Ask **one question per round by default**, prioritizing the decision that most shapes the remaining tree. Group questions only when **every** recommendation in the group is supported by known facts and settled user preferences, is clearly preferable to the alternatives, and is likely to need only a simple "OK" from the user for the entire group. Independence makes questions ready; it does not make their answers obvious. Confidence in your recommendation alone is insufficient: judge how much thought the user needs to give it.
-
-Keep any question that needs comparison, reflection, missing context, or a meaningful tradeoff in its own round, even when other ready questions qualify for grouping. Leave unasked frontier questions pending. Number each question, give your recommended answer when supported, and wait for the user's response before the next round. An expected "OK" is not approval; only the user's actual answer settles decisions.
-
-Use [recommend](../recommend/SKILL.md) to prepare each question's alternatives,
-pros and cons, comparison, and recommendation. Apply its decisive-gap checks within
-this skill's frontier and round rules: ask about an unresolved prerequisite before
-recommending choices that depend on it. Include the recommendation block below only
-when supported by the available evidence and settled preferences.
-
-For every question, try to offer **at least three distinct, viable alternatives**. Briefly explain each option's main tradeoff and identify your recommendation. Ground the options in known facts and settled prerequisites. When fewer than three viable alternatives exist, present those available and briefly explain the limitation. Let the user propose a different answer.
-
-Format each question like so; repeat the block only for a qualifying group:
+Use this format; repeat only for a qualifying group:
 
 ```
 ❓ **Q1** - **<question title>**: <question body>
@@ -38,13 +34,16 @@ C. <alternative and main tradeoff>
 💡 <recommended alternative and reason>
 ```
 
-Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
+Wait for the user's actual response before the next round; expected “OK” is not
+approval. Recompute the frontier after answers. Questions depending on another open
+question belong to a later round.
 
-Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, etc.), dispatch a sub-agent to find it; don't ask the user for anything you could look up yourself. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report; select the next round from the remaining frontier using the grouping rule above. The _decisions_ are the user's: put each to them and wait.
+Find discoverable facts yourself: dispatch a subagent for environmental investigation
+instead of asking the user. A running investigation is an unsettled prerequisite;
+continue independent frontier questions and wait only for dependent ones. Users own
+decisions, which require their responses.
 
-Propose closure when the selected deliverable's knowledge requirements are met.
-Explain the supported result and consequential gaps. The user can accept, refine the
-current scope, or explicitly extend it. Keep later branches explicitly deferred;
-their existence does not prevent closure. Reuse an existing confirmation of this
-scope. On accepted closure, pass the settled choices, references, and remaining gaps
-to the next workflow within the existing authorization.
+Propose closure when this deliverable's knowledge requirements are met; show the
+supported result and consequential gaps. The user may accept, refine, or extend scope.
+Deferred branches do not prevent closure. Reuse existing scope confirmation; on accepted
+closure hand off settled choices, references, and gaps within existing authorization.

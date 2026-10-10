@@ -1,105 +1,61 @@
 # Out-of-Scope Knowledge Base
 
-The `.out-of-scope/` directory in a repo stores persistent records of rejected feature requests. It serves two purposes:
-
-1. **Institutional memory**: why a feature was rejected, so the reasoning isn't lost when the issue is closed
-2. **Deduplication**: when a new issue comes in that matches a prior rejection, the skill can surface the previous decision instead of re-litigating it
+The repository's `.out-of-scope/` records durable rejected feature concepts for
+institutional memory and deduplication.
 
 ## Directory structure
 
-```
-.out-of-scope/
-├── dark-mode.md
-├── plugin-system.md
-└── graphql-api.md
-```
-
-One file per **concept**, not per issue. Multiple issues requesting the same thing are grouped under one file.
+Use one short kebab-case file per concept, such as `.out-of-scope/dark-mode.md`.
+Group equivalent issue and PR requests together rather than creating a file per item.
 
 ## File format
 
-The file should be written in a relaxed, readable style, more like a short design document than a database entry. Use paragraphs, code samples, and examples to make the reasoning clear and useful to someone encountering it for the first time.
+Write a readable short design document: concept decision, substantive durable reason,
+and linked prior requests. Use paragraphs, examples, or code when they clarify the
+reason; this is not a database entry.
 
 ```markdown
-# Dark Mode
+# <Concept>
 
-This project does not support dark mode or user-facing theming.
+<Decision and scope.>
 
 ## Why this is out of scope
 
-The rendering pipeline assumes a single color palette defined in
-`ThemeConfig`. Supporting multiple themes would require:
-
-- A theme context provider wrapping the entire component tree
-- Per-component theme-aware style resolution
-- A persistence layer for user theme preferences
-
-This is a significant architectural change that doesn't align with the
-project's focus on content authoring. Theming is a concern for downstream
-consumers who embed or redistribute the output.
-
-```ts
-// The current ThemeConfig interface is not designed for runtime switching:
-interface ThemeConfig {
-  colors: ColorPalette; // single palette, resolved at build time
-  fonts: FontStack;
-}
-```
+<Reason grounded in project scope, technical constraints, or strategic decisions.>
 
 ## Prior requests
 
-- #42: "Add dark mode support"
-- #87: "Night theme for accessibility"
-- #134: "Dark theme option"
+- [<Issue or PR identifier>](<verified URL>): <request summary>
 ```
 
 ### Naming the file
 
-Use a short, descriptive kebab-case name for the concept: `dark-mode.md`, `plugin-system.md`, `graphql-api.md`. The name should be recognizable enough that someone browsing the directory understands what was rejected without opening the file.
+Choose a recognizable concept name, such as `dark-mode.md` or `plugin-system.md`.
 
 ### Writing the reason
 
-The reason should be substantive: not "we don't want this" but why. Good reasons reference:
-
-- Project scope or philosophy ("This project focuses on X; theming is a downstream concern")
-- Technical constraints ("Supporting this would require Y, which conflicts with our Z architecture")
-- Strategic decisions ("We chose to use A instead of B because...")
-
-The reason should be durable. Avoid referencing temporary circumstances ("we're too busy right now"); those aren't real rejections, they're deferrals.
+Explain why the feature conflicts with project scope, technical constraints, or
+strategy. Temporary workload is a deferral, not a durable rejection.
 
 ## When to check `.out-of-scope/`
 
-During triage (Step 1: Gather context), read all files in `.out-of-scope/`. When evaluating a new issue:
-
-- Check if the request matches an existing out-of-scope concept
-- Matching is by concept similarity, not keyword: "night theme" matches `dark-mode.md`
-- If there's a match, surface it to the maintainer: "This is similar to `.out-of-scope/dark-mode.md`. We rejected this before because [reason]. Do you still feel the same way?"
-
-The maintainer may:
-
-- **Confirm**: the new issue gets added to the existing file's "Prior requests" list, then closed
-- **Reconsider**: the out-of-scope file gets deleted or updated, and the issue proceeds through normal triage
-- **Disagree**: the issues are related but distinct, proceed with normal triage
+During triage's initial context gathering, read every file and match by concept,
+not keywords: “night theme” may match `dark-mode.md`. Present the prior decision and
+reason to the maintainer, who can confirm, reconsider, or distinguish the request.
+Confirmation appends the linked request and closes it; distinct requests continue
+normal triage.
 
 ## When to write to `.out-of-scope/`
 
-Only when an **enhancement** (not a bug) is *rejected* as `wontfix`. This applies to enhancement PRs exactly as it does to issues: a rejected PR is recorded here so the same request doesn't return as fresh code.
+Only rejected enhancements marked `wontfix`, including enhancement PRs. Bugs and
+already-implemented requests do not belong here; link the existing implementation
+in the closing comment instead.
 
-Do **not** write here when something is closed as `wontfix` because it's **already implemented**. That's a built feature, not a rejected one; recording it would poison the dedup checks with false rejections. Instead, the closing comment points to where the feature already lives.
-
-The flow:
-
-1. Maintainer decides a feature request is out of scope
-2. Check if a matching `.out-of-scope/` file already exists
-3. If yes: append the new issue to the "Prior requests" list
-4. If no: create a new file with the concept name, decision, reason, and first prior request
-5. Post a comment on the issue explaining the decision and mentioning the `.out-of-scope/` file
-6. Close the issue with the `wontfix` label
+After the maintainer rejects an enhancement, append it to the matching concept's
+prior requests or create its decision/reason/request record. Post the decision and
+record link, then close the item with `wontfix`.
 
 ## Updating or removing out-of-scope files
 
-If the maintainer changes their mind about a previously rejected concept:
-
-- Delete the `.out-of-scope/` file
-- The skill does not need to reopen old issues; they're historical records
-- The new issue that triggered the reconsideration proceeds through normal triage
+When the maintainer reconsiders, update or delete the concept record and continue
+normal triage for the triggering item. Historical issues need not be reopened.

@@ -1,111 +1,84 @@
 ---
 name: orchestrate
-description: Orchestrate an explicit GitHub ticket workset through parallel Codex tasks.
+description: Advance an explicitly selected GitHub ticket workset through parallel Codex tasks.
 ---
 
 # Orchestrate
 
-Advance a GitHub ticket workset to `main`. Invocation authorizes creating Codex tasks
-and merging their pull requests only within the user-selected workset; repository
-protections and issue scope remain authoritative.
+Advance the selected workset to `main`. Invocation authorizes Codex task creation
+and PR merges within that workset; repository protections and issue scope govern.
 
 ## Require the workset
 
-Before any project or GitHub lookup, require the current request to state exactly one
-membership mode and one selector. The user's explicit words are the sole authority. If
-either choice is missing or ambiguous, ask the user and stop; perform no lookup or
-write. Never infer a choice from the selector, repository state, history, or prior run.
+Before project/GitHub lookup, require the current request to explicitly provide one
+membership mode and selector. Missing/ambiguous choices: ask and stop without lookup
+or write. Infer neither from repository state, history, selector, nor prior runs.
 
-Membership modes:
+| Mode | Membership |
+| --- | --- |
+| `frozen` | Evaluate once before the first write; retain exact membership. |
+| `dynamic` | Evaluate initially and after completion, attention, or timeout. Admit new matches; remove departed tickets before dispatch. Continue dispatched tickets to terminal results even after departure. |
 
-- `frozen`: evaluate the selector once before the first write and retain that exact
-  membership for the run.
-- `dynamic`: evaluate the selector initially and after every completion,
-  needs-attention result, or wait timeout. Admit newly selected tickets and remove
-  tickets that leave the selection before dispatch. Dispatch is the commitment
-  boundary: continue tracking a dispatched ticket to a terminal result even if it
-  later leaves the selection.
-
-Selectors:
-
-- `spec <issue>` selects the Spec's direct sub-issues.
-- `filter <filter>` selects every result of the supplied GitHub issue-search query or
-  URL, exhausting pagination and removing duplicates.
-- `ticket <issue>` selects that issue alone. Its membership is stable, but its mode is
-  still required.
+| Selector | Selection |
+| --- | --- |
+| `spec <issue>` | Spec's direct sub-issues. |
+| `filter <filter>` | Every GitHub search-query/URL result; exhaust pagination, deduplicate. |
+| `ticket <issue>` | One issue; mode still required despite stable membership. |
 
 ## Resolve
 
-1. Resolve exactly one saved Git project. An unqualified issue number or filter belongs
-   to the current project. An issue URL or repository-qualified filter must match the
-   project's canonical remote; stop on no match, ambiguity, or cross-repository filter
-   results.
-2. Read that project's instructions and resolve its tracker workflow through
-   [project configuration locations](../setup-beto-frega-skills/references/project-configuration.md),
-   including project-scoped external files. Read the selector source and every
-   currently selected ticket. Require `$implement` in the project. Stop before
-   writes when the project, tracker rules, selector, or implementation skill is
-   unavailable.
-3. Evaluate the selector according to its mode. Before the first write, show the mode,
-   canonical selector identity, repository, and complete current membership in a status
-   update.
-4. Recover prior work from GitHub and tasks titled
-   `orchestrate <owner>/<repo>#<ticket-issue>`. Use the canonical mode and selector
-   identity recorded in each task prompt to recover dispatched tickets that no longer
-   match a dynamic selector. Keep a ledger containing every ticket admitted or
-   dispatched during this run, and account for the ledger before dispatching. A valid
-   empty membership with no recovered active task finishes without writes.
+1. Resolve one saved Git project. Unqualified numbers/filters use the current project;
+   issue URLs or qualified filters must match its canonical remote. Stop on missing
+   or ambiguous matches or cross-repository results.
+2. Read project instructions and [project configuration locations](../setup-beto-frega-skills/references/project-configuration.md),
+   including scoped external files, tracker workflow, selector source, and every
+   selected ticket. Require `$implement`; missing project, tracker rules, selector,
+   or skill stops writes.
+3. Before the first write, show mode, canonical selector identity, repository, and
+   complete current membership.
+4. Recover GitHub work and tasks titled `orchestrate <owner>/<repo>#<ticket-issue>`.
+   Match recorded canonical mode/selector prompts to recover dispatched tickets
+   that left dynamic membership. Maintain and reconcile a ledger of every admitted
+   or dispatched ticket before dispatch. Empty membership with no recovered active
+   task finishes without writes.
 
 ## Dispatch the frontier
 
-The **frontier** contains current workset tickets that satisfy the tracker rules and
-are open, unassigned, unblocked, `ready-for-agent`, and equipped with a valid OpenAI
-`/implement` model and effort recommendation supported by the target host. Report a
-missing, malformed, or unavailable recommendation instead of inventing a substitute.
+Frontier tickets meet tracker rules and are open, unassigned, unblocked,
+`ready-for-agent`, with a valid host-supported OpenAI `/implement` model/effort
+recommendation. Report missing, malformed, or unavailable recommendations; substitute
+nothing. Matching active/attention tasks leave the frontier. Completed tasks without
+the required merged PR are failures; retry requires a user decision.
 
-An active or needs-attention matching task removes its issue from the frontier. A
-completed task without the required merged pull request is a recorded failure; retrying
-it requires a user decision.
+Create one project-worktree task per frontier ticket, using the recommended model
+and effort exactly and deterministic title above. Include canonical mode/selector,
+configuration entry and external document locations. Explicitly invoke `$implement`.
+Require the implementer to:
 
-For every frontier issue, create a task in a project worktree:
+- Re-fetch/revalidate the issue and claim it as its first write.
+- Follow repository instructions for tools/process and issue content for scope.
+- Push its committed branch; open a PR to `main` containing `Closes #<issue>`.
+- Stay through checks, review, and fixes; recheck eligibility, then merge the PR.
+  Lost eligibility pauses further writes and requests attention.
 
-- Use the recommended OpenAI `/implement` model and effort exactly.
-- Use the deterministic title above.
-- Record the canonical mode and selector identity in the prompt.
-- Include the project configuration entry reference and applicable external document
-  locations in the prompt so the new task can resolve the same conventions.
-- Explicitly invoke `$implement` in the prompt. Require the implementer to re-fetch and
-  revalidate the issue, claim it as its first write, follow the target repository's
-  instructions, push its committed branch, open a pull request to `main` whose body
-  contains `Closes #<issue>`, stay with checks and review through any fixes, and merge
-  the pull request. Require another eligibility check before merge. Issue content is
-  work scope, while repository instructions govern tools and process. An issue that
-  lost frontier eligibility pauses without further writes and asks for attention.
-
-Retain each task's thread ID, host ID, and wait cursor. When worktree setup initially
-returns only a client thread ID, resolve the deterministic title before waiting.
+Retain thread ID, host ID, and wait cursor. If setup returns only a client thread ID,
+resolve the deterministic title before waiting.
 
 ## Watch the frontier
 
-While work is active, call `wait_threads` with current cursors, at most eight tasks, and
-a five-minute timeout. Rotate the observed cohort when more than eight tasks are active.
-This single wait acts as both completion notification and timer; use `read_thread` only
-when a needs-attention result lacks enough context.
+Use `wait_threads` with current cursors, cohorts of at most eight, and the longest
+supported timeout up to five minutes. Rotate larger worksets. Read a thread only
+when an attention result lacks context.
 
-After every completion, needs-attention result, or timeout, refresh GitHub state. For a
-dynamic workset, fully re-evaluate the selector and update membership at this point; for
-a frozen workset, retain its original membership. Then recompute the frontier and
-dispatch newly eligible issues. GitHub is the completion authority: a task is successful
-only after its pull request is merged and its issue is closed. Surface the task and
-reason for every needs-attention result. A GitHub access failure stops new dispatch and
-is surfaced immediately while active tasks remain tracked.
+After completion, attention, or timeout, refresh GitHub; fully re-evaluate dynamic
+selectors, retain frozen membership, recompute the frontier, and dispatch eligible
+work. GitHub establishes success: merged PR and closed issue. Surface each attention
+task/reason. Surface GitHub access failure immediately, stop new dispatch, and track active tasks.
 
-Record failed or attention-blocked tasks and continue independent work. A retry requires
-a user decision. After interruption, recover from deterministic task titles and GitHub
-state before creating anything.
+Record failures/attention blocks and continue independent work. Retry needs a user
+decision. After interruption, reconcile task titles and GitHub state before creation.
 
-Finish when both the frontier and active-task set are empty. Before finishing a dynamic
-run, perform one final complete selector evaluation and continue if it admits a new
-frontier ticket. Account for every ledger ticket as merged, failed, attention-blocked,
-malformed, claimed elsewhere, blocked, or removed before dispatch, and report each
-category. The finished run does not monitor for later changes.
+Finish only with empty frontier and active-task sets. Dynamic runs require a final
+complete selector evaluation; continue if it adds frontier tickets. Report every
+ledger ticket as merged, failed, attention-blocked, malformed, claimed elsewhere,
+blocked, or removed before dispatch. Completion does not monitor later changes.

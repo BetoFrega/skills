@@ -1,54 +1,45 @@
 ---
 name: last-responsible-moment
-description: Apply Last Responsible Moment to ongoing work. Use at any stage to curb excessive planning, premature commitments, or risky deferrals.
+description: Apply Last Responsible Moment to ongoing work to curb overplanning, premature commitments, or risky deferrals.
 ---
 
 # Last Responsible Moment
 
-Apply to the current workflow without restarting it or expanding scope.
-**Bring learning forward, not commitment. Preserve options without stalling delivery.**
+Continue the current workflow without restarting or expanding scope. Bring learning forward before commitment;
+preserve options without stalling delivery.
 
 ## Decision triage
 
-Consider the next increment, reversibility, cost of delay, expected learning,
-and required lead time.
+Assess the next increment, reversibility, delay cost, expected learning, and lead time.
 
-- **Decide now:** the choice is necessary to move forward or define verifiable
-  behavior; waiting disproportionately increases cost or risk, or eliminates an
-  important option.
-- **Investigate now:** an uncertainty could invalidate the approach. Seek evidence
-  in code, documents, measurements, or minimal experiments without requiring a
-  definitive commitment.
-- **Choose provisionally:** to move forward, adopt the simplest alternative when
-  reversal is cheap, no important option is lost, and authority has been delegated.
-  Do not invent requirements or business rules.
-- **Defer deliberately:** keep an unnecessary choice open when the cost of waiting
-  is acceptable, especially when relevant learning is still ahead. Record only the
-  question, reason, and observable trigger; allow lead time to investigate,
-  implement, and validate.
+- **Decide now:** progress or verifiable behavior requires it, or delay creates
+  disproportionate cost/risk or loses an important option.
+- **Investigate now:** uncertainty could invalidate the approach. Use code,
+  documents, measurements, or minimal experiments without requiring commitment.
+- **Choose provisionally:** progress requires a choice, reversal is cheap, important
+  options remain, and authority is delegated. Choose the simplest alternative;
+  invent no requirements or business rules.
+- **Defer deliberately:** the choice is unnecessary and delay cost acceptable,
+  especially with learning ahead. Record question, reason, and observable trigger,
+  reserving lead time to investigate, implement, and validate.
 
 ## Boundaries
 
-Also defer branches that depend on deferred decisions, except for independently
-relevant risks. Out of scope does not imply a future commitment.
+Defer dependent branches too, except independently relevant risks. Out of scope
+creates no future commitment. Prefer evidence over preference questions; needed user
+input gets one decision, recommendation, and reason to decide now.
 
-Prefer evidence over preference questions. When user input is needed, present one
-decision at a time, a recommendation, and why the decision is needed now.
+**YAGNI:** preserve changeability rather than speculative abstractions, configuration,
+or infrastructure. Importance does not imply irreversibility; deferring a solution
+does not defer investigation.
 
-**YAGNI:** preserve ease of change, not speculative abstractions, configuration,
-or infrastructure. Do not confuse importance with irreversibility, or deferring
-a solution with deferring investigation.
-
-Distinguish decisions, hypotheses, and deferrals in existing documents. Record
-only what affects continuity; do not create exhaustive inventories or an ADR for
-every pending issue. Reassess commitments and triggers as new evidence emerges.
+In existing documents, distinguish decisions, hypotheses, and deferrals; record only
+continuity needs, avoiding exhaustive inventories or an ADR per pending issue.
+Reassess commitments and triggers with new evidence.
 
 ## Stopping criterion
 
-In planning and questioning, replace exhaustive exploration of the decision tree
-with readiness of the next increment: clear, executable, and verifiable, with no
-hidden business assumptions or unaddressed material risks.
-
-End deliberation once this criterion is met. Proceed within existing
-authorization. Communicate only relevant adjustments and blockers; do not turn
-this skill into another planning ceremony.
+Stop deliberation when the next increment is clear, executable, and verifiable,
+without hidden business assumptions or unaddressed material risks. Proceed under
+existing authorization. Communicate relevant adjustments and blockers; add no
+planning ceremony or exhaustive decision-tree exploration.

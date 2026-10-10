@@ -1,80 +1,66 @@
 ---
 name: review-learnings
-description: Gather and review evidence and learning across product work, resolve consequential choices through grilling, and feed supported knowledge and work implications back into canonical records.
+description: Review evidence and learning across product work, resolve consequential choices through grilling, and feed supported knowledge and work implications into canonical records.
 ---
 
 # Review Learnings
 
-Review what work taught us and how it changes product knowledge or upcoming work.
 Own evidence gathering, synthesis, and unresolved decisions; use
-[consolidate](../consolidate/SKILL.md) as the canonical writer.
-
-Apply [artifact links](../consolidate/references/artifact-links.md) to cited source
-documents, affected records, and tickets in the review and its handoff.
+[consolidate](../consolidate/SKILL.md) as canonical writer. Apply
+[artifact links](../consolidate/references/artifact-links.md) to sources, records, and tickets.
 
 ## Scope and gather
 
-Identify the selected work, product question, or review period from the request.
-Read the applicable canonical knowledge, including hypotheses, accepted choices,
-contracts, increments, and earlier evidence. Resolve sources and review conventions
-through [project configuration](../setup-beto-frega-skills/references/project-configuration.md),
-including project-scoped external files.
+Identify selected work, question, or review period. Resolve sources/conventions through
+[project configuration](../setup-beto-frega-skills/references/project-configuration.md),
+including external files. Read canonical hypotheses, accepted choices, contracts,
+increments, and earlier evidence.
 
-Gather relevant work records, results, experiments, feedback, changes of direction,
-technical decisions, and delivery or exposure observations. Follow consequences
-across affected features and pending work without expanding into an unrelated audit.
-Record source scope, observation time, coverage, and access gaps. Verify discoverable
-facts before asking the user; a missing source is not proof that no change occurred.
+Gather work records, results, experiments, feedback, direction changes, technical
+choices, and delivery/exposure observations. Follow consequences into affected
+features and pending work within scope. Retain source scope, time, coverage, and access
+gaps. Verify discoverable facts before asking; missing sources do not prove no change.
 
 ## Synthesize and resolve
 
-Deduplicate repeated evidence and retain contradictions or inconclusive results.
-Distinguish observations, interpretations, hypotheses, accepted choices, and proposed
-changes. Identify material effects on direction, feature definitions, rules, value,
-cost, risks, priorities, related records, or the selected workset.
+Deduplicate evidence while retaining contradictions and inconclusive results.
+Separate observations, interpretations, hypotheses, accepted choices, and proposals.
+Identify material effects on direction, features, rules, value/cost, risk, priorities,
+records, and selected work.
 
-Supported observations and previously accepted choices can be incorporated within
-existing documentation authority. For a consequential new choice, use
-[grilling](../grilling/SKILL.md) with the relevant current canonical context and a
-bounded decision goal. Propose closure when the choice can be recorded consistently;
-a learning review need not define a new delivery increment. Use the product increment
-sufficiency check only when the user is selecting another delivery slice.
+Incorporate supported observations and prior approvals within existing write authority.
+For consequential new choices, use [grilling](../grilling/SKILL.md) with current canonical
+context and a bounded goal. Propose closure when the choice can be recorded consistently;
+apply slice sufficiency only when selecting another delivery increment.
 
-When indispensable evidence needs further work, define bounded discovery with a
-question, scope, method, expected output, and completion criterion. Preserve unresolved
-proposals and their implications rather than turn an experiment into approved policy.
+Indispensable missing evidence gets bounded discovery: question, scope, method,
+expected output, and completion criterion. Preserve unresolved proposals and implications;
+an experiment does not establish policy.
 
 ## Feed knowledge and consequences back
 
-Use consolidate to update affected contracts, direction, decisions, evidence, domain
-references, ADRs, and delivery observations through their authoritative routes. Apply
-its living-record and history rules; this review is not a narrative of document edits.
-Reuse settled approvals and maintain provenance for supported claims.
+Use consolidate's authoritative routes and history rules for affected contracts,
+direction, decisions, evidence, vocabulary, ADRs, and delivery observations. Reuse
+settled approval and retain provenance; the review is not an edit narrative.
 
-Route reusable learning about agent procedure to the canonical skill or instruction
-that governs that procedure, through [writing-for-agents](../writing-for-agents/SKILL.md).
-Keep case-specific evidence in the work record and place the actionable rule where
-future work will load it. Verify its discovery trigger and read back the changed
-guidance; a diagnostic comment alone does not complete this procedural feedback.
-Apply existing write authority, or name the exact target and pending change when
-that authority is missing.
+For reusable agent-procedure learning, use [writing-for-agents](../writing-for-agents/SKILL.md)
+to update its governing skill/instruction. Keep case evidence in work records; place
+the actionable rule where future work loads it. Verify discovery trigger and readback;
+a diagnostic comment does not complete feedback. Apply existing write authority or
+name the target and pending change.
 
-Identify implications for pending work: scope, acceptance, dependencies, readiness,
-or need for further investigation. Use [selected work planning](../plan-increment/references/selected-work.md)
-and its work-item route to prepare concrete changes when requested. Reviewing learning
-alone does not authorize publishing new work, changing tracker state, releasing, or
-operating flags. Exercise existing authorization within its actual scope.
+Identify pending-work effects on scope, acceptance, dependencies, readiness, and
+investigation. When requested, use [selected work planning](../plan-increment/references/selected-work.md)
+and its work-item route to prepare changes. Review alone authorizes no new work
+publication, tracker state change, release, or flag operation; reuse actual authority.
 
 ## Verify completion
 
-For local document changes, apply
-[local document delivery](../consolidate/references/local-document-delivery.md).
+Apply [local document delivery](../consolidate/references/local-document-delivery.md)
+for local edits. Read back canonical and authorized work changes. Account for every
+material finding with a supported update, no-change reason, unresolved choice, or
+source gap. Identify drafts, partial writes, and missing evidence; report useful
+conclusions and record/work links.
 
-Read back saved canonical changes and any authorized work changes. Account for each
-material finding with a supported update, a reason it needs no change, or a named
-unresolved choice or source gap. Clearly identify drafts, partial writes, and missing
-evidence. Report the useful conclusions and affected record/work references.
-
-Use [next steps](../next-steps/SKILL.md) for continuation. Previously incorporated
-learning needs another review only when new evidence or a configured review point
-justifies it; avoid a cycle of recommending the same completed review.
+Use [next steps](../next-steps/SKILL.md) for continuation. Repeat incorporated learning
+reviews only for new evidence or a configured review point.

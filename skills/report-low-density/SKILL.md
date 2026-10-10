@@ -1,102 +1,68 @@
 ---
 name: report-low-density
-description: Prepare one delegated low-information-density flag as a minimal, reproducible tracker issue and publish it only after the user explicitly requests or approves that write. Do not use for investigation or remediation.
+description: Prepare one delegated low-information-density flag as a reproducible tracker issue; publish only with the user's explicit request or approval. Use neither for investigation nor remediation.
 ---
 
 # Report low density
 
-Run only as a subagent explicitly delegated by a parent agent under the repository's
-information-density rule. Otherwise create nothing and state that reporting requires
-that delegation. Delegation establishes the reporting scope; it does not authorize a
-tracker mutation. Publish one observed flag only after the active task contains the
-user's explicit request or approval to create that report. The parent agent must supply
-the exact flag plus every grouped source pointer, revision or environment when relevant,
-and minimal reproduction steps. Without those inputs, return the missing fields and
-create nothing.
+Run only as a subagent delegated under the repository's information-density rule;
+otherwise create nothing and name the missing delegation. Delegation scopes reporting,
+not tracker authority. Require the exact flag, every grouped source pointer, relevant
+revision/environment, and minimal reproduction steps; return missing inputs without
+creating anything. Publish only with explicit user authority in the active task.
 
 ## Resolve the tracker contract
 
-Use [project configuration locations](../setup-beto-frega-skills/references/project-configuration.md)
-to resolve the issue-tracker workflow and label vocabulary, including project-scoped
-external files. Read the applicable repository instructions and resolved documents.
-Resolve these two configured labels:
-
-- category `low information density`, defaulting to `low-info-density` only when the
-  project document explicitly keeps that default;
-- workflow `needs triage`, defaulting to `needs-triage` only when explicitly mapped.
-
-Verify that both labels exist in an external tracker. For a local Markdown tracker,
-verify its documented category and status representation. If configuration or labels
-are missing or contradictory, create nothing and direct the parent to
-`$setup-beto-frega-skills`. Never guess, fall back to an unmapped default, or create a
-label from this skill.
+Resolve [project configuration](../setup-beto-frega-skills/references/project-configuration.md),
+including external files; read repository instructions and tracker/label contracts.
+Resolve category `low information density` and workflow `needs triage`. Use defaults
+`low-info-density` / `needs-triage` only when explicitly mapped by project documents.
+Verify both external labels, or the local Markdown category/status representation.
+Missing/contradictory configuration means no write: direct the parent to
+`$setup-beto-frega-skills`. Guess/create no labels or unmapped defaults.
 
 ## Build the minimal issue
 
-Use this title:
+Title: `‼️ LOW INFORMATION DENSITY ‼️ — <short source>`.
+Body only:
 
-`‼️ LOW INFORMATION DENSITY ‼️ — <short source>`
-
-The body contains only:
-
-- stable source pointers such as a path and lines, log or command, or durable artifact;
-- revision and environment only when they affect reproduction;
-- the minimum steps or command that reproduce the flagged content;
+- stable source pointers (path/lines, log/command, durable artifact);
+- revision/environment when reproduction depends on them;
+- minimum reproduction steps/command;
 - `low-density-fingerprint: sha256:<hex>`;
-- `Investigate with $investigate-low-density.` when that skill is available, otherwise
-  `Investigation required.`
+- `Investigate with $investigate-low-density.` if available, otherwise `Investigation required.`
 
-Exclude diagnosis, severity, proposed reduction, copied dumps, implementation plans,
-and speculative context. Redact secrets and sensitive data; prefer a reproducible
-pointer over copied content.
-
-Build the fingerprint input with LF separators from the tracker project identifier,
-repo-relative source pointers sorted lexicographically, and reproduction steps with
-trailing whitespace removed. Hash those exact UTF-8 bytes with SHA-256.
+Exclude diagnosis, severity, reductions, copied dumps, plans, and speculative context.
+Redact sensitive data; prefer reproducible pointers. Fingerprint the exact UTF-8 bytes
+of tracker project ID, lexicographically sorted repo-relative source pointers, and
+steps stripped of trailing whitespace, separated by LF; use SHA-256.
 
 ## Resolve publication authority
 
-Search for a duplicate before requesting or exercising publication authority. When no
-match exists, accept either of these as authority for the create:
+Search duplicates during preparation before requesting/exercising publication authority.
+Without a match, authority is either the user's explicit request to publish this report,
+or their explicit approval of the shown destination, title, labels, and complete body,
+carried by the parent in delegation. Repository/standing rules, another report's approval,
+or the parent's decision are insufficient.
 
-- the user explicitly requested publication of this report in the active task; or
-- after seeing the tracker destination, title, labels, and complete body, the user
-  explicitly approved that create and the parent included that approval in the
-  delegation.
-
-A repository instruction, standing rule, prior approval for another report, or the
-parent agent's decision is not user authorization for a persistent tracker write. When
-authority is absent, create nothing. Return `approval-required` with the destination,
-title, labels, complete body, and this question in the user's language:
-
-`May I publish this low-density issue to <tracker>?`
-
-The parent asks the user and, if approved, delegates again with the approval and the
-unchanged prepared issue. This approval pause is a successful preparation outcome, not
-an access failure or uncertain write.
+Without authority, return `approval-required` and that exact prepared issue plus this
+question in the user's language: `May I publish this low-density issue to <tracker>?`
+The parent asks, then delegates again with approval and unchanged issue. This is
+successful preparation, not access failure or uncertain write.
 
 ## Detect duplicates and publish
 
-Search open issues carrying the configured low-information-density label and
-fingerprint during preparation, then repeat the same search immediately before an
-authorized creation.
+Search open issues with configured category and fingerprint during preparation and
+again immediately before authorized creation. An existing match gets no mutation,
+including no workflow reset. Otherwise create one with category/workflow values.
+For local Markdown use a deterministic fingerprint filename and atomic create-if-absent.
 
-- If no match exists, create one issue with the configured category and workflow
-  values.
-- If a match exists, make no mutation.
-- Never reset the workflow label of an existing issue.
+After creation search the fingerprint again. Multiple open matches: report the
+lowest-numbered as canonical and every duplicate; edit/close none. Return the created
+or matched link. After uncertain creation search once: one match establishes success;
+otherwise remain unresolved and never retry the create. On access/authentication
+failure or unresolved write, say no issue was confirmed and creation may be unresolved,
+preserve exact flag/reproduction pointers, and stop.
 
-After creation, search the fingerprint again. If multiple open issues match, report the
-lowest-numbered issue as canonical and report every duplicate; do not close or edit
-them. For a local Markdown tracker, use the fingerprint in a deterministic filename
-and require atomic create-if-absent semantics.
-
-Return the created or matched issue reference to the parent. After an uncertain create,
-search the fingerprint once: accept one matching issue as success; otherwise keep the
-outcome unresolved. Never retry an uncertain create. On missing access, authentication
-failure, or an unresolved write, state that no issue was confirmed and that creation
-may be unresolved, preserve the exact flag and reproduction pointers, and stop.
-
-For a local Markdown issue, apply
-[local document delivery](../consolidate/references/local-document-delivery.md)
-in the handoff so the parent can report its Git state and remaining route.
+For local Markdown issues, carry [document delivery](../consolidate/references/local-document-delivery.md)
+in the parent handoff.

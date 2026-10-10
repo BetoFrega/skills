@@ -1,91 +1,76 @@
 ---
 name: consolidate
-description: Read and consolidate canonical product knowledge, ideas, behavior, decisions, delivery increments, and evidence; route technical decisions to ADRs or scoped specs and reconcile delivery, exposure, and flags.
+description: Consolidate canonical product knowledge, ideas, behavior, decisions, increments, and evidence; route technical decisions and reconcile delivery, exposure, and flags.
 ---
 
 # Consolidate
 
-Maintain explicit product knowledge that product owners and agents can use across
-sessions. Maintain consolidated intent, behavior, authority, and evidence. Adapt formats,
-workflow, hierarchy, and depth to the product while covering the relevant contract.
-
-Apply [artifact links](references/artifact-links.md) whenever citing documents or
-tickets in records, responses, or handoffs.
+Maintain product intent, behavior, authority, and evidence for owners and agents
+across sessions. Adapt representation, hierarchy, workflow, and depth to the product;
+cover its relevant contract. Apply [artifact links](references/artifact-links.md)
+whenever citing documents or tickets.
 
 ## Resolve authority and intent
 
-Use [project configuration locations](../setup-beto-frega-skills/references/project-configuration.md#resolve-configuration)
-to resolve the product configuration, including files outside the repository. Read
-its canonical destinations, native representation, product conventions, applicable
-decisions, and maintenance sources. Retain existing identifiers and settled choices.
-Locate affected records and the operation's existing authorization before writing.
+Resolve [project configuration](../setup-beto-frega-skills/references/project-configuration.md#resolve-configuration),
+including external files. Read canonical destinations, native representation,
+conventions, governing decisions, maintenance sources, affected records, and existing
+authorization. Preserve identifiers and settled choices.
 
-Standard setup owns configuration. For an unresolved destination or convention,
-identify the gap and suggest explicit `$setup-beto-frega-skills` use. Continue work
-that has a known authority; prepare a clearly identified draft for blocked writes.
-A draft stays subordinate to the canonical destination. A configured replacement
-that is unavailable remains an explicit gap.
+Setup owns configuration. For an unresolved destination or convention, name the gap
+and suggest `$setup-beto-frega-skills`. Continue work with known authority; prepare
+clearly labeled drafts for blocked writes. Drafts remain subordinate to canonical
+records; an unavailable configured replacement stays an explicit gap.
 
-Read only the references needed for the task. Combine routes when one change affects
-several documentation functions; the table is a router, not a mandatory sequence.
+Read only relevant routes; combine them when needed:
 
 | Route | Read when |
 | --- | --- |
-| [Catalogue](references/catalogue.md) | Finding capabilities or defining and updating functionalities, audiences, jobs, behavior, value, and cost. |
-| [Delivery slices](references/delivery-slices.md) | Recording selected increments, acceptance, dependencies, exposure strategy, coverage, and delivery observations. |
-| [Context](references/context.md) | Maintaining product direction, business context, shared rules, vocabulary links, or research and experiment evidence. |
-| [Decisions](references/decisions.md) | Recording product or business choices and rationale, preserving history, or applying an accepted change to affected contracts. |
-| [Proposals](references/proposals.md) | Shaping a product proposal or pitch for an investment decision. |
-| [Technical work](references/technical-work.md) | Consolidating technical choices after discussion or preparing a scoped technical spec in the configured tracker. |
-| [Reconciliation](references/reconciliation.md) | Maintaining implementation, deployment, release, exposure, and flag observations, or investigating documentation drift. |
+| [Catalogue](references/catalogue.md) | Finding or maintaining functionalities, audiences, jobs, behavior, value, and cost. |
+| [Delivery slices](references/delivery-slices.md) | Recording selected increments, acceptance, dependencies, exposure, coverage, or delivery evidence. |
+| [Context](references/context.md) | Maintaining direction, business context, shared rules, vocabulary links, or discovery evidence. |
+| [Decisions](references/decisions.md) | Recording product/business choices, rationale, history, or their contract consequences. |
+| [Proposals](references/proposals.md) | Shaping an investment proposal or pitch. |
+| [Technical work](references/technical-work.md) | Preserving technical choices or preparing a scoped tracker spec. |
+| [Reconciliation](references/reconciliation.md) | Maintaining implementation, deployment, release, exposure, or flags; investigating drift. |
 
-For an architectural choice, use [write-adr](../write-adr/SKILL.md). For vocabulary
-definitions, follow [the glossary format](../domain-modeling/CONTEXT-FORMAT.md) and
-configured domain conventions. Keep product-specific behavior in the catalogue and
-cross-functional rules in their shared authority.
-Specs and tickets describe work derived from these records and retain links to them.
-For an interview handoff, retain the selected increments, confirmed choices, relevant
-technical decisions, and deferred questions. Consolidate what is already known; use
-grilling only for consequential unresolved choices that prevent the requested update.
-Feature knowledge and future ideas can exceed the scope selected for delivery.
+Use [write-adr](../write-adr/SKILL.md) for architecture and the
+[glossary format](../domain-modeling/CONTEXT-FORMAT.md) for definitions under configured
+domain conventions. Feature behavior belongs in the catalogue; cross-functional
+rules have shared authority. Link derived specs and tickets to those records.
+
+Consolidate known knowledge; grill only consequential gaps blocking this update.
+Interview handoffs retain selected increments, confirmed product/technical choices,
+references, and deferred questions. Feature knowledge and ideas may exceed selected
+delivery scope.
 
 ## Write the affected knowledge
 
-Before creating or updating a living record, read
-[record format](references/record-format.md) for consolidation, native version history,
-bounded changelogs, and the functionality template and worked example.
+Read [record format](references/record-format.md) before writing living records;
+it owns consolidation, native history, bounded changelogs, template, and example.
 
-Distinguish approved intent, proposals, observed implementation, and assumptions.
-Use conversation and project evidence for approval; code or flag configuration alone
-does not establish a product decision. State material unknowns and discrepancies.
-Carry observation time, source, scope, and coverage with claims about actual state.
+Distinguish approval, proposals, observations, and assumptions. Approval comes from
+conversation/project evidence, not code or flag configuration alone. Preserve
+unknowns and discrepancies; actual-state claims carry source, time, scope, and coverage.
 
-Use the configured properties, sections, objects, and links. Preserve a single
-canonical record for each meaning rather than duplicate it across views. Capture
-all relevant behavior, exceptions, and scenarios needed for agents to implement
-and verify the contract; proportionality adjusts detail and governance, not whether
-known rules are documented. Update linked records affected by an accepted change.
+Use configured objects, properties, sections, and relationships. Keep one authority
+per meaning; cover known behavior, exceptions, and implementation/verification
+scenarios. Proportionality adjusts detail and governance, not rule coverage. Update
+linked records affected by accepted changes. Label interaction illustrations
+replaceable and state binding outcomes explicitly.
 
-Interaction illustrations may express intent. Label them illustrative and
-replaceable; write binding outcomes and rules explicitly so implementation choices
-remain open.
-
-Exercise existing authorization within its scope. Documentation maintenance does
-not itself authorize a new release, flag change, scheduled job, or product policy.
-Read the reconciliation route before any authorized operational flag change.
+Exercise existing authorization within scope. Documentation maintenance does not
+authorize release, flag operations, schedules, or new policy. Read reconciliation
+before an authorized flag operation.
 
 ## Verify completion
 
-For local document changes, apply
-[local document delivery](references/local-document-delivery.md) before reporting.
+Apply [local document delivery](references/local-document-delivery.md) for local edits.
+Read back saved records and relationships: verify identity, representation, content,
+authority/timing, source coverage, decision/shared-rule/work/evidence links, and the
+whole-document record-format checks. Account for every affected record with a
+verified result or named gap.
 
-Read back saved records and relationships in the configured destination. Check
-identity, representation, applicable content, authority and effective timing,
-source coverage, and links to decisions, shared rules, work, and verification. Apply
-the record-format completion checks to the resulting document as a whole.
-Account for every affected record with a verified result or a named remaining gap.
-
-For a lookup or review, answer with the relevant canonical references and concrete
-findings. For a change, report what was saved, what remains proposed or unknown, and
-any unverifiable effect. A prepared draft, an accepted decision, an implemented
-change, and a verified release are distinct outcomes.
+For lookups/reviews, return canonical links and findings. For changes, report saved,
+proposed, unknown, and unverifiable effects separately. Drafts, acceptance,
+implementation, and verified release are distinct outcomes.

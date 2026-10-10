@@ -1,44 +1,29 @@
 ---
 name: implement-spec
-description: "Implement a specification in code."
+description: Implement an entire specification and its ticket graph as one PR.
 disable-model-invocation: true
 ---
 
-You have been provided a spec. This spec should have tickets associated with it, describing how to implement the spec.
-
-The goal is a PR which implements the entire spec on a single branch.
-
-The tickets are not a list of steps. They are a **task graph** with blocking relationships between them. This means there is always a **frontier** of tickets which are ready to be grabbed.
-
-Communication to and from subagents should be sparse. Communicate primarily through **context pointers**: to the spec, tickets, research notes, and previous commits. Don't duplicate information already available via pointers.
-
-**Implementer subagents** should be run in the background where possible for **maximum concurrency**.
+Deliver the whole spec on one PR branch. Tickets form a dependency graph; dispatch
+its ready frontier with maximum background concurrency. Communicate sparsely through
+pointers to specs, tickets, research, and commits instead of duplicating them.
 
 ## Steps
 
-1. Read the spec and tickets. Read enough to understand the selected task graph. For
-   product work, read the applicable canonical contracts and increments through
-   [consolidate](../consolidate/SKILL.md), including external configuration. Technical
-   specs and tickets reference product authority; surface consequential conflicts
-   instead of deriving policy from implementation instructions. Pass those context
-   pointers and the selected workset to implementer subagents.
-
-2. (optional) Use an **exploration subagent** to conduct any exploration required by the tickets - relevant codebase files or external documentation. Ensure the exploration subagent can save files - it should save its markdown notes in a directory outside the repo, accessible by all future subagents. This lets **implementer subagents** focus on implementation rather than exploration.
-
-3. Create a branch, and a draft PR. The PR should be marked as 'closing' the spec issue and tickets.
-
-4. Use **implementer subagents** to implement each ticket. Each implementer subagent should work in its own worktree, on its own branch.
-
-5. Once an **implementer subagent** completes, merge its work to the PR branch with a **merger subagent**.
-
-6. If this changes the **frontier** of available tickets, kick off more **implementer subagents** to work on the new tickets. This allows for maximum concurrency.
-
-7. Once all tickets are complete, run /code-review on the PR branch. Fix all issues raised by the code review in a single **implementer subagent**.
-
-8. Mark the PR as ready for review.
-
-9. Clean up all **implementer subagent** worktrees.
-
-10. Reconcile affected canonical product records within existing documentation
-    authority using consolidate. Preserve independent delivery and exposure evidence.
-    Report the implementation and delivery state using [next steps](../next-steps/SKILL.md).
+1. Read the spec and ticket graph. For product work, read applicable canonical
+   contracts/increments through [consolidate](../consolidate/SKILL.md), including
+   external configuration. Technical work references product authority; surface
+   consequential conflicts. Pass these pointers and the selected workset to agents.
+2. If tickets require exploration, optionally delegate it. Save Markdown notes outside
+   the repository where future agents can read them; ensure the agent can write there.
+3. Create the integration branch and draft PR, marking it as closing the spec issue
+   and tickets. Follow repository branch/worktree conventions.
+4. Dispatch each ready ticket to an implementer in its own worktree and branch.
+5. As implementers finish, use a merger subagent to integrate into the PR branch.
+   Dispatch newly ready tickets as the frontier changes.
+6. After all tickets complete, run [code-review](../code-review/SKILL.md). Use one
+   implementer subagent to fix all issues raised.
+7. Mark the PR ready for review and clean up implementer worktrees.
+8. Reconcile affected product records through consolidate within existing documentation
+   authority, preserving independent delivery/exposure evidence. Report implementation
+   and delivery state through [next steps](../next-steps/SKILL.md).
