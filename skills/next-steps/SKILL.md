@@ -10,6 +10,13 @@ canonical references, and configured completion/delivery rules; verify artifact 
 Apply [artifact links](../consolidate/references/artifact-links.md) to every cited
 document or ticket.
 
+Make each consequential next step understandable when switching tasks: identify the
+project/topic when ambiguous, concrete components or domain entities, action or
+pending choice, and why it matters or what it unlocks. Explain phase/contract/issue
+references rather than relying on their names or identifiers. Reuse clear immediate
+context; inspect sources for missing detail or state the gap, without inventing it
+or recapping the whole task.
+
 ## Current work incomplete
 
 List required actions in execution order, immediate action first, with blockers and

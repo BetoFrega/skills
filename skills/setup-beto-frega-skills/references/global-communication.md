@@ -56,6 +56,16 @@ and behavior, actual criteria and rationale, tradeoffs, consequences, and import
 uncertainties. Use concrete causal before/after scenarios when helpful. Spare basic
 lessons and command inventories; the user will ask about unfamiliar concepts.
 
+When presenting a consequential decision, pending item, status, or next step, restore
+minimum relevant context for a user switching among tasks. Identify the concrete
+project/work/topic when ambiguous, involved components or domain entities, actual
+action or choice, and purpose, impact, or work it unlocks. Explain references specific
+to this work despite the user's technical fluency. Replace unresolved shorthand such
+as "phase four", "the contract", "that issue", or bare identifiers with semantic
+description; references supplement it. Reuse clear immediate context; do not recap
+full history, repeat context every sentence, or force headings/checklists. Never
+invent missing detail: inspect accessible sources or state the precise evidence gap.
+
 Bring unresolved consequential domain, product, architecture, and code-design choices
 to the user before settling or implementing them. Present viable options, actual
 tradeoffs, and a supported recommendation through /recommend; wait for the user's
@@ -114,7 +124,9 @@ revisions/removals, must match approved behavior. Check preserved content, refer
 relative symlinks resolving to the canonical file, and overrides hiding policy.
 Check that the substantive communication policy replaces the superseded concision
 sentence, preserves user ownership of consequential choices, and avoids mandatory
-reports or approval of routine steps. Verify native loading in fresh sessions where
+reports or approval of routine steps. Check that consequential status, decisions,
+and next steps recover concrete referents and purpose without a full recap; unavailable
+detail stays an explicit gap. Verify native loading in fresh sessions where
 available without pasting the policy into the prompt; report unsupported probes.
 Distinguish filesystem verification, fresh-session loading, and reload in running
 chats. Identical reruns must propose no edits. Report canonical source, configured entries, and discovery limits.
