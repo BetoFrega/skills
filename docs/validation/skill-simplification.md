@@ -6,8 +6,9 @@ The reviewed simplification updates 38 files and removes four files belonging to
 `esds-compress-compressed` and `last-responsible-moment-compressed`. Their contracts
 remain in [ESDS compression](../../skills/esds-compress/SKILL.md) and
 [Last Responsible Moment](../../skills/last-responsible-moment/SKILL.md).
-The explicit [grill-me alias](../../skills/grill-me/SKILL.md) remains. The repository
-contains 49 skills, down from 51. Removed command names have no automatic redirect.
+The explicit [grill-me alias](../../skills/grill-me/SKILL.md) remains. At delivery,
+the repository contained 49 skills, down from 51. Removed command names have no
+automatic redirect.
 
 Compare against base commit
 [bba0906](https://github.com/BetoFrega/skills/commit/bba09067bac3694bd71a731dffd70617eabf0acd).
@@ -44,9 +45,8 @@ retirements against the final surviving contracts and invocation configuration.
 
 Rechecks preserved the unconditional term-definition rule, 50–95% fidelity-limited
 pruning aspiration, reconciliation before implementation commits, explicit spec
-comparison, the orchestrator's merge action and immediate failure reporting, and
-optional rather than mandatory historical issue closure. Invocation-policy and
-retirement losses were made explicit.
+comparison and optional rather than mandatory historical issue closure.
+Invocation-policy and retirement losses were made explicit.
 
 ## Compatibility and verification
 
@@ -58,8 +58,6 @@ retirement losses were made explicit.
   for a root commit. An isolated fixture reproduced the old three-dot diff's exit 128;
   the direct diff and root log returned 0 and included the root change. Ordinary
   commit comparisons retain their merge-base behavior.
-- [Orchestration](../../skills/orchestrate/SKILL.md) selects a supported bounded wait
-  within communication constraints. A default timeout is not evidence of a maximum.
 - Markdown references and affected incoming anchors resolved. The translated
   [PR explanation template](../../skills/explain-pr/assets/pr-explanation.html) retained
   its stylesheet, renderer/security settings, print handling, and valid internal
@@ -68,10 +66,8 @@ retirement losses were made explicit.
   links were removed only after verifying their targets belonged to this repository.
   Installation must follow [the link workflow](../local-skill-links.md), pointing to
   the synchronized primary checkout after delivery.
-- Package validation and archive readback covered all 49 surviving skills and excluded
-  the retired files. The repository package workflow remains the CI validation source.
+- At delivery, package validation and archive readback covered all 49 surviving skills
+  and excluded the retired files. The packaging workflow has since been retired.
 
 The existing TDD trigger/UI versus refactoring-stage discrepancy retains its current
-policy and metadata. Git delivery does not publish an installed plugin; external
-clients require a separately authorized update under
-[publication rules](../../plugins/frega-portal/PUBLISHING.md).
+policy and metadata.
