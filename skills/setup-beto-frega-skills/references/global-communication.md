@@ -1,8 +1,13 @@
-# Global personal communication
+# Global personal rules
 
-Read this when setup installs or reconciles Beto Frega's personal communication
-policy. These choices are settled. Configure their global discovery; interview only
+Read this when setup installs or reconciles Beto Frega's global rules, including
+personal communication. These choices are settled. Configure their global discovery; interview only
 if the user asks to change the policy or existing instructions require a new decision.
+
+For global additions, revisions, or removals, follow the
+[global rule workflow](../../../AGENTS.md#global-rule-changes). Update this reference's
+canonical block and setup guidance; reconcile approved changes in installed entries,
+including removals. Preserve unrelated instructions.
 
 ## Discover and reconcile
 
@@ -13,7 +18,7 @@ if the user asks to change the policy or existing instructions require a new dec
    `CLAUDE.md`. Verify any other agent's loading mechanism before changing its entry.
 2. Read existing entries and resolve symlinks before drafting changes. Preserve
    managed blocks, unrelated instructions, and agent-specific discovery references.
-   An equivalent existing communication section is settled; update it in place only
+   An equivalent existing policy section is settled; update it in place only
    when its behavior needs the approved policy.
 3. Retain an existing canonical global `AGENTS.md`; when none is established, use
    Codex's global `AGENTS.md`. Install the block below once in that canonical file.
@@ -76,7 +81,9 @@ The emoji convention applies to conversation only. Artifacts follow their own st
 
 ## Verify
 
-Read the installed policy through every configured agent's global entry. Confirm the
+Read the installed policy through every configured agent's global entry. Confirm all
+maintained global rules match their approved behavior, including revisions and
+explicit removals. Confirm the
 language split, concision rule, linked document/ticket citations, all eight meanings,
 and one marker per relevant block.
 For symlinks, check that the stored target is relative and resolves to the canonical file. Verify

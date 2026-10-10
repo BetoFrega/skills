@@ -1,6 +1,6 @@
 ---
 name: setup-beto-frega-skills
-description: Configure global communication and project skill conventions, inside or outside the repository. Run explicitly before first use or for configuration gaps.
+description: Configure global rules and project skill conventions, inside or outside the repository. Run explicitly before first use or for configuration gaps.
 ---
 
 # Setup Beto Frega skills
@@ -15,7 +15,7 @@ Inspect existing instructions/configuration, installed skills and actual agent l
 
 | Branch | Required guidance and decisions |
 | --- | --- |
-| Global communication | [Global policy](references/global-communication.md): reuse approved choices; fill installation gaps across configured agents. |
+| Global rules | [Global policy](references/global-communication.md): reuse approved choices; reconcile maintained global rules across configured agents. |
 | Issue tracker | Confirm the remote-indicated tracker or user choice; adapt [GitHub](references/issue-tracker-github.md), [GitLab](references/issue-tracker-gitlab.md), or [Markdown](references/issue-tracker-local.md) to verified operations. |
 | Tracker labels, when triage or low-density skills are installed | Confirm [label mappings](references/triage-labels.md); inspect live labels and propose missing ones. |
 | Domain layout | Use [domain rules](references/domain.md); recommend one context, multiple only for demonstrated boundaries. Create domain records lazily. |

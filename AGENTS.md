@@ -20,6 +20,15 @@
 
 Write all skill content in English, including frontmatter descriptions, headings, instructions, and examples. Apply this rule when creating or editing skills in this repository. Respond to the user in their preferred language.
 
+## Global rule changes
+
+For global additions, revisions, or removals, use [grilling](skills/grilling/SKILL.md),
+reuse settled answers, and obtain approval. Update local global instructions and
+[setup](skills/setup-beto-frega-skills/SKILL.md)'s maintained policy, installation,
+and verification guidance. Setup must reproduce approved behavior on other computers,
+including removals. Read back both destinations and verify configured agents' loading.
+Report blocked destinations and Git delivery separately; local-only changes are incomplete.
+
 ## Skill installation
 
 Every repository skill must have a relative symlink under `~/.agents/skills`.
