@@ -23,6 +23,23 @@ Standard speed, credits per million tokens.
 ### Another section
 """
 
+ANTHROPIC_SOURCE = """## Model pricing
+
+| Model | Base input tokens | 5m cache writes | 1h cache writes | Cache hits and refreshes | Output tokens |
+| :---- | :---------------- | :-------------- | :-------------- | :----------------------- | :------------ |
+| Claude Fable 5.1 | $10 / MTok | $12.50 / MTok | $20 / MTok | $0.25 / MTok<sup>1</sup> | $50 / MTok |
+| Claude Mythos 5.1 ([limited availability](https://example.test)) | $10 / MTok | $12.50 / MTok | $20 / MTok | $0.25 / MTok<sup>1</sup> | $50 / MTok |
+| Claude Opus 5.5 | $4 / MTok | $5 / MTok | $8 / MTok | $0.20 / MTok<sup>2</sup> | $20 / MTok |
+| Claude Opus 4.1 ([retired, except on Bedrock](https://example.test)) | $15 / MTok | $18.75 / MTok | $30 / MTok | $1.50 / MTok | $75 / MTok |
+| Claude Haiku 5.5 (for prompts up to 100,000 tokens) | $0.10 / MTok | $0.125 / MTok | $0.20 / MTok | $0.01 / MTok | $0.50 / MTok |
+| Claude Haiku 5.5 (for prompts over 100,000 tokens) | $0.50 / MTok | $0.625 / MTok | $1 / MTok | $0.05 / MTok | $2.50 / MTok |
+
+## Cloud platform pricing
+
+| Model | Base input tokens | 5m cache writes | 1h cache writes | Cache hits and refreshes | Output tokens |
+| Claude Opus 5.5 | $9 / MTok | $9 / MTok | $9 / MTok | $9 / MTok | $9 / MTok |
+"""
+
 
 def card(provider="openai", surface="codex_paid_credits"):
     return {"provider": provider, "billing_surface": surface, "speed_mode": "standard",
@@ -59,6 +76,41 @@ class PricingCacheTest(unittest.TestCase):
                        SOURCE.replace("1,250 credits", "1,25 credits")):
             with self.subTest(source=source), self.assertRaises(ValueError):
                 cache.parse_rates(source)
+
+    def test_extracts_active_claude_api_rates(self):
+        rates = cache.parse_anthropic_rates(ANTHROPIC_SOURCE)
+        self.assertEqual(list(rates), ["claude-fable-5-1", "claude-mythos-5-1", "claude-opus-5-5", "claude-haiku-5-5"])
+        self.assertEqual(rates["claude-fable-5-1"], {"input": 10, "cache_write_5m": 12.5, "cache_write_1h": 20,
+                                                     "cached_input": 0.25, "output": 50})
+        self.assertEqual(rates["claude-haiku-5-5"]["output"], 0.5)
+
+    def test_changed_claude_source_shape_or_units_are_rejected(self):
+        for source in (ANTHROPIC_SOURCE.replace("## Model pricing", "## Prices"),
+                       ANTHROPIC_SOURCE.replace("Output tokens |\n| :", "Other tokens |\n| :"),
+                       ANTHROPIC_SOURCE.replace("| $4 / MTok |", "| $4 / KTok |"),
+                       ANTHROPIC_SOURCE.replace("Claude Opus 5.5 | $4", "Opus Next | $4"),
+                       ANTHROPIC_SOURCE.replace("Claude Mythos 5.1", "Claude Fable 5.1")):
+            with self.subTest(source=source), self.assertRaises(ValueError):
+                cache.parse_anthropic_rates(source)
+
+    def test_claude_refresh_replaces_only_its_rate_card(self):
+        with patch.object(cache, "urlopen", return_value=self.response(ANTHROPIC_SOURCE)):
+            result = cache.refresh(self.path, "anthropic")
+        updated = cache.load_cache(self.path)
+        self.assertEqual(result["model_count"], 4)
+        self.assertEqual(updated["rate_cards"][0], card())
+        self.assertEqual(updated["rate_cards"][1]["unit"], "usd_per_million_tokens")
+        self.assertEqual(updated["rate_cards"][1]["source_url"], cache.ANTHROPIC_SOURCE_URL)
+
+    def test_cli_refreshes_every_source_by_default(self):
+        sources = {cache.SOURCE_URL: SOURCE, cache.ANTHROPIC_SOURCE_URL: ANTHROPIC_SOURCE}
+        respond = lambda request, timeout: self.response(sources[request.full_url])
+        with patch.object(cache, "urlopen", side_effect=respond), \
+             patch.object(cache.sys, "argv", ["pricing_cache.py", "--cache", str(self.path), "refresh"]), \
+             patch("builtins.print"):
+            self.assertEqual(cache.main(), 0)
+        providers = [item["provider"] for item in cache.load_cache(self.path)["rate_cards"]]
+        self.assertEqual(sorted(providers), ["anthropic", "openai"])
 
     def test_show_is_offline_and_reports_unknown_models(self):
         with patch.object(cache, "urlopen", side_effect=AssertionError("Network access")) as network:

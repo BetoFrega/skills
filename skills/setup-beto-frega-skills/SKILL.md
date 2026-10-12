@@ -22,6 +22,7 @@ Inspect existing instructions/configuration, installed skills and actual agent l
 | Missing equivalent information-density rule | Apply [density rules](references/information-density.md), including only available skill branches. |
 | Missing observability baseline | Grill with [observability defaults](references/observability-default.md), grounded in inspected architecture/tooling. |
 | Missing accessibility baseline | Grill separately with [accessibility defaults](references/accessibility-default.md), grounded in inspected surfaces/platforms. |
+| Missing model price cache, when model-selection is installed | Run its [pricing cache](../model-selection/references/pricing-cache.md) refresh; report per-source failures. |
 | Missing/incomplete product conventions | Apply [product setup](references/product-documentation.md) for destinations, representation, and maintenance. |
 
 For installed low-density reporting, require fingerprint search, labeled creation, and readback; for investigation, issue/discussion reading, commenting, and readback. Missing operations are configuration gaps.

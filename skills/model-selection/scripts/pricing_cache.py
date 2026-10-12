@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read local model prices or explicitly refresh Codex Standard credit rates."""
+"""Read local model prices or explicitly refresh Codex credit and Claude API rates."""
 
 import argparse
 from datetime import datetime, timezone
@@ -16,8 +16,10 @@ from urllib.request import Request, urlopen
 
 
 SOURCE_URL = "https://learn.chatgpt.com/docs/pricing.md"
+ANTHROPIC_SOURCE_URL = "https://platform.claude.com/docs/en/about-claude/pricing.md"
 DEFAULT_CACHE = Path.home() / ".agents" / "model-pricing.json"
 CARD_KEY = ("openai", "codex_paid_credits", "standard")
+ANTHROPIC_CARD_KEY = ("anthropic", "claude_api", "standard")
 
 
 class Table(HTMLParser):
@@ -87,6 +89,47 @@ def parse_rates(markdown):
     return models
 
 
+def parse_anthropic_rates(markdown):
+    heading = re.search(r"(?m)^## Model pricing\s*$", markdown)
+    if heading is None:
+        raise ValueError("Official model-pricing heading was not found")
+    section = re.split(r"(?m)^## ", markdown[heading.end():], maxsplit=1)[0]
+    rows = [[cell.strip() for cell in line.strip().strip("|").split("|")]
+            for line in section.splitlines() if line.lstrip().startswith("|")]
+    expected_header = ["Model", "Base input tokens", "5m cache writes", "1h cache writes",
+                       "Cache hits and refreshes", "Output tokens"]
+    if not rows or rows[0] != expected_header:
+        raise ValueError("Official Claude price columns changed")
+    models = {}
+    for row in rows[2:]:
+        label = row[0]
+        if "retired" in label or "for prompts over" in label:
+            continue
+        match = re.match(r"Claude ([A-Za-z]+) (\d+(?:\.\d+)?)(?: \(|$)", label)
+        if match is None:
+            raise ValueError("Unrecognized Claude model row: " + label)
+        model = "claude-" + match.group(1).lower() + "-" + match.group(2).replace(".", "-")
+        if len(row) != 6 or model in models:
+            raise ValueError("Incomplete or duplicate model rate row: " + label)
+        rates = {}
+        for key, cell in zip(("input", "cache_write_5m", "cache_write_1h", "cached_input", "output"), row[1:]):
+            price = re.fullmatch(r"\$(\d+(?:\.\d+)?) / MTok", re.sub(r"<sup>.*?</sup>", "", cell).strip())
+            if price is None:
+                raise ValueError("Invalid USD rate: " + cell)
+            rates[key] = float(Decimal(price.group(1)))
+        models[model] = rates
+    if not models:
+        raise ValueError("No model rates were extracted")
+    return models
+
+
+SOURCES = {
+    "openai": {"key": CARD_KEY, "unit": "credits_per_million_tokens", "url": SOURCE_URL, "parse": parse_rates},
+    "anthropic": {"key": ANTHROPIC_CARD_KEY, "unit": "usd_per_million_tokens", "url": ANTHROPIC_SOURCE_URL,
+                  "parse": parse_anthropic_rates},
+}
+
+
 def load_cache(path):
     return validate_cache(json.loads(path.read_text()))
 
@@ -105,8 +148,9 @@ def validate_cache(data):
         if timestamp.tzinfo is None:
             raise ValueError("checked_at must include its timezone")
         key = key_for(card)
-        if key == CARD_KEY and card["unit"] != "credits_per_million_tokens":
-            raise ValueError("Codex credit-rate units are incompatible")
+        for source in SOURCES.values():
+            if key == source["key"] and card["unit"] != source["unit"]:
+                raise ValueError("Rate-card units are incompatible: " + card["provider"])
         if key in seen:
             raise ValueError("Duplicate rate card")
         seen.add(key)
@@ -126,7 +170,7 @@ def key_for(card):
     return tuple(card.get(key) for key in ("provider", "billing_surface", "speed_mode"))
 
 
-def prepare_refresh(path):
+def prepare_refresh(path, card_key=CARD_KEY):
     empty = {"schema_version": 1, "rate_cards": []}
     if not path.exists():
         return empty, None
@@ -146,21 +190,22 @@ def prepare_refresh(path):
                 except (ValueError, TypeError, KeyError, OverflowError):
                     continue
                 key = key_for(item)
-                if key != CARD_KEY and key not in seen:
+                if key != card_key and key not in seen:
                     recovered["rate_cards"].append(item)
                     seen.add(key)
         return recovered, raw
 
 
-def refresh(path):
-    request = Request(SOURCE_URL, headers={"User-Agent": "model-selection-cache/1.0"})
+def refresh(path, provider="openai"):
+    source = SOURCES[provider]
+    request = Request(source["url"], headers={"User-Agent": "model-selection-cache/1.0"})
     with urlopen(request, timeout=30) as response:
-        models = parse_rates(response.read().decode("utf-8"))
-    card = dict(zip(("provider", "billing_surface", "speed_mode"), CARD_KEY))
-    card.update(unit="credits_per_million_tokens", source_url=SOURCE_URL,
+        models = source["parse"](response.read().decode("utf-8"))
+    card = dict(zip(("provider", "billing_surface", "speed_mode"), source["key"]))
+    card.update(unit=source["unit"], source_url=source["url"],
                 checked_at=datetime.now(timezone.utc).isoformat(), models=models)
-    data, invalid_bytes = prepare_refresh(path)
-    data["rate_cards"] = [item for item in data["rate_cards"] if key_for(item) != CARD_KEY] + [card]
+    data, invalid_bytes = prepare_refresh(path, source["key"])
+    data["rate_cards"] = [item for item in data["rate_cards"] if key_for(item) != source["key"]] + [card]
     validate_cache(data)
     content = json.dumps(data, indent=2, allow_nan=False) + "\n"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -179,7 +224,7 @@ def refresh(path):
     finally:
         if temporary is not None and temporary.exists():
             temporary.unlink()
-    result = {"cache": str(path), "checked_at": card["checked_at"], "model_count": len(models)}
+    result = {"provider": provider, "cache": str(path), "checked_at": card["checked_at"], "model_count": len(models)}
     if backup is not None:
         result["backup"] = str(backup)
     return result
@@ -201,18 +246,29 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cache", type=Path, default=DEFAULT_CACHE)
     commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("refresh", help="Explicitly download and update the Standard credit-rate card")
-    read = commands.add_parser("show", help="Read cached rates without network access")
+    update = commands.add_parser("refresh", help="Explicitly download and update built-in rate cards")
+    update.add_argument("providers", nargs="*", help="Sources to refresh: " + ", ".join(SOURCES) + " (default: all)")
+    read = commands.add_parser("show", help="Read cached Codex rates without network access")
     read.add_argument("models", nargs="*")
     args = parser.parse_args()
+    unknown = [provider for provider in getattr(args, "providers", []) if provider not in SOURCES]
+    if unknown:
+        parser.error("unknown pricing source: " + ", ".join(unknown))
+    path = args.cache.expanduser()
+    if args.command == "show":
+        return report(lambda: show(path, args.models))
+    # Each source updates independently, so one failure keeps the other cards current.
+    statuses = [report(lambda: refresh(path, provider)) for provider in args.providers or SOURCES]
+    return max(statuses)
+
+
+def report(action):
     try:
-        path = args.cache.expanduser()
-        result = refresh(path) if args.command == "refresh" else show(path, args.models)
-        print(json.dumps(result, separators=(",", ":"), allow_nan=False))
+        print(json.dumps(action(), separators=(",", ":"), allow_nan=False))
+        return 0
     except (OSError, ValueError, KeyError, TypeError, InvalidOperation) as error:
         print("Pricing cache: " + str(error), file=sys.stderr)
         return 1
-    return 0
 
 
 if __name__ == "__main__":
