@@ -57,7 +57,7 @@ own authoritative sources. Availability, capability, and supported effort remain
 facts of the execution environment.
 
 The Anthropic `claude_api` / `standard` card uses `usd_per_million_tokens` and model
-IDs such as `claude-opus-5-5` and `claude-opus-5`. Maintain it explicitly from
+IDs such as `claude-fable-5-1` and `claude-opus-5-5`. Maintain it explicitly from
 [Claude API pricing](https://platform.claude.com/docs/en/about-claude/pricing), with
 its own `checked_at`. `cached_input` is the cache-read price; optional
 `cache_write_5m` and `cache_write_1h` fields capture the distinct write rates.

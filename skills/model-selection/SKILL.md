@@ -26,7 +26,7 @@ Implementation: sufficient for mechanical edits; balanced for contained work; st
 
 Review: balanced; strong workhorse for subtle invariants; highest for frontier decisions.
 
-Opus 5.5: highest/frontier capability, with cheaper standard API rates than Opus 5, a strong workhorse. Capability sets neither effort nor cost.
+Current Claude anchors: Fable 5.1 is highest/frontier capability; Opus 5.5 is a strong workhorse at lower rates. Capability sets neither effort nor cost.
 
 ## Choose effort
 
