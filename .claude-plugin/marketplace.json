@@ -1,0 +1,17 @@
+{
+  "name": "beto-frega-skills",
+  "owner": {
+    "name": "Beto Frega"
+  },
+  "plugins": [
+    {
+      "name": "beto-frega-skills",
+      "source": "./",
+      "description": "Beto Frega's agent skills: grilling, planning, implementation, review, decisions, and delivery workflows.",
+      "version": "0.1.0"
+    }
+  ],
+  "metadata": {
+    "description": "Beto Frega's agent skills packaged as a plugin."
+  }
+}

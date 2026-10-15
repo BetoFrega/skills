@@ -14,6 +14,21 @@ Install the skills with:
 npx skills add betofrega/skills
 ```
 
+### Claude plugin
+
+The repository is also a Claude Code plugin marketplace (`.claude-plugin/`) that
+exposes every skill in `skills/` as the `beto-frega-skills` plugin. Install it with:
+
+```sh
+claude plugin marketplace add BetoFrega/skills
+claude plugin install beto-frega-skills@beto-frega-skills
+```
+
+In Claude (Code on the web, Cowork, or the desktop app), add the same GitHub
+repository as a plugin marketplace from the plugin settings, then install
+`beto-frega-skills`. Skills are namespaced, for example `/beto-frega-skills:grilling`.
+Bump `version` in both manifests when publishing a change.
+
 In Codex, name the skill and provide its scope, references, and intended result:
 
 ```text
