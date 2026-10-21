@@ -29,9 +29,9 @@ Defer dependent branches too, except independently relevant risks. Out of scope
 creates no future commitment. Prefer evidence over preference questions; needed user
 input gets one decision, recommendation, and reason to decide now.
 
-**YAGNI:** preserve changeability rather than speculative abstractions, configuration,
-or infrastructure. Importance does not imply irreversibility; deferring a solution
-does not defer investigation.
+Apply [Keep It Lean](../beto-mode/principles/keep-it-lean.md) to what you build
+meanwhile. Importance does not imply irreversibility; deferring a solution does not
+defer investigation.
 
 In existing documents, distinguish decisions, hypotheses, and deferrals; record only
 continuity needs, avoiding exhaustive inventories or an ADR per pending issue.

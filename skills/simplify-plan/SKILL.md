@@ -7,7 +7,11 @@ description: Simplify an implementation or delivery plan using YAGNI and Last Re
 
 Reduce work, dependencies, concepts, and operations for the next usable outcome.
 Preserve requirements, accepted decisions, and authority;
-flag evidence-based challenges separately.
+flag evidence-based challenges separately. Apply
+[Keep It Lean](../beto-mode/principles/keep-it-lean.md),
+[Subtract Before You Add](../beto-mode/principles/subtract-before-you-add.md), and
+[Fail Loud, Handle on Evidence](../beto-mode/principles/fail-loud-handle-on-evidence.md)
+to failure handling in the plan.
 
 ## Find the necessary work
 
