@@ -25,9 +25,8 @@ and project workflow: evidence, canonical updates, checks, review, integration,
 deployment, operational verification, and tracker closure only where required.
 Discovery completes against expected evidence/output and need not deliver a feature.
 
-Completion requires verified evidence for every required condition; local changes,
-merged PRs, closed tickets, and drafts establish only their own state. Name evidence
-gaps. Apply [local document delivery](../consolidate/references/local-document-delivery.md)
+Completion requires verified evidence for every required condition, per
+[Evidence Before Claims](../beto-mode/principles/evidence-before-claims.md). Apply [local document delivery](../consolidate/references/local-document-delivery.md)
 to distinguish saved documentation from pending `origin/main` integration. For product
 observations, use [consolidate](../consolidate/SKILL.md) to interpret independent
 implementation, deployment, authorized release, exposure, and flag dimensions.

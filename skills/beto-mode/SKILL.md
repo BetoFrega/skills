@@ -36,6 +36,12 @@ Each entry says when it applies. Files live at `principles/<name>.md`.
   sequencing work, or deliberating longer than the next step needs.
 - **Encode Lessons in Structure** (`encode-lessons-in-structure`). Writing the same
   instruction a second time, or meeting a recurring correction.
+- **Evidence Before Claims** (`evidence-before-claims`). Reporting a result, status, or
+  completion, or judging whether something works or is feasible.
+- **One Canonical Record** (`one-canonical-record`). Writing or updating a decision,
+  rule, term, or other fact that may already be recorded elsewhere.
+- **Separate Documented From Inferred** (`separate-documented-from-inferred`). Writing
+  a spec, record, brief, explanation, or citation, or meeting a missing detail.
 
 ## Routes
 
