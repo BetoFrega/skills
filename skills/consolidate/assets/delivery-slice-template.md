@@ -12,7 +12,7 @@
 ### Acceptance criteria
 
 - <observable result under stated conditions; applicable scenario reference>
-- <relevant failure, denial, limit, or recovery outcome>
+- <expected failure, denial, or limit outcome, or the refusal and signal for it>
 
 ### Dependencies
 

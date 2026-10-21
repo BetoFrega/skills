@@ -19,13 +19,13 @@
 
 - <Preconditions and permitted outcome>.
 - <Business states, transitions, limits, invariants, and postconditions>.
-- <Relevant denial, failure, exception, and recovery behavior>.
+- <Expected denial and failure behavior; refusal and signal for anything else>.
 - <Links to shared rules and vocabulary rather than copied definitions>.
 
 ## Scenarios
 
 - <Situation> → <expected outcome>.
-- <Relevant invalid action or failure> → <expected outcome>.
+- <Expected invalid action or failure> → <expected outcome>.
 
 ## Value and cost
 

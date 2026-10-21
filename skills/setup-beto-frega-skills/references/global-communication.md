@@ -22,6 +22,9 @@ setup guidance, and installed entries. Preserve unrelated instructions.
    a recoverable copy. Bring unresolved conflicts to the user.
 5. Route other agents through supported global symlinks, imports, or always-loaded
    references. For required inline copies, install this block and record reconciliation.
+6. Remove superseded global paragraphs now owned by `beto-mode` principles: the lean
+   paragraph beginning "YAGNI, Last Responsible Moment", the exploratory-experiment
+   paragraph, and "Time matters". Keep their sentence on cognitive overload.
 
 Include edits, reconciled content, backups, entries, and symlink targets in setup's
 complete draft. Apply within approved scope; no repeat approval for approved drafts.
@@ -38,6 +41,9 @@ This reference owns the policy; installed globals supply it to agents.
 <!-- /@bufferapp/cli skill — managed -->
 
 Use `advisory` skill when stuck.
+
+Before multi-step, design, implementation, debugging, planning, or review work, read
+the `beto-mode` skill and apply the principles it routes to.
 
 ## Personal communication
 
@@ -108,13 +114,9 @@ blockers, and ordinary questions distinct from authorization requests. Use ✅ o
 when the claimed result or completion has been verified; describe progress with 🔄.
 The emoji convention applies to conversation only. Artifacts follow their own style.
 
-YAGNI, Last Responsible Moment, and other lean principles apply. Balance this with Evolutionary Architecture. Avoid over-engineering or premature optimization. Favor simplicity and clarity over cleverness. Avoid unnecessary abstractions, patterns, or frameworks. Favor explicitness over implicitness. Avoid unnecessary dependencies. DO apply the principle of least surprise. Code should be easy to read even by a drunken developer. Consider the user is already cognitively overloaded.
-
-Before proposing an exploratory experiment, compare its cost with making a reversible business decision, implementing it, and adjusting later. Include time, tokens, attention, delay, execution, and expected rework; qualitative judgment is enough. Propose the experiment only when its answer could change the decision and its expected total cost is lower than proceeding directly with an adjustment path. Otherwise, obtain the needed business choice, proceed within authorization, and preserve changeability. Uncertainty alone is not a reason to experiment. Keep required correctness, security, and data-integrity verification proportional to the implementation; do not treat this rule as a waiver of those checks.
+Consider the user is already cognitively overloaded.
 
 Before making or changing a design, architecture, or project-toolchain choice, review viable options and tradeoffs with the user using /recommend and wait for their decision. This includes selecting a project CLI, framework, provider, persistence strategy, or lasting dependency; familiarity, existing agent instructions, and autonomous execution do not substitute for user approval. Reuse explicit prior approval within its scope. Continue routine implementation, investigation, and verification autonomously within settled choices; do not reopen them or ask about ordinary task-local tool use. Record the user-approved choice at its governing destination before treating it as settled.
-
-Time matters: do not spend time that can be avoided. The earlier a good solution is found, the better.
 ```
 
 ## Verify
@@ -124,7 +126,8 @@ revisions/removals, must match approved behavior. Check preserved content, refer
 relative symlinks resolving to the canonical file, and overrides hiding policy.
 Check that the substantive communication policy replaces the superseded concision
 sentence, preserves user ownership of consequential choices, and avoids mandatory
-reports or approval of routine steps. Check that consequential status, decisions,
+reports or approval of routine steps. Check that the `beto-mode` pointer is present
+and the superseded principle paragraphs are absent. Check that consequential status, decisions,
 and next steps recover concrete referents and purpose without a full recap; unavailable
 detail stays an explicit gap. Verify native loading in fresh sessions where
 available without pasting the policy into the prompt; report unsupported probes.
