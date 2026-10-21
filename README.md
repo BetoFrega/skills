@@ -45,6 +45,18 @@ Installation makes instructions available; invocation starts the selected
 workflow. Some skills require explicit invocation. Reading a skill is not proof
 that its actions ran.
 
+## Working principles
+
+[beto-mode](skills/beto-mode/SKILL.md) is the entry point for non-trivial work. It
+routes a task to short working principles, such as Keep It Lean, Subtract Before You
+Add, and Fail Loud, Handle on Evidence, and to the workflow skills below. Setup
+installs a global pointer to it. Use a principle's name to steer an agent:
+
+```text
+Apply fail loud, handle on evidence: reject the duplicate write and alert on it
+instead of adding a lock.
+```
+
 ## 1. Prepare the project
 
 Use [setup-beto-frega-skills](skills/setup-beto-frega-skills/SKILL.md) before first

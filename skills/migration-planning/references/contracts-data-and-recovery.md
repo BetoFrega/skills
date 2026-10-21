@@ -12,7 +12,7 @@ For staged read/write changes, establish compatible reads before enabling new wr
 
 Define historical-data transfer, concurrent-change capture, completeness checks, and correctness. Make backfill restartable, with progress tracking and idempotent retries. Account for updates and deletions occurring during transfer; define how to catch up and prove acceptable completeness before handing over authority.
 
-Replication or multiple writes require ordering, partial-failure handling, reconciliation, acceptable lag, and recovery compatibility. Define when authority transfers and how writes admitted around that transition are handled. Use the authoritative-writer policy from the main workflow.
+Replication or multiple writes require acceptable lag and recovery compatibility. Handle ordering, partial failure, and reconciliation where write volume makes them expected; otherwise reject the conflicting write and emit a signal. Define when authority transfers and how writes admitted around that transition are handled. Use the authoritative-writer policy from the main workflow.
 
 Data transition is ready when compatible readers and writers, transfer progress, concurrent changes, authority handoff, and tested recovery are accounted for at the next exposure state.
 
@@ -22,7 +22,7 @@ Identify invariants that currently depend on one transaction. Explain whether th
 
 When a multi-step workflow needs compensating actions, consider a **saga**: committed steps are followed by explicit business compensation when required, rather than one database rollback. Choose orchestration or choreography from the workflow's coordination, state, and failure needs. Explain the choice with a concrete operation.
 
-Define retries, duplicate delivery, ordering, timeouts, partial completion, compensation failure, and reconciliation according to the workflow. A refund can compensate a charge, but cannot erase every consequence of the original payment. Preserve valid user activity and specify who resolves work that cannot be recovered automatically.
+Handle the retries, duplicate deliveries, timeouts, and partial completions that the workflow's known volume makes expected. Refuse any other conflicting or duplicate operation and emit a signal; add compensation or reconciliation when signals show the case recurring, per [Fail Loud, Handle on Evidence](../../beto-mode/principles/fail-loud-handle-on-evidence.md). A refund can compensate a charge, but cannot erase every consequence of the original payment. Preserve valid user activity and specify who resolves work that cannot be recovered automatically.
 
 Business recovery is ready when acceptable partial states, completion or compensation behavior, and unresolved-work handling are explicit and verified at relevant seams. Distinguish these rules from traffic rollback and legacy-path readiness.
 

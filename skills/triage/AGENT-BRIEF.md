@@ -6,7 +6,7 @@ For an issue, specify the requested change. For a PR, describe the current diff 
 
 Describe behavior and contracts; leave implementation decisions to the agent. Identify work through stable types, signatures, interfaces, and configuration shapes rather than implementation paths or line numbers. The brief must remain useful after refactoring.
 
-Use every field below. Include edge cases and errors, independently verifiable acceptance criteria, and explicit scope boundaries.
+Use every field below. Include the expected failures (specified, observed, or certain at the system's known scale), where anything else must fail loudly with a signal, independently verifiable acceptance criteria, and explicit scope boundaries. Do not enumerate hypothetical edge cases.
 
 ## Template
 
@@ -20,7 +20,7 @@ Use every field below. Include edge cases and errors, independently verifiable a
 Present behavior, or current diff state for a PR.
 
 **Desired behavior:**
-Required outcome, including edge cases and errors.
+Required outcome, including expected failures and where anything else fails loudly with a signal.
 
 **Key interfaces:**
 - Stable symbol or contract: required change and rationale.
