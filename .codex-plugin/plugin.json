@@ -1,0 +1,16 @@
+{
+  "name": "beto-frega-skills",
+  "version": "0.4.0",
+  "description": "Beto Frega's agent skills: grilling, planning, implementation, review, decisions, and delivery workflows.",
+  "author": { "name": "Beto Frega" },
+  "homepage": "https://github.com/BetoFrega/skills",
+  "repository": "https://github.com/BetoFrega/skills",
+  "license": "MIT",
+  "interface": {
+    "displayName": "Beto Frega Skills",
+    "shortDescription": "Agent workflows from problem to delivery",
+    "developerName": "Beto Frega",
+    "category": "Developer Tools"
+  },
+  "skills": "./skills/"
+}

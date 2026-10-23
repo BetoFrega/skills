@@ -1,0 +1,20 @@
+{
+  "name": "beto-frega-skills",
+  "interface": {
+    "displayName": "Beto Frega Skills"
+  },
+  "plugins": [
+    {
+      "name": "beto-frega-skills",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
