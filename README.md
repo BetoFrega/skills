@@ -8,16 +8,11 @@ Reuse accepted decisions and existing records instead of repeating every stage.
 
 ## Install and invoke
 
-Install the skills with:
+The repository is a plugin marketplace for Claude and Codex. Both expose every skill
+in `skills/` through the `beto-frega-skills` plugin; there is no separate local
+installation.
 
-```sh
-npx skills add betofrega/skills
-```
-
-### Claude plugin
-
-The repository is also a Claude Code plugin marketplace (`.claude-plugin/`) that
-exposes every skill in `skills/` as the `beto-frega-skills` plugin. Install it with:
+Claude Code:
 
 ```sh
 claude plugin marketplace add BetoFrega/skills
@@ -26,8 +21,19 @@ claude plugin install beto-frega-skills@beto-frega-skills
 
 In Claude (Code on the web, Cowork, or the desktop app), add the same GitHub
 repository as a plugin marketplace from the plugin settings, then install
-`beto-frega-skills`. Skills are namespaced, for example `/beto-frega-skills:grilling`.
-Bump `version` in both manifests when publishing a change.
+`beto-frega-skills`.
+
+Codex:
+
+```sh
+codex plugin marketplace add BetoFrega/skills
+codex plugin add beto-frega-skills@beto-frega-skills
+```
+
+Skills are namespaced in both agents, for example `beto-frega-skills:grilling`.
+Agents receive a change only after its plugin version is published and updated:
+bump `version` in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`,
+and `.codex-plugin/plugin.json` together.
 
 In Codex, name the skill and provide its scope, references, and intended result:
 
@@ -36,8 +42,8 @@ $grill-with-docs Read the existing checkout contracts and help me select
 the next usable increment. Focus on guest checkout.
 ```
 
-Examples below use local Codex skill names. Other clients use their supported
-invocation mechanism.
+Examples below omit the `beto-frega-skills:` prefix. Other clients use their
+supported invocation mechanism.
 Available tools, agent delegation, and project configuration determine which
 workflows a host can execute.
 
@@ -251,16 +257,9 @@ records. Use semantic compression when the task specifically needs that represen
 ## Repository layout
 
 - [skills/](skills/): canonical workflows, references, scripts, and agent metadata.
-- [Local development links](docs/local-skill-links.md): checkout linking and verification.
+- `.claude-plugin/`, `.codex-plugin/`, and `.agents/plugins/`: plugin and marketplace
+  manifests for Claude and Codex.
 
-For local development, edit canonical copies under `skills/` and expose them
-through relative links. From the repository checkout, preview and apply:
-
-```sh
-python3 scripts/link_skills.py
-python3 scripts/link_skills.py --apply
-```
-
-This development script uses the primary checkout by default. Follow the
-[local development workflow](docs/local-skill-links.md) for worktree selection,
-verification, and synchronization after delivery.
+To try unmerged changes, add the checkout itself as a local marketplace, for example
+`codex plugin marketplace add "$(git rev-parse --show-toplevel)"`, and install the
+plugin from it.

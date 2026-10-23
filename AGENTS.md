@@ -31,10 +31,12 @@ Report blocked destinations and Git delivery separately; local-only changes are 
 
 ## Skill installation
 
-Every repository skill must have a relative symlink under `~/.agents/skills`.
-When creating or importing skills, or after synchronizing delivered changes into
-the primary checkout, follow [the link workflow](docs/local-skill-links.md) and
-verify every installed skill before declaring the task complete.
+Install repository skills only through the `beto-frega-skills` plugin in each agent;
+do not create local copies or symlinks of repository skills. When delivering a skill
+change, bump `version` in `.claude-plugin/plugin.json`,
+`.claude-plugin/marketplace.json`, and `.codex-plugin/plugin.json` together. After
+synchronizing delivered changes into the primary checkout, update the plugin in each
+configured agent and verify that a fresh session loads the changed skill.
 
 ## Portable paths
 
