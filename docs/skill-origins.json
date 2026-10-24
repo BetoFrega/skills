@@ -166,7 +166,7 @@
     "beto-mode": {
       "source": "cursor/plugins (pstack)",
       "source_url": "https://github.com/cursor/plugins",
-      "source_path": "pstack/skills/poteto-mode/SKILL.md and pstack/skills/principle-*/SKILL.md",
+      "source_path": "pstack/skills/poteto-mode/SKILL.md, pstack/skills/principle-*/SKILL.md, and pstack/agents/poteto-agent.md",
       "upstream_commit": "1e5c90a4b6f249917bd21fe361b3a2a7deb741b8",
       "upstream_version": "0.15.24",
       "license": "MIT, Copyright (c) 2026 Lauren Tan",
@@ -175,7 +175,21 @@
         "Keep principles as files under principles/ instead of separate skills.",
         "Adapt Subtract Before You Add, Fix Root Causes, Test Behavior Not Implementation, Model the Domain, and Encode Lessons in Structure; merge Laziness Protocol into Keep It Lean and Minimize Reader Load into Least Surprise.",
         "Extract Keep It Lean, Least Surprise, Price the Experiment, and Don't Spend Avoidable Time from the global policy; add Fail Loud, Handle on Evidence.",
-        "Route to this repository's workflow skills; global rules keep authority over decisions and permissions."
+        "Route to this repository's workflow skills; global rules keep authority over decisions and permissions.",
+        "Adapt Build the Lever, Sequence Verifiable Units, Attack the Premise, Boundary Discipline (folding in parts of Type System Discipline), and Migrate Callers Then Delete Legacy APIs; generalize Attack the Premise's census to any premise test.",
+        "Adapt poteto-agent as the plugin's beto-agent delegate, loading beto-mode instead of poteto-mode and returning out-of-scope decisions to the parent."
+      ]
+    },
+    "correct": {
+      "source": "cursor/plugins (pstack)",
+      "source_url": "https://github.com/cursor/plugins",
+      "source_path": "pstack/skills/correct/SKILL.md",
+      "upstream_commit": "1e5c90a4b6f249917bd21fe361b3a2a7deb741b8",
+      "upstream_version": "0.15.24",
+      "license": "MIT, Copyright (c) 2026 Lauren Tan",
+      "local_adaptations": [
+        "Cite beto-mode principles for the fix ladder, tests, and canonical rule placement.",
+        "Require the user's approval for exceptions and proof that each check passes on the fix as well as failing on the past mistake."
       ]
     }
   }
