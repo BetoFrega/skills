@@ -10,6 +10,8 @@ otherwise create nothing and name the missing delegation. Delegation scopes repo
 not tracker authority. Require the exact flag, every grouped source pointer, relevant
 revision/environment, and minimal reproduction steps; return missing inputs without
 creating anything. Publish only with explicit user authority in the active task.
+When the source is a skill from an installed plugin, create nothing here: return the
+flag for `report-skill-lesson`, which files it on the plugin's repository.
 
 ## Resolve the tracker contract
 

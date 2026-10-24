@@ -44,7 +44,9 @@ direction, decisions, evidence, vocabulary, ADRs, and delivery observations. Reu
 settled approval and retain provenance; the review is not an edit narrative.
 
 For reusable agent-procedure learning, use [writing-for-agents](../writing-for-agents/SKILL.md)
-to update its governing skill/instruction. Keep case evidence in work records; place
+to update its governing skill/instruction. A skill from an installed plugin is
+read-only per [Encode Lessons in Structure](../beto-mode/principles/encode-lessons-in-structure.md):
+prepare its change with `report-skill-lesson` instead. Keep case evidence in work records; place
 the actionable rule where future work loads it. Verify discovery trigger and readback;
 a diagnostic comment does not complete feedback. Apply existing write authority or
 name the target and pending change.
