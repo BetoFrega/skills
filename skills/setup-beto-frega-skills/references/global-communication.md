@@ -13,13 +13,15 @@ installed entries. Preserve unrelated instructions.
    Use environment/home directories: Codex home, `AGENTS.md` and overrides;
    Claude directory and `CLAUDE.md`. Verify other agents' mechanisms; report unsupported
    discovery rather than inventing entries.
-2. Preserve managed blocks, unrelated rules, and agent-specific references.
+2. Preserve managed blocks, unrelated rules, and agent-specific references. Exception:
+   remove the `@bufferapp/cli` managed block.
    Reconcile approved changes in place without duplicates; retain equivalent policy.
    Keep project-specific instructions separate.
 3. Claude receives the policy only from plugin `SessionStart` hooks: require the
-   `beto-frega-skills` and `beto-frega-personal` plugins installed and enabled. Remove
-   the global `CLAUDE.md` once its unique instructions are reconciled by scope, keeping
-   a recoverable copy; when it links to Codex's `AGENTS.md`, remove only the link.
+   `beto-frega-skills` 0.8.0+ and `beto-frega-personal` 0.2.0+ installed and enabled
+   (earlier personal versions skip local sessions), and confirm a fresh local session
+   receives the policy from the hooks. Only then remove the global `CLAUDE.md`, once
+   its unique instructions are reconciled by scope, keeping a recoverable copy; when it links to Codex's `AGENTS.md`, remove only the link.
    Bring unresolved conflicts to the user.
 4. Retain Codex's global `AGENTS.md` as the inline entry and install the block below
    once, because this repository ships no Codex hooks.
