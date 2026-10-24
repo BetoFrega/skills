@@ -34,20 +34,9 @@ complete draft. Apply within approved scope; no repeat approval for approved dra
 
 This reference owns installation; [`personal/global-rules.md`](../../../personal/global-rules.md)
 owns the policy text, and the `beto-frega-personal` plugin injects that same file into
-Claude cloud sessions, which have no global `CLAUDE.md`. Install into each global
-entry, once and in this order:
-
-1. The `@bufferapp/cli` managed block, verbatim:
-
-   ```markdown
-   <!-- @bufferapp/cli skill — managed -->
-
-   !buffer context
-
-   <!-- /@bufferapp/cli skill — managed -->
-   ```
-
-2. The full contents of `personal/global-rules.md`.
+Claude cloud sessions, which have no global `CLAUDE.md`. Install the full contents of
+`personal/global-rules.md` into each global entry once. Remove any
+`@bufferapp/cli` managed block (`!buffer context`) from global entries.
 
 ## Verify
 
