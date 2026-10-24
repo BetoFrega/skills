@@ -25,15 +25,25 @@ Each entry says when it applies. Files live at `principles/<name>.md`.
 - **Fail Loud, Handle on Evidence** (`fail-loud-handle-on-evidence`). Deciding which
   failures, edge cases, or concurrency risks the code handles; writing briefs, plans,
   or review findings about them.
+- **Boundary Discipline** (`boundary-discipline`). Wiring validation, parsing, error
+  handling, or framework adapters, or designing types and signatures.
 - **Fix Root Causes** (`fix-root-causes`). Debugging a failure or regression.
+- **Attack the Premise** (`attack-the-premise`). Two or more fixes sharing one premise
+  have failed the same check.
 - **Test Behavior, Not Implementation** (`test-behavior-not-implementation`). Writing,
   changing, or keeping a test.
 - **Model the Domain** (`model-the-domain`). Writing stateful logic, or code that
   branches a lot or repeats a shape assumption across files.
+- **Migrate Callers, Then Delete Legacy** (`migrate-callers-then-delete-legacy`).
+  Introducing a new internal API while old callers exist.
 - **Price the Experiment** (`price-the-experiment`). Tempted to prototype, spike, or
   measure before deciding.
 - **Don't Spend Avoidable Time** (`dont-spend-avoidable-time`). Choosing between paths,
   sequencing work, or deliberating longer than the next step needs.
+- **Build the Lever** (`build-the-lever`). Any non-trivial edit, migration, analysis,
+  or check that a script, codemod, or generator could do or prove.
+- **Sequence Verifiable Units** (`sequence-verifiable-units`). Multi-step work, sweeps,
+  migrations, or ordering commits and PRs.
 - **Encode Lessons in Structure** (`encode-lessons-in-structure`). Writing the same
   instruction a second time, or meeting a recurring correction.
 - **Evidence Before Claims** (`evidence-before-claims`). Reporting a result, status, or
@@ -75,7 +85,8 @@ in settled decisions or records.
 - Module boundaries and seams → `codebase-design`; test-first work → `tdd`.
 - Hard bug or performance regression → `diagnosing-bugs`.
 - Stuck, repeated errors, or a consequential diagnosis → `advisory`.
-- Delegating work → `model-selection`.
+- Delegating work → `model-selection`; in Claude, spawn delegates as the
+  `beto-frega-skills:beto-agent` subagent.
 
 **Review and deliver**
 
@@ -87,3 +98,4 @@ in settled decisions or records.
 **Instructions**
 
 - Creating or editing skills, `AGENTS.md`, or `CLAUDE.md` → `writing-for-agents`.
+- The user corrects the same mistake class again → suggest `/correct`.

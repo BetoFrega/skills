@@ -244,6 +244,7 @@ Use `proceed` to continue execution within existing scope and approval boundarie
 | Need | Skill and result |
 | --- | --- |
 | Write or improve agent instructions | [writing-for-agents](skills/writing-for-agents/SKILL.md): behavior-changing guidance and useful retrieval structure. |
+| Stop agents repeating a corrected mistake | [correct](skills/correct/SKILL.md): each repeated mistake class fixed at the highest level that works, with a check proven on a past mistake. |
 | Reduce an agent document | [prune-agent-docs](skills/prune-agent-docs/SKILL.md): exact, independently reviewed cuts, applied only after authorization. |
 | Clarify reader-facing prose | [simple-language](skills/simple-language/SKILL.md): plain, readable language. |
 | Prepare an explicitly delegated low-density tracker report | [report-low-density](skills/report-low-density/SKILL.md): a reproducible flag; publication requires explicit instruction or approval. |
@@ -257,6 +258,8 @@ records. Use semantic compression when the task specifically needs that represen
 ## Repository layout
 
 - [skills/](skills/): canonical workflows, references, scripts, and agent metadata.
+- [agents/](agents/): Claude subagents shipped with the plugin, such as `beto-agent`,
+  the delegate that reads beto-mode before working.
 - `.claude-plugin/`, `.codex-plugin/`, and `.agents/plugins/`: plugin and marketplace
   manifests for Claude and Codex.
 
