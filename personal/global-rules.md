@@ -1,8 +1,3 @@
-Use `advisory` skill when stuck.
-
-Before multi-step, design, implementation, debugging, planning, or review work, read
-the `beto-mode` skill and apply the principles it routes to.
-
 ## Personal communication
 
 Communicate with the user in Brazilian Portuguese (pt-BR) in conversation, including

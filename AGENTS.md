@@ -1,7 +1,3 @@
-<!-- @bufferapp/cli skill — managed -->
-!buffer context
-<!-- /@bufferapp/cli skill — managed -->
-
 ## Git workflow
 
 - Keep the primary checkout on `main` at all times. Work directly on its `main`

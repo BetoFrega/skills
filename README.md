@@ -32,7 +32,7 @@ codex plugin add beto-frega-skills@beto-frega-skills
 
 In Claude, the plugin's `SessionStart` hook routes every session, including cloud
 sessions, to `beto-mode`. The marketplace also lists `beto-frega-personal`, which
-injects the author's personal global rules into Claude cloud sessions; other users
+injects the author's personal global rules into every Claude session; other users
 should not install it.
 
 Skills are namespaced in both agents, for example `beto-frega-skills:grilling`.

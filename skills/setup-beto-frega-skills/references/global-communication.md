@@ -16,11 +16,13 @@ installed entries. Preserve unrelated instructions.
 2. Preserve managed blocks, unrelated rules, and agent-specific references.
    Reconcile approved changes in place without duplicates; retain equivalent policy.
    Keep project-specific instructions separate.
-3. Retain the canonical global `AGENTS.md`, defaulting to Codex's when none exists.
-   Install the block below once.
-4. Link Claude's `CLAUDE.md` relatively to that canonical file; retain correct links.
-   Before replacing a separate file, reconcile unique instructions by scope and keep
-   a recoverable copy. Bring unresolved conflicts to the user.
+3. Claude receives the policy only from plugin `SessionStart` hooks: require the
+   `beto-frega-skills` and `beto-frega-personal` plugins installed and enabled. Remove
+   the global `CLAUDE.md` once its unique instructions are reconciled by scope, keeping
+   a recoverable copy; when it links to Codex's `AGENTS.md`, remove only the link.
+   Bring unresolved conflicts to the user.
+4. Retain Codex's global `AGENTS.md` as the inline entry and install the block below
+   once, because this repository ships no Codex hooks.
 5. Route other agents through supported global symlinks, imports, or always-loaded
    references. For required inline copies, install this block and record reconciliation.
 6. Remove superseded global paragraphs now owned by `beto-mode` principles: the lean
@@ -32,17 +34,24 @@ complete draft. Apply within approved scope; no repeat approval for approved dra
 
 ## Canonical instruction block
 
-This reference owns installation; [`personal/global-rules.md`](../../../personal/global-rules.md)
-owns the policy text, and the `beto-frega-personal` plugin injects that same file into
-Claude cloud sessions, which have no global `CLAUDE.md`. Install the full contents of
-`personal/global-rules.md` into each global entry once. Remove any
-`@bufferapp/cli` managed block (`!buffer context`) from global entries.
+This reference owns installation. The policy text lives in two files, which the
+plugin hooks inject into every Claude session:
+
+- [`hooks/beto-mode-routing.md`](../../../hooks/beto-mode-routing.md), injected by
+  `beto-frega-skills`;
+- [`personal/global-rules.md`](../../../personal/global-rules.md), injected by
+  `beto-frega-personal`.
+
+For inline entries such as Codex's `AGENTS.md`, install both files' contents once, in
+that order. Remove any `@bufferapp/cli` managed block (`!buffer context`) from global
+entries.
 
 ## Verify
 
 Read back all configured agents' global entries: every maintained rule, including
 revisions/removals, must match approved behavior. Check preserved content, references,
-relative symlinks resolving to the canonical file, and overrides hiding policy.
+that no global Claude `CLAUDE.md` remains, that both plugins are enabled, and overrides
+hiding policy.
 Check that the substantive communication policy replaces the superseded concision
 sentence, preserves user ownership of consequential choices, and avoids mandatory
 reports or approval of routine steps. Check that the `beto-mode` pointer is present
