@@ -19,11 +19,13 @@ installed entries. Preserve unrelated instructions.
    Keep project-specific instructions separate.
 3. Claude receives the policy only from plugin `SessionStart` hooks: require the
    `beto-frega-skills` 0.8.0+ and `beto-frega-personal` 0.2.0+ installed and enabled
-   (earlier personal versions skip local sessions). Record how to restore the global
-   `CLAUDE.md` (a copy of a regular file, or a symlink's target), reconcile its unique
-   instructions by scope, then remove it. If a fresh local session then lacks the
-   policy, restore it as recorded and report the hook gap. Bring unresolved conflicts
-   to the user.
+   (earlier personal versions skip local sessions). Then retire the global `CLAUDE.md`:
+   - Symlink (usually to Codex's `AGENTS.md`): record its target and remove only the
+     link; never edit or delete the target.
+   - Regular file: reconcile its unique instructions by scope, keep a copy, then
+     delete it.
+   If a fresh local session then lacks the policy, recreate the link or restore the
+   copy and report the hook gap. Bring unresolved conflicts to the user.
 4. Retain Codex's global `AGENTS.md` as the inline entry and install the block below
    once, because this repository ships no Codex hooks.
 5. Route other agents through supported global symlinks, imports, or always-loaded
