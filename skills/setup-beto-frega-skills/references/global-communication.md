@@ -21,7 +21,8 @@ installed entries. Preserve unrelated instructions.
    `beto-frega-skills` 0.8.0+ and `beto-frega-personal` 0.2.0+ installed and enabled
    (earlier personal versions skip local sessions), and confirm a fresh local session
    receives the policy from the hooks. Only then remove the global `CLAUDE.md`, once
-   its unique instructions are reconciled by scope, keeping a recoverable copy; when it links to Codex's `AGENTS.md`, remove only the link.
+   its unique instructions are reconciled by scope, keeping a recoverable copy; when
+   it links to Codex's `AGENTS.md`, remove only the link.
    Bring unresolved conflicts to the user.
 4. Retain Codex's global `AGENTS.md` as the inline entry and install the block below
    once, because this repository ships no Codex hooks.
