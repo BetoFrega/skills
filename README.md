@@ -30,6 +30,11 @@ codex plugin marketplace add BetoFrega/skills
 codex plugin add beto-frega-skills@beto-frega-skills
 ```
 
+In Claude, the plugin's `SessionStart` hook routes every session, including cloud
+sessions, to `beto-mode`. The marketplace also lists `beto-frega-personal`, which
+injects the author's personal global rules into every Claude session; other users
+should not install it.
+
 Skills are namespaced in both agents, for example `beto-frega-skills:grilling`.
 Agents receive a change only after its plugin version is published and updated:
 bump `version` in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`,
@@ -261,6 +266,9 @@ records. Use semantic compression when the task specifically needs that represen
 - [skills/](skills/): canonical workflows, references, scripts, and agent metadata.
 - [agents/](agents/): Claude subagents shipped with the plugin, such as `beto-agent`,
   the delegate that reads beto-mode before working.
+- [hooks/](hooks/): the Claude `SessionStart` hook that points sessions to `beto-mode`.
+- [personal/](personal/): the `beto-frega-personal` plugin and the canonical text of
+  the author's global rules.
 - `.claude-plugin/`, `.codex-plugin/`, and `.agents/plugins/`: plugin and marketplace
   manifests for Claude and Codex.
 

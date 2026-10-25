@@ -1,0 +1,9 @@
+{
+  "name": "beto-frega-personal",
+  "description": "Beto Frega's personal global agent rules for every Claude session. Not meant for other users.",
+  "version": "0.2.0",
+  "author": { "name": "Beto Frega" },
+  "homepage": "https://github.com/BetoFrega/skills",
+  "repository": "https://github.com/BetoFrega/skills",
+  "license": "MIT"
+}

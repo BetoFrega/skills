@@ -40,6 +40,6 @@ Obtain approval before writing, including edits to existing configuration.
 Apply approved changes only. Reconcile the communication policy in existing globals,
 including replacement of superseded concision guidance and minimum context when
 switching tasks; preserve unrelated rules.
-Read back labels; verify references, discovery, project accuracy, relative global symlinks, policy loading through every configured agent, and idempotence. For external-only setup, verify the repository stayed untouched.
+Read back labels; verify references, discovery, project accuracy, relative global symlinks, plugin-hook loading for Claude, policy loading through every configured agent, and idempotence. For external-only setup, verify the repository stayed untouched.
 
 Report changed files, consumers, and [delivery state](../consolidate/references/local-document-delivery.md). Rerun setup only for gaps or intentional revisions.
