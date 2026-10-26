@@ -5,9 +5,14 @@ description: Compare viable alternatives and recommend a choice; resolve missing
 
 # Recommend
 
-Compare alternatives against the user's goal, constraints, and priorities, respecting
-settled decisions and rejected options. This invocation produces advice; execution
-uses its own authorization.
+Compare alternatives against the user's goal, constraints, and priorities. This
+invocation produces advice; execution uses its own authorization.
+
+The user is open to revisiting earlier decisions and rejected options. Treat them as
+context, not fixed constraints, when they shape the comparison: if an earlier choice
+blocks a better option or a rejected option now fits, include that option, name the
+decision it would reopen, and state the cost of reversing it. Leave decisions that do
+not affect this comparison alone.
 
 ## Establish the comparison
 
