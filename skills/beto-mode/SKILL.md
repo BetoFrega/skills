@@ -35,6 +35,8 @@ Each entry says when it applies. Files live at `principles/<name>.md`.
   have failed the same check.
 - **Test Behavior, Not Implementation** (`test-behavior-not-implementation`). Writing,
   changing, or keeping a test.
+- **Tests Earn Their Runtime** (`tests-earn-their-runtime`). Adding or keeping a test,
+  or reviewing a change that adds tests.
 - **Model the Domain** (`model-the-domain`). Writing stateful logic, or code that
   branches a lot or repeats a shape assumption across files.
 - **Migrate Callers, Then Delete Legacy** (`migrate-callers-then-delete-legacy`).

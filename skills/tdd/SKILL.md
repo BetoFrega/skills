@@ -13,6 +13,8 @@ present and relevant ADRs; use domain vocabulary in tests and interfaces.
 Test behavior through public interfaces. Tests read as specifications and survive
 internal rewrites. Consult [tests.md](tests.md) for examples and
 [mocking.md](mocking.md) for dependency strategy.
+Each test must also earn its runtime: apply
+[Tests Earn Their Runtime](../beto-mode/principles/tests-earn-their-runtime.md).
 
 ## Seams: where tests go
 

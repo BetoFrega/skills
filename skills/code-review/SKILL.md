@@ -98,6 +98,13 @@ Provide all standards and paste the smell baseline in full. Cite file and contro
 rule for breaches. Smells are judgement calls, never hard requirements: name the
 smell and cite the changed hunk.
 
+When the diff adds or changes tests, also paste
+[Tests Earn Their Runtime](../beto-mode/principles/tests-earn-their-runtime.md) in
+full. For each added test, require the failure only it catches; report as findings
+tests with none, tests at a slower level than their failure needs, one case per value
+where one per class suffices, real waits or network, and tests the diff made
+redundant but kept. Cite the test and the rule it breaks.
+
 ### Spec reviewer
 
 Provide spec path and contents. Find missing/partial requirements, unrequested scope,
