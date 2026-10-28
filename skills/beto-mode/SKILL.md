@@ -45,9 +45,10 @@ Each entry says when it applies. Files live at `principles/<name>.md`.
 - **Sequence Verifiable Units** (`sequence-verifiable-units`). Multi-step work, sweeps,
   migrations, or ordering commits and PRs.
 - **Encode Lessons in Structure** (`encode-lessons-in-structure`). Writing the same
-  instruction a second time, or meeting a recurring correction.
-- **Evidence Before Claims** (`evidence-before-claims`). Reporting a result, status, or
-  completion, or judging whether something works or is feasible.
+  instruction a second time, meeting a recurring correction, or about to change a
+  skill or agent instruction.
+- **Evidence Before Claims** (`evidence-before-claims`). Reporting a result, status,
+  completion, or measured number, or judging whether something works or is feasible.
 - **One Canonical Record** (`one-canonical-record`). Writing or updating a decision,
   rule, term, or other fact that may already be recorded elsewhere.
 - **Separate Documented From Inferred** (`separate-documented-from-inferred`). Writing
@@ -98,4 +99,6 @@ in settled decisions or records.
 **Instructions**
 
 - Creating or editing skills, `AGENTS.md`, or `CLAUDE.md` → `writing-for-agents`.
-- The user corrects the same mistake class again → suggest `/correct`.
+- Lesson about, or change to, a skill from an installed plugin →
+  `report-skill-lesson`.
+- Periodic audit of repeated agent mistakes in a repository → suggest `/correct`.

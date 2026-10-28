@@ -177,7 +177,8 @@
         "Extract Keep It Lean, Least Surprise, Price the Experiment, and Don't Spend Avoidable Time from the global policy; add Fail Loud, Handle on Evidence.",
         "Route to this repository's workflow skills; global rules keep authority over decisions and permissions.",
         "Adapt Build the Lever, Sequence Verifiable Units, Attack the Premise, Boundary Discipline (folding in parts of Type System Discipline), and Migrate Callers Then Delete Legacy APIs; generalize Attack the Premise's census to any premise test.",
-        "Adapt poteto-agent as the plugin's beto-agent delegate, loading beto-mode instead of poteto-mode and returning out-of-scope decisions to the parent."
+        "Adapt poteto-agent as the plugin's beto-agent delegate, loading beto-mode instead of poteto-mode and returning out-of-scope decisions to the parent.",
+        "Fold pstack's correct ladder into Encode Lessons in Structure, add the plugin-skills-are-read-only rule, and fold Explain the Number's limiter and alternative-explanation checks into Evidence Before Claims."
       ]
     },
     "correct": {
@@ -188,7 +189,8 @@
       "upstream_version": "0.15.24",
       "license": "MIT, Copyright (c) 2026 Lauren Tan",
       "local_adaptations": [
-        "Cite beto-mode principles for the fix ladder, tests, and canonical rule placement.",
+        "Keep only the history sweep; the fix ladder, proof, and rule table move into the Encode Lessons in Structure principle so a single correction is handled without invoking the skill.",
+        "Route mistakes traced to installed plugin skills to report-skill-lesson instead of editing them.",
         "Require the user's approval for exceptions and proof that each check passes on the fix as well as failing on the past mistake."
       ]
     }
