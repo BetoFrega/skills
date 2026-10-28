@@ -8,7 +8,9 @@ guidance; trust model competence.
 
 Inspect the user's chosen file; otherwise select an agent-facing document relevant
 to the active task and documents discussed, referenced, or open in context, with
-clear pruning potential. Use a broader inventory to select one large document only
+clear pruning potential. Skip skills from an installed plugin; per
+[Encode Lessons in Structure](../beto-mode/principles/encode-lessons-in-structure.md),
+report their reductions with `report-skill-lesson`. Use a broader inventory to select one large document only
 when context supplies no relevant candidate. Show exact cuts and estimated word
 reduction, targeting 50–95%.
 Preserve intent, essential contracts, exceptions, and reference triggers. Prefer

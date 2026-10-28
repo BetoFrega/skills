@@ -1,0 +1,3 @@
+interface:
+  display_name: "Report Skill Lesson"
+  short_description: "File a plugin skill lesson as an issue instead of editing it"
