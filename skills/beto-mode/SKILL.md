@@ -27,6 +27,9 @@ Each entry says when it applies. Files live at `principles/<name>.md`.
   or review findings about them.
 - **Boundary Discipline** (`boundary-discipline`). Wiring validation, parsing, error
   handling, or framework adapters, or designing types and signatures.
+- **Security by Design** (`security-by-design`). Touching a trust boundary: untrusted
+  input, authentication, authorization, secrets, personal data, permissions, or a new
+  dependency or network exposure.
 - **Fix Root Causes** (`fix-root-causes`). Debugging a failure or regression.
 - **Attack the Premise** (`attack-the-premise`). Two or more fixes sharing one premise
   have failed the same check.
