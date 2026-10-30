@@ -4,5 +4,6 @@ Before multi-step, design, implementation, debugging, planning, or review work, 
 the `beto-frega-skills:beto-mode` skill and apply the principles it routes to.
 
 Before delivering any text you wrote, including messages, review it with the
-`beto-frega-skills:simple-language` skill: remove AI'isms and cut to the length a
-person would write.
+`beto-frega-skills:simple-language` skill: remove AI'isms, cut what is obvious
+and anything beyond the length a person would write, and use the tense that matches
+when each event happens.
