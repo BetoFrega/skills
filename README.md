@@ -35,8 +35,8 @@ injects the author's personal global rules into every Claude session; other user
 should not install it.
 
 Skills are namespaced in both agents, for example `beto-frega-skills:grilling`.
-Agents receive a change only after its plugin version is published and updated:
-bump `version` in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`,
+Agents receive a change to skills, agents, or hooks only after its plugin version is
+published and updated: bump `version` in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`,
 and `.codex-plugin/plugin.json` together.
 
 In Codex, name the skill and provide its scope, references, and intended result:
