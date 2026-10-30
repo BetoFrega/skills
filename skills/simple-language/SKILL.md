@@ -53,6 +53,7 @@ Keep terms of art and literal comparisons that carry information.
 Before drafting, estimate how much a person who knows the subject would write for
 this reader. Aim for that length; an unchecked draft runs longer. On review, ask
 whether a person would have written this much, and cut until the answer is yes.
+In running prose, cut every sentence or clause the reader would infer without it.
 
 Read the text as the reader would hear it. Vary sentence length, and join short
 related sentences so the text reads with rhythm.
@@ -74,6 +75,6 @@ Rewrite the default present:
 Verify the named reader understands the intended knowledge/action after one reading;
 the main point appears in the first two lines; sentences/paragraphs hold one
 idea/topic; terms have one name and no unexplained jargon; all facts, numbers,
-conditions, and honest hedges survive; no AI'ism from the list above remains; the length matches what a person would write; each verb's tense matches when its event happens.
+conditions, and honest hedges survive; no AI'ism from the list above remains; the length matches what a person would write and nothing obvious remains; each verb's tense matches when its event happens.
 
 For local rewrites, report [document delivery](../consolidate/references/local-document-delivery.md).
