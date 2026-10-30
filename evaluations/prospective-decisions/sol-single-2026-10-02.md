@@ -138,7 +138,7 @@ or an extracted correct choice do not prove equal reliability.
 
 These are synthetic architecture constraint problems with finite references.
 Product, open-ended architecture, code design, tone and manner, and factual truth
-remain separate unqualified decision tracks. No change to Tudo Macaé was executed.
+remain separate unqualified decision tracks.
 The requested round is complete; no additional cases or repetitions were started.
 
 ## Artifacts and reproduction

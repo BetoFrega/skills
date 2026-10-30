@@ -14,7 +14,7 @@ and scores their decisions with an executable reference.
 The implemented generator is an **architecture constraint diagnostic**: dependency
 ordering, capacity, concurrency, retries, deadlines, competing costs, and uncertainty
 across possible worlds. Its three scenario names evoke publication, upload, and image
-recovery. They are fictional controlled problems, not claims about Tudo Macaé or
+recovery. They are fictional controlled problems, not claims about a real product or
 three independent decision classes. Operation names add no hidden domain constraints.
 This diagnostic does not establish skill in open-ended architecture or product design.
 
