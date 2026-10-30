@@ -1,6 +1,6 @@
 # Don't Spend Avoidable Time
 
-Time matters. The earlier a good solution is found, the better.
+Reach a good solution as early as you can.
 
 - Prefer the path that reaches a verifiable result soonest, at acceptable quality.
 - Stop deliberating when the next step is clear, executable, and verifiable.

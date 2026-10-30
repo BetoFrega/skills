@@ -16,7 +16,7 @@ Inspect changes that can affect:
   loops, including lost caching, incremental work, or parallelism.
 
 A development-loop cost is a finding when it grows out of proportion to the value
-introduced by the change. Proportional growth is not a defect. Report clear
+introduced by the change; proportional growth is fine. Report clear
 disproportion as a finding; label subjective cases `Potentially disproportionate` and
 show the evidence for both cost and benefit.
 
@@ -29,8 +29,8 @@ A plausible degradation is actionable when the reviewer can show all four links:
 3. a real execution path, workload, or scale condition where that difference matters;
 4. the likely user or development consequence.
 
-This chain, not a measurement, establishes the possibility. Omit abstract suspicions
-that cannot identify the mechanism. When measurement confirms the effect, report the
+The chain is enough to report the risk without a measurement. Omit suspicions that
+cannot name the mechanism. When measurement confirms the effect, report the
 regression and magnitude. When the chain is present but adequate measurement is not,
 report `Impact: Unverified` and the smallest credible verification instead of asking
 the user to discover the mechanism.
@@ -53,7 +53,7 @@ that the author understands:
 - the benefit received in exchange;
 - the credible verification or mitigation considered.
 
-Acceptance resolves the awareness requirement, not the performance cost. Keep an
+Acceptance satisfies the awareness requirement, but the cost remains, so keep an
 accepted trade-off in the report with its evidence. Use exactly one of these labels:
 
 - `Author acknowledgement: Not found`
