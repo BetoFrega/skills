@@ -1,6 +1,6 @@
 ---
 name: simple-language
-description: Rewrite or audit reader-facing prose for plain language, clarity, readability, or actionability.
+description: Rewrite or audit reader-facing prose for plain language, clarity, readability, or actionability. Also use to review any produced text for AI'isms before delivery.
 ---
 
 Use ISO 24495's four principles. Numeric targets below are working proxies,
@@ -32,11 +32,27 @@ Name who does what. Give instructions as imperatives with explicit objects and
 applicable deadlines; put conditions before actions. End messages with a next step
 when one exists.
 
+## Remove AI'isms
+
+Review every text you produce before delivering it: docs, skills, PR and commit
+descriptions, tickets, and messages. Rewrite each of these patterns as a direct
+statement of the fact or action:
+
+- Slogans and punchy closers: "Pinned is not intended.", "leaving the growth is not."
+- Contrast frames: "this is X, not Y", "X, not Y", "not a coverage campaign". State X.
+- Emphatic negations: "never as a side effect", "nobody asked for". Say what to do.
+- Forced metaphors: "exhale in the same change". Name the action: "simplify again in
+  the same change".
+- Decorative symbols in prose: `≠`, `→` chains, tree blocks (`├──`, `└──`), emoji
+  outside an agreed convention.
+
+Keep terms of art and literal comparisons that carry information.
+
 ## Self-Check (run before returning)
 
 Verify the named reader understands the intended knowledge/action after one reading;
 the main point appears in the first two lines; sentences/paragraphs hold one
 idea/topic; terms have one name and no unexplained jargon; all facts, numbers,
-conditions, and honest hedges survive.
+conditions, and honest hedges survive; no AI'ism from the list above remains.
 
 For local rewrites, report [document delivery](../consolidate/references/local-document-delivery.md).
