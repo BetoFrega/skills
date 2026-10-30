@@ -11,7 +11,7 @@ delegation. File-reading jobs retain sandboxed shell access; judges have shell
 access disabled as well. It preserves execution-policy rules and approval checks.
 
 The CLI sandbox governs model-generated commands. Connector permissions require
-their own restrictions; inheriting a writable MCP tool is not a read-only assignment.
+their own restrictions; an assignment that inherits a writable MCP tool is not read-only.
 The bundled adapter supports supplied evidence and local file reading. When an
 assignment needs another capability, provide a verified evidence packet or use a
 native agent with the required explicitly limited read-only tools.

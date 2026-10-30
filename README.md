@@ -3,14 +3,13 @@
 Agent workflows for developers: clarify the problem, define useful increments,
 implement them, review the result, and deliver with evidence.
 
-Start where your work is today. This is a journey map, not a mandatory sequence.
-Reuse accepted decisions and existing records instead of repeating every stage.
+The stages below are a map. Start at the one that matches your work today, and
+reuse accepted decisions and existing records instead of repeating earlier stages.
 
 ## Install and invoke
 
-The repository is a plugin marketplace for Claude and Codex. Both expose every skill
-in `skills/` through the `beto-frega-skills` plugin; there is no separate local
-installation.
+The repository is a plugin marketplace for Claude and Codex. Both install every skill
+in `skills/` through the `beto-frega-skills` plugin.
 
 Claude Code:
 
@@ -47,14 +46,12 @@ $grill-with-docs Read the existing checkout contracts and help me select
 the next usable increment. Focus on guest checkout.
 ```
 
-Examples below omit the `beto-frega-skills:` prefix. Other clients use their
-supported invocation mechanism.
-Available tools, agent delegation, and project configuration determine which
-workflows a host can execute.
+Examples below omit the `beto-frega-skills:` prefix. Other clients use their own
+invocation mechanism. Which workflows a host can run depends on its tools, agent
+delegation, and project configuration.
 
-Installation makes instructions available; invocation starts the selected
-workflow. Some skills require explicit invocation. Reading a skill is not proof
-that its actions ran.
+Some skills run only when invoked explicitly. An agent that read a skill has not
+necessarily run its actions.
 
 ## Working principles
 
@@ -103,8 +100,8 @@ $grill-with-docs Review the current purchase and identity rules. Help me
 define the smallest useful guest-checkout increment and its acceptance.
 ```
 
-Use discoverable facts before asking the user. A prototype or research finding
-provides evidence; it does not itself approve product policy.
+Use discoverable facts before asking the user. A prototype or research finding is
+evidence for a product decision; the decision still needs approval.
 
 ## 3. Choose an approach and preserve the decision
 
@@ -122,9 +119,9 @@ $recommend Compare the feasible identity approaches for this selected
 increment. Include user impact, maintenance cost, and the next decision.
 ```
 
-Record accepted choices, including rationale and consequences. Retain unresolved
-proposals as proposals. Autonomous deliberation does not grant additional execution
-permission.
+Record accepted choices with their rationale and consequences, and keep unresolved
+proposals marked as proposals. Autonomous deliberation runs within the permissions
+you already granted.
 
 ## 4. Define a usable increment and executable work
 
@@ -142,14 +139,12 @@ tickets with dependencies, validation, and done criteria; show the breakdown
 before publishing.
 ```
 
-A vertical slice produces a usable result across the necessary layers. One
-increment may need several tickets. Resolve outstanding scope and breakdown
-choices before publication; reuse approval already given for the same workset.
-Ticket readiness does not replace product approval.
+A vertical slice produces a usable result across the necessary layers, and one
+increment may need several tickets. Resolve scope and breakdown choices before
+publishing, reusing approval already given for the same workset. Ready tickets
+still need product approval.
 
 ## 5. Implement the selected scope
-
-Choose the execution route deliberately:
 
 | Route | Use it when |
 | --- | --- |
@@ -189,8 +184,8 @@ $code-review Review the current branch against the selected increment and
 acceptance criteria. Include affected error paths and observability.
 ```
 
-Resolve actionable findings and rerun affected validation. Passing tests alone
-does not establish that expected reviews completed.
+Resolve actionable findings and rerun affected validation. Confirm that the
+expected reviews ran; passing tests do not show that.
 
 ## 7. Deliver and verify the claimed outcome
 
@@ -229,8 +224,8 @@ supported learning, unresolved questions, and implications for pending work.
 ```
 
 Use [next-steps](skills/next-steps/SKILL.md) for remaining completion requirements,
-learning-review triggers, and ready successors. Learning review does not itself
-authorize publishing new tickets or changing release controls.
+learning-review triggers, and ready successors. Publishing new tickets or changing
+release controls still needs your approval.
 
 ## Commands for an ongoing task
 
@@ -241,8 +236,8 @@ authorize publishing new tickets or changing release controls.
 | Prepare a continuation brief | [handoff](skills/handoff/SKILL.md) |
 | Resume the agreed plan through completion | [proceed](skills/proceed/SKILL.md) |
 
-Status, scope checks, handoffs, verification, and next-step requests are informational.
-Use `proceed` to continue execution within existing scope and approval boundaries.
+Status, scope checks, handoffs, verification, and next steps only report. Use
+`proceed` to continue execution within the existing scope and approvals.
 
 ## Maintain the instructions agents and people read
 

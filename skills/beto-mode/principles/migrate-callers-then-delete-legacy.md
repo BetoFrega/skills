@@ -12,6 +12,6 @@ API in the same wave. Do not keep both paths because internal callers still exis
   declared and the end state is fully verified.
 
 Applies when no external consumer depends on the old API and the project can absorb a
-coordinated change. External or deployed consumers → `migration-planning`.
+coordinated change. With external or deployed consumers, use `migration-planning`.
 
 **Check:** after the wave, a search for the old API returns nothing outside history.

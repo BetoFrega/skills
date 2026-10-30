@@ -19,8 +19,8 @@ inputs. Apply `model-selection` to available Claude models and supported efforts
 Set both through the dispatch interface or a role-specific agent definition; verify
 the effective configuration when the environment inherits or substitutes a setting.
 Use restricted read-only tools for deciders and verifiers. Judges receive the report
-packet directly and have no research tools. A tool permission grant such as
-`allowed-tools` is not a tool restriction.
+packet directly and have no research tools. A permission grant such as
+`allowed-tools` adds tools; it does not restrict them.
 
 ## Independent CLI sessions
 

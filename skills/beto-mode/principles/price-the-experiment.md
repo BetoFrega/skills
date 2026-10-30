@@ -11,4 +11,4 @@ attention, delay, execution, and expected rework; qualitative judgment is enough
 - When the experiment loses, obtain the needed business choice, proceed within
   authorization, and preserve changeability.
 - Required correctness, security, and data-integrity verification stays proportional
-  to the implementation; this principle never waives it.
+  to the implementation, whatever the experiment decision.

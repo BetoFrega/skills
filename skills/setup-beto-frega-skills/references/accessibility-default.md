@@ -22,8 +22,8 @@ baseline at its resolved location. Consult that document once it exists.
 - **Journey coverage**: review entry, success, error, interrupted, and recovery states,
   not only isolated components or the happy path.
 - **Verification**: combine automated checks with keyboard/manual inspection and the
-  agreed browser, platform, or assistive-technology matrix. Automation alone is not a
-  conformance claim.
+  agreed browser, platform, or assistive-technology matrix. Automated checks alone do not
+  support a conformance claim.
 - **Exceptions**: record the unmet requirement, affected users and journey, rationale,
   compensating path, owner, and expiry or review condition.
 

@@ -35,7 +35,7 @@ For decision records, read
 For living records, read
 [record format](../../consolidate/references/record-format.md), including
 its functionality template and example. Map them to the chosen native representation;
-historical narration is not a field or section in living records.
+living records have no field or section for historical narration.
 Use those requirements to map the chosen destination without duplicating templates
 in the generated configuration. Record concrete native field/section mappings or
 links to authoritative project templates so writers can apply them.
@@ -60,7 +60,7 @@ when defining readiness, dependencies, and publication conventions.
 Configure useful learning-review points and sources for this product. Review-learnings
 gathers and resolves learning; consolidate persists supported knowledge. Routine
 factual maintenance continues during work, without a mandatory review after each
-item. A configured review cadence does not itself create a scheduled job.
+item. Configuring a review cadence creates no scheduled job.
 
 ## Maintenance and capabilities
 

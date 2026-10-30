@@ -5,7 +5,7 @@ description: Configure global rules and project skill conventions, inside or out
 
 # Setup Beto Frega skills
 
-Fill configuration gaps only; revisit settled choices only on request. This invocation authorizes configuration, not product records or unrelated work. Resolve decisions through [grilling](../grilling/SKILL.md).
+Fill configuration gaps only; revisit settled choices only on request. This invocation authorizes configuration only; product records and unrelated work need their own authority. Resolve decisions through [grilling](../grilling/SKILL.md).
 
 ## 1. Discover
 

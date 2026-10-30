@@ -1,10 +1,9 @@
 # Worked delivery-slice example
 
-This is a fictional accepted plan, not evidence of a real product or release. It
-shows two increments embedded in one feature; native related records can carry the
-same meanings. Names under exposure strategy are proposals, not provider observations.
-The feature excerpt shows the rules needed to interpret these slices; it is not a
-complete functionality template. The full feature owns its actors, job, and the four
+This is a fictional accepted plan. It shows two increments embedded in one feature;
+native related records can carry the same meanings. Names under exposure strategy are
+proposals that no provider has observed. The feature excerpt shows only the rules
+needed to interpret these slices. The full feature owns its actors, job, and the four
 separate value/cost dimensions referenced below.
 
 ## Feature: search listings
@@ -99,5 +98,5 @@ must account for both controls, both slices, and the feature's audience coverage
 SEARCH-01 covers SEARCH-R1 and SEARCH-R2. SEARCH-02 adds SEARCH-R3 while retaining the
 baseline rules. Each increment is a usable end-to-end result once its prerequisites
 hold; enabling query infrastructure is work toward those results. The plan defines
-coverage, not proof that any slice or the complete feature is available. Implementation
+coverage; it does not show that any slice or the complete feature is available. Implementation
 feasibility, operational controls, pilot audience, and rollout criteria remain open.

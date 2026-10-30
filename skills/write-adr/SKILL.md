@@ -35,7 +35,7 @@ directory only with its first saved record; honor context-specific ADR locations
 
 Recover scope, decision, rationale, and approval evidence from conversation and records.
 Inspect code/sources affecting reasoning. Distinguish facts, assumptions, intent, and
-unknowns; code proves implementation, not approval. Invent no evidence, alternatives,
+unknowns; code shows implementation, and approval needs its own evidence. Invent no evidence, alternatives,
 or results.
 
 Apply [writing-for-agents](../writing-for-agents/SKILL.md) when drafting and reviewing

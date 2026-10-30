@@ -22,7 +22,7 @@ isolate deliberations; their errors may still be correlated.
 
 Compare an economical ensemble against the individual baseline. Lightweight
 deciders, verifiers, and judges are evaluation candidates; assign tiers by role and
-observed weaknesses. A stronger judge is an option, not a requirement.
+observed weaknesses. A stronger judge is optional.
 
 Use a cheaper joint allocation in ordinary work only when relevant confirmation
 data supports the final acceptance criteria and comparable coverage for that class
@@ -53,7 +53,7 @@ a mixed decision needs support for each determinant component. Freeze configurat
 prompts, references, and budgets before exposing fresh confirmation cases to the
 tested models. Preserve generator seeds and artifact hashes for replay, and retire
 exposed cases from future untouched confirmation sets. New local instances support
-a prospective-exposure claim, not proof of the provider's training history.
+a prospective-exposure claim; they cannot prove what the provider trained on.
 
 Record the protocol, per-role models and efforts, checks supporting the selection,
 evaluation evidence or provisional status, and concrete escalation triggers. Apply

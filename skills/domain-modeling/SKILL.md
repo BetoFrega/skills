@@ -22,7 +22,7 @@ term and an ADR directory at its first record.
 ### Challenge against the glossary
 
 Surface conflicting use immediately: the glossary says X while the discussion means Y.
-Resolve the distinction rather than silently changing terminology.
+Resolve the distinction openly before changing terminology.
 
 ### Sharpen fuzzy language
 
@@ -34,13 +34,13 @@ Stress-test relationships and concept boundaries with specific edge-case scenari
 Explain how proposed terms and relationships change responsibilities, rules, and
 behavior. For consequential domain/product choices, compare viable alternatives
 through [recommend](../recommend/SKILL.md) and obtain the user's decision before
-adopting them; prior approval remains valid within scope. Glossary edits capture
-settled meaning rather than silently settling policy.
+adopting them; prior approval remains valid within scope. Edit the glossary only
+for meaning that is already settled.
 
 ### Cross-reference with code
 
-Check behavioral claims against code; surface contradictions for resolution rather
-than treating implementation as approved intent.
+Check behavioral claims against code and raise contradictions for resolution. Code
+shows what was implemented, which may differ from approved intent.
 
 ### Update CONTEXT.md inline
 

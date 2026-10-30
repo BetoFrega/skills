@@ -11,6 +11,6 @@ capable, behind the same or a smaller surface than you found.
   shape. Once it works and before delivery, merge the duplicates it created, remove
   its scaffolding, and delete the code it made redundant.
 - Cut before you polish. Reach the minimum before investing in quality.
-- Design for observed usage, not speculative use.
+- Design for observed usage.
 - Simplify instructions as well as code: remove redundant rules, excessive templates,
   and stub references with no novel content.

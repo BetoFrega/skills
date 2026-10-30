@@ -74,7 +74,7 @@ omit findings for tooling-enforced rules.
 Read [review-triage](../review-triage/SKILL.md) for classification, follow-up tickets,
 and approval. Use [model-selection](../model-selection/SKILL.md) for each assignment;
 disclose each concrete model, effort, and substitution before or alongside dispatch.
-Run reviewers concurrently within capacity; queue others. Never combine axes.
+Run reviewers concurrently within capacity and queue the rest. Give each axis its own reviewer.
 
 Give every reviewer the fixed point, exact diff/log commands, changed files,
 repository instructions, and authoritative sources. Paste review-triage's
@@ -95,8 +95,8 @@ than infer compliance from passing probes.
 ### Standards reviewer
 
 Provide all standards and paste the smell baseline in full. Cite file and controlling
-rule for breaches. Smells are judgement calls, never hard requirements: name the
-smell and cite the changed hunk.
+rule for breaches. Smells are judgement calls: name the smell and cite the
+changed hunk.
 
 When the diff adds or changes tests, also paste
 [Tests Earn Their Runtime](../beto-mode/principles/tests-earn-their-runtime.md) in

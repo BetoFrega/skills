@@ -8,8 +8,8 @@ business logic in pure functions behind a thin shell.
   input loudly per Fail Loud, Handle on Evidence.
 - **Inside:** pass typed data, propagate errors, and do not re-validate. A null check
   deep in a call chain that the boundary already guarantees is noise.
-- **Across the boundary:** expose domain concepts, not transport, storage, framework,
-  or wire types. Keep general mechanism inside and special-purpose policy at the edge.
+- **Across the boundary:** expose domain concepts and keep transport, storage,
+  framework, and wire types inside. Keep general mechanism inside and special-purpose policy at the edge.
 - **In typed languages:** make illegal states unrepresentable, give semantic
   primitives their own types, and handle every variant instead of casting around the
   compiler.

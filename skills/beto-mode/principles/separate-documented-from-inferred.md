@@ -1,6 +1,6 @@
 # Separate Documented From Inferred
 
-Never invent missing detail. Keep what a source states apart from what you conclude.
+Keep what a source states apart from what you conclude.
 
 - Do not invent requirements, business rules, rationale, alternatives that were
   considered, links, identifiers, or citations.

@@ -31,11 +31,11 @@ Use these terms exactly; avoid unit/component/service, API/signature, and bounda
 - Depth concerns the interface. Internals may contain small, swappable parts and private seams for their tests.
 - **Deletion test**: complexity disappearing with the module signals pass-through; complexity reappearing across callers signals value.
 - Callers and tests cross the same external seam. Needing tests past that interface suggests redesign; private internal seams remain valid.
-- Introduce seams for actual variation: one adapter is hypothetical; two establish reality.
+- Introduce a seam for actual variation, once at least two adapters exist or are justified.
 - Accept dependencies, return results rather than mutate through side effects, and keep methods and parameters few.
 
 ## Further design
 
-For deepening clusters given dependencies, read [DEEPENING.md](DEEPENING.md): dependency categories, seam discipline, replace-don't-layer testing.
+For deepening clusters given dependencies, read [DEEPENING.md](DEEPENING.md): dependency categories, seam discipline, and replacing old tests.
 
 For alternative interfaces, read [DESIGN-IT-TWICE.md](DESIGN-IT-TWICE.md): parallel agent designs compared on depth, locality, and seam placement.

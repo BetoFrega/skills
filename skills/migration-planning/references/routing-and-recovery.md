@@ -18,7 +18,7 @@ For each operation:
 2. Check whether operational policy permits this operation on that path. Distinguish admission of new work from continuation of in-flight work: a draining path may allow only continuation.
 3. If the path cannot be used, select recovery only when compatibility with the operation's data and state has been verified. Otherwise use its defined failure handling; automatic redirection to the legacy path is not inherently safe.
 
-Define how deliberate recovery or retirement affects existing operations and future requests. Stable assignment preserves coherence while valid, not indefinite routing to an unavailable path.
+Define how deliberate recovery or retirement affects existing operations and future requests. Stable assignment keeps a journey coherent while its path is valid; it does not keep routing to a path that became unavailable.
 
 ## Propagate policy changes
 
@@ -26,4 +26,4 @@ Operator actions or authorized automated monitors can change operational policy.
 
 If routers cache a versioned local policy to avoid per-request external evaluation, specify propagation, cache validity, and stale-policy behavior. Verify the interval when different components hold different versions; updates are not instantly global.
 
-Routing design is ready when assignment, admission, continuation, failure, policy-update, and recovery behavior are explicit and tested at relevant seams. Compatibility is established by the migration design and evidence, not inferred by the router.
+Routing design is ready when assignment, admission, continuation, failure, policy-update, and recovery behavior are explicit and tested at relevant seams. The migration design and its evidence establish compatibility; the router does not infer it.

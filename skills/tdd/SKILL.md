@@ -5,7 +5,7 @@ description: Test-first features, bug fixes, integration tests, or red-green-ref
 
 # Test-Driven Development
 
-Apply every section before and during each red → green cycle. Read `CONTEXT.md` when
+Apply every section before and during each red-green cycle. Read `CONTEXT.md` when
 present and relevant ADRs; use domain vocabulary in tests and interfaces.
 
 ## What a good test is
@@ -18,7 +18,7 @@ Each test must also earn its runtime: apply
 
 ## Seams: where tests go
 
-Test at public seams, never internals. Before writing any test, record seams and
+Test only at public seams. Before writing any test, record seams and
 confirm them with the user; reuse prior agreement. Prioritize critical paths and
 complex logic instead of exhaustive edge coverage.
 
@@ -41,4 +41,4 @@ When interface shape, module depth, or seam placement is unresolved, consult
   tests or speculative features.
 - **One slice:** one seam, one test, one minimal implementation per cycle.
 - **Refactoring:** belongs to [code-review](../code-review/SKILL.md), outside the
-  red → green implementation cycle.
+  red-green implementation cycle.

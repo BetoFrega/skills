@@ -17,8 +17,8 @@ identify its purpose and satisfaction condition separately from usable increment
 The functionality remains canonical for product behavior. Reference its rules and
 scenarios rather than copy the whole contract into each slice. Retain the relevant
 actors, jobs, and value/cost references, adding material differences for this scope.
-Keep proposed product changes distinguishable from accepted rules. Acceptance of a
-slicing plan does not authorize a release or operational flag change.
+Keep proposed product changes distinguishable from accepted rules. Releases and
+operational flag changes need authority beyond acceptance of the slicing plan.
 
 ## Identity and representation
 
@@ -30,8 +30,8 @@ identifiers and links when moving between sections, properties, and related obje
 
 A slice can require multiple tickets. Its scope comes from a coherent deliverable
 outcome; a ticket's execution size does not impose the slice's size. Link derived
-specs, tickets, and evidence without treating a single ticket's completion as proof
-that the whole slice is implemented or exposed.
+specs, tickets, and evidence. One completed ticket does not show that the whole slice
+is implemented or exposed.
 
 ## Required slice meanings
 

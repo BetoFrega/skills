@@ -18,9 +18,9 @@ conventions, governing decisions, maintenance sources, affected records, and exi
 authorization. Preserve identifiers and settled choices.
 
 Setup owns configuration. For an unresolved destination or convention, name the gap
-and suggest `$setup-beto-frega-skills`. Continue work with known authority; prepare
-clearly labeled drafts for blocked writes. Drafts remain subordinate to canonical
-records; an unavailable configured replacement stays an explicit gap.
+and suggest `$setup-beto-frega-skills`. Continue the work you have authority for, and
+write clearly labeled drafts where a write is blocked. Canonical records keep
+precedence over drafts, and an unavailable configured destination stays a named gap.
 
 Read only relevant routes; combine them when needed:
 
@@ -49,18 +49,18 @@ delivery scope.
 Read [record format](references/record-format.md) before writing living records;
 it owns consolidation, native history, bounded changelogs, template, and example.
 
-Distinguish approval, proposals, observations, and assumptions. Approval comes from
-conversation/project evidence, not code or flag configuration alone. Preserve
+Keep approval, proposals, observations, and assumptions apart. Approval comes from
+the conversation or project evidence; code and flag configuration alone do not show it. Preserve
 unknowns and discrepancies; actual-state claims carry source, time, scope, and coverage.
 
 Use configured objects, properties, sections, and relationships. Keep one authority
 per meaning; cover known behavior, exceptions, and implementation/verification
-scenarios. Proportionality adjusts detail and governance, not rule coverage. Update
+scenarios. Scale detail and governance to the product, but cover every rule. Update
 linked records affected by accepted changes. Label interaction illustrations
 replaceable and state binding outcomes explicitly.
 
-Exercise existing authorization within scope. Documentation maintenance does not
-authorize release, flag operations, schedules, or new policy. Read reconciliation
+Act within existing authorization. Release, flag operations, schedules, and new
+policy need their own authorization. Read reconciliation
 before an authorized flag operation.
 
 ## Verify completion
@@ -72,5 +72,5 @@ whole-document record-format checks. Account for every affected record with a
 verified result or named gap.
 
 For lookups/reviews, return canonical links and findings. For changes, report saved,
-proposed, unknown, and unverifiable effects separately. Drafts, acceptance,
-implementation, and verified release are distinct outcomes.
+proposed, unknown, and unverifiable effects separately. Report drafts, acceptance,
+implementation, and verified release as separate outcomes.
