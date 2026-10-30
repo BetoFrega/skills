@@ -20,6 +20,8 @@ Each entry says when it applies. Files live at `principles/<name>.md`.
   to add an abstraction, option, dependency, or optimization.
 - **Subtract Before You Add** (`subtract-before-you-add`). Adding to an existing area,
   refactoring, migrating, or simplifying a plan or document. Remove first, then build.
+- **Pin Behavior Before Changing** (`pin-behavior-before-changing`). Refactoring,
+  fixing, migrating, or deleting existing code.
 - **Least Surprise** (`least-surprise`). Writing or reviewing code someone must read,
   trace, or change.
 - **Fail Loud, Handle on Evidence** (`fail-loud-handle-on-evidence`). Deciding which
