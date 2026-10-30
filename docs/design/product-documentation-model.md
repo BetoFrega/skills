@@ -19,7 +19,7 @@ Maintain explicit product knowledge that supports product-owner decisions and ag
 
 Standardize meanings, authority, traceability, and relevant behavioral coverage. Adapt hierarchy, formats, workflow, depth, and maintenance cadence to each product through the setup below.
 
-The starting hierarchy is **product areas → capabilities → functionalities**. Group by domain behavior and meaningful outcomes, adapting depth to the product. Roles, segments, and jobs provide additional views of the same records.
+The starting hierarchy has **product areas** containing **capabilities**, which contain **functionalities**. Group by domain behavior and meaningful outcomes, adapting depth to the product. Roles, segments, and jobs provide additional views of the same records.
 
 ## Product-owner needs
 
@@ -351,7 +351,7 @@ for both entries; Spaces is a project choice rather than a universal provider.
 Select the increments in scope before decomposing work; broader feature documentation
 does not authorize a broader delivery plan.
 
-Use progressive disclosure through plain reference files within each entry. Define an explicit reading trigger for each reference and keep each rule authoritative in one place. Group and split references according to their consumers; the following are product-knowledge routing responsibilities, not a fixed file count or mandatory process sequence:
+Use progressive disclosure through plain reference files within each entry. Define an explicit reading trigger for each reference and keep each rule authoritative in one place. Group and split references according to their consumers; the following are product-knowledge routing responsibilities, and the file count and order can vary:
 
 | Branch | Read when |
 | --- | --- |

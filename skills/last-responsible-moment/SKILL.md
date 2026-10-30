@@ -5,8 +5,8 @@ description: Apply Last Responsible Moment to ongoing work to curb overplanning,
 
 # Last Responsible Moment
 
-Continue the current workflow without restarting or expanding scope. Bring learning forward before commitment;
-preserve options without stalling delivery.
+Continue the current workflow without restarting or expanding scope. Learn what you
+can before committing, and keep options open without stalling delivery.
 
 ## Decision triage
 
@@ -25,16 +25,17 @@ Assess the next increment, reversibility, delay cost, expected learning, and lea
 
 ## Boundaries
 
-Defer dependent branches too, except independently relevant risks. Out of scope
-creates no future commitment. Prefer evidence over preference questions; needed user
-input gets one decision, recommendation, and reason to decide now.
+Defer dependent branches too, unless they carry a risk that matters on its own.
+Noting something as out of scope commits to nothing later. Gather evidence before
+asking the user about preferences; when you need their input, ask for one decision
+with a recommendation and the reason it must be decided now.
 
 Apply [Keep It Lean](../beto-mode/principles/keep-it-lean.md) to what you build
-meanwhile. Importance does not imply irreversibility; deferring a solution does not
-defer investigation.
+meanwhile. An important choice can still be reversible, and you can keep
+investigating while the solution is deferred.
 
 In existing documents, distinguish decisions, hypotheses, and deferrals; record only
-continuity needs, avoiding exhaustive inventories or an ADR per pending issue.
+what continuity needs. Skip exhaustive inventories and an ADR per pending issue.
 Reassess commitments and triggers with new evidence.
 
 ## Stopping criterion

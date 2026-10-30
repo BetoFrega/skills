@@ -5,47 +5,70 @@ description: Select models and effort for implementation, review, recommendation
 
 # Model Selection
 
-Choose the cheapest reliable configuration meeting latency, tooling, and context needs, subject to explicit user or role preferences. Resolve IDs, capabilities, and supported efforts live.
+Choose the cheapest configuration that does the work reliably and meets its latency,
+tooling, and context needs, unless the user or the role states a preference. Look up
+model IDs, capabilities, and supported efforts live.
 
-Assess every assignment independently: deciders follow implementation criteria; judges/verifiers follow review criteria. Coordination or agreement sets no universal floor or discount.
+Assess every assignment on its own: deciders follow the implementation criteria, and
+judges or verifiers follow the review criteria. Coordinating with other agents, or
+expecting agreement among them, neither raises nor lowers the choice.
 
-Read [ensemble](references/ensemble.md) for explicit ensemble cost/reliability comparisons or adoption backed by relevant confirmation data.
+Read [ensemble](references/ensemble.md) when explicitly comparing ensemble cost and
+reliability, or when adopting an ensemble backed by relevant confirmation data.
 
 ## Classify the work
 
-- **Mechanical:** known edit and precedent, no design choice.
-- **Contained:** behavior, seam, precedent, and acceptance determine the solution.
+- **Mechanical:** the edit and its precedent are known, with no design choice.
+- **Contained:** the behavior, seam, precedent, and acceptance determine the solution.
 - **Judgment-heavy:** investigation or competing solutions remain.
-- **Frontier:** unresolved architecture/product choices risk silent, expensive downstream effects.
+- **Frontier:** unresolved architecture or product choices risk silent, expensive
+  downstream effects.
 
-Authorization, persistence, caching, public behavior, and file/layer/test counts alone justify neither judgment-heavy classification nor high effort.
+Touching authorization, persistence, caching, or public behavior, or a high count of
+files, layers, or tests, does not by itself make work judgment-heavy or call for high
+effort.
 
 ## Set the capability floor
 
-Implementation: sufficient for mechanical edits; balanced for contained work; strong workhorse for judgment-heavy work; highest for consequential decisions risking silent, expensive, or propagating errors.
+Implementation: a sufficient model for mechanical edits, a balanced one for contained
+work, a strong workhorse for judgment-heavy work, and the highest for consequential
+decisions whose errors would be silent, expensive, or spread.
 
-Review: balanced; strong workhorse for subtle invariants; highest for frontier decisions.
+Review: a balanced model; a strong workhorse for subtle invariants; the highest for
+frontier decisions.
 
-Current Claude anchors: Fable 5.1 is highest/frontier capability; Opus 5.5 is a strong workhorse at lower rates. Capability sets neither effort nor cost.
+Current Claude anchors: Fable 5.1 is the highest, frontier capability, and Opus 5.5 is
+a strong workhorse at lower rates. Capability does not decide effort or cost.
 
 ## Choose effort
 
-Independently: lowest for obvious edits/precedent; middle for settled, contained work; high for investigation, competing approaches, or subtle judgment; exceptional top for broader frontier decisions.
+Choose effort separately: the lowest for obvious edits with precedent, middle for
+settled contained work, high for investigation, competing approaches, or subtle
+judgment, and the top level only for broad frontier decisions.
 
 ## Compare expected cost
 
-Reuse `~/.agents/model-pricing.json` exclusively for routine pricing; reload after explicit refresh or snapshot change. Age is provenance, not a refresh trigger. Match billing surface, speed, and units; API rates imply neither subscription costs nor dispatch availability.
+Use `~/.agents/model-pricing.json` as the only source for routine pricing, and reload
+it after an explicit refresh or when the snapshot changes. An old snapshot is still
+valid; its age is provenance. Match billing surface, speed, and units. API rates say
+nothing about subscription costs or what can be dispatched.
 
-Estimate input, cache, billable output/reasoning, and retries. Prefer higher capability at equal/lower cost. Disclose missing/incompatible rates or incomplete evidence; choose a suitable default. Name model, effort, and cost basis.
+Estimate input, cache, billable output and reasoning, and retries. At equal or lower
+cost, prefer higher capability. Disclose missing or incompatible rates and incomplete
+evidence, and pick a suitable default. Name the model, effort, and cost basis.
 
 Read [pricing cache](references/pricing-cache.md) for explicit setup, repair, or refresh.
 
 ## Recommend advisory
 
-For stalls, repeated errors, complex algorithms, or unresolved cross-layer interactions, use [advisory](../advisory/SKILL.md), which owns consultation triggers and model preference.
+For stalls, repeated errors, complex algorithms, or unresolved cross-layer
+interactions, use [advisory](../advisory/SKILL.md), which owns consultation triggers
+and model preference.
 
 ## Justify escalation
 
-Above-middle effort always requires an unresolved question and concrete error consequence; paying more requires both unless an explicit model preference applies. Otherwise use at most middle effort.
+Effort above middle needs an open question and a concrete consequence of getting it
+wrong. A more expensive model needs both too, unless an explicit model preference
+applies. Otherwise use middle effort or lower.
 
 Before dispatch, apply [delegation](references/delegation.md).

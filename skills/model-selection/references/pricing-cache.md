@@ -34,14 +34,13 @@ without a model call, and atomically replaces that rate card: the
 the [Claude API pricing](https://platform.claude.com/docs/en/about-claude/pricing)
 model table. Pass `openai` or `anthropic` to refresh one source. Each source succeeds
 or fails independently; a failure retains that card, preserves other rate cards, and
-makes the command exit nonzero. The command reports one compact line per source
-rather than the source page.
+makes the command exit nonzero. The command reports one compact line per source.
 
 For a corrupt or incompatible cache, a successful refresh saves the original bytes
 in a `.bak` file beside the cache and rebuilds the target card. It retains other valid
 rate cards when the version 1 container can be read, and reports the backup path.
 
-The sources are documentation, not dedicated pricing APIs. A changed heading, table,
+The sources are documentation pages without a pricing API. A changed heading, table,
 or unit requires repairing the parser against the official source before retrying.
 Use an agent for that repair when interpretation is needed; routine extraction runs
 as a script.
@@ -66,5 +65,5 @@ IDs such as `claude-fable-5-1` and `claude-opus-5-5`, derived from the official
 model names. `cached_input` is the cache-read price; `cache_write_5m` and
 `cache_write_1h` capture the distinct write rates. Retired models are skipped, and
 models with prompt-length tiers keep only the base tier. These are standard global
-API rates, not Claude subscription costs or Codex credits. Account for cache writes
+API rates; Claude subscription costs and Codex credits differ. Account for cache writes
 when estimating API costs.

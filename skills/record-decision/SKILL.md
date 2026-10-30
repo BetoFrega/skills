@@ -13,7 +13,7 @@ without treating it as approval of later execution.
 For a product or business choice, use
 [`consolidate`](../consolidate/SKILL.md) to find the configured
 authority, preserve decision history, and update affected product contracts. A spec
-or ticket remains a linked work record rather than the implicit authority for product
+or ticket stays a linked work record; it does not become the authority for product
 policy. If a choice also affects architecture, link the architectural record.
 
 When the destination is an ADR, or an architectural decision may warrant one, use

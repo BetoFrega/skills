@@ -6,12 +6,12 @@ whether scope and constraints are respected, and whether the rationale is enough
 to decide. Source references are provenance; evaluate the supplied excerpts and
 results without opening sources, searching, or gathering new information.
 
-Verification findings qualify the claims they checked. Agreement alone is not proof.
+Verification findings qualify the claims they checked. Agreement alone does not show that a claim is true.
 Identify unsupported premises and decision-changing uncertainty explicitly.
 
 Count majority support using completed decider reports only. A strict majority is
 more than half selecting an equivalent proposal, scope, and material conditions.
-Judge and verifier findings are evidence, not votes. Keep earlier choices visible
+Judge and verifier findings count as evidence; only decider reports count as votes. Keep earlier choices visible
 even when later evidence undermines their rationale; describe that limitation.
 
 If your supported preference differs from a strict majority, return

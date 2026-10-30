@@ -14,7 +14,7 @@ matching through `policy.allow_implicit_invocation` in `agents/openai.yaml`:
   invocation remains available.
 - **User-invoked:** set `allow_implicit_invocation: false` when use requires explicit
   selection. Keep a concise human-facing summary. Explicit `$skill` still works;
-  this policy disables implicit matching, not description requirements or file reading.
+  this policy disables only implicit matching; descriptions and file reading still apply.
 
 Directly following a reference to a skill file is different from invoking that skill.
 A false implicit-invocation policy does not make its files unreadable to other skills.

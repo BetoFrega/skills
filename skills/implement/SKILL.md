@@ -7,7 +7,7 @@ disable-model-invocation: true
 For product work, read affected canonical contracts through
 [consolidate](../consolidate/SKILL.md), including external configuration. Preserve
 functionality, shared-rule, decision, and scenario links; surface conflicts or
-unresolved policy. Ticket readiness does not establish product approval. Carry the
+unresolved policy. A ready ticket still needs product approval. Carry the
 configuration entry and affected record references into delegated work.
 
 Explain the intended behavior and responsibility changes in conversation without

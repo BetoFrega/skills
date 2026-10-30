@@ -17,12 +17,12 @@ Report the state supported by evidence:
 | --- | --- |
 | Saved locally, uncommitted | The files are on disk; the changes are not committed or integrated into `origin/main`. |
 | Committed locally, not pushed | A local commit exists; it has not reached the remote. |
-| Pushed to a branch, integration pending | The remote branch contains the changes; its push or open PR does not establish integration into `origin/main`. |
+| Pushed to a branch, integration pending | The remote branch contains the changes; they are not yet in `origin/main`. |
 | Integrated into `origin/main` | A freshly fetched remote main revision contains the intended changes. Link the verified commit or merged PR. |
 
 Account for remaining local edits even when an earlier revision was delivered.
 Before claiming integration, fetch `origin` and verify the intended version in
-`origin/main`; a clean working tree or local `main` alone does not establish it.
+`origin/main`. A clean working tree or local `main` is not enough.
 If remote verification is unavailable, label integration unverified.
 
 ## Explain the remaining route

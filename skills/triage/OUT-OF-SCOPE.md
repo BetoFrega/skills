@@ -11,8 +11,8 @@ Group equivalent issue and PR requests together rather than creating a file per 
 ## File format
 
 Write a readable short design document: concept decision, substantive durable reason,
-and linked prior requests. Use paragraphs, examples, or code when they clarify the
-reason; this is not a database entry.
+and linked prior requests. Write it as prose, with examples or code when they clarify
+the reason.
 
 ```markdown
 # <Concept>
@@ -35,7 +35,7 @@ Choose a recognizable concept name, such as `dark-mode.md` or `plugin-system.md`
 ### Writing the reason
 
 Explain why the feature conflicts with project scope, technical constraints, or
-strategy. Temporary workload is a deferral, not a durable rejection.
+strategy. Temporary workload is a reason to defer; it does not justify a durable rejection.
 
 ## When to check `.out-of-scope/`
 

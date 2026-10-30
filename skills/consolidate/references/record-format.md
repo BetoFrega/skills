@@ -18,7 +18,7 @@ Revision history belongs in native versions, commits, or audit history. Prohibit
 narratives anywhere in the living record: sections, footnotes, appendices, or comment
 logs. Native history retains earlier values, question numbers, rejected answers, and
 reopened choices. Current rationale may explain purpose/value;
-[decision records](decisions.md) explain substantive choices, not edits. Dated,
+[decision records](decisions.md) explain substantive choices. Dated,
 scoped observations of current discrepancies remain evidence.
 
 ## Optional final changelog
@@ -40,7 +40,7 @@ routine observations, minor clarifications, and the section when unnecessary.
 
 Adapt the [functionality template](../assets/functionality-template.md); read the
 [worked example](functionality-example.md) when establishing representation or removing
-interview accumulation. Its fictional rules/evidence are not product authority.
+interview accumulation. Its rules and evidence are fictional.
 
 Prefer equivalent existing native fields. Keep user value/cost, business value/cost,
 and implementation, deployment, authorized release, observed exposure, and flags
@@ -54,5 +54,5 @@ Read the whole saved document: rules/examples match accepted choices and timing;
 titles/summaries/open questions agree; no edit/interview narration remains; actors,
 jobs, behavior, four value/cost meanings, delivery dimensions, and relevant knowledge
 gaps are independently accessible. Any changelog must qualify, be final, contain no
-more than five entries, and respect each entry's word limit. Persistence alone is
-insufficient.
+more than five entries, and respect each entry's word limit. A saved file alone does
+not pass these checks.

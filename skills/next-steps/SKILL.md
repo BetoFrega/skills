@@ -5,53 +5,57 @@ description: Identify remaining completion requirements, meaningful learning to 
 
 # Next Steps
 
-Use the latest goal, plan, results, and user corrections. Read relevant work records,
-canonical references, and configured completion/delivery rules; verify artifact state.
-Apply [artifact links](../consolidate/references/artifact-links.md) to every cited
-document or ticket.
+Start from the latest goal, plan, results, and user corrections. Read the relevant
+work records, canonical references, and configured completion and delivery rules, and
+verify the actual state of artifacts. Apply
+[artifact links](../consolidate/references/artifact-links.md) to every cited document
+or ticket.
 
-Make each consequential next step understandable when switching tasks: identify the
-project/topic when ambiguous, concrete components or domain entities, action or
-pending choice, and why it matters or what it unlocks. Explain phase/contract/issue
-references rather than relying on their names or identifiers. Reuse clear immediate
-context; inspect sources for missing detail or state the gap, without inventing it
-or recapping the whole task.
+The user may be switching tasks, so make each consequential next step understandable
+on its own: name the project or topic when ambiguous, the components or domain
+entities involved, the action or pending choice, and why it matters or what it
+unlocks. Explain references such as a phase, contract, or issue instead of relying on
+their names. Reuse context that is already clear. When a detail is missing, inspect
+the sources or name the gap, and skip a recap of the whole task.
 
 ## Current work incomplete
 
-List required actions in execution order, immediate action first, with blockers and
-decisions beside affected actions. Derive requirements from the goal, acceptance,
-and project workflow: evidence, canonical updates, checks, review, integration,
-deployment, operational verification, and tracker closure only where required.
-Discovery completes against expected evidence/output and need not deliver a feature.
+List the required actions in execution order, immediate action first, with blockers
+and decisions next to the actions they affect. Take the requirements from the goal,
+acceptance, and project workflow: evidence, canonical updates, checks, review,
+integration, deployment, operational verification, and tracker closure, each only
+where required. Discovery work is complete when it produces its expected evidence or
+output, even without a feature.
 
-Completion requires verified evidence for every required condition, per
-[Evidence Before Claims](../beto-mode/principles/evidence-before-claims.md). Apply [local document delivery](../consolidate/references/local-document-delivery.md)
-to distinguish saved documentation from pending `origin/main` integration. For product
-observations, use [consolidate](../consolidate/SKILL.md) to interpret independent
-implementation, deployment, authorized release, exposure, and flag dimensions.
+Each required condition needs verified evidence before you call the work complete,
+per [Evidence Before Claims](../beto-mode/principles/evidence-before-claims.md). Apply
+[local document delivery](../consolidate/references/local-document-delivery.md) to
+separate saved documentation from pending `origin/main` integration. For product
+observations, use [consolidate](../consolidate/SKILL.md) to read implementation,
+deployment, authorized release, exposure, and flags as separate dimensions.
 
 ## Current work complete
 
 Recommend [review-learnings](../review-learnings/SKILL.md) when results materially
-contradict hypotheses, change scope/direction or rules, or affect related/pending work,
-considering configured review points. Separate required knowledge maintenance from
-learning review. No review per item or repeated review of incorporated learning
-without new evidence or a review point.
+contradict hypotheses, change scope, direction, or rules, or affect related or pending
+work, taking configured review points into account. Keep required knowledge
+maintenance apart from learning review. Skip a review per item, and skip reviewing
+learning already incorporated unless there is new evidence or a review point.
 
-Inspect follow-ups, selected increment/spec references, parent/dependency relations,
-remaining work, readiness, and documented priority. Recommend one open successor with
-verified prerequisites, its link/title or identifier, and value toward the goal.
-Resolve consequential findings that invalidate scope/readiness before execution.
-Future ideas do not establish selection/readiness; absence of blockers does not prove
-readiness. Without tickets, require support from the goal and verified relationships.
-Omit unsupported successors and report unavailable sources. Separate current
-requirements from subsequent work.
+Inspect follow-ups, the selected increment or spec references, parent and dependency
+relations, remaining work, readiness, and documented priority. Recommend one open
+successor whose prerequisites you verified, with its link and title or identifier and
+its value toward the goal. Resolve consequential findings that invalidate its scope or
+readiness before it starts. A future idea is not yet selected or ready, and having no
+known blockers does not make work ready. Without tickets, the successor needs support
+from the goal and verified relationships. Leave out unsupported successors, report
+unavailable sources, and keep current requirements apart from later work.
 
 ## Invocation boundary
 
-Explicit invocation is informational: return guidance and end. During execution,
-complete remaining authorized work before the final report or identify its blocker.
-Use execution skills for actions and consolidate for canonical persistence.
-Recommendations grant no new work, decisions, publication, release, or scheduling
-permission; existing authorization remains usable. Ask which task if no goal is known.
+An explicit invocation only reports: return the guidance and end. During execution,
+finish the remaining authorized work before the final report, or name its blocker.
+Use execution skills for actions and consolidate for canonical records. A
+recommendation grants no new permission for work, decisions, publication, release, or
+scheduling, and existing authorization still applies. If no goal is known, ask which
+task the user means.

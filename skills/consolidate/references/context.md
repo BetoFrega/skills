@@ -36,8 +36,8 @@ Reference the domain glossary for definitions and terminology. Follow the config
 domain conventions and [glossary format](../../domain-modeling/CONTEXT-FORMAT.md) for
 approved definition changes; surface unresolved meanings or context boundaries.
 Keep product behavior and policy in their product authority, linking
-glossary terms to it where useful. A glossary entry alone does not establish a product
-permission, invariant, or business commitment.
+glossary terms to it where useful. Product permissions, invariants, and business commitments
+need a product record; a glossary entry alone does not create them.
 
 ## Evidence and discovery
 
@@ -46,8 +46,8 @@ observation date, result, limitations, and interpretation appropriate to the evi
 Distinguish observations from conclusions and estimates. Link evidence to the choices
 and functionalities it informs. Preserve inconclusive and contrary results.
 
-Approval to run an experiment is scoped to that experiment. Its observations do not
-automatically become permanent policy. Use [proposals](proposals.md) when an idea has
+Approval to run an experiment covers only that experiment, and its observations
+become policy only through a decision. Use [proposals](proposals.md) when an idea has
 enough shape for an investment discussion; use [catalogue](catalogue.md) when it meets
 the proposal admission criteria. Retain its discovery provenance.
 

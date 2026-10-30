@@ -28,7 +28,7 @@ Include only when `$report-low-density` is available:
 For a flag in pre-existing or out-of-scope content, delegate `$report-low-density` to a
 subagent with the exact flag, source, minimal reproduction command or steps, and the
 relevant revision and environment. Delegation authorizes preparation and duplicate
-detection, not a tracker mutation. If the active task does not contain the user's
+detection; changing the tracker needs more. If the active task does not contain the user's
 explicit request or approval to publish the exact report, the reporter returns the
 complete proposed issue and the parent asks before delegating publication. If no
 subagent is available or publication cannot be confirmed, preserve the flag and

@@ -22,7 +22,7 @@ evidence, and existing increments through [consolidate](../consolidate/SKILL.md)
 
 Establish the selected outcome, increment identifiers or bounded investigation before
 decomposing work. Retain confirmed choices and accepted interview handoffs. If selection
-is unclear, clarify the next useful result; do not expand into all future possibilities.
+is unclear, clarify the next useful result and leave other future possibilities aside.
 Read relevant code and technical records when they affect feasibility or dependencies.
 Use the domain vocabulary and preserve existing identities and work relationships.
 
@@ -34,15 +34,15 @@ Use the domain vocabulary and preserve existing identities and work relationship
 | [Work items](references/work-items.md) | Decomposing selected work into executable tickets, assigning dependencies and readiness, or publishing them. |
 
 Use [grilling](../grilling/SKILL.md) for consequential missing choices. Apply its product
-reference for increment questions; reuse prior answers and approvals rather than
+reference for increment questions; reuse prior answers and approvals instead of
 reopening settled choices. Resolve factual questions from available sources first.
 Consolidate accepted increment definitions through the canonical writer, then link work
 to those records. Routine implementation choices can remain for execution.
 
 Present the proposed cuts and work graph concisely: usable result or expected output,
 acceptance, blocking edges, and relevant exposure controls. Explain consequential
-product/domain choices, actual cut criteria, and consequences in conversation;
-links do not replace decision-essential context. Obtain unresolved scope or
+product and domain choices, the actual cut criteria, and their consequences in the
+conversation itself; links only add to that. Obtain unresolved scope or
 breakdown decisions before publication; existing approval of the same workset is
 sufficient. Publication and execution stay within the user's applicable authority.
 
@@ -54,7 +54,7 @@ For local increment records or Markdown tickets, apply
 Read back saved increment records, tickets, references, blocking relationships, and
 configured readiness. Account for the selected scope and its aggregate acceptance;
 identify deferred work, unresolved choices, and any partial publication. A missing
-blocker edge does not establish readiness, and ticket completion does not prove the
+blocker edge does not make work ready, and completed tickets do not show that the
 whole increment is deployed or exposed.
 
 Report the canonical increments and published work identifiers, or clearly identify

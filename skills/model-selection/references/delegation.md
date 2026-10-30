@@ -15,7 +15,7 @@ summary.
   the ticket for its provider. Set both explicitly when the interface supports them;
   otherwise include them in the assignment.
 - Recalibrate narrower supporting work with the selection criteria in `SKILL.md`. The
-  parent recommendation is context, not an automatic minimum.
+  parent recommendation is context and sets no minimum.
 - Include the applicable ticket recommendation and this delegation rule in the
   assignment. When using a compatible pricing snapshot, include its `checked_at`
   value and billing surface; otherwise carry the recommendation's pricing uncertainty.

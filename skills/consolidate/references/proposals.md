@@ -1,8 +1,8 @@
 # Proposals and pitches
 
 Read this to shape a product proposal or prepare an investment pitch. Use the format
-and decision workflow configured for the product; a pitch is useful when an investment
-choice warrants it, rather than as a required artifact for every change.
+and decision workflow configured for the product; write a pitch when an investment
+choice warrants it.
 
 ## Shape the investment
 
@@ -19,7 +19,7 @@ in the configured native object:
 - exclusions or boundaries that keep the investment within its appetite;
 - acceptance authority and the decision still required.
 
-Treat appetite as an investment choice, not as an observed delivery estimate. Describe
+Treat appetite as an investment choice; it is not a delivery estimate. Describe
 behavior at a useful level while retaining room for implementation decisions.
 Interaction sketches may communicate intent when explicitly illustrative and
 replaceable. State any binding rule as behavior in the proposal, independent of a

@@ -1,6 +1,6 @@
 # Worked example: receive signup credits
 
-This is a fictional example, not a statement about any existing product. Assume the
+This is a fictional example. Assume the
 product owner approved a signup grant of 20 credits on 2026-10-06, replacing an earlier
 amount recorded in the destination's native history. The living record below is the
 result; the introductory assumption is not part of that record.

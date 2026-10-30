@@ -8,7 +8,7 @@ template, example, and consolidation checks.
 
 Start with product areas, capabilities, and functionalities when the project has no
 settled hierarchy. Adapt depth and grouping to meaningful domain outcomes. Profiles,
-jobs, implementation, and exposure are views over the same records, not reasons to
+jobs, implementation, and exposure are views over the same records, so they do not
 duplicate a functionality.
 
 A functionality is a recognizable outcome an actor can achieve under relevant
@@ -21,8 +21,8 @@ and the reason so historical work can still be traced.
 Roles describe responsibilities and permissions; segments describe needs and context.
 A functionality may serve several roles, segments, and jobs. Capture material
 differences without filling every possible combination. Query the native catalogue
-through its configured indexes and relationships, including pagination where needed;
-a partial search is not evidence that a record does not exist.
+through its configured indexes and relationships, including pagination where needed.
+A partial search cannot show that a record is missing.
 
 ## Required meanings
 
@@ -66,7 +66,7 @@ copying their implementation into the contract.
 For example, a reservation functionality may specify who can reserve, which states
 permit it, whether simultaneous reservations are valid, and what happens after expiry.
 An illustration of a reservation interface can accompany that contract as replaceable
-intent. The interface illustration does not define those business rules by itself.
+intent. The business rules live in the contract.
 
 Read current records and approval evidence before editing. If implementation differs
 from approved behavior, retain the contract and record the discrepancy until an
@@ -78,15 +78,15 @@ identifiable from the contract currently in force.
 Keep user value, user cost, business value, and business cost independently accessible.
 Explain each qualitatively for material contexts, then add supported measurements.
 Distinguish hypotheses, estimates, and observed outcomes. Numbers and comparative
-scores retain their rationale, source, units, and uncertainty where relevant. Absence
-of a measurement is not zero cost or proof of value.
+scores retain their rationale, source, units, and uncertainty where relevant. A missing
+measurement means unknown, neither zero cost nor proven value.
 
 ## Catalogue admission and completion
 
 Include existing functionalities and proposals sufficiently defined to identify an
 actor, desired outcome, scope, and material open questions. Label proposals as such;
-raw ideas stay in discovery until their identity is meaningful. Adding a proposal
-does not establish acceptance, implementation, or release authority.
+raw ideas stay in discovery until their identity is meaningful. A proposal in
+the catalogue has no acceptance, implementation, or release authority.
 
 After a change, verify the saved contract and its native relationships. Check the
 affected audience and job views against the same identity, ensure shared rules and

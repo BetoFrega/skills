@@ -19,7 +19,7 @@ increments, and earlier evidence.
 Gather work records, results, experiments, feedback, direction changes, technical
 choices, and delivery/exposure observations. Follow consequences into affected
 features and pending work within scope. Retain source scope, time, coverage, and access
-gaps. Verify discoverable facts before asking; missing sources do not prove no change.
+gaps. Verify discoverable facts before asking. A missing source does not show that nothing changed.
 
 ## Synthesize and resolve
 
@@ -35,26 +35,26 @@ apply slice sufficiency only when selecting another delivery increment.
 
 Indispensable missing evidence gets bounded discovery: question, scope, method,
 expected output, and completion criterion. Preserve unresolved proposals and implications;
-an experiment does not establish policy.
+an experiment result becomes policy only through a decision.
 
 ## Feed knowledge and consequences back
 
 Use consolidate's authoritative routes and history rules for affected contracts,
 direction, decisions, evidence, vocabulary, ADRs, and delivery observations. Reuse
-settled approval and retain provenance; the review is not an edit narrative.
+settled approval and retain provenance, and keep the review itself out of the records.
 
 For reusable agent-procedure learning, use [writing-for-agents](../writing-for-agents/SKILL.md)
 to update its governing skill/instruction. A skill from an installed plugin is
 read-only per [Encode Lessons in Structure](../beto-mode/principles/encode-lessons-in-structure.md):
 prepare its change with `report-skill-lesson` instead. Keep case evidence in work records; place
-the actionable rule where future work loads it. Verify discovery trigger and readback;
-a diagnostic comment does not complete feedback. Apply existing write authority or
+the actionable rule where future work loads it. Verify the discovery trigger and read back
+the change; a diagnostic comment alone does not complete the feedback. Apply existing write authority or
 name the target and pending change.
 
 Identify pending-work effects on scope, acceptance, dependencies, readiness, and
 investigation. When requested, use [selected work planning](../plan-increment/references/selected-work.md)
-and its work-item route to prepare changes. Review alone authorizes no new work
-publication, tracker state change, release, or flag operation; reuse actual authority.
+and its work-item route to prepare changes. Publishing new work, changing tracker
+state, releasing, or operating flags needs authority beyond the review; reuse what exists.
 
 ## Verify completion
 

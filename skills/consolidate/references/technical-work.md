@@ -2,8 +2,7 @@
 
 Read this when consolidation includes technical choices or a technical work spec.
 Use configured domain, ADR, and tracker destinations. A technical spec is a work
-artifact linked to canonical product behavior; it can be useful without being
-mandatory for every increment.
+artifact linked to canonical product behavior; write one when the increment needs it.
 
 ## Route the knowledge
 
@@ -52,7 +51,7 @@ Resolve the tracker workflow through project configuration. Prepare or publish o
 within the requested scope and existing authority, reusing applicable confirmation.
 Map readiness to concrete work with completion criteria and satisfied prerequisites;
 unresolved execution-blocking choices use the configured non-ready disposition.
-An approved product direction or technical proposal alone does not establish readiness.
+An approved product direction or technical proposal alone does not make work ready.
 
 Read back published content, identity, references, relationships, and readiness.
 Report draft-only or partial effects explicitly. The spec is complete when the selected
