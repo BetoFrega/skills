@@ -25,7 +25,7 @@ Assign exactly one category and state:
 
 For PRs, `ready-for-agent` means a brief and agent action on the diff; `ready-for-human` means ready for human merge.
 
-Normally: unlabeled → `needs-triage` → another state; reporter replies return `needs-info` to `needs-triage`. Maintainers may override. Conflicting states require maintainer clarification before anything else; flag unusual transitions and ask before proceeding.
+Normally an unlabeled issue moves to `needs-triage` and then to another state, and a reporter's reply moves `needs-info` back to `needs-triage`. Maintainers may override. Conflicting states require maintainer clarification before anything else; flag unusual transitions and ask before proceeding.
 
 ## Attention queue
 

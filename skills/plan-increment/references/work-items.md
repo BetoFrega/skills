@@ -1,8 +1,8 @@
 # Executable work items
 
 Read this to turn selected increments or bounded discovery into tracker work. Use the
-configured native representation, labels, and readiness rules; local files are a tracker
-choice, not a required intermediate destination.
+configured native representation, labels, and readiness rules; local files are one tracker
+choice.
 
 ## Decompose and validate
 
@@ -15,13 +15,12 @@ A raw idea without executable work belongs in the canonical knowledge space.
 Prefer end-to-end execution cuts that can be verified independently. Size execution
 items for reliable work in a fresh context without redefining the product increment
 to fit that context. Explicitly link necessary enabling or layer work to the result
-it gates. Refactoring belongs in this plan when needed or justified for the selected
-result; do not prepend every possible cleanup.
+it gates. Include refactoring only when the selected result needs or justifies it.
 
 Retain relevant approved technical constraints, ADRs, and existing test boundaries.
 Resolve consequential execution gaps before readiness or create bounded discovery
 that resolves them. Tests should establish the result, including relevant failures,
-rather than mirror proposed implementation details. Use domain and module identities
+without mirroring proposed implementation details. Use domain and module identities
 when helpful; avoid brittle file locations or code listings. Decision-rich prototype
 schemas or state machines can be included with their source and limited purpose.
 
@@ -35,7 +34,7 @@ authority are separate meanings.
 
 Apply the configured ready disposition only when required choices, execution inputs,
 and start prerequisites are satisfied. Keep blocked or uncertain items in the mapped
-non-ready disposition. The absence of ticket blockers alone does not prove readiness.
+non-ready disposition. No ticket blockers alone does not make an item ready.
 The executable frontier contains items whose actual start prerequisites are met.
 
 Wide mechanical changes that cannot land independently green may need expand–contract:
@@ -48,7 +47,7 @@ and verification. Do not call intermediate broken states usable delivery increme
 
 Use the [work-item template](../assets/work-item-template.md), adapting sections to native
 properties. Show the proposed graph and resolve outstanding breakdown decisions before
-publication. Reuse approval already covering the same workset; do not ask for it again.
+publication. Reuse approval that already covers the same workset.
 Publish within requested authority and preserve partial results for safe resumption.
 
 - **Local tracker:** one file per ticket at its configured work-record location. Use
@@ -58,8 +57,8 @@ Publish within requested authority and preserve partial results for safe resumpt
   identifiers. Use verified native blocking or sub-issue operations; otherwise retain
   explicit dependency links in the record. Apply configured readiness and relationships.
 
-Link the source or parent when applicable; planning does not itself close or modify
-the parent. Changing existing work requires applicable authorization and the same
+Link the source or parent when applicable; planning leaves the parent open and
+unchanged. Changing existing work requires applicable authorization and the same
 scope and readiness checks. Read back every published item, canonical reference,
 blocking relationship, and readiness assignment. Account for selected acceptance
 across the workset and explicitly identify gaps or failed operations.

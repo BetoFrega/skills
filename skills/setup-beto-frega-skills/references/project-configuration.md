@@ -48,7 +48,7 @@ Confirm the external directory and how agents will receive its entry reference.
 | Observability baseline | `OBSERVABILITY.md` | `OBSERVABILITY.md` |
 | Accessibility baseline | `ACCESSIBILITY.md` | `ACCESSIBILITY.md` |
 
-These are placement defaults, not required names. An external `agent-skills.md`
+These are default placements; other names work. An external `agent-skills.md`
 contains the project binding, applicable information-density rule, and scoped
 pointers to the selected documents. A mixed configuration points to the existing
 authority for each section and fills only gaps. Keep configuration location separate

@@ -14,8 +14,8 @@ tickets cited in questions, closure proposals, and handoffs.
 Use [consolidate](../../consolidate/SKILL.md) to resolve configured
 authority and the affected functionality, shared rules, decisions, proposals, and
 evidence. Read the applicable domain glossary and existing ADRs or technical constraints
-through project configuration. For a new feature, use its relevant family and direction
-rather than invent an existing contract. Identify missing sources and observation gaps.
+through project configuration. For a new feature, use its relevant family and direction;
+there is no existing contract to cite. Identify missing sources and observation gaps.
 
 Read the material relevant to the intended change and its consequences. Retain existing
 identities, vocabulary, and confirmed choices; distinguish intended behavior from actual
@@ -25,13 +25,12 @@ when increment records already exist or their meanings need clarification.
 ## Select and clarify the next scope
 
 Establish the next usable result or set of increments the user wants to consider now.
-Develop the selection together when the user starts with a broad idea. Keep future
-possibilities discoverable as deferred proposals rather than expanding the current
-interview. A cross-cutting question belongs now when it materially affects the selected
+Develop the selection together when the user starts with a broad idea. Record future
+possibilities as deferred proposals and keep the current interview to the selection. A cross-cutting question belongs now when it materially affects the selected
 outcome, scope, acceptance, or prerequisites.
 
 Resolve choices that could change this slice's consistency. Retrieve factual evidence
-from available sources; use the user for decisions rather than discoverable facts.
+from available sources; ask the user only for decisions.
 Retain confirmed choices as they settle. Use the canonical writer within existing
 documentation authority; unresolved alternatives remain proposals.
 
@@ -65,9 +64,9 @@ Keep that executable discovery work distinguishable from a product delivery slic
 Carry it into work planning under the existing publication and execution authority.
 
 A smaller slice is preferable when it still provides relevant progress toward the
-user's goal. Preserve the deferred uncertainty and its implications. Longer research
-uses the discovery handoff rather than keeping the interview open waiting for results.
+user's goal. Preserve the deferred uncertainty and its implications. For longer research,
+use the discovery handoff and close the interview instead of waiting for results.
 
 Return supported findings to canonical knowledge and read them when resuming. Preserve
 settled choices and resolve the remaining consequential uncertainty for the selected
-slice. Approved hypotheses and experiment outcomes remain distinguishable from policy.
+slice. Keep approved hypotheses and experiment outcomes marked apart from policy.

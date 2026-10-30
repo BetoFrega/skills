@@ -15,5 +15,6 @@ through [document delivery](../consolidate/references/local-document-delivery.md
 
 After accepted closure, hand off selected increments, canonical references, confirmed
 product/technical choices, consequential gaps, and deferred questions to consolidation
-and planning. Broad feature knowledge does not expand selected delivery scope; reuse
+and planning. Delivery scope stays at the selected increments however much feature
+knowledge you gather. Reuse
 accepted choices and confirmations as later workflows refine the handoff.

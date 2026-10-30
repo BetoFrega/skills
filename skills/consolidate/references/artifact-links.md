@@ -2,8 +2,7 @@
 
 Read this before citing specific documents or tickets in conversation, saved records,
 recommendations, or handoffs. Every cited document or ticket has a navigable link at
-its mention. Use its title or identifier as the label; a name, identifier, or path
-alone does not satisfy the citation.
+its mention. Use its title or identifier as the label of the link.
 
 Use the verified destination URL or native document reference for provider records.
 For local files in conversation, use a Markdown link with an absolute file target.
@@ -14,6 +13,6 @@ when available. Link a draft to the actual saved draft and retain its draft stat
 
 Resolve missing links from the source or saved-record readback before reporting.
 Verify that each target identifies the intended document or ticket. If a target
-cannot be resolved, report the specific reference gap rather than invent a URL or
-silently substitute an unlinked identifier. Generic artifact types and clearly
+cannot be resolved, report that gap; do not invent a URL or fall back to an unlinked
+identifier. Generic artifact types and clearly
 labeled template placeholders require no invented destination.

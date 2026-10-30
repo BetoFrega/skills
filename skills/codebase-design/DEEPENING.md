@@ -16,13 +16,12 @@ Classify dependencies to choose tests across the deepened module's seam:
 
 ## Seam discipline
 
-One adapter is hypothetical; introduce a port only when at least two adapters are
-justified, typically production and test. Private seams used by internal tests remain
+Introduce a port only when at least two adapters are justified, typically production
+and test. Private seams used by internal tests remain
 valid; do not expose them through the external interface.
 
-## Testing strategy: replace, don't layer
+## Testing strategy: replace old tests
 
 Once tests through the deepened interface exist, delete old shallow-module
-unit tests. Assert observable outcomes through that interface, not internal state.
-Tests describe behavior and survive internal refactors; otherwise they cross past
-the interface.
+unit tests. Assert observable outcomes through that interface so the tests survive internal
+refactors. A test that needs internal state has crossed past the interface.

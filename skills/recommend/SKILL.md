@@ -9,8 +9,7 @@ Compare alternatives against the user's goal, constraints, and priorities. This
 invocation produces advice; execution uses its own authorization.
 
 Within this recommendation only, the user is open to revisiting earlier decisions and
-rejected options. Treat them as context, not fixed constraints, when they shape the
-comparison: if an earlier choice blocks a better option or a rejected option now fits,
+rejected options. Treat them as context that can change when they shape the comparison: if an earlier choice blocks a better option or a rejected option now fits,
 include that option, name the decision it would reopen, and state the cost of
 reversing it. Leave decisions that do not affect this comparison alone. This openness
 ends with the recommendation; elsewhere, settled decisions stay settled until the user
@@ -46,6 +45,6 @@ Explain why it beats the strongest alternative and which changed assumptions or
 conditions would reverse it. Use qualitative judgment unless evidence supports
 quantification. Make consequential domain, product, architecture, and code-design
 choices assessable in conversation: explain affected behavior/responsibilities and
-implications without assuming the user read linked artifacts. Describe actual options
-and rationale; do not invent retrospective alternatives. Finish when no decisive gap
+implications without assuming the user read linked artifacts. Describe only the options
+and rationale that actually exist; do not invent alternatives after the fact. Finish when no decisive gap
 remains; adoption awaits the user's decision unless already explicitly approved.

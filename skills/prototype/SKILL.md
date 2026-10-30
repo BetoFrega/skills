@@ -7,13 +7,13 @@ description: Prototype a state model, business logic, or UI with throwaway code 
 
 Identify the question and completion criterion. For product questions, read canonical
 contracts/evidence through [consolidate](../consolidate/SKILL.md), including external
-configuration. Technical or interaction success establishes no product rule or release.
+configuration. A prototype that works sets no product rule and authorizes no release.
 
 ## Pick a branch
 
-- Logic/state model → [LOGIC.md](LOGIC.md): one shareable HTML file with free-play
+- Logic or state model: [LOGIC.md](LOGIC.md), one shareable HTML file with free-play
   actions and tabbed walkthroughs, usable by a non-developer.
-- Appearance → [UI.md](UI.md): distinct variants on one route, selectable through a
+- Appearance: [UI.md](UI.md), distinct variants on one route, selectable through a
   URL parameter and floating bottom bar.
 
 Infer from prompt/code or ask when ambiguous. If the user is unreachable, prefer

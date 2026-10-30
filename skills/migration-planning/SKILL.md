@@ -11,7 +11,7 @@ Prefer **Strangler Fig** and **vertical slices**: complete capabilities independ
 
 ## Plan the next slice
 
-Establish its measurable benefit and baseline, boundary, required behavior, intentional changes, consumers inside and outside the repository, operational owner, and prerequisites. Corroborate consumer discovery with runtime evidence; search silence proves nothing.
+Establish its measurable benefit and baseline, boundary, required behavior, intentional changes, consumers inside and outside the repository, operational owner, and prerequisites. Corroborate consumer discovery with runtime evidence; an empty search does not show that no consumer exists.
 
 Specify intermediate states, compatibility, data authority, in-flight work, and recovery. Prefer stable identity-based canary assignment across journeys and return visits. Prefer one authoritative writer; justify independent writers with conflict resolution.
 

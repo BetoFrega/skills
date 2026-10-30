@@ -15,5 +15,5 @@ Handle what normal operation will hit. Make everything else fail loudly.
 - Every refusal or unexpected failure emits a signal under the project's
   observability baseline, so someone learns it happened.
 - When a signal shows an edge case recurring, it has become expected; handle it then.
-- In plans and reviews, ask for the refusal and its signal, not for handling of a
-  hypothetical case.
+- In plans and reviews, ask for the refusal and its signal instead of handling for
+  a hypothetical case.

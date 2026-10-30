@@ -11,8 +11,8 @@ sufficiency, and discovery handoff. Retain settled choices; leave future branche
 Work in **rounds**. The **frontier** contains questions whose prerequisites are settled.
 Ask **one question per round by default**, prioritizing the decision that shapes the
 tree most. Group only when every recommendation is supported by known facts and settled
-preferences, clearly preferable, and likely to require just one simple “OK.” Independence
-alone does not make answers obvious; confidence alone does not remove user effort.
+preferences, clearly preferable, and likely to require just one simple “OK.” Questions being
+independent, or you being confident, is not enough to group them.
 Questions requiring comparison, reflection, missing context, or meaningful tradeoffs
 stay in separate rounds. Leave unasked frontier questions pending.
 
@@ -34,8 +34,8 @@ C. <alternative and main tradeoff>
 💡 <recommended alternative and reason>
 ```
 
-Wait for the user's actual response before the next round; expected “OK” is not
-approval. Recompute the frontier after answers. Questions depending on another open
+Wait for the user's actual response before the next round; do not count an
+expected “OK” as given. Recompute the frontier after answers. Questions depending on another open
 question belong to a later round.
 
 Find discoverable facts yourself: dispatch a subagent for environmental investigation

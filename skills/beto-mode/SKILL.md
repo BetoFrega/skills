@@ -6,13 +6,13 @@ description: Read first for multi-step, design, implementation, debugging, plann
 # Beto mode
 
 Route the task to the principles and workflow skills it triggers. Global rules keep
-authority over decisions and permissions; nothing here overrides them.
+authority over decisions and permissions.
 
 ## Principles
 
 Read a principle's file in full before applying it. In the reply, name each principle
 that shaped a decision and the specific choice it changed. Cite only principles whose
-file you read in this session; a name with no decision behind it is name-dropping.
+file you read in this session and that changed a decision.
 
 Each entry says when it applies. Files live at `principles/<name>.md`.
 

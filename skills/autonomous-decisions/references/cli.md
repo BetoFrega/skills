@@ -17,8 +17,8 @@ object response schema matching that role's required fields. Models and efforts
 are selected by `model-selection`, never by the runner.
 
 For file-reading jobs, list the authorized source directories in `read_dirs`.
-The adapter exposes only its supported read-only capabilities; missing connectors
-require a suitable native agent or a verified packet, not relaxed permissions.
+The adapter exposes only its supported read-only capabilities; for missing connectors,
+use a suitable native agent or a verified packet and keep the permissions as they are.
 
 Run with an unused output directory and explicit process cap and timeout:
 

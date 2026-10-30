@@ -7,8 +7,8 @@ artifact, revision, destination, or environment.
   PRs, closed tickets, and scheduled actions do not prove publication, deployment,
   delivery, or production behavior; those are separate claims needing their own
   evidence.
-- Label each claim as verified, inferred, or unknown. A prediction or an unseen cause
-  is a guess, not a result.
+- Label each claim as verified, inferred, or unknown. Report a prediction or an unseen
+  cause as a guess.
 - Before trusting a number you measured (speedup, regression, latency, eval result),
   name what limits it and rule out that it measured something else: errors, skipped
   or cached work, code that never ran, an untuned side, or noise.

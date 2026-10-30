@@ -34,7 +34,7 @@ permission requests. End with:
 “All” authorizes the presented list within its limits; exclusions deny those items;
 selected numbers authorize only those items; “none” denies the list. Accept equivalent
 wording, ranges, and multiple exclusions when unambiguous. Clarify ambiguity or
-nonexistent numbers before affected actions; silence is not approval.
+nonexistent numbers before affected actions, and do not treat silence as approval.
 
 Acknowledge approved/excluded numbers and continue. Retain decisions across task
 turns. Explain blocked dependencies and continue independent work; never route around
