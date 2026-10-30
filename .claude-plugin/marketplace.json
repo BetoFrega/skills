@@ -14,7 +14,7 @@
       "name": "beto-frega-personal",
       "source": "./personal",
       "description": "Beto Frega's personal global agent rules for every Claude session. Not meant for other users.",
-      "version": "0.2.0"
+      "version": "0.3.0"
     }
   ],
   "metadata": {
