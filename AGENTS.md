@@ -28,11 +28,14 @@ Report blocked destinations and Git delivery separately; local-only changes are 
 ## Skill installation
 
 Install repository skills only through the `beto-frega-skills` plugin in each agent;
-do not create local copies or symlinks of repository skills. When delivering a skill
-change, bump `version` in `.claude-plugin/plugin.json`,
-`.claude-plugin/marketplace.json`, and `.codex-plugin/plugin.json` together. A change
-under `personal/` bumps `personal/.claude-plugin/plugin.json` and its
-`marketplace.json` entry together instead. After
+do not create local copies or symlinks of repository skills. Bump the version only
+when the change alters what the plugin loads: skills, agents, hooks, or the manifests
+themselves. Changes limited to `evaluations/`, `docs/`, README, or tests keep the
+current version. When a bump is needed, change `version` in
+`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and
+`.codex-plugin/plugin.json` together. A change under `personal/` bumps
+`personal/.claude-plugin/plugin.json` and its `marketplace.json` entry together
+instead. After
 synchronizing delivered changes into the primary checkout, update the plugin in each
 configured agent and verify that a fresh session loads the changed skill.
 
