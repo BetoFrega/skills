@@ -12,10 +12,20 @@ Assume the user holds less of the tree than you do, may have stepped away betwee
 rounds, and is already busy. Write each question so they can answer it from the
 question alone.
 
+## Investigate before asking
+
+Before the first question, read what the goal touches: the code, docs, tickets, and
+earlier decisions you can reach. Before each later question, check whether its answer
+or its options depend on a fact you could look up, and look it up first. Ask the user
+only for decisions and for facts no available source holds; when you ask for a fact,
+say which sources you checked. Use a subagent when the investigation is long, and work
+inline when it takes a few reads. A running investigation is an unsettled
+prerequisite: continue with questions that do not depend on it.
+
 ## Open with the plan
 
-Before the first question, tell the user in a few lines what you understood the goal
-to be and which topics you will cover, in order. Update that list when an answer
+Then tell the user in a few lines what you understood the goal to be, what you found,
+and which topics you will cover, in order. Update that list when an answer
 changes it.
 
 ## Rounds
@@ -41,7 +51,7 @@ pending.
 Give each question a short context paragraph that covers:
 
 - where it comes from: the previous answer, or the part of the goal that raised it;
-- what is already known: the facts you found, each with a link or path and what it says;
+- what is already known: the facts you checked, each with a link or path and what it says;
 - what depends on the answer: what changes in the plan for each choice.
 
 Use the user's own terms and define any other term at first use. If the context needs
@@ -73,12 +83,7 @@ Wait for the user's actual response before the next round; do not count an expec
 "OK" as given. Recompute the frontier after answers. Questions depending on another
 open question belong to a later round.
 
-## Facts and closure
-
-Find discoverable facts yourself: dispatch a subagent for environmental investigation
-instead of asking the user. A running investigation is an unsettled prerequisite;
-continue with other questions on the frontier and wait only for dependent ones. Users
-own decisions, which require their responses.
+## Closure
 
 Propose closure when this deliverable's knowledge requirements are met; show the
 supported result and consequential gaps. The user may accept, refine, or extend scope.
