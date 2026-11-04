@@ -70,11 +70,26 @@ Rewrite the default present:
 - "After merge, the hook asks for both reviews": "the hook will ask".
 - "CI passes" about one finished run: "CI passed".
 
+## Make every reference reachable
+
+The reader sees only what you showed them in this conversation. When you cite a
+page, ticket, file, list item, commit, message, or earlier result, give a link or
+path the reader can open, and say what the cited part contains:
+
+- "item 12 on the page": name the page, link it, and quote or summarize item 12.
+- "ticket 1234": link the ticket and say what it is about.
+- "the fifth point of the list": give the file's path and the point's text.
+- "as discussed above": restate the point; the reader may not find it.
+
+Resolve the target before citing it. Show or summarize content you read but did
+not show before you refer to it. If you cannot link a target, say so instead of
+inventing a link.
+
 ## Self-Check (run before returning)
 
 Verify the named reader understands the intended knowledge/action after one reading;
 the main point appears in the first two lines; sentences/paragraphs hold one
 idea/topic; terms have one name and no unexplained jargon; all facts, numbers,
-conditions, and honest hedges survive; no AI'ism from the list above remains; the length matches what a person would write and nothing obvious remains; each verb's tense matches when its event happens.
+conditions, and honest hedges survive; no AI'ism from the list above remains; the length matches what a person would write and nothing obvious remains; each verb's tense matches when its event happens; every cited page, ticket, file, or item has a link or path and says what it contains.
 
 For local rewrites, report [document delivery](../consolidate/references/local-document-delivery.md).

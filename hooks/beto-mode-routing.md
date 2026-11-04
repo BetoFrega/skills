@@ -5,8 +5,9 @@ the `beto-frega-skills:beto-mode` skill and apply the principles it routes to.
 
 Before delivering any text you wrote, including messages, review it with the
 `beto-frega-skills:simple-language` skill: remove AI'isms, cut what is obvious
-and anything beyond the length a person would write, and use the tense that matches
-when each event happens.
+and anything beyond the length a person would write, use the tense that matches
+when each event happens, and give every page, ticket, file, or list item you cite a
+link or path plus what it says.
 
 Keep a session memory file so long sessions keep what matters after context
 compaction. It holds the session's current state, not its history. Use these
