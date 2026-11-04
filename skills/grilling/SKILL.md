@@ -8,40 +8,77 @@ if missing. Map its decisions as a **design tree**. For product questions, first
 [product increments](references/product-increments.md): canonical context, slice
 sufficiency, and discovery handoff. Retain settled choices; leave future branches deferred.
 
-Work in **rounds**. The **frontier** contains questions whose prerequisites are settled.
-Ask **one question per round by default**, prioritizing the decision that shapes the
-tree most. Group only when every recommendation is supported by known facts and settled
-preferences, clearly preferable, and likely to require just one simple “OK.” Questions being
-independent, or you being confident, is not enough to group them.
-Questions requiring comparison, reflection, missing context, or meaningful tradeoffs
-stay in separate rounds. Leave unasked frontier questions pending.
+Assume the user holds less of the tree than you do, may have stepped away between
+rounds, and is already busy. Write each question so they can answer it from the
+question alone.
 
-Number questions; use [recommend](../recommend/SKILL.md) for alternatives, pros/cons,
-comparison, and supported recommendations. Resolve decisive prerequisites before
-recommending dependent choices. Try for **at least three distinct viable alternatives**
-with their main tradeoffs; explain when fewer exist and allow another answer. Include
-the recommendation only when evidence and settled preferences support it.
+## Open with the plan
 
-Use this format; repeat only for a qualifying group:
+Before the first question, tell the user in a few lines what you understood the goal
+to be and which topics you will cover, in order. Update that list when an answer
+changes it.
+
+## Rounds
+
+Work in **rounds** of one question. The **frontier** contains questions whose
+prerequisites are settled. Start with the branch that shapes the tree most, then take
+each next question from the branch the user just answered, so every question follows
+from the previous answer. Finish or defer a branch before switching. When you switch,
+say in one sentence which topic closed and which one starts, and list the choices
+settled so far.
+
+A question asks for one decision. When answering it would require another decision
+first, or weighing several things at once, split it and ask the prerequisite first.
+
+Group questions only when each one is a simple confirmation on the same branch: the
+recommendation is supported by known facts and settled preferences, and you expect a
+plain "OK". Keep a group to three. Questions requiring comparison, reflection, missing
+context, or meaningful tradeoffs get their own round. Leave unasked frontier questions
+pending.
+
+## Context in every question
+
+Give each question a short context paragraph that covers:
+
+- where it comes from: the previous answer, or the part of the goal that raised it;
+- what is already known: the facts you found, each with a link or path and what it says;
+- what depends on the answer: what changes in the plan for each choice.
+
+Use the user's own terms and define any other term at first use. If the context needs
+more than a short paragraph, the question is too big; split it.
+
+## Alternatives
+
+Use [recommend](../recommend/SKILL.md) to prepare alternatives and the recommendation,
+then show the user only the format below; give the full comparison when they ask for
+it. Offer the viable alternatives, usually two or three, each with its consequence in
+one sentence. Skip invented options added to reach a count, and allow another answer.
+Resolve decisive prerequisites before recommending dependent choices. Include the
+recommendation only when evidence and settled preferences support it.
 
 ```
-❓ **Q1** - **<question title>**: <question body>
+❓ **Q<n>: <question title>**
 
-A. <alternative and main tradeoff>
-B. <alternative and main tradeoff>
-C. <alternative and main tradeoff>
+<context paragraph>
 
-💡 <recommended alternative and reason>
+<the question, in one sentence>
+
+A. <alternative>: <what happens if chosen>
+B. <alternative>: <what happens if chosen>
+
+💡 <recommended alternative and why>
 ```
 
-Wait for the user's actual response before the next round; do not count an
-expected “OK” as given. Recompute the frontier after answers. Questions depending on another open
-question belong to a later round.
+Wait for the user's actual response before the next round; do not count an expected
+"OK" as given. Recompute the frontier after answers. Questions depending on another
+open question belong to a later round.
+
+## Facts and closure
 
 Find discoverable facts yourself: dispatch a subagent for environmental investigation
 instead of asking the user. A running investigation is an unsettled prerequisite;
-continue independent frontier questions and wait only for dependent ones. Users own
-decisions, which require their responses.
+continue with other questions on the frontier and wait only for dependent ones. Users
+own decisions, which require their responses.
 
 Propose closure when this deliverable's knowledge requirements are met; show the
 supported result and consequential gaps. The user may accept, refine, or extend scope.
