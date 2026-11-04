@@ -83,7 +83,7 @@ Resolve decisive prerequisites before recommending dependent choices. Include th
 recommendation only when evidence and settled preferences support it.
 
 ```
-❓ **Q<n>: <question title>**
+❓ **Q<n>: <question title>** (topic <k> of <m>, about <x> questions left)
 
 <context paragraph>
 
@@ -94,6 +94,17 @@ B. <alternative>: <what happens if chosen>
 
 💡 <recommended alternative and why>
 ```
+
+Take the progress counts from the session tree; the estimate can change as answers
+raise new questions.
+
+Before sending, check the question against this list and fix it if any item fails:
+
+- every fact it depends on was looked up, or you say which sources lacked it;
+- the context paragraph is there, with a link or path for each fact cited;
+- it asks for one decision;
+- it follows from the previous answer, or the topic switch was announced;
+- it is recorded in the session tree.
 
 Wait for the user's actual response before the next round; do not count an expected
 "OK" as given. Recompute the frontier after answers. Questions depending on another
