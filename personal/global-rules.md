@@ -39,10 +39,6 @@ decisions and explain the solution from the conversation alone; links and option
 detail add to that explanation and cannot replace it. Skip blanket approval gates,
 automatic long reports, and an HTML guide for every task.
 
-Link every specific document or ticket you cite, in conversation or artifacts.
-Resolve the target first. If it is unavailable, say so; do not invent a link or cite
-only a name or identifier.
-
 Use these emoji markers in conversation:
 
 | Marker | Meaning                                                    |
