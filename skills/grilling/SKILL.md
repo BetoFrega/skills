@@ -4,7 +4,8 @@ description: Clarify and stress-test a selected plan, decision, idea, or product
 ---
 
 Establish the selected goal, scope, and next deliverable from conversation; ask only
-if missing. Map its decisions as a **design tree**. For product questions, first read
+if missing. Map its decisions as a **design tree** and keep it in the
+[session tree](#session-tree) file. For product questions, first read
 [product increments](references/product-increments.md): canonical context, slice
 sufficiency, and discovery handoff. Retain settled choices; leave future branches deferred.
 
@@ -28,14 +29,29 @@ Then tell the user in a few lines what you understood the goal to be, what you f
 and which topics you will cover, in order. Update that list when an answer
 changes it.
 
+## Session tree
+
+Keep the design tree in a file outside the repository, next to the session memory file
+when there is one, and state its path in the conversation. Record each question when
+it comes up, nested under the question whose answer raised it:
+
+```
+## <topic>
+- Q1 [settled] <title>. Origin: initial. Answer: <answer>.
+  - Q3 [open] <title>. Origin: answer to Q1.
+- Q2 [deferred] <title>. Origin: initial. Reason: <why>.
+```
+
+Update the entry when its state changes. Read the file again after compaction or
+resume. Show the user the tree when the topic changes, when they ask, and at closure.
+
 ## Rounds
 
 Work in **rounds** of one question. The **frontier** contains questions whose
 prerequisites are settled. Start with the branch that shapes the tree most, then take
 each next question from the branch the user just answered, so every question follows
 from the previous answer. Finish or defer a branch before switching. When you switch,
-say in one sentence which topic closed and which one starts, and list the choices
-settled so far.
+say in one sentence which topic closed and which one starts, and show the tree.
 
 A question asks for one decision. When answering it would require another decision
 first, or weighing several things at once, split it and ask the prerequisite first.
@@ -86,6 +102,6 @@ open question belong to a later round.
 ## Closure
 
 Propose closure when this deliverable's knowledge requirements are met; show the
-supported result and consequential gaps. The user may accept, refine, or extend scope.
+supported result, the tree, and consequential gaps. The user may accept, refine, or extend scope.
 Deferred branches do not prevent closure. Reuse existing scope confirmation; on accepted
 closure hand off settled choices, references, and gaps within existing authorization.
