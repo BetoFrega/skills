@@ -250,6 +250,7 @@ Status, scope checks, handoffs, verification, and next steps only report. Use
 | Report a problem in a skill from this plugin | [report-skill-lesson](skills/report-skill-lesson/SKILL.md): an issue on the plugin's repository instead of an edit to the installed copy, published only with approval. |
 | Reduce an agent document | [prune-agent-docs](skills/prune-agent-docs/SKILL.md): exact, independently reviewed cuts, applied only after authorization. |
 | Clarify reader-facing prose | [simple-language](skills/simple-language/SKILL.md): plain, readable language, and the AI'ism, obviousness, length, and tense review for all produced text. |
+| Fix verb tense and mood | [verb-tense](skills/verb-tense/SKILL.md): the available tenses in English and Portuguese and the errors agents make, such as the present for finished or planned events and missing conditional or subjunctive. |
 | Prepare an explicitly delegated low-density tracker report | [report-low-density](skills/report-low-density/SKILL.md): a reproducible flag; publication requires explicit instruction or approval. |
 | Investigate a low-density flag | [investigate-low-density](skills/investigate-low-density/SKILL.md): causes and safe reduction options, without implementing fixes. |
 | Encode a dense semantic payload | [esds-compress](skills/esds-compress/SKILL.md): compression preserving required operational literals. |
