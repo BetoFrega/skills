@@ -181,7 +181,7 @@
         "Fold pstack's correct ladder into Encode Lessons in Structure, add the plugin-skills-are-read-only rule, and fold Explain the Number's limiter and alternative-explanation checks into Evidence Before Claims.",
         "Add Security by Design as a local principle, layered on Boundary Discipline and Fail Loud, Handle on Evidence.",
         "Adapt Impatient Programming (impatientprogramming.org) rules 20 and 12: add Pin Behavior Before Changing, and add a same-change simplification pass to Subtract Before You Add.",
-        "Fold Prove It Works' user-inspectable proof and the multi-phase-plan review gate into Evidence Before Claims: interaction changes are done only after the user has seen the proof."
+        "Fold Prove It Works and the multi-phase-plan review gate into Evidence Before Claims as a rehearsed interactive demo script offered to the user; interaction changes are done only after the user has seen them working."
       ]
     },
     "correct": {
