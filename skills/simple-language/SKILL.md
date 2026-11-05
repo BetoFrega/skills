@@ -60,15 +60,10 @@ related sentences so the text reads with rhythm.
 
 ## Use the right tense
 
-Place each statement in time. Use the past for what already happened, the present
-for what holds now, and the future for what has not happened yet. Use the perfect,
-progressive, and conditional forms when they say something the simple forms cannot:
-"has run since Monday", "is still running", "would fail if the key expired".
-Rewrite the default present:
-
-- "I open the PR" when it is already open: "I opened the PR".
-- "After merge, the hook asks for both reviews": "the hook will ask".
-- "CI passes" about one finished run: "CI passed".
+Place each verb in time and mood: past for what happened, present for what holds
+now, future for what has not happened, conditional for hypotheses and the reader's
+options. Apply [verb-tense](../verb-tense/SKILL.md) for the full list of forms and
+errors.
 
 ## Make every reference reachable
 
