@@ -13,7 +13,8 @@
 
 ## Validation
 
-<How to verify the output; relevant agreed test boundaries and evidence.>
+<How to verify the output; relevant agreed test boundaries and evidence. For a usable
+result, the draft demo script: steps the user takes and what each shows.>
 
 ## Canonical and technical references
 

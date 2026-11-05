@@ -15,3 +15,14 @@ artifact, revision, destination, or environment.
 - Keep the run count and spread with the number.
 - Report the precise evidence gap instead of asserting through it.
 - Run a check you can run instead of handing it to the user.
+- For a change someone uses (UI, CLI, API, workflow), always offer the user an
+  interactive demo script: the steps to try it themselves and what each step should
+  show. Draft the script in the initial plan, before building, so it sets the
+  direction of the work; revise it when the plan changes. Rehearse the whole script on the delivered revision before offering it, and
+  attach the rehearsal's evidence: screenshots or a short video for UI, the real
+  commands and output otherwise. The rehearsal is your end-to-end check: a step that
+  does not show what the script promises means the change is not done. Passing tests
+  are not a rehearsal.
+- A change to an interaction (what the user sees, types, clicks, or receives) is done
+  only after the user has seen it working, through the demo or the rehearsal's
+  evidence. Stop at ready and wait for them.
