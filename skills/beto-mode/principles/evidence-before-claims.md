@@ -19,7 +19,9 @@ artifact, revision, destination, or environment.
   interactive demo script: the steps to try it themselves and what each step should
   show. Rehearse the whole script on the delivered revision before offering it, and
   attach the rehearsal's evidence: screenshots or a short video for UI, the real
-  commands and output otherwise. Passing tests are not a rehearsal.
+  commands and output otherwise. The rehearsal is your end-to-end check: a step that
+  does not show what the script promises means the change is not done. Passing tests
+  are not a rehearsal.
 - A change to an interaction (what the user sees, types, clicks, or receives) is done
   only after the user has seen it working, through the demo or the rehearsal's
   evidence. Stop at ready and wait for them.
