@@ -15,3 +15,9 @@ artifact, revision, destination, or environment.
 - Keep the run count and spread with the number.
 - Report the precise evidence gap instead of asserting through it.
 - Run a check you can run instead of handing it to the user.
+- For a change someone uses (UI, CLI, API, workflow), run it the way they would and
+  hand over proof they can inspect without replaying the run: screenshots or a short
+  video for UI, the real command and its output otherwise. Passing tests are not that
+  proof.
+- A change to an interaction (what the user sees, types, clicks, or receives) is done
+  only after the user has seen that proof. Stop at ready and wait for them.
