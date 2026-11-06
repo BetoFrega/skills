@@ -10,7 +10,7 @@ Weight each part by significance, not line count.
 
 ## 1. Establish evidence
 
-Apply [simple-language](../simple-language/SKILL.md) and its self-check; if it is
+Apply [writing-for-humans](../writing-for-humans/SKILL.md) and its self-check; if it is
 unavailable, ask where it is before drafting.
 
 Identify the reader and their question, the PR, and its base and head commits. The

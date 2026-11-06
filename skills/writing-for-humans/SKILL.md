@@ -1,5 +1,5 @@
 ---
-name: simple-language
+name: writing-for-humans
 description: Rewrite or audit reader-facing prose for plain language, clarity, readability, or actionability. Also use to review any produced text for AI'isms, length, and tense before delivery.
 ---
 
