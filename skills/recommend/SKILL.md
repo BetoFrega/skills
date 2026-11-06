@@ -17,9 +17,10 @@ A previous recommendation on the same question, including your own, is one more
 candidate, not the default. Evaluate it against the same criteria as the others
 and look for what it got wrong: new facts, weak assumptions, or options it never
 considered. Keep it only when it still wins on the merits, and say what you
-checked to reach that. This openness
-ends with the recommendation; elsewhere, settled decisions stay settled until the user
-explicitly reopens them.
+checked to reach that.
+
+This openness ends with the recommendation; elsewhere, settled decisions stay
+settled until the user explicitly reopens them.
 
 ## Establish the comparison
 
