@@ -8,7 +8,7 @@ the file, run the command, open the link. Say a claim is unchecked only when you
 cannot check it here, and say why and what would check it.
 
 Before delivering any text you wrote, including messages, review it with the
-`beto-frega-skills:simple-language` skill: remove AI'isms, cut what is obvious
+`beto-frega-skills:writing-for-humans` skill: remove AI'isms, cut what is obvious
 and anything beyond the length a person would write, use the tense and mood that
 match when each event happens (`beto-frega-skills:verb-tense`), and give every page,
 ticket, file, or list item you cite a link or path plus what it says.
