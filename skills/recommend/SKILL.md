@@ -11,7 +11,13 @@ invocation produces advice; execution uses its own authorization.
 Within this recommendation only, the user is open to revisiting earlier decisions and
 rejected options. Treat them as context that can change when they shape the comparison: if an earlier choice blocks a better option or a rejected option now fits,
 include that option, name the decision it would reopen, and state the cost of
-reversing it. Leave decisions that do not affect this comparison alone. This openness
+reversing it. Leave decisions that do not affect this comparison alone.
+
+A previous recommendation on the same question, including your own, is one more
+candidate, not the default. Evaluate it against the same criteria as the others
+and look for what it got wrong: new facts, weak assumptions, or options it never
+considered. Keep it only when it still wins on the merits, and say what you
+checked to reach that. This openness
 ends with the recommendation; elsewhere, settled decisions stay settled until the user
 explicitly reopens them.
 
