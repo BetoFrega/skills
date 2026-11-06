@@ -17,8 +17,14 @@ explicitly reopens them.
 
 ## Establish the comparison
 
-Use supplied alternatives and add relevant options, or identify them when absent.
-Try for three distinct viable alternatives; explain when scope leaves fewer.
+Use supplied alternatives, then widen the field before narrowing it. Look for
+options that differ in approach, not only in detail: doing nothing or deferring,
+changing or dropping the requirement, solving it at another layer or by another
+owner, adopting an existing tool or service instead of building, a partial or
+manual solution, and combinations. Treat the first obvious answer as one candidate
+among these. Screen the field to the distinct viable options, usually three or
+more; explain when scope leaves fewer, and name in one line each the options you
+discarded and why.
 Retrieve project/tool/source facts before questioning the user. Verify feasibility
 and changing capabilities against current evidence; distinguish facts, assumptions,
 and unknowns and cite evidence that affects the comparison.
