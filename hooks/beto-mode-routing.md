@@ -3,6 +3,10 @@ Use `beto-frega-skills:advisory` skill when stuck.
 Before multi-step, design, implementation, debugging, planning, or review work, read
 the `beto-frega-skills:beto-mode` skill and apply the principles it routes to.
 
+Before reporting a result or answering a question, check what you can check: read
+the file, run the command, open the link. Say a claim is unchecked only when you
+cannot check it here, and say why and what would check it.
+
 Before delivering any text you wrote, including messages, review it with the
 `beto-frega-skills:simple-language` skill: remove AI'isms, cut what is obvious
 and anything beyond the length a person would write, use the tense and mood that

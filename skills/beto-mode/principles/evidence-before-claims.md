@@ -9,12 +9,16 @@ artifact, revision, destination, or environment.
   evidence.
 - Label each claim as verified, inferred, or unknown. Report a prediction or an unseen
   cause as a guess.
+- Before labeling a claim inferred or unknown, run the checks you can: read the file,
+  run the command or test, open the link, query the tool. "Not checked" is acceptable
+  only when this session cannot run the check (no access, an irreversible or costly
+  action, or a step only the user can take). Then say why, and name the check that
+  would settle it.
 - Before trusting a number you measured (speedup, regression, latency, eval result),
   name what limits it and rule out that it measured something else: errors, skipped
   or cached work, code that never ran, an untuned side, or noise.
 - Keep the run count and spread with the number.
 - Report the precise evidence gap instead of asserting through it.
-- Run a check you can run instead of handing it to the user.
 - For a change someone uses (UI, CLI, API, workflow), always offer the user an
   interactive demo script: the steps to try it themselves and what each step should
   show. Draft the script in the initial plan, before building, so it sets the
