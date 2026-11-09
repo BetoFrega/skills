@@ -33,9 +33,11 @@ when the change alters what the plugin loads: skills, agents, hooks, or the mani
 themselves. Changes limited to `evaluations/`, `docs/`, README, or tests keep the
 current version. When a bump is needed, change `version` in
 `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, and
-`.codex-plugin/plugin.json` together. A change under `personal/` bumps
-`personal/.claude-plugin/plugin.json` and its `marketplace.json` entry together
-instead. After
+`.codex-plugin/plugin.json` together. A change under `personal/` bumps only its
+`marketplace.json` entry instead. `beto-frega-personal` has no `plugin.json`: its
+marketplace entry (`strict: false`) is its manifest, because the claude.ai sync
+rejects a plugin whose root holds another `.claude-plugin/plugin.json`, and
+`personal/` sits inside the root of `beto-frega-skills`. After
 synchronizing delivered changes into the primary checkout, update the plugin in each
 configured agent and verify that a fresh session loads the changed skill.
 
