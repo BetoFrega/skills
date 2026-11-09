@@ -22,7 +22,7 @@ the sources or name the gap, and skip a recap of the whole task.
 
 List the required actions in execution order, immediate action first, with blockers
 and decisions next to the actions they affect. Take the requirements from the goal,
-acceptance, and project workflow: evidence, a rehearsed demo script and the user's
+acceptance, and project workflow: evidence, a rehearsed demo script ([demo-day](../demo-day/SKILL.md)) and the user's
 review of interaction changes, canonical updates, checks, review, integration,
 deployment, operational verification, and tracker closure, each only where required. Discovery work is complete when it produces its expected evidence or
 output, even without a feature.
