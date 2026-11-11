@@ -8,13 +8,13 @@
       "name": "beto-frega-skills",
       "source": "./",
       "description": "Beto Frega's agent skills: grilling, planning, implementation, review, decisions, and delivery workflows.",
-      "version": "0.30.1"
+      "version": "0.31.0"
     },
     {
       "name": "beto-frega-personal",
       "source": "./personal",
       "description": "Beto Frega's personal global agent rules for every Claude session. Not meant for other users.",
-      "version": "0.5.0",
+      "version": "0.4.1",
       "author": {
         "name": "Beto Frega"
       },

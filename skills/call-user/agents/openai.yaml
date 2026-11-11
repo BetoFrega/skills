@@ -1,0 +1,6 @@
+interface:
+  display_name: "Call User"
+  short_description: "Ring a soft alarm until the user answers"
+  default_prompt: "Use $call-user to ring a soft alarm on my computer when you need me, and stop it when I answer."
+policy:
+  allow_implicit_invocation: true
