@@ -214,11 +214,13 @@ $verify Confirm that the delivered increment is available to the intended
 users in the target environment. Report any verification gaps.
 ```
 
-Use [demo-day](skills/demo-day/SKILL.md) to prepare a feature-review demo: a demo
+Use [demo-day](skills/demo-day/SKILL.md) to prepare a feature-review demo. It first
+agrees on the story with you (audience, key moments, cut, cast, order), then builds a demo
 script, reusable setup scenarios that print test data and users, and a rehearsal
 through the audience-facing interface that records each feature's demonstrability.
 On request, it also records each feature as a staged video with an animated cursor,
-spotlights, captions, zoom, and click sounds.
+spotlights, captions, zoom, and click sounds, staged with you over the rehearsal
+screenshots and done only when you approve it.
 
 ```text
 $demo-day Prepare the demo for guest checkout and saved carts. Rehearse locally

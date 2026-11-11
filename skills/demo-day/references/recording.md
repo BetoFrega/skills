@@ -12,8 +12,8 @@ and writes the MP4. It needs ffmpeg.
 
 Copy `recorder.mjs` next to the recording scripts in the demo day's folder, so the
 recording reproduces after the plugin updates. Write one recording script per
-feature that follows its demo script step by step, starting from the clean setup
-state.
+feature that follows its demo script step by step and its Staging column, starting
+from the clean setup state.
 
 ## Rules the helpers cannot enforce
 
