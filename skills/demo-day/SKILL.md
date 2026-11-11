@@ -1,6 +1,6 @@
 ---
 name: demo-day
-description: Prepare a feature-review demo for a demo day — demo script, setup scenarios that seed the environment and print test data and users, and a rehearsal recording each feature's demonstrability.
+description: Prepare a feature-review demo for a demo day — demo script, setup scenarios that seed the environment and print test data and users, a rehearsal recording each feature's demonstrability, and polished demo videos.
 ---
 
 # Demo day
@@ -10,7 +10,7 @@ name each principle that changed a choice. Global rules keep authority over deci
 and permissions.
 
 The invocation authorizes the demo artifacts below: scenarios, setup, demo script,
-and rehearsal report. Product code, shared environments, and tracker writes beyond
+rehearsal report, and demo videos. Product code, shared environments, and tracker writes beyond
 the verdict comment need their own authority.
 
 ## 1. Select features
@@ -66,10 +66,16 @@ Assign each feature a verdict — **demonstrable**, **demonstrable with caveats*
 **not demonstrable** — supported by the rehearsal evidence
 ([Evidence Before Claims](../beto-mode/principles/evidence-before-claims.md)).
 
-## 5. Record and report
+## 5. Record videos
+
+When the user asks for videos, record each demonstrable feature after its rehearsal
+passes, following [recording](references/recording.md). Direct the recording boldly:
+stage the feature's key moment with motion, suspense, spotlight, and zoom.
+
+## 6. Record and report
 
 Save the filled template in the demo day's folder as the demo script and rehearsal
-report: each step's result, evidence links, timing, and verdict. Record only the
+report: each step's result, evidence links, timing, verdict, and video link. Record only the
 verdict and a link to the report in each feature's canonical work item or record
 ([One Canonical Record](../beto-mode/principles/one-canonical-record.md)); features
 known only by PR keep the report alone.

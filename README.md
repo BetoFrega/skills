@@ -217,9 +217,12 @@ users in the target environment. Report any verification gaps.
 Use [demo-day](skills/demo-day/SKILL.md) to prepare a feature-review demo: a demo
 script, reusable setup scenarios that print test data and users, and a rehearsal
 through the audience-facing interface that records each feature's demonstrability.
+On request, it also records each feature as a staged video with an animated cursor,
+spotlights, captions, zoom, and click sounds.
 
 ```text
-$demo-day Prepare the demo for guest checkout and saved carts. Rehearse locally.
+$demo-day Prepare the demo for guest checkout and saved carts. Rehearse locally
+and record a video of each feature.
 ```
 
 Reconcile supported implementation and delivery observations through
