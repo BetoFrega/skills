@@ -9,8 +9,9 @@
 //   const context = await browser.newContext({ viewport, recordVideo: { dir, size: viewport } });
 //   await installCursor(context);
 //   const page = await context.newPage();
-//   const rec = createRecorder(page); // right after newPage: the video starts there
+//   const rec = createRecorder(page);
 //   await page.goto(url);
+//   await rec.syncFlash(); // aligns sounds and cuts the loading; see finish-recording.mjs
 //   await rec.chapter('Customer sign-up', 'New flow for sales');
 //   await rec.click('#name'); await rec.type('#name', 'Ana Souza');
 //   await rec.select('#plan', 'Pro'); await rec.click('#save');
@@ -480,12 +481,31 @@ export function createRecorder(page, options = {}) {
     }
   }
 
+  // Marks a sync point the video and the event log share. The recorder clock starts
+  // at createRecorder, the video at its first frame, and the gap between them changes
+  // from run to run. Call this once, right before the part the audience should see:
+  // finish-recording.mjs finds the magenta frame, aligns the sounds to it, and cuts
+  // everything up to the end of the flash.
+  async function syncFlash(ms = 400) {
+    await page.evaluate(() => {
+      const f = document.createElement('div');
+      f.setAttribute('data-demo-sync', '');
+      Object.assign(f.style, { position: 'fixed', inset: '0', background: '#ff00ff', zIndex: '2147483647', pointerEvents: 'none' });
+      document.documentElement.appendChild(f);
+      return new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    });
+    events.push({ type: 'sync', t: (Date.now() - t0) / 1000, ms });
+    await page.waitForTimeout(ms);
+    await page.evaluate(() => document.querySelectorAll('[data-demo-sync]').forEach((n) => n.remove()));
+    await page.waitForTimeout(100);
+  }
+
   async function saveEvents(path) {
     const { writeFile } = await import('node:fs/promises');
     await writeFile(path, JSON.stringify({ events }, null, 2));
   }
 
   return { moveTo, setMotion, hover, glance, click, type, press, select, chapter, spotlight, clearSpotlight,
-    callout, clearCallouts, zoom, unzoom, pause: wait, events, saveEvents };
+    callout, clearCallouts, zoom, unzoom, syncFlash, pause: wait, events, saveEvents };
 }
 
