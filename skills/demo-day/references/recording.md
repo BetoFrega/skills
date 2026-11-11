@@ -51,7 +51,7 @@ usually the result the audience came to see, and spend your flourishes there.
 - **Suspense.** `click(target, { suspense: ms })` stops just short of the target,
   holds, then clicks. Use it right before the click that delivers the payoff.
 - **Staging.** `spotlight(target)` darkens everything else; `callout(target, text)`
-  puts a short caption beside it; `chapter(title, description)` opens a section.
+  puts a short caption beside it that hovers above the page (`float` sets the bob); `chapter(title, description)` opens a section.
   Keep captions to a few words that say why it matters.
 - **Zoom.** `zoom(target, { mood })` frames the result: `subtle` nudges, `reveal`
   pushes in calmly, `punch` pops with overshoot for a win, `dramatic` pushes in

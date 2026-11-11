@@ -152,6 +152,7 @@ export function createRecorder(page, options = {}) {
   const log = (type) => events.push({ type, t: (Date.now() - t0) / 1000 });
   const viewport = page.viewportSize() ?? { width: 1280, height: 720 };
   let pos = { x: viewport.width / 2, y: viewport.height / 2 };
+  let parked = false;
 
   const wait = (ms) => page.waitForTimeout(ms / speed);
 
@@ -201,6 +202,7 @@ export function createRecorder(page, options = {}) {
   const setMotion = (m) => { motion = resolveMotion(m); };
 
   async function targetPoint(locator) {
+    if (!parked) { parked = true; await page.mouse.move(pos.x, pos.y); } // no cursor stuck in the corner
     await locator.waitFor({ state: 'visible' });
     const inView = await locator.evaluate((el) => {
       const r = el.getBoundingClientRect();
@@ -380,25 +382,49 @@ export function createRecorder(page, options = {}) {
     await page.evaluate(() => document.querySelectorAll('[data-demo-spotlight]').forEach((n) => n.remove()));
   }
 
-  // A speech-bubble caption beside the target. hold: ms on screen (0 keeps it until clearCallouts()).
-  async function callout(target, text, { hold = 2200 } = {}) {
+  // A speech-bubble caption beside the target, with a tail pointing at it. It hovers
+  // above the page: it bobs up and down while its shadow widens and fades, so it
+  // reads as an annotation, not part of the UI. float: bob height in px (0 = still).
+  // hold: ms on screen (0 keeps it until clearCallouts()).
+  async function callout(target, text, { hold = 2200, float = 6 } = {}) {
     const box = (await targetPoint(loc(target))).box;
-    await page.evaluate(({ box, text }) => {
+    await page.evaluate(({ box, text, float }) => {
+      if (!document.getElementById('demo-callout-style')) {
+        const st = document.createElement('style');
+        st.id = 'demo-callout-style';
+        st.textContent = '@keyframes demo-hover{0%,100%{transform:translateY(0);box-shadow:0 6px 14px rgba(0,0,0,.30),0 2px 4px rgba(0,0,0,.18)}' +
+          '50%{transform:translateY(calc(-1px * var(--demo-float)));box-shadow:0 22px 38px rgba(0,0,0,.20),0 8px 12px rgba(0,0,0,.08)}}';
+        document.documentElement.appendChild(st);
+      }
       const c = document.createElement('div');
+      const bubble = document.createElement('div');
+      const tail = document.createElement('div');
       c.setAttribute('data-demo-callout', '');
-      c.textContent = text;
+      bubble.textContent = text;
+      bubble.appendChild(tail);
+      c.appendChild(bubble);
       const right = box.x + box.width + 300 < innerWidth;
-      Object.assign(c.style, { position: 'fixed', zIndex: '2147483620', pointerEvents: 'none', maxWidth: '280px',
-        background: '#111827', color: '#fff', font: '600 16px system-ui, sans-serif', padding: '10px 14px',
-        borderRadius: '10px', boxShadow: '0 10px 30px rgba(0,0,0,.25)', opacity: '0',
-        transform: 'scale(.6)', transformOrigin: right ? 'left center' : 'top center',
+      Object.assign(c.style, { position: 'fixed', zIndex: '2147483620', pointerEvents: 'none', opacity: '0',
+        transform: 'scale(.6)', transformOrigin: right ? 'left center' : 'top left',
         transition: 'opacity .25s ease, transform .45s cubic-bezier(.34,1.56,.64,1)' });
-      if (right) { c.style.left = box.x + box.width + 16 + 'px'; c.style.top = box.y + box.height / 2 - 20 + 'px'; }
-      else { c.style.left = Math.max(8, box.x) + 'px'; c.style.top = box.y + box.height + 14 + 'px'; }
+      Object.assign(bubble.style, { position: 'relative', maxWidth: '280px', background: '#111827', color: '#fff',
+        font: '600 16px system-ui, sans-serif', padding: '10px 14px', borderRadius: '10px',
+        boxShadow: '0 6px 14px rgba(0,0,0,.30),0 2px 4px rgba(0,0,0,.18)' });
+      bubble.style.setProperty('--demo-float', String(float));
+      if (float) bubble.style.animation = 'demo-hover 2.6s ease-in-out infinite';
+      Object.assign(tail.style, { position: 'absolute', width: '12px', height: '12px', background: '#111827',
+        transform: 'rotate(45deg)', borderRadius: '2px' });
+      if (right) {
+        c.style.left = box.x + box.width + 22 + 'px'; c.style.top = box.y + box.height / 2 - 20 + 'px';
+        Object.assign(tail.style, { left: '-5px', top: '14px' });
+      } else {
+        c.style.left = Math.max(8, box.x + 12) + 'px'; c.style.top = box.y + box.height + 20 + 'px';
+        Object.assign(tail.style, { left: '18px', top: '-5px' });
+      }
       document.documentElement.appendChild(c);
       requestAnimationFrame(() => { c.style.opacity = '1'; c.style.transform = 'scale(1)'; });
       setTimeout(() => { c.style.transformOrigin = ''; c.style.transform = ''; c.style.transition = 'opacity .3s'; }, 500);
-    }, { box, text });
+    }, { box, text, float });
     await wait(500);
     if (hold) { await wait(hold); await clearCallouts(); }
   }
