@@ -65,11 +65,18 @@ takes and keep the better one.
 
 ## Finish
 
-Save the events with `rec.saveEvents()`, then run:
+Call `rec.syncFlash()` once, after the page has loaded and right before the part
+the audience should see. The recorder clock and the video start at different
+moments, and the gap changes from run to run, so neither a fixed `--offset` nor a
+cut time taken from the script clock lines up the sounds. Save the events with
+`rec.saveEvents()`, then run:
 
 ```sh
 node finish-recording.mjs <video.webm> <events.json> <feature>.mp4
 ```
 
-Pass `--offset=<seconds>` when sounds drift from the clicks, or `--silent` for no
-sounds. Link the MP4 in the rehearsal report as the feature's evidence.
+It finds the flash in the video, aligns every sound to it, and cuts the video at
+the end of the flash, which also removes the loading. The video ends with a 1.2 s
+fade to black, so end the script with a pause the fade can take. `--no-trim` keeps
+the part before the flash, `--offset=<seconds>` adds a manual shift, `--fade=<seconds>`
+changes the fade (`0` turns it off), and `--silent` drops the sounds. Link the MP4 in the rehearsal report as the feature's evidence.
