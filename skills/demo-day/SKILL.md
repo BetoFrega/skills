@@ -98,8 +98,10 @@ passes, following [recording](references/recording.md).
 
 1. **Plan the staging.** Propose each step's staging over its rehearsal screenshot,
    in the same proposal-then-questions shape as step 2: captions and their text, which moment
-   gets spotlight, zoom, or suspense, the motion style, and chapter titles. Be bold
-   on the key moment and plain elsewhere. Record the answers in the Staging column.
+   gets spotlight, zoom, or suspense, the motion style, chapter titles, and the
+   cursor's acting: its entrance and exit and the expression at each turn of the
+   story. Be bold on the key moment and brisk elsewhere. Record the answers in the
+   Staging column.
 2. **Record** from a clean setup, following the Staging column, and check the frames.
 3. **Get approval.** Send each video and ask for direction notes. Turn each note into
    a Staging change and record that feature again. A video is done only when the user
