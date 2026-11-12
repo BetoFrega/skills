@@ -21,7 +21,7 @@ users, identifiers>.
 
 | Step | Action on the audience-facing interface | What it shows | Rehearsal evidence | Staging |
 | --- | --- | --- | --- | --- |
-| 1 | <action> | <observable result> | <screenshot or output> | <caption, effect, motion; video only> |
+| 1 | <action> | <observable result> | <screenshot or output> | <caption, effect, motion, cursor expression; video only> |
 
 - **If a step fails:** <reset or recovery>
 - **Inferred steps:** <steps reconstructed without a draft, or none>
