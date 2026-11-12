@@ -2,6 +2,8 @@ Use `beto-frega-skills:advisory` skill when stuck.
 
 Before multi-step, design, implementation, debugging, planning, or review work, read
 the `beto-frega-skills:beto-mode` skill and apply the principles it routes to.
+Once read, it applies for the rest of the session: every turn, recall its name and
+that it routes each task to working principles and workflow skills.
 
 Before reporting a result or answering a question, check what you can check: read
 the file, run the command, open the link. Say a claim is unchecked only when you
