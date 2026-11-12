@@ -1,7 +1,8 @@
 // Recorder-friendly Playwright helpers for demo-day videos.
 //
 // Draws a visible cursor (arrow, hand, or I-beam, following the CSS `cursor` under
-// it), moves it along eased curves, shows a ripple on clicks, types at human speed,
+// it) that acts like a cartoon character (expressions, entrances, exits), moves it
+// along eased curves, shows a ripple on clicks, types at human speed,
 // renders native <select> options as a visible list, shows chapter cards, and logs
 // clicks and keystrokes so finish-recording.mjs can add sounds.
 //
@@ -13,8 +14,10 @@
 //   await page.goto(url);
 //   await rec.syncFlash(); // aligns sounds and cuts the loading; see finish-recording.mjs
 //   await rec.chapter('Customer sign-up', 'New flow for sales');
+//   await rec.enter({ side: 'left' });
 //   await rec.click('#name'); await rec.type('#name', 'Ana Souza');
-//   await rec.select('#plan', 'Pro'); await rec.click('#save');
+//   await rec.select('#plan', 'Pro'); await rec.click('#save', { suspense: 900, impact: true });
+//   await rec.react('celebrate'); await rec.exit();
 //   await rec.pause(1500);
 //   await rec.saveEvents('events.json');
 //   const video = page.video(); await context.close(); await video.saveAs('demo.webm');
@@ -31,21 +34,24 @@ const CURSOR_SCRIPT = `(() => {
     pointer: { x: 9, y: 2, html: svg('<path d="M9 13V4.5a2 2 0 0 1 4 0V12h.5V10a2 2 0 0 1 4 0v2h.5v-1a2 2 0 0 1 4 0v1.5a2 2 0 0 1 3.5 1.3V18c0 4.5-3 8-7.5 8H15c-2.5 0-4-1-5.5-3L5 17.2a2 2 0 0 1 3-2.6z" fill="#fff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/>') },
     text: { x: 14, y: 14, html: svg('<path d="M10 4h8M10 24h8M14 4v20" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M10 4h8M10 24h8M14 4v20" fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>') },
   };
-  // Two layers: el moves the cursor; body gives it life (squash, stretch, lean, breath).
-  const life = window.__demoLife ?? 1;
+  // Three layers: el moves the cursor; actor plays reactions (react()); body gives it
+  // life while it moves (squash, stretch, lean, breath).
+  const life = window.__demoLife ?? 1.4;
   const el = document.createElement('div');
+  const actor = document.createElement('div');
   const body = document.createElement('div');
   el.setAttribute('data-demo-overlay', '');
-  el.appendChild(body);
+  el.appendChild(actor);
+  actor.appendChild(body);
   Object.assign(el.style, { position: 'fixed', left: '0', top: '0', zIndex: '2147483647', pointerEvents: 'none', willChange: 'transform' });
   Object.assign(body.style, { willChange: 'transform', transition: 'transform .35s cubic-bezier(.34,1.8,.64,1)' });
   const style = document.createElement('style');
   style.textContent = '@keyframes demo-breathe{0%,100%{transform:scale(1)}50%{transform:scale(' + (1 + 0.07 * life) + ') rotate(' + (-3 * life) + 'deg)}}';
-  let kind = '', x = -100, y = -100, lastT = 0, vx = 0, vy = 0, idle = 0, pressed = false;
+  let kind = '', x = -100, y = -100, lastT = 0, vx = 0, vy = 0, idle = 0, pressed = false, lastGhost = 0;
   const setKind = (k) => {
     if (k === kind) return;
     kind = k; body.innerHTML = shapes[k].html;
-    body.style.transformOrigin = shapes[k].x + 'px ' + shapes[k].y + 'px';
+    body.style.transformOrigin = actor.style.transformOrigin = shapes[k].x + 'px ' + shapes[k].y + 'px';
     place();
   };
   const place = () => { const s = shapes[kind]; el.style.transform = 'translate(' + (x - s.x) + 'px,' + (y - s.y) + 'px)'; };
@@ -78,23 +84,193 @@ const CURSOR_SCRIPT = `(() => {
     if (c === 'auto' && (t.isContentEditable || t.matches('input:not([type=checkbox]):not([type=radio]):not([type=button]):not([type=submit]), textarea'))) return 'text';
     return 'arrow';
   };
-  window.__demoCursor = { el };
+  // Reactions: short pieces of acting, scaled by life. They play in place.
+  const L = Math.max(life, 0.4);
+  const tf = (t) => ({ transform: t });
+  const acts = {
+    // Jumps for joy: a deep crouch, a stretched leap with a full spin, stars at the top,
+    // a squashed landing and a small rebound.
+    celebrate: { ms: 1300, emote: 'stars', at: 330, keys: [
+      tf('none'),
+      { transform: 'translateY(6px) scale(' + (1 + 0.3 * L) + ',' + (1 - 0.35 * L) + ')', offset: 0.14 },
+      { transform: 'translateY(' + (-44 * L) + 'px) scale(' + (1 - 0.15 * L) + ',' + (1 + 0.3 * L) + ') rotate(200deg)', offset: 0.42 },
+      { transform: 'translateY(' + (-48 * L) + 'px) scale(1) rotate(300deg)', offset: 0.52 },
+      { transform: 'translateY(4px) scale(' + (1 + 0.3 * L) + ',' + (1 - 0.35 * L) + ') rotate(360deg)', offset: 0.72 },
+      { transform: 'translateY(' + (-10 * L) + 'px) scale(.95,1.08) rotate(360deg)', offset: 0.84 },
+      tf('rotate(360deg)'),
+    ] },
+    // Bounces on the spot, too eager to wait.
+    excited: { ms: 1000, keys: [0, 1, 2].flatMap((i) => {
+      const h = (16 - i * 4) * L, o = i / 3;
+      return [
+        { transform: 'translateY(0) scale(' + (1 + 0.18 * L) + ',' + (1 - 0.22 * L) + ')', offset: o + 0.02 },
+        { transform: 'translateY(' + -h + 'px) scale(.92,1.12) rotate(' + (i % 2 ? 8 : -8) + 'deg)', offset: o + 0.18 },
+      ];
+    }).concat([tf('none')]) },
+    // Tilts its head one way, then the other, looking around, with a wobbling "?".
+    confused: { ms: 1700, emote: '?', keys: [
+      tf('none'),
+      { transform: 'rotate(' + (-24 * L) + 'deg) translateX(-3px)', offset: 0.12 },
+      { transform: 'rotate(' + (-26 * L) + 'deg) translateX(-3px)', offset: 0.3 },
+      { transform: 'rotate(' + (22 * L) + 'deg) translateX(3px)', offset: 0.44 },
+      { transform: 'rotate(' + (24 * L) + 'deg) translateX(3px)', offset: 0.62 },
+      { transform: 'rotate(' + (-10 * L) + 'deg) scale(.94,1.06)', offset: 0.78 },
+      tf('none'),
+    ] },
+    // Droops and sinks, a tear runs down, then it pulls itself together.
+    sad: { ms: 1800, emote: 'drop', at: 250, keys: [
+      tf('none'),
+      { transform: 'translateY(' + 8 * L + 'px) rotate(' + 28 * L + 'deg) scale(1.06,' + (1 - 0.18 * L) + ')', offset: 0.3 },
+      { transform: 'translateY(' + 9 * L + 'px) rotate(' + 30 * L + 'deg) scale(1.06,' + (1 - 0.2 * L) + ')', offset: 0.75 },
+      tf('none'),
+    ] },
+    // Jumps back in surprise and swells, with a "!".
+    wow: { ms: 1100, emote: '!', keys: [
+      tf('none'),
+      { transform: 'translate(-4px,' + (-14 * L) + 'px) scale(' + (1 + 0.4 * L) + ') rotate(-8deg)', offset: 0.22 },
+      { transform: 'translate(-2px,' + (-10 * L) + 'px) scale(' + (1 + 0.32 * L) + ') rotate(-4deg)', offset: 0.7 },
+      tf('none'),
+    ] },
+    nod: { ms: 700, keys: [
+      tf('none'), { transform: 'rotate(' + 18 * L + 'deg) scale(1,.88)', offset: 0.25 }, { transform: 'none', offset: 0.5 },
+      { transform: 'rotate(' + 14 * L + 'deg) scale(1,.9)', offset: 0.75 }, tf('none'),
+    ] },
+    shake: { ms: 650, keys: [
+      tf('none'), { transform: 'translateX(-8px) rotate(-12deg)', offset: 0.2 }, { transform: 'translateX(8px) rotate(12deg)', offset: 0.4 },
+      { transform: 'translateX(-6px) rotate(-8deg)', offset: 0.6 }, { transform: 'translateX(4px) rotate(4deg)', offset: 0.8 }, tf('none'),
+    ] },
+  };
+  // A thought or feeling drawn above the cursor: "?", "!", a tear, or a ring of stars.
+  const emote = (kindOf) => {
+    const s = shapes[kind];
+    const add = (html, css) => {
+      const g = document.createElement('div');
+      g.innerHTML = html;
+      Object.assign(g.style, { position: 'absolute', left: s.x + 16 + 'px', top: s.y - 34 + 'px', pointerEvents: 'none' }, css);
+      el.appendChild(g);
+      return g;
+    };
+    const glyph = (ch, color) => {
+      const g = add(ch, { font: '800 30px system-ui, sans-serif', color, textShadow: '0 0 3px #fff, 0 0 3px #fff, 0 2px 6px rgba(0,0,0,.35)' });
+      g.animate([
+        { transform: 'scale(0) rotate(-30deg)', opacity: 0 },
+        { transform: 'scale(1.35) rotate(10deg)', opacity: 1, offset: 0.18 },
+        { transform: 'scale(1) rotate(-12deg)', offset: 0.36 },
+        { transform: 'scale(1) rotate(12deg)', offset: 0.58 },
+        { transform: 'scale(1) rotate(-6deg)', opacity: 1, offset: 0.82 },
+        { transform: 'scale(.6) translateY(-10px)', opacity: 0 },
+      ], { duration: 1500, easing: 'ease-out', fill: 'both' }).finished.then(() => g.remove());
+    };
+    if (kindOf === '?') glyph('?', '#f59e0b');
+    if (kindOf === '!') glyph('!', '#ef4444');
+    if (kindOf === 'drop') {
+      const g = add('<svg width="12" height="16" viewBox="0 0 12 16"><path d="M6 0C6 0 0 7 0 10.5a6 6 0 0 0 12 0C12 7 6 0 6 0z" fill="#60a5fa" stroke="#fff" stroke-width="1.2"/></svg>',
+        { left: s.x + 12 + 'px', top: s.y - 4 + 'px' });
+      g.animate([{ transform: 'translateY(0) scale(.2)', opacity: 0 }, { transform: 'translateY(2px) scale(1)', opacity: 1, offset: 0.25 },
+        { transform: 'translateY(26px) scale(.9,1.1)', opacity: 0 }], { duration: 1300, easing: 'ease-in', fill: 'both' }).finished.then(() => g.remove());
+    }
+    if (kindOf === 'stars') {
+      const colors = ['#f59e0b', '#ec4899', '#10b981', '#2563eb', '#f59e0b'];
+      colors.forEach((c, i) => {
+        const a = -Math.PI / 2 + (i - 2) * 0.6, d = 46 + (i % 2) * 14;
+        const g = add('<svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 1l3 7.5 8 .7-6 5.3 1.8 8L12 18.3 5.2 22.5 7 14.5 1 9.2l8-.7z" fill="' + c + '" stroke="#fff" stroke-width="1.5"/></svg>',
+          { left: s.x - 8 + 'px', top: s.y - 8 + 'px' });
+        g.animate([{ transform: 'translate(0,0) scale(0) rotate(0)', opacity: 1 },
+          { transform: 'translate(' + Math.cos(a) * d + 'px,' + Math.sin(a) * d + 'px) scale(1.2) rotate(140deg)', opacity: 1, offset: 0.55 },
+          { transform: 'translate(' + Math.cos(a) * d * 1.2 + 'px,' + (Math.sin(a) * d * 1.2 + 18) + 'px) scale(.5) rotate(220deg)', opacity: 0 }],
+          { duration: 1100, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'both' }).finished.then(() => g.remove());
+      });
+    }
+  };
+  const react = (name) => {
+    const a = acts[name];
+    if (!a) throw new Error('unknown reaction: ' + name);
+    body.style.animation = ''; clearTimeout(idle);
+    if (a.emote) setTimeout(() => emote(a.emote), a.at ?? 120);
+    return actor.animate(a.keys, { duration: a.ms, easing: 'cubic-bezier(.3,.7,.4,1)' }).finished.then(settle);
+  };
+  // Entrances and exits: the cursor flies in from beyond the edge and lands with a
+  // spring, or winds up and zips out. side: left | right | top | bottom.
+  const away = (side, d) => ({ left: [-d, 0], right: [d, 0], top: [0, -d], bottom: [0, d] })[side];
+  const enter = (side) => {
+    actor.getAnimations().forEach((a) => a.cancel());
+    const [ox, oy] = away(side, 230), lean = ox ? 30 * Math.sign(ox) : 0;
+    const k = 0.35 * L;
+    const stretch = ox ? (1 + k) + ',' + (1 - k * 0.6) : (1 - k * 0.6) + ',' + (1 + k);
+    return actor.animate([
+      { transform: 'translate(' + ox + 'px,' + oy + 'px) rotate(' + lean + 'deg) scale(' + stretch + ')' },
+      { transform: 'translate(' + -ox * 0.08 + 'px,' + -oy * 0.08 + 'px) rotate(' + -lean * 0.3 + 'deg) scale(.88,1.12)', offset: 0.65 },
+      { transform: 'none' },
+    ], { duration: 800, easing: 'cubic-bezier(.2,.9,.3,1)' }).finished.then(settle);
+  };
+  const exit = (side) => {
+    body.style.animation = ''; clearTimeout(idle);
+    const [ox, oy] = away(side, 220), k = 0.4 * L;
+    const stretch = ox ? (1 + k) + ',' + (1 - k * 0.6) : (1 - k * 0.6) + ',' + (1 + k);
+    return actor.animate([
+      { transform: 'none' },
+      { transform: 'translate(' + -ox * 0.06 + 'px,' + -oy * 0.06 + 'px) scale(.85,1.12)', offset: 0.35 },
+      { transform: 'translate(' + ox + 'px,' + oy + 'px) scale(' + stretch + ')' },
+    ], { duration: 550, easing: 'cubic-bezier(.6,0,.9,.4)', fill: 'forwards' }).finished;
+  };
+  // Smear: on fast moves, fading copies trail behind, like smear frames in a cartoon.
+  const ghost = () => {
+    const g = document.createElement('div');
+    g.setAttribute('data-demo-overlay', '');
+    g.innerHTML = shapes[kind].html;
+    Object.assign(g.style, { position: 'fixed', left: '0', top: '0', zIndex: '2147483646', pointerEvents: 'none', transform: el.style.transform });
+    document.documentElement.appendChild(g);
+    g.animate([{ opacity: Math.min(0.45, 0.25 * life) }, { opacity: 0 }], { duration: 180, easing: 'ease-out', fill: 'both' }).finished.then(() => g.remove());
+  };
+  // An impact click (for the key moment): a deeper squash, a double ripple, and sparks.
+  let impact = false;
+  const burst = (cx, cy) => {
+    for (let i = 0; i < 2; i++) {
+      const r = document.createElement('div');
+      r.setAttribute('data-demo-overlay', '');
+      Object.assign(r.style, { position: 'fixed', left: cx - 20 + 'px', top: cy - 20 + 'px', width: '40px', height: '40px', borderRadius: '50%',
+        border: '3px solid rgba(37,99,235,.8)', zIndex: '2147483646', pointerEvents: 'none' });
+      document.documentElement.appendChild(r);
+      r.animate([{ transform: 'scale(.3)', opacity: 1 }, { transform: 'scale(' + (2.6 + i) + ')', opacity: 0 }],
+        { duration: 650, delay: i * 140, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'both' }).finished.then(() => r.remove());
+    }
+    const colors = ['#2563eb', '#f59e0b', '#10b981', '#ec4899'];
+    for (let i = 0; i < 12; i++) {
+      const p = document.createElement('div');
+      p.setAttribute('data-demo-overlay', '');
+      const a = (i / 12) * Math.PI * 2 + Math.random() * 0.4, d = 38 + Math.random() * 30;
+      Object.assign(p.style, { position: 'fixed', left: cx - 3 + 'px', top: cy - 3 + 'px', width: '6px', height: '6px', borderRadius: '50%',
+        background: colors[i % colors.length], zIndex: '2147483646', pointerEvents: 'none' });
+      document.documentElement.appendChild(p);
+      p.animate([{ transform: 'translate(0,0) scale(1)', opacity: 1 },
+        { transform: 'translate(' + Math.cos(a) * d + 'px,' + Math.sin(a) * d + 'px) scale(.4)', opacity: 0 }],
+        { duration: 600, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'both' }).finished.then(() => p.remove());
+    }
+  };
+  window.__demoCursor = { el, react, enter, exit, setImpact: (v) => { impact = v; } };
   setKind('arrow');
   const mount = () => { document.documentElement.appendChild(style); document.documentElement.appendChild(el); };
   document.documentElement ? mount() : addEventListener('DOMContentLoaded', mount);
+  let seen = false;
   addEventListener('mousemove', (e) => {
+    // Playwright's mouse starts at 0,0; ignore that so no cursor sits in the corner.
+    if (!seen && !e.clientX && !e.clientY) return;
+    seen = true;
     const now = performance.now(), dt = Math.max(8, now - lastT);
     if (lastT && now - lastT < 200) { vx = vx * 0.5 + 0.5 * (e.clientX - x) / dt; vy = vy * 0.5 + 0.5 * (e.clientY - y) / dt; }
     lastT = now; x = e.clientX; y = e.clientY;
     body.style.animation = ''; clearTimeout(idle);
     setKind(kindAt(x, y)); place(); pose();
+    if (life && Math.hypot(vx, vy) > 1.1 && now - lastGhost > 22) { lastGhost = now; ghost(); }
     clearTimeout(settleTimer); settleTimer = setTimeout(settle, 60);
   }, true);
   addEventListener('mousedown', (e) => {
     pressed = true;
     body.style.animation = '';
     body.style.transition = 'transform .07s ease-out';
-    body.style.transform = 'scale(' + (1 + 0.15 * life) + ',' + (1 - 0.25 * life) + ')';
+    const k = impact ? 2 : 1;
+    body.style.transform = 'scale(' + Math.min(1.5, 1 + 0.15 * life * k) + ',' + Math.max(0.5, 1 - 0.25 * life * k) + ')';
+    if (impact) { impact = false; burst(e.clientX, e.clientY); return; }
     const r = document.createElement('div');
     r.setAttribute('data-demo-overlay', '');
     Object.assign(r.style, { position: 'fixed', left: e.clientX - 16 + 'px', top: e.clientY - 16 + 'px', width: '32px', height: '32px',
@@ -106,10 +282,10 @@ const CURSOR_SCRIPT = `(() => {
   addEventListener('mouseup', () => { pressed = false; settle(); }, true);
 })()`;
 
-// life: 0 draws a plain cursor; 1 (default) gives it character, following the Disney
-// principles of animation (squash and stretch, follow-through, secondary action);
-// up to 2 exaggerates it.
-export async function installCursor(context, { life = 1 } = {}) {
+// life: 0 draws a plain cursor; 1 gives it character, following the Disney principles
+// of animation (squash and stretch, follow-through, secondary action); 1.4 (default)
+// plays it big; up to 2 exaggerates it.
+export async function installCursor(context, { life = 1.4 } = {}) {
   await context.addInitScript('window.__demoLife = ' + Number(life) + ';' + CURSOR_SCRIPT);
 }
 
@@ -203,7 +379,8 @@ export function createRecorder(page, options = {}) {
   const setMotion = (m) => { motion = resolveMotion(m); };
 
   async function targetPoint(locator) {
-    if (!parked) { parked = true; await page.mouse.move(pos.x, pos.y); } // no cursor stuck in the corner
+    parked = true;
+    await page.mouse.move(pos.x, pos.y); // shows the cursor, also after a navigation
     await locator.waitFor({ state: 'visible' });
     const inView = await locator.evaluate((el) => {
       const r = el.getBoundingClientRect();
@@ -231,7 +408,7 @@ export function createRecorder(page, options = {}) {
 
   // suspense: ms of anticipation. The cursor stops just short of the target, holds,
   // then eases onto it and clicks. Use it before the click that delivers the payoff.
-  async function clickAt(x, y, m, suspense = 0) {
+  async function clickAt(x, y, m, suspense = 0, holdMs = 70) {
     if (suspense) {
       const dx = x - pos.x, dy = y - pos.y, d = Math.hypot(dx, dy) || 1;
       const gap = Math.min(28, d / 3);
@@ -246,14 +423,17 @@ export function createRecorder(page, options = {}) {
     await wait(between(120, 220));
     log('click');
     await page.mouse.down();
-    await page.waitForTimeout(70);
+    await page.waitForTimeout(holdMs);
     await page.mouse.up();
     await wait(250);
   }
 
-  async function click(target, { motion: m, suspense = 0 } = {}) {
+  // impact: the key-moment click, with a deeper squash, a double ripple, and sparks.
+  async function click(target, { motion: m, suspense = 0, impact = false } = {}) {
     const p = await targetPoint(loc(target));
-    await clickAt(p.x, p.y, m, suspense === true ? 1200 : suspense);
+    if (impact) await page.evaluate(() => window.__demoCursor?.setImpact(true));
+    // The burst plays on press; holding it keeps it on screen when the click navigates.
+    await clickAt(p.x, p.y, m, suspense === true ? 1200 : suspense, impact ? 380 : 70);
   }
 
   // typos: how many slips to make and correct on the way (never on the first character).
@@ -338,7 +518,7 @@ export function createRecorder(page, options = {}) {
   }
 
   async function chapter(title, description = '', ms = 1800) {
-    await page.mouse.move(pos.x, pos.y); // parks the cursor before the first move
+    if (parked) await page.mouse.move(pos.x, pos.y); // redraws it after a navigation
     await page.evaluate(({ title, description }) => {
       const card = document.createElement('div');
       card.setAttribute('data-demo-chapter', '');
@@ -471,6 +651,61 @@ export function createRecorder(page, options = {}) {
     await wait(ms + 100);
   }
 
+  // Expressions, played in place: celebrate (jumps for joy, after the payoff), excited
+  // (bounces, eager to go), confused (tilts its head both ways under a "?"), sad
+  // (droops, a tear), wow (jumps back with a "!"), nod, shake. think circles slowly as
+  // if pondering; hesitate approaches the target, backs off, and returns before acting.
+  async function react(name, { target } = {}) {
+    if (name === 'think') {
+      for (let i = 0; i <= 28; i++) {
+        const a = (i / 28) * Math.PI * 2.4;
+        await page.mouse.move(pos.x + Math.sin(a) * 14, pos.y - (1 - Math.cos(a)) * 9);
+        await page.waitForTimeout(32);
+      }
+      await page.mouse.move(pos.x, pos.y);
+      await wait(200);
+      return;
+    }
+    if (name === 'hesitate') {
+      const { x, y } = target ? await targetPoint(loc(target)) : pos;
+      const dx = x - pos.x, dy = y - pos.y, d = Math.hypot(dx, dy) || 1;
+      const near = { x: x - (dx / d) * 30, y: y - (dy / d) * 30 };
+      const back = { x: x - (dx / d) * 90, y: y - (dy / d) * 90 };
+      await moveTo(near.x, near.y);
+      await wait(350);
+      await glide(pos, back, 380, { ...motion, curve: 0.1, wobble: 0 }, easings.easeOut); pos = back;
+      await wait(450);
+      await moveTo(near.x, near.y, 'calm');
+      await wait(250);
+      return;
+    }
+    await page.mouse.move(pos.x, pos.y); // a new page has not drawn the cursor yet
+    await page.evaluate((n) => window.__demoCursor.react(n), name);
+    await wait(250);
+  }
+
+  // Flies in from beyond an edge and lands a little inside it. Call it before the first
+  // move, so the cursor has not appeared yet. at: where along that edge it lands (0..1).
+  async function enter({ side = 'left', at = 0.55 } = {}) {
+    parked = true;
+    const p = { left: [140, viewport.height * at], right: [viewport.width - 140, viewport.height * at],
+      top: [viewport.width * at, 110], bottom: [viewport.width * at, viewport.height - 110] }[side];
+    pos = { x: p[0], y: p[1] };
+    // Starts the flight first, so the cursor never shows at its landing spot beforehand.
+    await page.evaluate((s) => { window.__demoCursor.enter(s); }, side);
+    await page.mouse.move(pos.x, pos.y);
+    await wait(700);
+  }
+
+  // Leaves the screen: goes to the edge, winds up, and zips out. Use it as the last
+  // beat, before the closing pause.
+  async function exit({ side = 'right', motion: m = 'flourish' } = {}) {
+    const p = { left: [6, pos.y], right: [viewport.width - 6, pos.y], top: [pos.x, 6], bottom: [pos.x, viewport.height - 6] }[side];
+    await moveTo(p[0], p[1], m);
+    await page.evaluate((s) => window.__demoCursor.exit(s), side);
+    await wait(600);
+  }
+
   // The cursor wanders slowly over an area, as if reading it.
   async function glance(target, { points = 3 } = {}) {
     const { box } = await targetPoint(loc(target));
@@ -505,7 +740,7 @@ export function createRecorder(page, options = {}) {
     await writeFile(path, JSON.stringify({ events }, null, 2));
   }
 
-  return { moveTo, setMotion, hover, glance, click, type, press, select, chapter, spotlight, clearSpotlight,
+  return { moveTo, setMotion, hover, glance, react, enter, exit, click, type, press, select, chapter, spotlight, clearSpotlight,
     callout, clearCallouts, zoom, unzoom, syncFlash, pause: wait, events, saveEvents };
 }
 

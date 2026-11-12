@@ -34,34 +34,59 @@ from the clean setup state.
 
 ## Direct it: be bold
 
-Treat the cursor as a character and the recording as a short film. A flat recording
-of correct clicks is the failure to avoid. Pick a moment that carries the feature,
-usually the result the audience came to see, and spend your flourishes there.
+Treat the recording as a short cartoon and the cursor as its lead character. A flat
+recording of correct clicks is the failure to avoid; so is a cursor that only points.
+The video cursor is drawn, not a real mouse, so it can rotate, stretch, jump, and
+show feelings. Use that freedom.
 
+Before recording, give the cursor a small arc for each feature: what it looks for,
+where it gets stuck or curious, and how it feels at the payoff. Every video needs at
+least:
+
+- an entrance: `enter()` before the first move;
+- one expression before the payoff that builds tension, such as `confused`, `think`,
+  or `hesitate`;
+- the payoff staged with suspense, an impact click, and a reaction, such as
+  `celebrate`, `wow`, or `excited`;
+- an exit: `exit()` as the last beat, before the closing pause.
+
+Place each expression where the audience feels the same thing. A `confused` while
+looking for a hidden setting sells the old pain; a `celebrate` right next to the
+saved record sells the win. Move the cursor next to the result before it reacts.
+
+- **Expressions.** `react(name)`: `celebrate` jumps for joy with a spin and stars,
+  `excited` bounces, `wow` jumps back with a "!", `confused` tilts its head both ways
+  under a "?", `sad` droops with a tear, `nod` agrees, `shake` refuses, `think`
+  circles while pondering, and `react('hesitate', { target })` approaches, backs
+  off, and returns.
+- **Character.** `installCursor(context, { life })`: the cursor stretches and leaves
+  smear trails on fast moves, leans into them, springs back when it stops, squashes on
+  clicks, and breathes while idle, after the Disney principles of animation. `1.4`
+  is the default, `1` is milder, `2` is cartoon-loud, and `0` draws a plain cursor.
+- **Entrance and exit.** `enter({ side, at })` flies in from beyond an edge and lands
+  with a spring; `exit({ side })` winds up and zips out.
 - **Motion.** `createRecorder(page, { motion })` sets the default style and each
   action takes `{ motion }`. `calm` is near straight, `natural` is the default,
   `flourish` swings wide with overshoot and wobble, `showtime` adds anticipation
   and big arcs. Every field (`curve`, `overshoot`, `wobble`, `waves`, `pace`,
   `anticipation`, `easing`) can be set by hand. Use `flourish` or `showtime` for
   the moves into key moments.
-- **Character.** `installCursor(context, { life })`: the cursor stretches along fast
-  moves, leans into them, springs back when it stops, squashes on clicks, and
-  breathes while idle, after the Disney principles of animation. `1` is the
-  default, `0` turns it off, `2` exaggerates it.
-- **Suspense.** `click(target, { suspense: ms })` stops just short of the target,
-  holds, then clicks. Use it right before the click that delivers the payoff.
+- **Suspense and impact.** `click(target, { suspense: ms, impact: true })` stops
+  just short of the target, holds, then presses hard with rings and sparks. Save the
+  impact for the click that delivers the payoff.
 - **Staging.** `spotlight(target)` darkens everything else; `callout(target, text)`
-  puts a short caption beside it that hovers above the page (`float` sets the bob); `chapter(title, description)` opens a section.
-  Keep captions to a few words that say why it matters.
+  puts a short caption beside it that hovers above the page (`float` sets the bob);
+  `chapter(title, description)` opens a section. Keep captions to a few words that
+  say why it matters.
 - **Zoom.** `zoom(target, { mood })` frames the result: `subtle` nudges, `reveal`
   pushes in calmly, `punch` pops with overshoot for a win, `dramatic` pushes in
   slowly and holds for the big reveal.
 - **Humanity.** `type(target, text, { typos: 1 })` slips and corrects;
   `glance(area)` lets the cursor wander as if reading before it acts.
 
-Contrast makes flourishes land: keep routine steps brisk and plain, then slow down
-and stage the moment that matters. When unsure between more and less, record both
-takes and keep the better one.
+Contrast makes the acting land: keep routine steps brisk, then slow down and play
+the moment that matters. When unsure between more and less, record the bolder take
+first; tone it down only if the user asks.
 
 ## Finish
 
