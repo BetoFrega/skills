@@ -33,11 +33,11 @@ In Claude, the plugin's `SessionStart` hook routes every session, including clou
 sessions, to `beto-mode`. It also gives each session a memory file next to its
 transcript, where the agent records requests, decisions, and hard-won facts, and
 asks the agent to read it again after compaction or resume. A `UserPromptSubmit`
-hook reminds the agent of `beto-mode` every 10 prompts, so long sessions keep
-following it; set `BETO_MODE_REMINDER_EVERY` to change the interval, or `0` to turn
-it off. The marketplace also lists `beto-frega-personal`, which
-injects the author's personal global rules into every Claude session; other users
-should not install it.
+hook reminds the agent on every prompt that `beto-mode` stays active for the whole
+session and what it does, and adds a longer reminder every 10 prompts; set
+`BETO_MODE_REMINDER_EVERY` to change that interval, or `0` to turn both off. The
+marketplace also lists `beto-frega-personal`, which injects the author's personal
+global rules into every Claude session; other users should not install it.
 
 Skills are namespaced in both agents, for example `beto-frega-skills:grilling`.
 Agents receive a change to skills, agents, or hooks only after its plugin version is
@@ -280,7 +280,8 @@ records. Use semantic compression when the task specifically needs that represen
 - [skills/](skills/): canonical workflows, references, scripts, and agent metadata.
 - [agents/](agents/): Claude subagents shipped with the plugin, such as `beto-agent`,
   the delegate that reads beto-mode before working.
-- [hooks/](hooks/): the Claude hooks that point sessions to `beto-mode` and to their session memory file, and remind long sessions of `beto-mode`.
+- [hooks/](hooks/): the Claude hooks that point sessions to `beto-mode` and to their
+  session memory file, and remind every prompt that `beto-mode` stays active.
 - [personal/](personal/): the `beto-frega-personal` plugin and the canonical text of
   the author's global rules.
 - `.claude-plugin/`, `.codex-plugin/`, and `.agents/plugins/`: plugin and marketplace

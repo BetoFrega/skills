@@ -8,6 +8,10 @@ description: Read first for multi-step, design, implementation, debugging, plann
 Route the task to the principles and workflow skills it triggers. Global rules keep
 authority over decisions and permissions.
 
+Once read, beto-mode stays active for the rest of the session, across every task,
+until the user turns it off. Every turn, before acting, recall its name and what it
+does, then check which principles and routes the new message triggers.
+
 ## Principles
 
 Read a principle's file in full before applying it. In the reply, name each principle
