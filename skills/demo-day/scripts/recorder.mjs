@@ -182,36 +182,63 @@ const CURSOR_SCRIPT = `(() => {
       });
     }
   };
+  // Playwright's video only takes a frame when the recorder talks to the page (a mouse
+  // move, an evaluate), so animations the browser runs on its own freeze in the
+  // video and then jump. tick() holds every page animation (Web Animations, CSS
+  // animations and transitions) and advances it by the real time since the last
+  // tick; the recorder calls it every frame, and so does each mouse move.
+  // The video also misses Web Animations on the cursor itself, while it keeps every
+  // inline style change. So reactions play on a hidden stand-in (acting) and tick()
+  // copies its transform onto the actor.
+  const acting = document.createElement('div');
+  acting.setAttribute('data-demo-overlay', '');
+  Object.assign(acting.style, { position: 'fixed', left: '0', top: '0', width: '0', height: '0', visibility: 'hidden', pointerEvents: 'none' });
+  let lastTick = performance.now();
+  const tick = () => {
+    const now = performance.now(), dt = now - lastTick;
+    lastTick = now;
+    for (const a of document.getAnimations()) {
+      if (a.playState === 'finished') continue;
+      if (!a.__demo) { a.__demo = true; a.pause(); }
+      const end = a.effect ? a.effect.getComputedTiming().endTime : Infinity;
+      const t = (a.currentTime ?? 0) + dt * (a.playbackRate || 1);
+      if (t >= end) a.finish(); else a.currentTime = t;
+    }
+    actor.style.transform = acting.getAnimations().length ? getComputedStyle(acting).transform : '';
+  };
   const react = (name) => {
     const a = acts[name];
     if (!a) throw new Error('unknown reaction: ' + name);
     body.style.animation = ''; clearTimeout(idle);
     if (a.emote) setTimeout(() => emote(a.emote), a.at ?? 120);
-    return actor.animate(a.keys, { duration: a.ms, easing: 'cubic-bezier(.3,.7,.4,1)' }).finished.then(settle);
+    acting.animate(a.keys, { duration: a.ms, easing: 'cubic-bezier(.3,.7,.4,1)' }).finished.then(settle);
+    return a.ms + (a.emote ? 900 : 0);
   };
   // Entrances and exits: the cursor flies in from beyond the edge and lands with a
   // spring, or winds up and zips out. side: left | right | top | bottom.
   const away = (side, d) => ({ left: [-d, 0], right: [d, 0], top: [0, -d], bottom: [0, d] })[side];
   const enter = (side) => {
-    actor.getAnimations().forEach((a) => a.cancel());
+    acting.getAnimations().forEach((a) => a.cancel());
     const [ox, oy] = away(side, 230), lean = ox ? 30 * Math.sign(ox) : 0;
     const k = 0.35 * L;
     const stretch = ox ? (1 + k) + ',' + (1 - k * 0.6) : (1 - k * 0.6) + ',' + (1 + k);
-    return actor.animate([
+    acting.animate([
       { transform: 'translate(' + ox + 'px,' + oy + 'px) rotate(' + lean + 'deg) scale(' + stretch + ')' },
       { transform: 'translate(' + -ox * 0.08 + 'px,' + -oy * 0.08 + 'px) rotate(' + -lean * 0.3 + 'deg) scale(.88,1.12)', offset: 0.65 },
       { transform: 'none' },
     ], { duration: 800, easing: 'cubic-bezier(.2,.9,.3,1)' }).finished.then(settle);
+    return 800;
   };
   const exit = (side) => {
     body.style.animation = ''; clearTimeout(idle);
-    const [ox, oy] = away(side, 220), k = 0.4 * L;
+    const [ox, oy] = away(side, 340), k = 0.4 * L;
     const stretch = ox ? (1 + k) + ',' + (1 - k * 0.6) : (1 - k * 0.6) + ',' + (1 + k);
-    return actor.animate([
+    acting.animate([
       { transform: 'none' },
-      { transform: 'translate(' + -ox * 0.06 + 'px,' + -oy * 0.06 + 'px) scale(.85,1.12)', offset: 0.35 },
+      { transform: 'translate(' + -ox * 0.07 + 'px,' + -oy * 0.07 + 'px) scale(.82,1.15)', offset: 0.4, easing: 'cubic-bezier(.6,0,.9,.5)' },
       { transform: 'translate(' + ox + 'px,' + oy + 'px) scale(' + stretch + ')' },
-    ], { duration: 550, easing: 'cubic-bezier(.6,0,.9,.4)', fill: 'forwards' }).finished;
+    ], { duration: 700, fill: 'forwards' });
+    return 700;
   };
   // Smear: on fast moves, fading copies trail behind, like smear frames in a cartoon.
   const ghost = () => {
@@ -247,21 +274,23 @@ const CURSOR_SCRIPT = `(() => {
         { duration: 600, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'both' }).finished.then(() => p.remove());
     }
   };
-  window.__demoCursor = { el, react, enter, exit, setImpact: (v) => { impact = v; } };
+  window.__demoCursor = { el, react, enter, exit, tick, setImpact: (v) => { impact = v; } };
   setKind('arrow');
-  const mount = () => { document.documentElement.appendChild(style); document.documentElement.appendChild(el); };
+  const mount = () => { document.documentElement.appendChild(style); document.documentElement.appendChild(acting); document.documentElement.appendChild(el); };
   document.documentElement ? mount() : addEventListener('DOMContentLoaded', mount);
   let seen = false;
   addEventListener('mousemove', (e) => {
     // Playwright's mouse starts at 0,0; ignore that so no cursor sits in the corner.
     if (!seen && !e.clientX && !e.clientY) return;
     seen = true;
+    if (e.clientX === x && e.clientY === y) { tick(); return; } // a frame pulse from the recorder
     const now = performance.now(), dt = Math.max(8, now - lastT);
     if (lastT && now - lastT < 200) { vx = vx * 0.5 + 0.5 * (e.clientX - x) / dt; vy = vy * 0.5 + 0.5 * (e.clientY - y) / dt; }
     lastT = now; x = e.clientX; y = e.clientY;
     body.style.animation = ''; clearTimeout(idle);
     setKind(kindAt(x, y)); place(); pose();
     if (life && Math.hypot(vx, vy) > 1.1 && now - lastGhost > 22) { lastGhost = now; ghost(); }
+    tick();
     clearTimeout(settleTimer); settleTimer = setTimeout(settle, 60);
   }, true);
   addEventListener('mousedown', (e) => {
@@ -331,7 +360,16 @@ export function createRecorder(page, options = {}) {
   let pos = { x: viewport.width / 2, y: viewport.height / 2 };
   let parked = false;
 
-  const wait = (ms) => page.waitForTimeout(ms / speed);
+  // Waits while advancing the page's animations frame by frame, so the video shows
+  // them (see tick() in the cursor script). A navigation in progress just waits.
+  async function pump(ms) {
+    const end = Date.now() + ms;
+    while (Date.now() < end) {
+      await page.evaluate(() => window.__demoCursor?.tick()).catch(() => {});
+      await page.waitForTimeout(Math.min(frameMs, Math.max(0, end - Date.now())));
+    }
+  }
+  const wait = (ms) => pump(ms / speed);
 
   async function glide(from, to, ms, m, easing) {
     const dx = to.x - from.x, dy = to.y - from.y;
@@ -423,7 +461,7 @@ export function createRecorder(page, options = {}) {
     await wait(between(120, 220));
     log('click');
     await page.mouse.down();
-    await page.waitForTimeout(holdMs);
+    await pump(holdMs);
     await page.mouse.up();
     await wait(250);
   }
@@ -530,9 +568,9 @@ export function createRecorder(page, options = {}) {
       document.documentElement.appendChild(card);
       requestAnimationFrame(() => (card.style.opacity = '1'));
     }, { title, description });
-    await page.waitForTimeout(ms / speed);
+    await wait(ms);
     await page.evaluate(() => document.querySelectorAll('[data-demo-chapter]').forEach((n) => (n.style.opacity = '0')));
-    await page.waitForTimeout(400);
+    await pump(400);
     await page.evaluate(() => document.querySelectorAll('[data-demo-chapter]').forEach((n) => n.remove()));
   }
 
@@ -680,8 +718,9 @@ export function createRecorder(page, options = {}) {
       return;
     }
     await page.mouse.move(pos.x, pos.y); // a new page has not drawn the cursor yet
-    await page.evaluate((n) => window.__demoCursor.react(n), name);
-    await wait(250);
+    const ms = await page.evaluate((n) => window.__demoCursor.react(n), name);
+    await pump(ms);
+    await wait(150);
   }
 
   // Flies in from beyond an edge and lands a little inside it. Call it before the first
@@ -692,18 +731,20 @@ export function createRecorder(page, options = {}) {
       top: [viewport.width * at, 110], bottom: [viewport.width * at, viewport.height - 110] }[side];
     pos = { x: p[0], y: p[1] };
     // Starts the flight first, so the cursor never shows at its landing spot beforehand.
-    await page.evaluate((s) => { window.__demoCursor.enter(s); }, side);
+    const ms = await page.evaluate((s) => window.__demoCursor.enter(s), side);
     await page.mouse.move(pos.x, pos.y);
-    await wait(700);
+    await pump(ms);
+    await wait(150);
   }
 
-  // Leaves the screen: goes to the edge, winds up, and zips out. Use it as the last
-  // beat, before the closing pause.
+  // Leaves the screen: stops a little inside the edge, winds up, and zips out. Use it
+  // as the last beat, before the closing pause.
   async function exit({ side = 'right', motion: m = 'flourish' } = {}) {
-    const p = { left: [6, pos.y], right: [viewport.width - 6, pos.y], top: [pos.x, 6], bottom: [pos.x, viewport.height - 6] }[side];
+    const p = { left: [140, pos.y], right: [viewport.width - 140, pos.y], top: [pos.x, 110], bottom: [pos.x, viewport.height - 110] }[side];
     await moveTo(p[0], p[1], m);
-    await page.evaluate((s) => window.__demoCursor.exit(s), side);
-    await wait(600);
+    await wait(250);
+    const ms = await page.evaluate((s) => window.__demoCursor.exit(s), side);
+    await pump(ms + 100);
   }
 
   // The cursor wanders slowly over an area, as if reading it.
