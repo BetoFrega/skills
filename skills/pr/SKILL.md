@@ -45,9 +45,12 @@ Classify each finding by what merging this PR causes, not by severity:
 - **Improvement:** optional. Deferring one the author accepts needs a ticket.
 
 For each finding, give the location, evidence, impact, and smallest fix. Report
-concerns you could not confirm as unconfirmed, not as blockers. End with one verdict:
-changes required (a PR Blocker is open), approval pending follow-up (name the pending
-action), or ready for approval.
+concerns you could not confirm as unconfirmed, not as blockers.
+
+If no PR Blocker or Feature Blocker is open, submit the review as APPROVE; Tech Debt,
+Improvements, and unconfirmed concerns go in its comments and do not hold the approval.
+Otherwise, request changes for an open PR Blocker, or leave approval pending and name
+the action a Feature Blocker still needs.
 ```
 
 ## Sections
