@@ -17,7 +17,7 @@ The class does not depend on severity or review axis.
 | --- | --- | --- |
 | **PR Blocker** | The merge introduces or materially exposes a defect or a functional or non-functional regression, including a production spec violation. | Fix and verify in this PR; a ticket cannot waive it. |
 | **Feature Blocker** | The feature violates the spec, but verified isolation behind an inactive flag prevents a production regression at merge time. | Fix and verify, or defer explicitly with a verified ticket that blocks release and activation. |
-| **Tech Debt** | Significant maintainability cost without a regression. | Fix and verify, or defer explicitly with a verified ticket before approval. |
+| **Tech Debt** | Significant maintainability cost without a regression. | Fix and verify, or defer explicitly with a verified ticket. The reviewer decides whether the fix or ticket must come before approval. |
 | **Improvement** | Optional maintainability improvement. | Advisory; an accepted deferral needs a verified ticket. |
 
 Record the location, evidence, impact, smallest credible correction, and the axis
@@ -81,11 +81,12 @@ findings, and keep readiness pending until coverage reaches the current target.
 - **Changes required:** a PR Blocker is unresolved.
 - **Approval pending follow-up:** coverage is incomplete, an actionable concern is
   unsettled, isolation is unverified, a verified resolution or ticket-backed deferral
-  is missing, or accepted follow-up is incomplete. State the exact pending action.
+  is missing for a finding that holds approval, or accepted follow-up is incomplete. State the exact pending action.
 - **Ready for approval:** coverage reaches the current target; actionable concerns
-  are resolved or dismissed; PR Blockers are fixed and verified; other required
-  findings are fixed and verified or deferred with verified tickets; and deferred
-  Feature Blockers are isolated with recorded activation gates.
+  are resolved or dismissed; PR Blockers are fixed and verified; Feature Blockers,
+  and Tech Debt the reviewer chose to hold approval for, are fixed and verified or
+  deferred with verified tickets; and deferred Feature Blockers are isolated with
+  recorded activation gates.
 
 Apply the repository's other checks and approvals. A Feature Blocker keeps blocking
 activation until its fix is verified. A recommendation authorizes no PR approval,

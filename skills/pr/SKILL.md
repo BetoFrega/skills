@@ -30,6 +30,28 @@ Use this PR-body template:
 **Blast Radius:** <one-word description>
 
 <optional: potential ramifications of merge>
+
+<optional, only if the user says yes:>
+## Review Contract
+
+Classify each finding by what merging this PR causes, not by severity:
+
+- **PR Blocker:** the merge introduces or exposes a defect or regression in
+  production, including a spec violation. Fix it in this PR; a ticket cannot waive it.
+- **Feature Blocker:** the feature violates the spec, but an inactive flag verifiably
+  isolates it from production at merge time. Fix it here, or defer it to a ticket that
+  blocks release and activation. Until the isolation is verified, approval stays pending.
+- **Tech Debt:** significant maintainability cost without a regression. Fix it here,
+  or defer it to a ticket.
+- **Improvement:** optional. Deferring one the author accepts needs a ticket.
+
+For each finding, give the location, evidence, impact, and smallest fix. Report
+concerns you could not confirm as unconfirmed, not as blockers.
+
+If no PR Blocker or Feature Blocker is open, submit the review as APPROVE; Tech Debt,
+Improvements, and unconfirmed concerns go in its comments and do not hold the approval.
+Otherwise, request changes for an open PR Blocker, or leave approval pending and name
+the action a Feature Blocker still needs.
 ```
 
 ## Sections
@@ -64,3 +86,9 @@ For test evidence, show the exact failing/passing case, using pseudocode.
 State reversibility: two-way doors are cheap to roll back; destructive or hard-to-reverse
 choices are one-way doors. Describe the potential scope and ramifications of merging,
 including affected consumers, layout, and responsiveness where relevant.
+
+### Review Contract
+
+Before writing the body, ask the user whether to include the Review Contract. It
+tells the reviewer how to classify findings and when to approve. If the user says
+yes, copy it verbatim, even when the PR has no feature flag; otherwise leave it out.
