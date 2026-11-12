@@ -105,6 +105,8 @@ in settled decisions or records.
 
 - Review a change → `code-review`; triage its findings → `review-triage`.
 - PR body → `pr`; deliver to main → `ship-main`; confirm a claimed outcome → `verify`.
+- Text a person will read (messages, docs, PR bodies, tickets) → review with
+  `writing-for-humans` before delivering; verb tense → `verb-tense`.
 - Remaining work and successors → `next-steps`; learning from results →
   `review-learnings`.
 
