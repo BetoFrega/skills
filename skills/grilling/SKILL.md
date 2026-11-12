@@ -56,9 +56,8 @@ say in one sentence which topic closed and which one starts, and show the tree.
 A question asks for one decision. When answering it would require another decision
 first, or weighing several things at once, split it and ask the prerequisite first.
 
-Group questions only when each one is a simple confirmation on the same branch: the
-recommendation is supported by known facts and settled preferences, and you expect a
-plain "OK". Keep a group to three. Questions requiring comparison, reflection, missing
+Group questions only when each one is a [trivial](#alternatives) decision on the same
+branch. Keep a group to three. Questions requiring comparison, reflection, missing
 context, or meaningful tradeoffs get their own round. Leave unasked frontier questions
 pending.
 
@@ -75,12 +74,50 @@ more than a short paragraph, the question is too big; split it.
 
 ## Alternatives
 
-Use [recommend](../recommend/SKILL.md) to prepare alternatives and the recommendation,
-then show the user only the format below; give the full comparison when they ask for
-it. Offer the viable alternatives, usually two or three, each with its consequence in
-one sentence. Skip invented options added to reach a count, and allow another answer.
-Resolve decisive prerequisites before recommending dependent choices. Include the
-recommendation only when evidence and settled preferences support it.
+Classify each decision before preparing its alternatives.
+
+A decision is **trivial** when all of these hold: known facts and settled preferences
+already pick one option, the choice is cheap to reverse, and you expect a plain "OK".
+Every other decision is **non-trivial**. Signs of a non-trivial decision:
+
+- reversing it later is costly or slow: it touches data, a public interface, the
+  architecture, a lasting dependency, or behavior users see;
+- the viable options differ in cost, risk, or what they rule out, and no fact or
+  settled preference decides between them;
+- other open questions in the session tree depend on its answer;
+- the user has to weigh tradeoffs they care about.
+
+For a trivial decision, use [recommend](../recommend/SKILL.md) to check the options
+and show the short format below.
+
+For a non-trivial decision, apply [recommend](../recommend/SKILL.md) in full before
+proposing anything: widen the field of options, then weigh the pros and cons of every
+viable option, the recommended one included, each with its consequence and its high,
+medium, or low impact. Show that weighing in the question, using the long format
+below, so the user can judge the recommendation without asking for it.
+
+A non-trivial decision is **particularly hard** when any of these hold:
+
+- after the weighing, no high-impact item separates the two best options;
+- the decision is both hard to reverse and high impact;
+- a decisive fact stays unknown and is expensive to obtain;
+- the options interact across several layers, systems, or owners in ways you cannot
+  trace with confidence;
+- you changed your recommendation on it, or the user rejected it and you are unsure
+  what to propose next.
+
+For a particularly hard decision, consult [advisory](../advisory/SKILL.md) before
+recommending. Give the advisor the question, the evidence, the options, and the
+criteria, and leave out your own conclusion. Then check the advice against the
+evidence and say in the question that you consulted an advisor and where it agreed
+or disagreed with you.
+
+In both formats, offer the viable alternatives, usually two or three. Skip invented
+options added to reach a count, and allow another answer. Resolve decisive
+prerequisites before recommending dependent choices. Include the recommendation only
+when evidence and settled preferences support it.
+
+Short format, for trivial decisions:
 
 ```
 ❓ **Q<n>: <question title>** (topic <k> of <m>, about <x> questions left)
@@ -95,6 +132,27 @@ B. <alternative>: <what happens if chosen>
 💡 <recommended alternative and why>
 ```
 
+Long format, for non-trivial decisions:
+
+```
+❓ **Q<n>: <question title>** (topic <k> of <m>, about <x> questions left)
+
+<context paragraph>
+
+<the question, in one sentence>
+
+A. <alternative>: <what happens if chosen>
+   - Pro: <consequence>. Impact: <high|medium|low>, because <reason>.
+   - Con: <consequence>. Impact: <high|medium|low>, because <reason>.
+B. <alternative>: <what happens if chosen>
+   - Pro: ...
+   - Con: ...
+
+💡 <recommended alternative>, decided by <the high-impact items>. It beats <strongest
+alternative> because <reason>; <condition> would reverse it. <Advisor: agreed, or
+where it disagreed, when consulted.>
+```
+
 Take the progress counts from the session tree; the estimate can change as answers
 raise new questions.
 
@@ -103,6 +161,9 @@ Before sending, check the question against this list and fix it if any item fail
 - every fact it depends on was looked up, or you say which sources lacked it;
 - the context paragraph is there, with a link or path for each fact cited;
 - it asks for one decision;
+- it is classified as trivial, non-trivial, or particularly hard, and uses the
+  matching format, with the weighing for non-trivial and the advisor for particularly
+  hard;
 - it follows from the previous answer, or the topic switch was announced;
 - it is recorded in the session tree.
 
