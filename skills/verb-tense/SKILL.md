@@ -60,8 +60,7 @@ the sentence be true? If not, the present is wrong.
 
 What holds now and stays true: the current contract, how the code behaves today,
 general facts, and instructions. "The endpoint returns 404 for unknown ids" stays in
-the present when it already does. Changing these to past or future is also an
-error.
+the present when it already does. Keep these in the present.
 
 ## Contracts not yet met
 

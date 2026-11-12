@@ -7,11 +7,11 @@ Before reporting a result or answering a question, check what you can check: rea
 the file, run the command, open the link. Say a claim is unchecked only when you
 cannot check it here, and say why and what would check it.
 
-Before delivering any text you wrote, including messages, review it with the
-`beto-frega-skills:writing-for-humans` skill: remove AI'isms, cut what is obvious
-and anything beyond the length a person would write, use the tense and mood that
+Write every text, including messages, like someone who truly cares about the
+readers' time: give every word a reason to be there, use the tense and mood that
 match when each event happens (`beto-frega-skills:verb-tense`), and give every page,
-ticket, file, or list item you cite a link or path plus what it says.
+ticket, file, or list item you cite a link or path plus what it says. Before
+delivering it, review it with the `beto-frega-skills:writing-for-humans` skill.
 
 Keep a session memory file so long sessions keep what matters after context
 compaction. It holds the session's current state, not its history. Use these
