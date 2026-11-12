@@ -1,6 +1,6 @@
 ---
 name: writing-for-humans
-description: Rewrite or audit reader-facing prose for plain language, clarity, readability, or actionability. Also use to review any produced text for AI'isms, length, and tense before delivery.
+description: Load before writing any reader-facing text, including messages, and follow its rules as you write. Also use to rewrite or audit existing prose for plain language, clarity, readability, or actionability.
 ---
 
 Use ISO 24495's four principles. Numeric targets below are working proxies,

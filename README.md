@@ -265,7 +265,7 @@ Status, scope checks, handoffs, verification, and next steps only report. Use
 | Audit a repository for mistakes agents keep repeating | [correct](skills/correct/SKILL.md): each repeated mistake class fixed at the highest level that works, with a check proven on a past mistake. |
 | Report a problem in a skill from this plugin | [report-skill-lesson](skills/report-skill-lesson/SKILL.md): an issue on the plugin's repository instead of an edit to the installed copy, published only with approval. |
 | Reduce an agent document | [prune-agent-docs](skills/prune-agent-docs/SKILL.md): exact, independently reviewed cuts, applied only after authorization. |
-| Clarify reader-facing prose | [writing-for-humans](skills/writing-for-humans/SKILL.md): plain, readable language, and the AI'ism, obviousness, length, and tense review for all produced text. |
+| Write reader-facing prose | [writing-for-humans](skills/writing-for-humans/SKILL.md): rules to follow while writing any produced text (plain language, no AI'isms, human length, right tense), plus a self-check before delivery. |
 | Fix verb tense and mood | [verb-tense](skills/verb-tense/SKILL.md): the available tenses in English and Portuguese and the errors agents make, such as the present for finished or planned events and missing conditional or subjunctive. |
 | Prepare an explicitly delegated low-density tracker report | [report-low-density](skills/report-low-density/SKILL.md): a reproducible flag; publication requires explicit instruction or approval. |
 | Investigate a low-density flag | [investigate-low-density](skills/investigate-low-density/SKILL.md): causes and safe reduction options, without implementing fixes. |
