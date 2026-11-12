@@ -6,11 +6,24 @@ description: Rewrite or audit reader-facing prose for plain language, clarity, r
 Use ISO 24495's four principles. Numeric targets below are working proxies,
 not standard clauses or caps: use them as review tripwires.
 
+## Register
+
+Write like someone who truly cares about the readers' time: say what is true and
+what to do, once, and stop when the reader has what they need.
+
+- Write like someone who cares about the subject and uses the vocabulary its
+  practitioners use: name the action, the component, or the term itself.
+- Open with the point, and state each uncertainty once, as strongly as the
+  evidence supports.
+- Give every word, sentence, formula, and punctuation mark a reason to be there.
+  On review, cut whatever has none.
+- Write as a colleague would in a message: words and punctuation, with lists or
+  tables only when the content is a list or a table.
+
 ## Relevant — content selection
 
-Name the reader before editing. Remove throat-clearing and content that reader will
-not use: known background, internal process, defensive caveats. Move uncertain cuts
-to the end. Preserve every fact, number, condition, and honest uncertainty.
+Name the reader before editing, and keep the content that reader will use. Move
+uncertain cuts to the end. Preserve every fact, number, condition, and honest uncertainty.
 
 ## Findable — structure
 
@@ -23,8 +36,7 @@ lists for 3+ steps/options/conditions, tables for lookups/comparisons, prose for
 Keep one idea per sentence (~20 words prompts review). Use active voice with explicit
 actors; passive is fine for unknown/irrelevant actors. Prefer verbs and common words,
 retaining terms of art. Define terms at first use. Gloss abbreviations at first use
-unless the named audience already knows them; use one name per concept. Remove stacked hedges
-without deleting real uncertainty.
+unless the named audience already knows them; use one name per concept.
 
 ## Usable — actionability
 
@@ -32,28 +44,17 @@ Name who does what. Give instructions as imperatives with explicit objects and
 applicable deadlines; put conditions before actions. End messages with a next step
 when one exists.
 
-## Remove AI'isms
+## Review for AI'isms
 
-Review every text you produce before delivering it: docs, skills, PR and commit
-descriptions, tickets, and messages. Rewrite each of these patterns as a direct
-statement of the fact or action:
-
-- Slogans and punchy closers: "Pinned is not intended.", "leaving the growth is not."
-- Contrast frames: "this is X, not Y", "X, not Y", "not a coverage campaign". State X.
-- Emphatic negations: "never as a side effect", "nobody asked for". Say what to do.
-- Forced metaphors: "exhale in the same change". Name the action: "simplify again in
-  the same change".
-- Decorative symbols in prose: `≠`, `→` chains, tree blocks (`├──`, `└──`), emoji
-  outside an agreed convention.
-
-Keep terms of art and literal comparisons that carry information.
+On the final review of every text you produce, read
+[ai-isms.md](references/ai-isms.md) and rewrite each pattern it lists that the
+draft contains. Read it only for review; write the draft from the register above.
 
 ## Write at human length
 
 Before drafting, estimate how much a person who knows the subject would write for
 this reader. Aim for that length; an unchecked draft runs longer. On review, ask
 whether a person would have written this much, and cut until the answer is yes.
-In running prose, cut every sentence or clause the reader would infer without it.
 
 Read the text as the reader would hear it. Vary sentence length, and join short
 related sentences so the text reads with rhythm.
@@ -85,6 +86,6 @@ inventing a link.
 Verify the named reader understands the intended knowledge/action after one reading;
 the main point appears in the first two lines; sentences/paragraphs hold one
 idea/topic; terms have one name and no unexplained jargon; all facts, numbers,
-conditions, and honest hedges survive; no AI'ism from the list above remains; the length matches what a person would write and nothing obvious remains; each verb's tense matches when its event happens; every cited page, ticket, file, or item has a link or path and says what it contains.
+conditions, and honest hedges survive; no pattern from ai-isms.md remains; the length matches what a person would write and every word has a reason to be there; each verb's tense matches when its event happens; every cited page, ticket, file, or item has a link or path and says what it contains.
 
 For local rewrites, report [document delivery](../consolidate/references/local-document-delivery.md).
