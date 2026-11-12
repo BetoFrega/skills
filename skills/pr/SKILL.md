@@ -31,6 +31,7 @@ Use this PR-body template:
 
 <optional: potential ramifications of merge>
 
+<optional, only if the user says yes:>
 ## Review Contract
 
 Classify each finding by what merging this PR causes, not by severity:
@@ -88,6 +89,6 @@ including affected consumers, layout, and responsiveness where relevant.
 
 ### Review Contract
 
-Copy this section verbatim into every PR body. It tells the reviewer how to classify
-findings and which verdict to give, so keep it unchanged even when the PR has no
-feature flag.
+Before writing the body, ask the user whether to include the Review Contract. It
+tells the reviewer how to classify findings and when to approve. If the user says
+yes, copy it verbatim, even when the PR has no feature flag; otherwise leave it out.
