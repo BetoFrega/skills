@@ -41,7 +41,7 @@ Classify each finding by what merging this PR causes, not by severity:
   isolates it from production at merge time. Fix it here, or defer it to a ticket that
   blocks release and activation. Until the isolation is verified, approval stays pending.
 - **Tech Debt:** significant maintainability cost without a regression. Fix it here,
-  or defer it to a ticket before approval.
+  or defer it to a ticket.
 - **Improvement:** optional. Deferring one the author accepts needs a ticket.
 
 For each finding, give the location, evidence, impact, and smallest fix. Report
