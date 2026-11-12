@@ -49,11 +49,17 @@ minor unknowns as explicit assumptions only when they would not change the choic
 
 ## Compare and recommend
 
-Scale depth to impact, uncertainty, and cost; start compact. Include pros and cons
-for every alternative against the same criteria, decisive tradeoffs, and a preferred
-choice whose advantages outweigh its disadvantages for this user.
+Scale depth to impact, uncertainty, and cost; start compact.
 
-Lead with the supported recommendation and a compact table or equivalent comparison.
+Show the pros and cons of every viable option, the recommended one included, in the
+message the user reads. Each option gets its own pros and its own cons, judged on the
+same criteria, and each item names a concrete consequence for this user: what gets
+easier, harder, faster, riskier, or more expensive, and for whom. Look for at least
+one pro and one con per option; when an option has no real con, say so and what you
+checked. A criteria table supports this list and does not replace it. Prefer the
+option whose pros outweigh its cons for this user.
+
+Lead with the supported recommendation, then the options with their pros and cons.
 Explain why it beats the strongest alternative and which changed assumptions or
 conditions would reverse it. Use qualitative judgment unless evidence supports
 quantification. Make consequential domain, product, architecture, and code-design
