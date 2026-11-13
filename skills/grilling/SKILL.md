@@ -112,7 +112,8 @@ criteria, and leave out your own conclusion. Then check the advice against the
 evidence and say in the question that you consulted an advisor and where it agreed
 or disagreed with you.
 
-In both formats, offer the viable alternatives, usually two or three. Skip invented
+In both formats, offer the viable alternatives, usually two or three, written in
+[recommend's option format](../recommend/SKILL.md#compare-and-recommend). Skip invented
 options added to reach a count, and allow another answer. Resolve decisive
 prerequisites before recommending dependent choices. Include the recommendation only
 when evidence and settled preferences support it.
@@ -126,8 +127,7 @@ Short format, for trivial decisions:
 
 <the question, in one sentence>
 
-A. <alternative>: <what happens if chosen>
-B. <alternative>: <what happens if chosen>
+<the alternatives, in recommend's option format, without Pro and Con lines>
 
 💡 <recommended alternative and why>
 ```
@@ -141,12 +141,7 @@ Long format, for non-trivial decisions:
 
 <the question, in one sentence>
 
-A. <alternative>: <what happens if chosen>
-   - Pro: <consequence>. Impact: <high|medium|low>, because <reason>.
-   - Con: <consequence>. Impact: <high|medium|low>, because <reason>.
-B. <alternative>: <what happens if chosen>
-   - Pro: ...
-   - Con: ...
+<the alternatives with their weighed pros and cons, in recommend's option format>
 
 💡 <recommended alternative>, decided by <the high-impact items>. It beats <strongest
 alternative> because <reason>; <condition> would reverse it. <Advisor: agreed, or
@@ -164,6 +159,7 @@ Before sending, check the question against this list and fix it if any item fail
 - it is classified as trivial, non-trivial, or particularly hard, and uses the
   matching format, with the weighing for non-trivial and the advisor for particularly
   hard;
+- the alternatives follow recommend's option format;
 - it follows from the previous answer, or the topic switch was announced;
 - it is recorded in the session tree.
 
