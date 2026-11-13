@@ -63,6 +63,21 @@ decided it.
 
 Present it in that order: the options with their assessed pros and cons, then the
 recommendation. A criteria table supports this list and does not replace it.
+Write the options as a Markdown list, one item per option, with its pros and cons
+nested two spaces under it:
+
+```
+- **A.** <option>: <what happens if chosen>
+  - Pro: <consequence>. Impact: <high|medium|low>, because <reason>.
+  - Con: <consequence>. Impact: <high|medium|low>, because <reason>.
+- **B.** <option>: <what happens if chosen>
+  - Pro: ...
+  - Con: ...
+```
+
+A bare `B.` line is not a list marker: written right after a bullet, it renders as
+part of that bullet.
+
 Explain why the recommendation beats the strongest alternative and which changed assumptions or
 conditions would reverse it. Use qualitative judgment unless evidence supports
 quantification. Make consequential domain, product, architecture, and code-design
