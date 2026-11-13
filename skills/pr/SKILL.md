@@ -14,6 +14,8 @@ Use this PR-body template:
 ```markdown
 ## Summary
 
+<one sentence: the change and why it is needed>
+
 <diagram, diff-sketch, or tree>
 
 ## Evidence
@@ -60,7 +62,10 @@ Keep prose brief, without preambles. Use the user's domain vocabulary from `CONT
 
 ### Summary
 
-Choose the smallest view explaining the change:
+Open with one sentence that joins the change to its why, per Start With the Why in
+`beto-mode`. Mark an inferred why as inferred.
+
+Then choose the smallest view explaining the change:
 
 - pseudocode for logic/algorithms;
 - a call tree for runtime order;

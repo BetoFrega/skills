@@ -20,6 +20,9 @@ file you read in this session and that changed a decision.
 
 Each entry says when it applies. Files live at `principles/<name>.md`.
 
+- **Start With the Why** (`start-with-the-why`). Acting on a directive (requirement,
+  request, rule, review finding, or ticket): implementing, investigating, reviewing,
+  testing, or asking someone to deliver it.
 - **Keep It Lean** (`keep-it-lean`). Scoping a change, choosing a design, or tempted
   to add an abstraction, option, dependency, or optimization.
 - **Subtract Before You Add** (`subtract-before-you-add`). Adding to an existing area,
