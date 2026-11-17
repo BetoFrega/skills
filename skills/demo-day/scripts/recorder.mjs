@@ -341,12 +341,14 @@ export const MOTION = {
 };
 // Zoom moods: subtle (a nudge), reveal (calm push-in to show a result), punch (fast pop
 // with overshoot, for a win), dramatic (slow push-in with a long hold, for the big reveal).
+// easing names one of ZOOM_EASINGS, which finish-recording.mjs applies to the video.
 export const ZOOM = {
-  subtle: { scale: 1.25, ms: 900, easing: 'cubic-bezier(.4,0,.2,1)', hold: 1400 },
-  reveal: { scale: 1.5, ms: 1100, easing: 'cubic-bezier(.65,0,.35,1)', hold: 1800 },
-  punch: { scale: 1.8, ms: 420, easing: 'cubic-bezier(.34,1.56,.64,1)', hold: 1200, outMs: 500 },
-  dramatic: { scale: 2.1, ms: 2600, easing: 'cubic-bezier(.3,0,.2,1)', hold: 2600, outMs: 1400 },
+  subtle: { scale: 1.25, ms: 900, easing: 'easeInOut', hold: 1400 },
+  reveal: { scale: 1.5, ms: 1100, easing: 'easeInOut', hold: 1800 },
+  punch: { scale: 1.8, ms: 420, easing: 'backOut', hold: 1200, outMs: 500 },
+  dramatic: { scale: 2.1, ms: 2600, easing: 'easeOut', hold: 2600, outMs: 1400 },
 };
+export const ZOOM_EASINGS = ['linear', 'easeInOut', 'easeOut', 'backOut'];
 const resolveMotion = (m) => ({ ...MOTION.natural, ...(typeof m === 'string' ? MOTION[m] : m) });
 
 export function createRecorder(page, options = {}) {
@@ -355,7 +357,7 @@ export function createRecorder(page, options = {}) {
   let motion = resolveMotion(options.motion ?? 'natural');
   const t0 = Date.now();
   const events = [];
-  const log = (type) => events.push({ type, t: (Date.now() - t0) / 1000 });
+  const log = (type, data) => events.push({ type, t: (Date.now() - t0) / 1000, ...data });
   const viewport = page.viewportSize() ?? { width: 1280, height: 720 };
   let pos = { x: viewport.width / 2, y: viewport.height / 2 };
   let parked = false;
@@ -654,38 +656,31 @@ export function createRecorder(page, options = {}) {
     await page.evaluate(() => document.querySelectorAll('[data-demo-callout]').forEach((n) => n.remove()));
   }
 
-  // Magnifies the page around the target. mood picks the feeling (see ZOOM); any field
+  // Zooms the video in on the target. mood picks the feeling (see ZOOM); any field
   // can be overridden. hold: ms before zooming back (0 keeps it until unzoom()).
   // center (0..1) pulls the target toward the middle of the frame; fit caps the target's
-  // zoomed size as a fraction of the frame. Spotlights and
-  // callouts on screen zoom with the page.
+  // zoomed size as a fraction of the frame.
+  // The zoom happens in post-production: this only logs it, and finish-recording.mjs
+  // crops and scales the video. The page is never transformed, because a transform on
+  // <body> or <html> becomes the containing block of every position: fixed element,
+  // which throws modals, fixed headers, and toasts off screen.
   async function zoom(target, { mood = 'reveal', ...overrides } = {}) {
     const z = { center: 0.8, fit: 0.6, ...ZOOM.reveal, ...ZOOM[mood], ...overrides };
-    const box = (await targetPoint(loc(target))).box;
-    await page.evaluate(({ box, z }) => {
-      const cx = box.x + box.width / 2, cy = box.y + box.height / 2;
-      // Never magnify the target past z.fit of the frame, so it and its callout stay in view.
-      z.scale = Math.min(z.scale, (innerWidth * z.fit) / box.width, (innerHeight * z.fit) / box.height);
-      const apply = (n) => {
-        const r = n.getBoundingClientRect();
-        n.style.transition = `transform ${z.ms}ms ${z.easing}, opacity .4s`;
-        n.style.transformOrigin = `${cx - r.left}px ${cy - r.top}px`;
-        n.style.transform = `translate(${(innerWidth / 2 - cx) * z.center}px, ${(innerHeight / 2 - cy) * z.center}px) scale(${z.scale})`;
-      };
-      apply(document.body);
-      document.querySelectorAll('[data-demo-spotlight],[data-demo-callout]').forEach(apply);
-    }, { box, z });
+    if (!ZOOM_EASINGS.includes(z.easing)) throw new Error(`zoom easing must be one of ${ZOOM_EASINGS.join(', ')}: ${z.easing}`);
+    const { box } = await targetPoint(loc(target));
+    const cx = box.x + box.width / 2, cy = box.y + box.height / 2;
+    // Never magnify the target past z.fit of the frame, so it and its callout stay in view.
+    const scale = Math.min(z.scale, (viewport.width * z.fit) / box.width, (viewport.height * z.fit) / box.height);
+    // The frame's middle shows this page point; center 1 puts the target there.
+    const fx = cx + ((viewport.width / 2 - cx) * (1 - z.center)) / scale;
+    const fy = cy + ((viewport.height / 2 - cy) * (1 - z.center)) / scale;
+    log('zoom', { ms: z.ms, easing: z.easing, scale, x: fx / viewport.width, y: fy / viewport.height });
     await wait(z.ms + 100);
     if (z.hold) { await wait(z.hold); await unzoom({ ms: z.outMs ?? 900 }); }
   }
 
   async function unzoom({ ms = 900 } = {}) {
-    await page.evaluate((ms) => {
-      [document.body, ...document.querySelectorAll('[data-demo-spotlight],[data-demo-callout]')].forEach((n) => {
-        n.style.transition = `transform ${ms}ms cubic-bezier(.65,0,.35,1), opacity .4s`;
-        n.style.transform = '';
-      });
-    }, ms);
+    log('zoom', { ms, easing: 'easeInOut', scale: 1, x: 0.5, y: 0.5 });
     await wait(ms + 100);
   }
 
