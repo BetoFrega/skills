@@ -80,7 +80,9 @@ saved record sells the win. Move the cursor next to the result before it reacts.
   say why it matters.
 - **Zoom.** `zoom(target, { mood })` frames the result: `subtle` nudges, `reveal`
   pushes in calmly, `punch` pops with overshoot for a win, `dramatic` pushes in
-  slowly and holds for the big reveal.
+  slowly and holds for the big reveal. The zoom is a camera move added by
+  `finish-recording.mjs`: the raw video and screenshots show the page unzoomed, and
+  the page itself never changes, so modals and fixed headers stay in place.
 - **Humanity.** `type(target, text, { typos: 1 })` slips and corrects;
   `glance(area)` lets the cursor wander as if reading before it acts.
 
@@ -100,7 +102,7 @@ cut time taken from the script clock lines up the sounds. Save the events with
 node finish-recording.mjs <video.webm> <events.json> <feature>.mp4
 ```
 
-It finds the flash in the video, aligns every sound to it, and cuts the video at
+It finds the flash in the video, aligns every sound and zoom to it, and cuts the video at
 the end of the flash, which also removes the loading. The video ends with a 1.2 s
 fade to black, so end the script with a pause the fade can take. `--no-trim` keeps
 the part before the flash, `--offset=<seconds>` adds a manual shift, `--fade=<seconds>`

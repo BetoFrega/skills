@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-// Adds click and keystroke sounds to a demo recording and writes an MP4.
+// Adds click and keystroke sounds and the recorder's zooms to a demo recording and writes an MP4.
 // Usage: node finish-recording.mjs <video.webm|mp4> <events.json> <out.mp4> [--no-trim] [--offset=<seconds>] [--fade=<seconds>] [--silent]
 // events.json comes from recorder.saveEvents(). When it holds a sync event (rec.syncFlash()),
 // the script finds the magenta flash in the video, aligns every sound to it, and cuts the
 // video at the end of the flash; --no-trim keeps the part before it. Without a sync event the
 // sounds follow the recorder clock, whose start differs from the video's by an amount that
 // changes per run. --offset adds a manual shift (positive = later). The video ends with a
-// fade to black of --fade seconds (default 1.2; 0 turns it off). Needs ffmpeg on PATH.
+// fade to black of --fade seconds (default 1.2; 0 turns it off). Zoom events become a camera
+// that crops and scales the video, on the same clock as the sounds. Needs ffmpeg on PATH.
 import { writeFile, readFile, rm } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
@@ -87,6 +88,44 @@ const sounds = {
 
 if (!('silent' in flags)) for (const e of events) sounds[e.type]?.(e.t + offset - trim);
 
+// The camera: each zoom event eases the frame's scale and middle point (fractions of the
+// frame) from where they were to the event's values, over the event's ms. Every quantity is
+// start + the sum of its changes, each eased by its progress clipped to 0..1, so holds
+// need no terms of their own. ffmpeg's perspective filter takes the four corners of the
+// visible rectangle; register 0 holds the progress, 1 the scale, 2 the middle point.
+const FPS = 25; // Playwright records at 25 fps; the filter chain resamples to it.
+const EASE = {
+  linear: 'ld(0)',
+  easeInOut: 'if(lt(ld(0),0.5),4*ld(0)^3,1-(2-2*ld(0))^3/2)',
+  easeOut: '1-(1-ld(0))^3',
+  backOut: '1+2.70158*(ld(0)-1)^3+1.70158*(ld(0)-1)^2',
+};
+function camera() {
+  const zooms = events.filter((e) => e.type === 'zoom');
+  if (!zooms.length) return null;
+  const terms = { scale: [], x: [], y: [] };
+  let at = { scale: 1, x: 0.5, y: 0.5 };
+  for (const e of zooms) {
+    const ease = EASE[e.easing];
+    if (!ease) { console.error(`unknown zoom easing ${e.easing}`); process.exit(1); }
+    const start = (e.t + offset - trim).toFixed(3), ms = Math.max(1, e.ms) / 1000;
+    for (const k of Object.keys(terms)) {
+      const d = e[k] - at[k];
+      if (d) terms[k].push(`(st(0,clip((in/${FPS}-(${start}))/${ms},0,1));${d.toFixed(5)}*(${ease}))`);
+    }
+    at = { scale: e.scale, x: e.x, y: e.y };
+  }
+  const sum = (k, base) => [base, ...terms[k]].join('+');
+  // Keeps the visible rectangle inside the frame, so a zoom near an edge never shows past it.
+  const middle = (k, size) => `st(1,${sum('scale', 1)});st(2,clip(${size}*(${sum(k, 0.5)}),${size}/2/ld(1),${size}-${size}/2/ld(1)))`;
+  const x = (side) => `'${middle('x', 'W')};ld(2)${side}W/2/ld(1)'`;
+  const y = (side) => `'${middle('y', 'H')};ld(2)${side}H/2/ld(1)'`;
+  return `fps=${FPS},perspective=x0=${x('-')}:y0=${y('-')}:x1=${x('+')}:y1=${y('-')}:x2=${x('-')}:y2=${y('+')}:x3=${x('+')}:y3=${y('+')}` +
+    ':interpolation=cubic:eval=frame';
+}
+const zoom = camera();
+const vf = [zoom, fade > 0 && `fade=t=out:st=${fadeAt}:d=${fade}`].filter(Boolean).join(',');
+
 const pcm = Buffer.alloc(44 + samples.length * 2);
 pcm.write('RIFF', 0); pcm.writeUInt32LE(36 + samples.length * 2, 4); pcm.write('WAVEfmt ', 8);
 pcm.writeUInt32LE(16, 16); pcm.writeUInt16LE(1, 20); pcm.writeUInt16LE(1, 22); pcm.writeUInt32LE(rate, 24);
@@ -97,9 +136,10 @@ const wav = join(tmpdir(), `demo-sounds-${process.pid}.wav`);
 await writeFile(wav, pcm);
 
 const ff = spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', String(trim), '-i', video, '-i', wav,
-  ...(fade > 0 ? ['-vf', `fade=t=out:st=${fadeAt}:d=${fade}`, '-af', `afade=t=out:st=${fadeAt}:d=${fade}`] : []),
+  ...(vf ? ['-vf', vf] : []), ...(fade > 0 ? ['-af', `afade=t=out:st=${fadeAt}:d=${fade}`] : []),
   '-map', '0:v', '-map', '1:a', '-c:v', 'libx264', '-crf', '18', '-preset', 'medium', '-pix_fmt', 'yuv420p',
   '-c:a', 'aac', '-b:a', '128k', '-shortest', '-movflags', '+faststart', out], { stdio: 'inherit' });
 await rm(wav, { force: true });
 if (ff.status !== 0) process.exit(ff.status ?? 1);
-console.log(`${out}: ${length.toFixed(1)}s, ${events.filter((e) => sounds[e.type]).length} sound events`);
+console.log(`${out}: ${length.toFixed(1)}s, ${events.filter((e) => sounds[e.type]).length} sound events, ` +
+  `${events.filter((e) => e.type === 'zoom').length} zoom moves`);
