@@ -42,6 +42,9 @@ Each entry says when it applies. Files live at `principles/<name>.md`.
 - **Fix Root Causes** (`fix-root-causes`). Debugging a failure or regression.
 - **Attack the Premise** (`attack-the-premise`). Two or more fixes sharing one premise
   have failed the same check.
+- **Weigh Rival Explanations** (`weigh-rival-explanations`). Explaining why something
+  happened (a failure, incident, metric shift, or past decision), or judging whether a
+  change caused an effect.
 - **Test Behavior, Not Implementation** (`test-behavior-not-implementation`). Writing,
   changing, or keeping a test.
 - **Tests Earn Their Runtime** (`tests-earn-their-runtime`). Adding or keeping a test,
