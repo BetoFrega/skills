@@ -1,0 +1,5 @@
+interface:
+  display_name: "Explain PR"
+  short_description: "Explain a PR as an HTML guide"
+policy:
+  allow_implicit_invocation: false

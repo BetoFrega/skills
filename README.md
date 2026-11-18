@@ -182,7 +182,7 @@ Supporting skills solve specific implementation problems:
 | Review a branch, PR, or in-progress change | [code-review](skills/code-review/SKILL.md): findings against the selected scope and standards. |
 | Write the PR description | [pr](skills/pr/SKILL.md): a reviewer-facing body describing behavior and validation, with an optional review contract for classifying findings. |
 | Resolve review findings and determine readiness | [review-triage](skills/review-triage/SKILL.md): verified dispositions and a gate covering the current target. |
-| Explain a large change through user journeys | [explain-pr](skills/explain-pr/SKILL.md): a navigable HTML explanation linked to code. |
+| Walk through how code runs, or explain a large change through user journeys | [explain-code](skills/explain-code/SKILL.md): a navigable HTML guide from entrypoint to outcome, with editor links to exact lines. `/explain-pr` runs it with the PR scope. |
 
 ```text
 $code-review Review the current branch against the selected increment and

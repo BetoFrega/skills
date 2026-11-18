@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code explanation — illustrative example</title>
+<style>
+:root{color-scheme:light;--paper:#faf8f3;--ink:#23332f;--muted:#52635c;--line:#cbd3ca;--accent:#17634f;--wash:#e9efe7;--code:#edf0ea}
+*{box-sizing:border-box}html{scroll-padding-top:2rem}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.7 system-ui,sans-serif}::selection{background:#cce3bc;color:#183328}a{color:var(--accent);text-underline-offset:.2em}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid var(--accent);outline-offset:5px}code,pre{font-family:ui-monospace,monospace;font-size:.88em}code{overflow-wrap:anywhere}pre{padding:1.25rem;background:var(--code);overflow:auto;line-height:1.6}pre code{overflow-wrap:normal}.layout{max-width:1280px;margin:auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:4rem;padding:3rem 2rem 6rem}.skip{position:absolute;left:1rem;top:-100px}.skip:focus{top:1rem;background:var(--paper);padding:.5rem}aside{position:sticky;top:2rem;align-self:start;font-size:.88rem}nav a{display:block;padding:.45rem 0}nav{border-top:1px solid var(--line);margin-top:1rem;padding-top:.7rem}main{min-width:0}header{padding-bottom:2rem;border-bottom:1px solid var(--line)}h1,h2,h3{line-height:1.16;text-wrap:balance}h1{font:500 clamp(2.5rem,5vw,4.5rem)/1.06 Georgia,serif;letter-spacing:-.025em;margin:0 0 1.5rem;max-width:19ch}h2{font:500 2rem/1.2 Georgia,serif;margin:0 0 1.25rem}h3{font-size:1.12rem;margin:2rem 0 .6rem}p,li{max-width:70ch}p{margin:.7rem 0 1.1rem}.lead{font-size:1.2rem}.meta,.caption{color:var(--muted);font-size:.88rem}.meta{font-variant-numeric:tabular-nums;overflow-wrap:anywhere}section{padding:2.8rem 0;border-bottom:1px solid var(--line)}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:2rem}.comparison h3{margin-top:0}.tag{display:inline-block;font-size:.75rem;font-weight:650;padding:.12rem .55rem;background:var(--wash);border:1px solid var(--line);border-radius:4px;vertical-align:middle}.journey{padding-left:1.5rem}.journey li{padding:0 0 1.25rem .5rem}.journey h3{margin:.2rem 0}.journey p{margin:.5rem 0}figure{margin:1.75rem 0;padding:1.25rem;background:white;border:1px solid var(--line)}.screenshot img{display:block;max-width:100%;height:auto;margin:auto}.screenshot figcaption{margin-top:.75rem}.diagram{overflow:auto}.diagram svg{display:block;max-width:none!important;margin:auto}.diagram-status{color:var(--muted);font-size:.85rem}details{margin:1rem 0}summary{cursor:pointer;font-weight:600;min-height:44px;padding:.45rem 0}summary:hover{color:var(--accent)}footer{margin-top:2rem;color:var(--muted);font-size:.85rem}
+@media(max-width:800px){.layout{grid-template-columns:1fr;gap:2rem;padding:1.5rem 1.2rem 3rem}aside{position:static}nav{display:flex;flex-wrap:wrap;gap:.25rem 1rem}h1{max-width:24ch}.comparison{grid-template-columns:1fr;gap:1rem}figure{margin-inline:0;padding:.75rem}}
+@media print{body{background:white;font-size:11pt}.layout{display:block;padding:0;max-width:none}aside,.skip,.diagram-status{display:none}section{padding:1.2rem 0}h1{font-size:30pt}h2{font-size:21pt}h2,h3,summary{break-after:avoid}figure,li{break-inside:avoid}a{color:inherit}pre{white-space:pre-wrap;overflow-wrap:anywhere}details::details-content{display:block!important;content-visibility:visible!important}.diagram{overflow:visible}.diagram svg{max-width:100%!important;height:auto}footer{font-size:9pt}}
+.editor-bar{display:grid;gap:.35rem;margin:1rem 0;padding:.8rem;background:var(--wash);border:1px solid var(--line)}.editor-bar label{font-weight:600;font-size:.8rem}.editor-bar select,.editor-bar input{font:inherit;font-size:.85rem;padding:.35rem;border:1px solid var(--line);background:white;color:var(--ink);min-height:44px;width:100%}.hint{margin:0;color:var(--muted);font-size:.8rem}.steps{padding-left:1.5rem}.steps>li{padding:0 0 1.5rem .5rem}.steps h3{margin:.2rem 0}.steps p{margin:.5rem 0}a.src{font-family:ui-monospace,monospace;font-size:.88em}a.src:not([href]){color:var(--ink);text-decoration:none}.io,.next{font-size:.95rem}.branches{font-size:.95rem;color:var(--muted)}
+@media print{.editor-bar{display:none}}
+</style>
+</head>
+<body data-repo="example-shop" data-default-root="">
+<a class="skip" href="#content">Skip to the explanation</a>
+<div class="layout">
+<aside aria-label="Explanation navigation">
+<strong>Code guide</strong>
+<p class="meta">Illustrative example<br>Replace with the explained repository and revision.</p>
+<form class="editor-bar" aria-label="Open code in your editor">
+<label for="editor">Editor</label>
+<select id="editor" name="editor"><option value="vscode">VS Code</option><option value="idea">IntelliJ IDEA</option></select>
+<label for="root">Repository folder on this computer</label>
+<input id="root" name="root" type="text" spellcheck="false" autocomplete="off" placeholder="/Users/you/src/example-shop">
+<p class="hint" id="editor-hint">Set the folder to turn citations into editor links.</p>
+</form>
+<nav aria-label="On this page">
+<a href="#question">Question and scenario</a>
+<a href="#change">What changes (PR only)</a>
+<a href="#walkthrough">From entrypoint to outcome</a>
+<a href="#evidence">Evidence and reading route</a>
+</nav>
+</aside>
+<main id="content">
+<header>
+<h1>How a discount code reaches the order total</h1>
+<p class="lead">Illustrative example: why does an order show the full price after Ana applies a valid code?</p>
+<p class="meta">Reader: an engineer who knows the product but has not read this code.<br>Revision: record the repository, the commit SHA, and any uncommitted changes in traced files.</p>
+</header>
+<section id="question">
+<h2>Ana applies a code at checkout</h2>
+<p><strong>Scenario:</strong> Ana, signed in, has one item in her cart and submits the code <code>WELCOME10</code>.</p>
+<p><strong>Starts at</strong> the checkout route handler. <strong>Ends at</strong> the order total saved and returned to the page.</p>
+</section>
+<section id="change">
+<h2>The discount follows the cart <span class="tag">PR only</span></h2>
+<p class="caption">Keep this section for a PR guide and drop it for a walkthrough.</p>
+<div class="comparison">
+<div><h3>Before</h3><p>In this fictional example, the discount is computed and then dropped when the total is saved.</p></div>
+<div><h3>After <span class="tag">Changed</span></h3><p>The saved total includes the discount.</p></div>
+</div>
+</section>
+<section id="walkthrough">
+<h2>From entrypoint to outcome</h2>
+<figure aria-labelledby="diagram-description">
+<div class="diagram" role="img" aria-label="Illustrative checkout call sequence" hidden></div>
+<p class="diagram-status" role="status">The diagram requires a connection. Its description and source are available below.</p>
+<figcaption id="diagram-description">The route validates the code, the pricing service applies it, and the repository saves the total.</figcaption>
+<details><summary>View diagram source</summary><pre class="diagram-source">sequenceDiagram
+  participant R as Checkout route
+  participant P as Pricing service
+  participant D as Order repository
+  R->>P: applyDiscount(cart, "WELCOME10")
+  P-->>R: total 90.00
+  R->>D: saveTotal(order, total)
+  D-->>R: saved</pre></details>
+</figure>
+<ol class="steps">
+<li id="step-1">
+<h3>The route receives the code</h3>
+<p>The checkout handler reads the code from the request and loads Ana's cart.</p>
+<p><a class="src" data-path="src/routes/checkout.ts" data-line="42">src/routes/checkout.ts:42</a></p>
+<pre><code>const cart = await carts.forUser(req.user.id);
+const total = await pricing.applyDiscount(cart, req.body.code);</code></pre>
+<p class="io"><span class="tag">Inferred</span> In: <code>req.body.code = "WELCOME10"</code>. Out: a cart with one item at 100.00.</p>
+<p class="next">Next: <a class="src" data-path="src/routes/checkout.ts" data-line="43">src/routes/checkout.ts:43</a> calls <code>applyDiscount</code>.</p>
+</li>
+<li id="step-2">
+<h3>The pricing service applies the code</h3>
+<p>The service looks up the code and subtracts its percentage. <code>findCode</code> is collapsed: it returns the stored code or <code>null</code>.</p>
+<p><a class="src" data-path="src/pricing/discount.ts" data-line="17">src/pricing/discount.ts:17</a></p>
+<pre><code>const code = await codes.findCode(input);
+if (!code) return cart.subtotal;</code></pre>
+<p class="io"><span class="tag">Observed</span> In a run of <code>discount.test.ts</code>: <code>findCode</code> returned <code>{ percent: 10 }</code>, and the function returned 90.00.</p>
+<ul class="branches">
+<li>Unknown code: returns the subtotal unchanged, <a class="src" data-path="src/pricing/discount.ts" data-line="18">src/pricing/discount.ts:18</a>; checkout continues without a discount.</li>
+</ul>
+<p class="next">Next: the total returns to <a class="src" data-path="src/routes/checkout.ts" data-line="44">src/routes/checkout.ts:44</a>.</p>
+</li>
+<li id="step-3">
+<h3>The repository saves the total</h3>
+<p>The handler saves the discounted total and returns it to the page.</p>
+<p><a class="src" data-path="src/orders/repository.ts" data-line="61">src/orders/repository.ts:61</a></p>
+<pre><code>await db.orders.update({ id: order.id, total });</code></pre>
+<p class="io"><span class="tag">Inferred</span> In: <code>total = 90.00</code>. Out: the order row holds 90.00.</p>
+<p class="next">End of execution: the response carries the saved total.</p>
+</li>
+</ol>
+</section>
+<section id="evidence">
+<h2>What supports this explanation</h2>
+<p>This template is a fictional demonstration. No real code or tests have been verified.</p>
+<details><summary>Tests and runs</summary><p>Record tests only inspected, CI results consulted, and commands actually run, kept apart. Identify what remains unknown.</p></details>
+<h3>Where to start reading the code</h3>
+<p>Replace with a short reading order that links the central decisions.</p>
+</section>
+<footer>Illustrative example · The final explanation must identify the explained revision and its limitations.</footer>
+</main>
+</div>
+<script>
+// Editor links: VS Code accepts vscode://file/<absolute path>:<line> ("Opening VS Code with URLs", https://code.visualstudio.com/docs/editor/command-line).
+// IntelliJ IDEA accepts idea://open?file=<absolute path>&line=<line>.
+(() => {
+  const repo = document.body.dataset.repo || 'default';
+  const key = `explain-code:${repo}`;
+  const editor = document.getElementById('editor');
+  const root = document.getElementById('root');
+  const hint = document.getElementById('editor-hint');
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(key) || '{}'); } catch {}
+  editor.value = saved.editor === 'idea' ? 'idea' : 'vscode';
+  root.value = saved.root || document.body.dataset.defaultRoot || '';
+  const join = (base, path) => `${base.replace(/[\\/]+$/, '').replace(/\\/g, '/')}/${path.replace(/^\/+/, '')}`;
+  const absolute = path => /^(\/|[A-Za-z]:\/)/.test(path);
+  function update() {
+    const base = root.value.trim();
+    const ready = base && absolute(base.replace(/\\/g, '/'));
+    hint.textContent = ready ? `Links open in ${editor.options[editor.selectedIndex].text}.` : 'Set an absolute folder path to turn citations into editor links.';
+    for (const link of document.querySelectorAll('a.src')) {
+      const line = String(parseInt(link.dataset.line, 10) || 1);
+      if (!ready) { link.removeAttribute('href'); continue; }
+      const file = join(base, link.dataset.path);
+      link.href = editor.value === 'idea'
+        ? `idea://open?file=${encodeURIComponent(file)}&line=${line}`
+        : `vscode://file${file.startsWith('/') ? '' : '/'}${encodeURI(file)}:${line}`;
+    }
+    try { localStorage.setItem(key, JSON.stringify({ editor: editor.value, root: base })); } catch {}
+  }
+  editor.addEventListener('change', update);
+  root.addEventListener('input', update);
+  update();
+})();
+</script>
+<script type="module">
+// Renderer: https://mermaid.js.org/config/usage.html . Narrative and source remain usable offline.
+const figures = [...document.querySelectorAll('figure:has(.diagram-source)')];
+try {
+  const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.esm.min.mjs');
+  mermaid.initialize({startOnLoad:false,securityLevel:'strict',theme:'neutral',fontFamily:'system-ui, sans-serif',flowchart:{htmlLabels:false}});
+  for (const [index, figure] of figures.entries()) {
+    const target = figure.querySelector('.diagram');
+    const status = figure.querySelector('.diagram-status');
+    try {
+      const { svg } = await mermaid.render(`journey-${index}`, figure.querySelector('.diagram-source').textContent);
+      target.innerHTML = svg;
+      target.hidden = false;
+      status.hidden = true;
+    } catch {
+      status.textContent = 'Unable to render this diagram. Read its description and source below.';
+    }
+  }
+} catch {
+  for (const figure of figures) figure.querySelector('.diagram-status').textContent = 'Renderer unavailable. The diagram description and source remain available.';
+}
+</script>
+<script>
+const expandedBeforePrint = new Set();
+addEventListener('beforeprint', () => {
+  document.querySelectorAll('details').forEach(detail => {
+    if (detail.open) expandedBeforePrint.add(detail);
+    detail.open = true;
+  });
+});
+addEventListener('afterprint', () => {
+  document.querySelectorAll('details').forEach(detail => { detail.open = expandedBeforePrint.has(detail); });
+  expandedBeforePrint.clear();
+});
+</script>
+</body>
+</html>
