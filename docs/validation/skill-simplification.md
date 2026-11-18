@@ -59,7 +59,7 @@ Invocation-policy and retirement losses were made explicit.
   the direct diff and root log returned 0 and included the root change. Ordinary
   commit comparisons retain their merge-base behavior.
 - Markdown references and affected incoming anchors resolved. The translated
-  [PR explanation template](../../skills/explain-pr/assets/pr-explanation.html) retained
+  [PR explanation template](../../skills/explain-code/assets/code-explanation.html) retained
   its stylesheet, renderer/security settings, print handling, and valid internal
   navigation/ARIA IDs. Browser/PDF rendering was not executed or claimed verified.
 - All 49 installed skills were readable through relative links. Two retired global
