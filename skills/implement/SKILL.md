@@ -4,6 +4,9 @@ description: Implement selected work from a spec or tickets.
 disable-model-invocation: true
 ---
 
+Read [beto-mode](../beto-mode/SKILL.md) first and apply the principles it routes to
+throughout the work.
+
 For product work, read affected canonical contracts through
 [consolidate](../consolidate/SKILL.md), including external configuration. Preserve
 functionality, shared-rule, decision, and scenario links; surface conflicts or
@@ -18,7 +21,10 @@ At delivery, explain resulting behavior, actual rationale, consequences, and wha
 verification establishes or leaves uncertain. Keep detail proportional to significance.
 
 Use [tdd](../tdd/SKILL.md) where possible, at pre-agreed seams. Run typechecking and
-single test files regularly, then the full suite once at the end. Finish with
+single test files regularly, then the full suite once at the end. Once the work
+passes, make a simplification pass per
+[Subtract Before You Add](../beto-mode/principles/subtract-before-you-add.md)'s
+"Simplify again in the same change", then finish with
 [code-review](../code-review/SKILL.md).
 
 After relevant implementation, deployment, or release actions, reconcile affected

@@ -105,6 +105,12 @@ tests with none, tests at a slower level than their failure needs, one case per 
 where one per class suffices, real waits or network, and tests the diff made
 redundant but kept. Cite the test and the rule it breaks.
 
+Also paste [Keep It Lean](../beto-mode/principles/keep-it-lean.md) and
+[Least Surprise](../beto-mode/principles/least-surprise.md) in full. Report as findings
+what the diff could delete or flatten with the same behavior: duplicates it created,
+leftover scaffolding, dead code, layers with one caller, copied state, and hunks
+larger than the problem needs. Cite the hunk, the rule, and the simpler shape.
+
 ### Spec reviewer
 
 Provide spec path and contents. Find missing/partial requirements, unrequested scope,

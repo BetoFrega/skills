@@ -40,5 +40,7 @@ When interface shape, module depth, or seam placement is unresolved, consult
 - **Red before green:** fail first; implement only enough to pass, without anticipated
   tests or speculative features.
 - **One slice:** one seam, one test, one minimal implementation per cycle.
-- **Refactoring:** belongs to [code-review](../code-review/SKILL.md), outside the
-  red-green implementation cycle.
+- **Refactoring:** stays outside the red-green cycle. Once the slices pass, make a
+  simplification pass per
+  [Subtract Before You Add](../beto-mode/principles/subtract-before-you-add.md)
+  with the tests green; [code-review](../code-review/SKILL.md) checks what it missed.
