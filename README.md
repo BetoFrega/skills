@@ -34,7 +34,8 @@ sessions, to `beto-mode`. It also gives each session a memory file next to its
 transcript, where the agent records requests, decisions, and hard-won facts, and
 asks the agent to read it again after compaction or resume. A `UserPromptSubmit`
 hook reminds the agent on every prompt that `beto-mode` stays active for the whole
-session and what it does, and adds a longer reminder every 10 prompts; set
+session and what it does, and to end each reply that carries work with a `🧭 beto-mode:`
+line naming the principles and skills it applied. It adds a longer reminder every 10 prompts; set
 `BETO_MODE_REMINDER_EVERY` to change that interval, or `0` to turn both off. The
 marketplace also lists `beto-frega-personal`, which injects the author's personal
 global rules into every Claude session; other users should not install it.
