@@ -111,6 +111,13 @@ what the diff could delete or flatten with the same behavior: duplicates it crea
 leftover scaffolding, dead code, layers with one caller, copied state, and hunks
 larger than the problem needs. Cite the hunk, the rule, and the simpler shape.
 
+When the diff adds, edits, or removes comments, also paste
+[Comments Earn Their Place](../beto-mode/principles/comments-earn-their-place.md) in
+full. Report as findings comments that restate the code, carry task history, hold a
+`TODO` without a ticket link, keep commented-out code, or are false against the code,
+and removed comments whose rationale has no new home. Cite the comment, the rule, and
+the fact's destination.
+
 ### Spec reviewer
 
 Provide spec path and contents. Find missing/partial requirements, unrequested scope,
