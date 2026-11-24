@@ -14,14 +14,16 @@ does, then check which principles and routes the new message triggers.
 
 ## Signal
 
-End every reply to the user with one line that shows beto-mode is active:
+End each reply that carries work (a result, recommendation, plan, review, or
+delivery) with one line that shows beto-mode is active:
 
 `🧭 beto-mode: <principle> (<choice it changed>); <skill used>`
 
 Name each principle that changed a decision in this reply, with that choice, and each
 workflow skill used. Cite only principles whose file you read in this session. Write
 the choices in the reply's language. When nothing applied, end with
-`🧭 beto-mode: no principle applied`.
+`🧭 beto-mode: no principle applied`. Leave the line off short answers,
+acknowledgements, and one-line status updates.
 
 ## Principles
 
