@@ -12,11 +12,22 @@ Once read, beto-mode stays active for the rest of the session, across every task
 until the user turns it off. Every turn, before acting, recall its name and what it
 does, then check which principles and routes the new message triggers.
 
+## Signal
+
+End each reply that carries work (a result, recommendation, plan, review, or
+delivery) with one line that shows beto-mode is active:
+
+`🧭 beto-mode: <principle> (<choice it changed>); <skill used>`
+
+Name each principle that changed a decision in this reply, with that choice, and each
+workflow skill used. Cite only principles whose file you read in this session. Write
+the choices in the reply's language. When nothing applied, end with
+`🧭 beto-mode: no principle applied`. Leave the line off short answers,
+acknowledgements, and one-line status updates.
+
 ## Principles
 
-Read a principle's file in full before applying it. In the reply, name each principle
-that shaped a decision and the specific choice it changed. Cite only principles whose
-file you read in this session and that changed a decision.
+Read a principle's file in full before applying it.
 
 Each entry says when it applies. Files live at `principles/<name>.md`.
 
