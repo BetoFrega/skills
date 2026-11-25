@@ -43,6 +43,8 @@ Each entry says when it applies. Files live at `principles/<name>.md`.
   fixing, migrating, or deleting existing code.
 - **Least Surprise** (`least-surprise`). Writing or reviewing code someone must read,
   trace, or change.
+- **Comments Earn Their Place** (`comments-earn-their-place`). Writing, editing, or
+  deleting a code comment, or reviewing a change that does.
 - **Fail Loud, Handle on Evidence** (`fail-loud-handle-on-evidence`). Deciding which
   failures, edge cases, or concurrency risks the code handles; writing briefs, plans,
   or review findings about them.

@@ -24,8 +24,9 @@ Use [tdd](../tdd/SKILL.md) where possible, at pre-agreed seams. Run typechecking
 single test files regularly, then the full suite once at the end. Once the work
 passes, make a simplification pass per
 [Subtract Before You Add](../beto-mode/principles/subtract-before-you-add.md)'s
-"Simplify again in the same change", then finish with
-[code-review](../code-review/SKILL.md).
+"Simplify again in the same change", check the comments you wrote against
+[Comments Earn Their Place](../beto-mode/principles/comments-earn-their-place.md),
+then finish with [code-review](../code-review/SKILL.md).
 
 After relevant implementation, deployment, or release actions, reconcile affected
 product records through consolidate: supported observations and verification gaps
