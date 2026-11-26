@@ -9,6 +9,10 @@ metadata:
     url: "https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md"
 ---
 
+Before drafting, load [writing-for-humans](../writing-for-humans/SKILL.md) and follow
+it as you write the body, including
+[Describe what exists now](../writing-for-humans/SKILL.md#describe-what-exists-now).
+
 Use this PR-body template:
 
 ```markdown

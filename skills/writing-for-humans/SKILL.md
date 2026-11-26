@@ -25,6 +25,16 @@ what to do, once, and stop when the reader has what they need.
 Name the reader before editing, and keep the content that reader will use. Move
 uncertain cuts to the end. Preserve every fact, number, condition, and honest uncertainty.
 
+### Describe what exists now
+
+In code, comments, commit messages, PR bodies, tickets, and docs, describe what
+exists and why it holds today. Leave out the history of the work: earlier versions
+inside the branch, review rounds, who asked, failed attempts, and phrases such as
+"as agreed" or "fixed per review". Git, the thread, and the ticket keep that history.
+A commit or PR states what it changes against its base ("renames `foo` to `bar` to
+match the glossary"), and names a rejected alternative only when it explains the
+current choice. Conversation messages may report what happened.
+
 ## Findable — structure
 
 Front-load the conclusion, decision, or action; give headings an informative message
@@ -86,6 +96,6 @@ inventing a link.
 Verify the named reader understands the intended knowledge/action after one reading;
 the main point appears in the first two lines; sentences/paragraphs hold one
 idea/topic; terms have one name and no unexplained jargon; all facts, numbers,
-conditions, and honest hedges survive; no pattern from ai-isms.md remains; the length matches what a person would write and every word has a reason to be there; each verb's tense matches when its event happens; every cited page, ticket, file, or item has a link or path and says what it contains.
+conditions, and honest hedges survive; no pattern from ai-isms.md remains; durable text carries no history of the work; the length matches what a person would write and every word has a reason to be there; each verb's tense matches when its event happens; every cited page, ticket, file, or item has a link or path and says what it contains.
 
 For local rewrites, report [document delivery](../consolidate/references/local-document-delivery.md).
