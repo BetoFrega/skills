@@ -41,6 +41,11 @@ rejects a plugin whose root holds another `.claude-plugin/plugin.json`, and
 synchronizing delivered changes into the primary checkout, update the plugin in each
 configured agent and verify that a fresh session loads the changed skill.
 
+A merge to `main` that changes the version in `.claude-plugin/plugin.json` publishes
+a GitHub Release `v<version>` through `.github/workflows/release.yml`. Its notes list
+the titles of the PRs merged since the previous release, so give each PR a title that
+says what changes for plugin users.
+
 ## Portable paths
 
 Use repository-relative paths in maintained instructions and examples. Scripts must
