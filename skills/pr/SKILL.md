@@ -18,6 +18,16 @@ Use this PR-body template:
 
 <diagram, diff-sketch, or tree>
 
+## Where to Look
+
+<omit for a small single-purpose PR>
+
+**Needs judgment:**
+
+- `<path:lines>`: <the choice, risk, or trade-off>; <what to check>
+
+**Mechanical:** <renames, moves, generated files, formatting, version bumps>; skim.
+
 ## Evidence
 
 - **Before:** <screenshot/output/failing test run>
@@ -79,6 +89,22 @@ Show a whole block when mostly new, omission hides ownership/order, or the reade
 needs a copyable target. Put visuals beside their short explanation. Retain only
 calls, files, props, states, and boundaries answering the current question or choice;
 combine useful views without overwhelming the reader.
+
+### Where to Look
+
+Point the reviewer's attention where human judgment changes the outcome: risky
+logic, design choices, non-obvious trade-offs, security or data boundaries, and
+anything you are unsure of. Order items by risk, and give each a location, the
+reason it needs judgment, and the question the reviewer should answer. Name
+rejected alternatives only when they explain the choice.
+
+List mechanical, low-risk changes separately, grouped by kind with paths or globs,
+so the reviewer can skim them. When a mechanical group hides one real change, move
+that change to Needs judgment.
+
+Include this section when the PR spans several concerns or more files than a
+reviewer reads at once; the larger the PR, the more it matters. Omit it for a small
+single-purpose PR, where the Summary already shows where to look.
 
 ### Evidence
 
