@@ -16,18 +16,24 @@ question alone.
 ## Investigate before asking
 
 Before the first question, read what the goal touches: the code, docs, tickets, and
-earlier decisions you can reach. Before each later question, check whether its answer
-or its options depend on a fact you could look up, and look it up first. Ask the user
-only for decisions and for facts no available source holds; when you ask for a fact,
-say which sources you checked. Use a subagent when the investigation is long, and work
-inline when it takes a few reads. A running investigation is an unsettled
-prerequisite: continue with questions that do not depend on it.
+earlier decisions you can reach. Then sort the facts each planned topic will need.
+Facts no answer can change, such as what the code does or what a dependency supports,
+can be looked up now: when you open with the plan, start a background subagent for
+each long lookup, so its result is ready when the topic comes up. Facts that depend
+on an answer, such as which branch opens, wait for that answer.
+
+Before each question, check whether its answer or its options depend on a fact you
+could look up. Use the background result when it has arrived, and look up what is
+still missing, inline when it takes a few reads. Ask the user only for decisions and
+for facts no available source holds; when you ask for a fact, say which sources you
+checked. A running investigation is an unsettled prerequisite: continue with
+questions that do not depend on it.
 
 ## Open with the plan
 
 Then tell the user in a few lines what you understood the goal to be, what you found,
-and which topics you will cover, in order. Update that list when an answer
-changes it.
+which topics you will cover, in order, and which lookups are running in the
+background. Update that list when an answer changes it.
 
 ## Session tree
 
