@@ -98,6 +98,12 @@ Provide all standards and paste the smell baseline in full. Cite file and contro
 rule for breaches. Smells are judgement calls: name the smell and cite the
 changed hunk.
 
+Also paste [Describe what exists now](../writing-for-humans/SKILL.md#describe-what-exists-now)
+in full. Report as findings the commit messages in the reviewed range, and the PR
+body when the target is a PR, that narrate the history of the work instead of the
+change: earlier iterations, review rounds, who asked, failed attempts. Cite the
+message and the sentence.
+
 When the diff adds or changes tests, also paste
 [Tests Earn Their Runtime](../beto-mode/principles/tests-earn-their-runtime.md) in
 full. For each added test, require the failure only it catches; report as findings

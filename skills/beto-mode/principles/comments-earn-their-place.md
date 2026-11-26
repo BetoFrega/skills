@@ -11,7 +11,9 @@ extract, or type until the comment is unneeded.
 - What the code does: a name, an extracted function, or a type.
 - An invariant on our own code: a type, an assertion, or a test, per
   [Encode Lessons in Structure](encode-lessons-in-structure.md).
-- What changed, what was tried, who asked, how it was verified: the commit or PR.
+- What the change does and how it was verified: the commit or PR. The history of the
+  work stays in git and the thread, per
+  [Describe what exists now](../../writing-for-humans/SKILL.md#describe-what-exists-now).
 - Work still to do: a ticket. A `TODO` stays only with the ticket's link.
 - An architectural choice: an ADR, linked from the code when the reader needs it.
 - What a domain term means: the `CONTEXT.md` glossary.
