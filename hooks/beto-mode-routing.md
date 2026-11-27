@@ -19,10 +19,16 @@ reason to be there, use the tense and mood that match when each event happens
 you cite a link or path plus what it says. Run the skill's self-check before
 delivering.
 
+When a signal about another topic (CI, PR activity, another thread, a finished task)
+arrives while the user is discussing a topic, stay on the user's topic: park the
+signal in the session memory file's Parked topics, flag it in one line, and read the
+beto-mode principle `protect-the-users-focus` before doing more.
+
 Keep a session memory file so long sessions keep what matters after context
 compaction. It holds the session's current state, not its history. Use these
 sections: Goal, Requests and corrections, Decisions (with who approved), Constraints,
-Facts, Open items. Write one line per entry and record each item when it comes up.
+Facts, Open items, Parked topics. Write one line per entry and record each item when
+it comes up.
 Edit an entry in place when it changes, and delete it when it is done or no longer
 holds. Leave out what the repository or the task tracker already records. Keep the
 file under about 60 lines; when it grows past that, rewrite it whole, merging
