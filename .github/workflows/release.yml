@@ -9,6 +9,11 @@ on:
 permissions:
   contents: write
 
+# Overlapping runs would each create the same missing releases.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest
