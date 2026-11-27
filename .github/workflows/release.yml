@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths: [.claude-plugin/plugin.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Publish a release for each version without one
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Walk main's history oldest first. The commit that first sets a
+          # version is that version's release target, and the previous
+          # version's tag bounds its notes.
+          previous=""
+          for sha in $(git log --first-parent --reverse --format=%H -- .claude-plugin/plugin.json); do
+            tag="v$(git show "$sha:.claude-plugin/plugin.json" | jq -r .version)"
+            if [ "$tag" = "$previous" ]; then
+              continue
+            fi
+            if ! gh release view "$tag" >/dev/null 2>&1; then
+              gh release create "$tag" --target "$sha" --title "$tag" --generate-notes \
+                ${previous:+--notes-start-tag "$previous"}
+            fi
+            previous="$tag"
+          done
