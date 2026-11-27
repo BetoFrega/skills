@@ -13,6 +13,11 @@ functionality, shared-rule, decision, and scenario links; surface conflicts or
 unresolved policy. A ready ticket still needs product approval. Carry the
 configuration entry and affected record references into delegated work.
 
+Before coding a ticket, read its related tickets: parent, siblings, dependencies, and
+the tickets it blocks. Keep the code within the contracts they fix, such as
+interfaces, data formats, and accepted decisions, and bring a needed change through
+recommend before making it.
+
 Explain the intended behavior and responsibility changes in conversation without
 assuming the user read the spec. Bring unresolved consequential domain, product, or
 code-design choices and discovered deviations through [recommend](../recommend/SKILL.md)

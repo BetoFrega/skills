@@ -16,7 +16,11 @@ question alone.
 ## Investigate before asking
 
 Before the first question, read what the goal touches: the code, docs, tickets, and
-earlier decisions you can reach. Then sort the facts each planned topic will need.
+earlier decisions you can reach. When the goal has a ticket, also read its related
+tickets: parent, siblings, dependencies, and the tickets it blocks. The contracts they
+fix, such as interfaces, data formats, and accepted decisions, are facts: cite each
+with its ticket link instead of asking about it, and ask only when the goal would
+change one. Then sort the facts each planned topic will need.
 Facts no answer can change, such as what the code does or what a dependency supports,
 can be looked up now: when you open with the plan, start a background subagent for
 each long lookup, so its result is ready when the topic comes up. Facts that depend

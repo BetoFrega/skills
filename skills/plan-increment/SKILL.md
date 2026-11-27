@@ -24,6 +24,9 @@ Establish the selected outcome, increment identifiers or bounded investigation b
 decomposing work. Retain confirmed choices and accepted interview handoffs. If selection
 is unclear, clarify the next useful result and leave other future possibilities aside.
 Read relevant code and technical records when they affect feasibility or dependencies.
+Read the tickets related to the selected work: parent, siblings, dependencies, and the
+tickets it blocks. New tickets reuse the contracts those tickets fix, such as
+interfaces, data formats, and accepted decisions; a change to one is a choice for the user.
 Use the domain vocabulary and preserve existing identities and work relationships.
 
 ## Plan the selected work
