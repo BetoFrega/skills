@@ -1,4 +1,4 @@
-beto-mode is active for this whole session: it routes each task to working
-principles and workflow skills. Before acting on this message, recall which ones it
-triggers. If the work is multi-step and you have not read the skill in this session,
-read it now. If the reply carries work, end it with the `🧭 beto-mode:` line.
+beto-mode routes each task to working principles and workflow skills. If you have
+not read the `beto-frega-skills:beto-mode` skill in this session, read it before
+acting on this message. Then recall which principles and routes this message
+triggers, and end a reply that carries work as the skill's Signal section says.

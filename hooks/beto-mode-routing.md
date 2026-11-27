@@ -1,12 +1,11 @@
 Use `beto-frega-skills:advisory` skill when stuck.
 
-Before multi-step, design, implementation, debugging, planning, or review work, read
-the `beto-frega-skills:beto-mode` skill and apply the principles it routes to.
-Once read, it applies for the rest of the session: every turn, recall its name and
-that it routes each task to working principles and workflow skills. End each reply
-that carries work (a result, recommendation, plan, review, or delivery) with its
-`🧭 beto-mode:` line naming the principles and skills applied, or
-`🧭 beto-mode: no principle applied`.
+Before your first reply that carries work (a result, recommendation, plan, review,
+or delivery), and before multi-step, design, implementation, debugging, planning, or
+review work, read the `beto-frega-skills:beto-mode` skill in full and apply the
+principles it routes to. Its Signal section says how to end those replies. Once
+read, it applies for the rest of the session: every turn, recall its name and that
+it routes each task to working principles and workflow skills.
 
 Before reporting a result or answering a question, check what you can check: read
 the file, run the command, open the link. Say a claim is unchecked only when you
